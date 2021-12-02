@@ -22,16 +22,19 @@ type FilterListReader struct {
 
 // ReadResponse reads a server response into the received o.
 func (o *FilterListReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
-	switch response.Code() {
-	case 200:
-		result := NewFilterListOK()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
-	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+	if response.Code() >= 400 && response.Code() < 500 {
+		return nil, runtime.NewAPIError("response status code indicates client error", response, response.Code())
 	}
+
+	if response.Code() >= 500 && response.Code() < 600 {
+		return nil, runtime.NewAPIError("response status code indicates server error", response, response.Code())
+	}
+
+	result := NewFilterListOK()
+	if err := result.readResponse(response, consumer, o.formats); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // NewFilterListOK creates a FilterListOK with default headers values

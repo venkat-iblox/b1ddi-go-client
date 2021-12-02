@@ -22,16 +22,19 @@ type AddressCreateReader struct {
 
 // ReadResponse reads a server response into the received o.
 func (o *AddressCreateReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
-	switch response.Code() {
-	case 201:
-		result := NewAddressCreateCreated()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
-	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+	if response.Code() >= 400 && response.Code() < 500 {
+		return nil, runtime.NewAPIError("response status code indicates client error", response, response.Code())
 	}
+
+	if response.Code() >= 500 && response.Code() < 600 {
+		return nil, runtime.NewAPIError("response status code indicates server error", response, response.Code())
+	}
+
+	result := NewAddressCreateCreated()
+	if err := result.readResponse(response, consumer, o.formats); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // NewAddressCreateCreated creates a AddressCreateCreated with default headers values
