@@ -10,6 +10,8 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	b1cliruntime "github.com/infobloxopen/b1ddi-go-client/runtime"
 )
 
 // New creates a new address block API client.
@@ -84,6 +86,9 @@ func (a *Client) AddressBlockCopy(params *AddressBlockCopyParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
@@ -169,6 +174,9 @@ func (a *Client) AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNex
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -210,6 +218,9 @@ func (a *Client) AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNex
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
@@ -253,6 +264,9 @@ func (a *Client) AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreat
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -294,6 +308,9 @@ func (a *Client) AddressBlockDelete(params *AddressBlockDeleteParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
@@ -379,6 +396,9 @@ func (a *Client) AddressBlockListNextAvailableAB(params *AddressBlockListNextAva
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -420,6 +440,9 @@ func (a *Client) AddressBlockListNextAvailableIP(params *AddressBlockListNextAva
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
@@ -463,6 +486,9 @@ func (a *Client) AddressBlockListNextAvailableSubnet(params *AddressBlockListNex
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -505,6 +531,9 @@ func (a *Client) AddressBlockRead(params *AddressBlockReadParams, authInfo runti
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -546,6 +575,9 @@ func (a *Client) AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {

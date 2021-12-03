@@ -10,6 +10,8 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	b1cliruntime "github.com/infobloxopen/b1ddi-go-client/runtime"
 )
 
 // New creates a new hardware filter API client.
@@ -113,6 +115,9 @@ func (a *Client) HardwareFilterDelete(params *HardwareFilterDeleteParams, authIn
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -197,6 +202,9 @@ func (a *Client) HardwareFilterRead(params *HardwareFilterReadParams, authInfo r
 		opt(op)
 	}
 
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
@@ -238,6 +246,9 @@ func (a *Client) HardwareFilterUpdate(params *HardwareFilterUpdateParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
+
+	params.ID = b1cliruntime.TrimIDPrefix(op.PathPattern, params.ID)
+	op.Params = params
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
