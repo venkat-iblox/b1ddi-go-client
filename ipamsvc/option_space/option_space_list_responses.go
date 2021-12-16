@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/infobloxopen/b1ddi-go-client/models"
+	b1cliruntime "github.com/infobloxopen/b1ddi-go-client/runtime"
 )
 
 // OptionSpaceListReader is a Reader for the OptionSpaceList structure.
@@ -23,11 +24,11 @@ type OptionSpaceListReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *OptionSpaceListReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	if response.Code() >= 400 && response.Code() < 500 {
-		return nil, runtime.NewAPIError("response status code indicates client error", response, response.Code())
+		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates client error", response.Body(), response.Code())
 	}
 
 	if response.Code() >= 500 && response.Code() < 600 {
-		return nil, runtime.NewAPIError("response status code indicates server error", response, response.Code())
+		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
 	result := NewOptionSpaceListOK()
