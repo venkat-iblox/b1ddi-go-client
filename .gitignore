@@ -9,3 +9,6 @@ Session.vim
 .netrwhist
 *~
 pyvenv.cfg
+
+# Go coverage files
+cover.out
