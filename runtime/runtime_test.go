@@ -2,6 +2,7 @@ package runtime
 
 import (
 	"github.com/stretchr/testify/assert"
+	"strings"
 	"testing"
 )
 
@@ -38,4 +39,9 @@ func Test_TrimIDPrefix(t *testing.T) {
 			assert.Equal(t, tc.expectedId, TrimIDPrefix(tc.pathPattern, tc.id))
 		})
 	}
+}
+
+func TestAPIHTTPError_Error(t *testing.T) {
+	e := NewAPIHTTPError("mock_operation", strings.NewReader("mock error message"), 700)
+	assert.Equal(t, "mock_operation (status 700): \nmock error message", e.Error())
 }

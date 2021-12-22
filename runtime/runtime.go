@@ -3,6 +3,10 @@
 package runtime
 
 import (
+	"fmt"
+	"github.com/go-openapi/runtime"
+	"io"
+	"io/ioutil"
 	"path"
 	"strings"
 )
@@ -28,4 +32,28 @@ func TrimIDPrefix(pathPattern string, id string) string {
 		return strings.TrimPrefix(id, "/")
 	}
 
+}
+
+// NewAPIHTTPError creates a new API HTTP error
+func NewAPIHTTPError(opName string, payload io.Reader, code int) *APIHTTPError {
+	body, err := ioutil.ReadAll(payload)
+	if err != nil {
+		body = []byte("Failed to read response")
+	}
+	return &APIHTTPError{
+		runtime.APIError{
+			OperationName: opName,
+			Response:      string(body),
+			Code:          code,
+		},
+	}
+}
+
+// APIHTTPError wraps runtime.APIError, and modifies response processing logic
+type APIHTTPError struct {
+	runtime.APIError
+}
+
+func (a *APIHTTPError) Error() string {
+	return fmt.Sprintf("%s (status %d): \n%s", a.OperationName, a.Code, a.Response)
 }
