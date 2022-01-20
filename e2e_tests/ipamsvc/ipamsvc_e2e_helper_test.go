@@ -41,7 +41,3 @@ func TestMain(m *testing.M) {
 
 	os.Exit(m.Run())
 }
-
-func stringPointer(s string) *string {
-	return &s
-}
