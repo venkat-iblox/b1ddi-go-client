@@ -28,7 +28,7 @@ type ConfigView struct {
 	// The timestamp when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Optional. List of custom root nameservers. The order does not matter.
 	//
@@ -64,7 +64,7 @@ type ConfigView struct {
 	//
 	// A default list is provided by cloud management and included here for config generation.
 	// Read Only: true
-	DnssecRootKeys []*ConfigTrustAnchor `json:"dnssec_root_keys"`
+	DnssecRootKeys []*ConfigTrustAnchor `json:"dnssec_root_keys,omitempty"`
 
 	// Optional. DNSSEC trust anchors.
 	//
@@ -234,7 +234,7 @@ type ConfigView struct {
 	// The timestamp when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// Optional. Use default forwarders to resolve queries for subzones.
 	//
@@ -752,7 +752,7 @@ func (m *ConfigView) ContextValidate(ctx context.Context, formats strfmt.Registr
 
 func (m *ConfigView) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -1010,7 +1010,7 @@ func (m *ConfigView) contextValidateUpdateACL(ctx context.Context, formats strfm
 
 func (m *ConfigView) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

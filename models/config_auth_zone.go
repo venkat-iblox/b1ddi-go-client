@@ -28,7 +28,7 @@ type ConfigAuthZone struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Optional. _true_ to disable object. A disabled object is effectively non-existent when generating configuration.
 	Disabled bool `json:"disabled,omitempty"`
@@ -57,7 +57,7 @@ type ConfigAuthZone struct {
 
 	// The list of the inheritance assigned hosts of the object.
 	// Read Only: true
-	InheritanceAssignedHosts []*Inheritance2AssignedHost `json:"inheritance_assigned_hosts"`
+	InheritanceAssignedHosts []*Inheritance2AssignedHost `json:"inheritance_assigned_hosts,omitempty"`
 
 	// Optional. Inheritance configuration.
 	InheritanceSources *ConfigAuthZoneInheritance `json:"inheritance_sources,omitempty"`
@@ -126,7 +126,7 @@ type ConfigAuthZone struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// Optional. Use default forwarders to resolve queries for subzones.
 	//
@@ -536,7 +536,7 @@ func (m *ConfigAuthZone) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *ConfigAuthZone) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -741,7 +741,7 @@ func (m *ConfigAuthZone) contextValidateUpdateACL(ctx context.Context, formats s
 
 func (m *ConfigAuthZone) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

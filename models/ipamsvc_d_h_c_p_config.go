@@ -22,10 +22,13 @@ import (
 type IpamsvcDHCPConfig struct {
 
 	// Disable to allow leases only for known clients, those for which a fixed address is configured.
-	AllowUnknown bool `json:"allow_unknown,omitempty"`
+	AllowUnknown *bool `json:"allow_unknown,omitempty"`
 
 	// The resource identifier.
 	Filters []string `json:"filters"`
+
+	// Enable to ignore the client UID when issuing a DHCP lease. Use this option to prevent assigning two IP addresses for a client which does not have a UID during one phase of PXE boot but acquires one for the other phase.
+	IgnoreClientUID bool `json:"ignore_client_uid,omitempty"`
 
 	// The list of clients to ignore requests from.
 	IgnoreList []*IpamsvcIgnoreItem `json:"ignore_list"`

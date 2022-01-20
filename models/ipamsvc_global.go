@@ -142,6 +142,11 @@ type IpamsvcGlobal struct {
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
+	// When enabled, DHCP Server will remove the suffix from the option 81 in the incoming client request.
+	//
+	// Defaults to _false_.
+	RemoveSuffixOption81 bool `json:"remove_suffix_option_81,omitempty"`
+
 	// The resource identifier.
 	VendorSpecificOptionOptionSpace string `json:"vendor_specific_option_option_space,omitempty"`
 }

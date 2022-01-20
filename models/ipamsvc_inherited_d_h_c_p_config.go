@@ -26,6 +26,9 @@ type IpamsvcInheritedDHCPConfig struct {
 	// The inheritance configuration for filters field from _DHCPConfig_ object.
 	Filters *InheritedDHCPConfigFilterList `json:"filters,omitempty"`
 
+	// The inheritance configuration for _ignore_client_uid_ field from _DHCPConfig_ object.
+	IgnoreClientUID *InheritanceInheritedBool `json:"ignore_client_uid,omitempty"`
+
 	// The inheritance configuration for _ignore_list_ field from _DHCPConfig_ object.
 	IgnoreList *InheritedDHCPConfigIgnoreItemList `json:"ignore_list,omitempty"`
 
@@ -42,6 +45,10 @@ func (m *IpamsvcInheritedDHCPConfig) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFilters(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIgnoreClientUID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -89,6 +96,25 @@ func (m *IpamsvcInheritedDHCPConfig) validateFilters(formats strfmt.Registry) er
 				return ve.ValidateName("filters")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("filters")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) validateIgnoreClientUID(formats strfmt.Registry) error {
+	if swag.IsZero(m.IgnoreClientUID) { // not required
+		return nil
+	}
+
+	if m.IgnoreClientUID != nil {
+		if err := m.IgnoreClientUID.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ignore_client_uid")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ignore_client_uid")
 			}
 			return err
 		}
@@ -147,6 +173,10 @@ func (m *IpamsvcInheritedDHCPConfig) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateIgnoreClientUID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateIgnoreList(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -185,6 +215,22 @@ func (m *IpamsvcInheritedDHCPConfig) contextValidateFilters(ctx context.Context,
 				return ve.ValidateName("filters")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("filters")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) contextValidateIgnoreClientUID(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.IgnoreClientUID != nil {
+		if err := m.IgnoreClientUID.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ignore_client_uid")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ignore_client_uid")
 			}
 			return err
 		}

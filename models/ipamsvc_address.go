@@ -32,7 +32,7 @@ type IpamsvcAddress struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The DHCP information associated with this object.
 	// Read Only: true
@@ -78,7 +78,7 @@ type IpamsvcAddress struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The usage is a combination of indicators, each tracking a specific associated use. Listed below are usage indicators with their meaning:
 	//  usage indicator        | description
@@ -92,7 +92,7 @@ type IpamsvcAddress struct {
 	//  _DHCP_, _LEASED_       |  An active lease for that address was issued by a DHCP server.
 	//  _DNS_                  |  Address is used by one or more DNS records.
 	// Read Only: true
-	Usage []string `json:"usage"`
+	Usage []string `json:"usage,omitempty"`
 }
 
 // Validate validates this ipamsvc address
@@ -260,7 +260,7 @@ func (m *IpamsvcAddress) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *IpamsvcAddress) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -332,7 +332,7 @@ func (m *IpamsvcAddress) contextValidateState(ctx context.Context, formats strfm
 
 func (m *IpamsvcAddress) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

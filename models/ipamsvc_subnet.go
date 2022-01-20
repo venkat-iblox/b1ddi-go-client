@@ -44,7 +44,7 @@ type IpamsvcSubnet struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Controls who does the DDNS updates.
 	//
@@ -78,7 +78,7 @@ type IpamsvcSubnet struct {
 
 	// Determines if DDNS updates are enabled at the subnet level.
 	// Defaults to _true_.
-	DdnsSendUpdates bool `json:"ddns_send_updates,omitempty"`
+	DdnsSendUpdates *bool `json:"ddns_send_updates,omitempty"`
 
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
@@ -90,7 +90,7 @@ type IpamsvcSubnet struct {
 	// When false, DHCP server will simply attempt to update the DNS entries per the request, regardless of whether or not they conflict with existing entries owned by other DHCP4 clients.
 	//
 	// Defaults to _true_.
-	DdnsUseConflictResolution bool `json:"ddns_use_conflict_resolution,omitempty"`
+	DdnsUseConflictResolution *bool `json:"ddns_use_conflict_resolution,omitempty"`
 
 	// The DHCP configuration of the subnet that controls how leases are issued.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
@@ -139,7 +139,7 @@ type IpamsvcSubnet struct {
 
 	// The list of the inheritance assigned hosts of the object.
 	// Read Only: true
-	InheritanceAssignedHosts []*InheritanceAssignedHost `json:"inheritance_assigned_hosts"`
+	InheritanceAssignedHosts []*InheritanceAssignedHost `json:"inheritance_assigned_hosts,omitempty"`
 
 	// The resource identifier.
 	InheritanceParent string `json:"inheritance_parent,omitempty"`
@@ -170,7 +170,7 @@ type IpamsvcSubnet struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The IP address utilization statistics of the subnet.
 	// Read Only: true
@@ -552,7 +552,7 @@ func (m *IpamsvcSubnet) contextValidateAsmScopeFlag(ctx context.Context, formats
 
 func (m *IpamsvcSubnet) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -687,7 +687,7 @@ func (m *IpamsvcSubnet) contextValidateThreshold(ctx context.Context, formats st
 
 func (m *IpamsvcSubnet) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

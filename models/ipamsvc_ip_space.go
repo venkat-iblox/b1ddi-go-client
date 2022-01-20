@@ -35,7 +35,7 @@ type IpamsvcIPSpace struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Controls who does the DDNS updates.
 	//
@@ -69,7 +69,7 @@ type IpamsvcIPSpace struct {
 
 	// Determines if DDNS updates are enabled at the IP space level.
 	// Defaults to _true_.
-	DdnsSendUpdates bool `json:"ddns_send_updates,omitempty"`
+	DdnsSendUpdates *bool `json:"ddns_send_updates,omitempty"`
 
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
@@ -81,13 +81,13 @@ type IpamsvcIPSpace struct {
 	// When false, DHCP server will simply attempt to update the DNS entries per the request, regardless of whether or not they conflict with existing entries owned by other DHCP4 clients.
 	//
 	// Defaults to _true_.
-	DdnsUseConflictResolution bool `json:"ddns_use_conflict_resolution,omitempty"`
+	DdnsUseConflictResolution *bool `json:"ddns_use_conflict_resolution,omitempty"`
 
 	// The shared DHCP configuration for the IP space that controls how leases are issued.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
 
 	// The list of DHCP options for the IP space. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
@@ -121,6 +121,9 @@ type IpamsvcIPSpace struct {
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
+	// inheritance assigned hosts
+	InheritanceAssignedHosts interface{} `json:"inheritance_assigned_hosts,omitempty"`
+
 	// The inheritance configuration.
 	InheritanceSources *IpamsvcIPSpaceInheritance `json:"inheritance_sources,omitempty"`
 
@@ -138,7 +141,7 @@ type IpamsvcIPSpace struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The utilization of IP addresses in the IP space.
 	// Read Only: true
@@ -425,7 +428,7 @@ func (m *IpamsvcIPSpace) contextValidateAsmScopeFlag(ctx context.Context, format
 
 func (m *IpamsvcIPSpace) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -511,7 +514,7 @@ func (m *IpamsvcIPSpace) contextValidateThreshold(ctx context.Context, formats s
 
 func (m *IpamsvcIPSpace) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

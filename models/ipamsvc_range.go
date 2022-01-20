@@ -49,7 +49,7 @@ type IpamsvcRange struct {
 
 	// The list of the inheritance assigned hosts of the object.
 	// Read Only: true
-	InheritanceAssignedHosts []*InheritanceAssignedHost `json:"inheritance_assigned_hosts"`
+	InheritanceAssignedHosts []*InheritanceAssignedHost `json:"inheritance_assigned_hosts,omitempty"`
 
 	// The resource identifier.
 	InheritanceParent string `json:"inheritance_parent,omitempty"`
