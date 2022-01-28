@@ -22,8 +22,8 @@ func NewClient(transport runtime.ClientTransport, formats strfmt.Registry) *Clie
 	}
 }
 
-// B1DDIToken provides a header for the BloxOne DDI token authentication
-func B1DDIToken(token string) runtime.ClientAuthInfoWriter {
+// B1DDIAPIKey provides a header for the BloxOne DDI token authentication
+func B1DDIAPIKey(token string) runtime.ClientAuthInfoWriter {
 	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
 		return r.SetHeaderParam("Authorization", "Token "+token)
 	})
