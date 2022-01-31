@@ -128,7 +128,7 @@ type ConfigGlobal struct {
 	// The resource identifier.
 	// Required: true
 	// Read Only: true
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 
 	// _kerberos_keys_ contains a list of keys for GSS-TSIG signed dynamic updates.
 	//

@@ -48,11 +48,11 @@ type IpamsvcOptionFilter struct {
 
 	// The name of the option filter. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// The list of option filter rules to match.
 	// Required: true
-	Rules *IpamsvcOptionFilterRuleList `json:"rules"`
+	Rules *IpamsvcOptionFilterRuleList `json:"rules,omitempty"`
 
 	// The tags for the option filter in JSON format.
 	Tags interface{} `json:"tags,omitempty"`

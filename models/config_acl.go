@@ -36,7 +36,7 @@ type ConfigACL struct {
 
 	// ACL object name.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`

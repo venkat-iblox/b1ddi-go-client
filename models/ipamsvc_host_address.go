@@ -28,15 +28,15 @@ type IpamsvcHostAddress struct {
 	//     * If the _Address_ already exists and is pointing to a different _Host, the operation must abort.
 	//     * If the _Address_ already exists and is not pointing to any _Host_, it is linked to the _Host_.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// The resource identifier.
 	// Required: true
-	Ref *string `json:"ref"`
+	Ref *string `json:"ref,omitempty"`
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 }
 
 // Validate validates this ipamsvc host address

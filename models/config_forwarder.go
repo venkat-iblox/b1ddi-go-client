@@ -23,11 +23,11 @@ type ConfigForwarder struct {
 
 	// Server IP address.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// Server FQDN.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// Server FQDN in punycode.
 	// Read Only: true

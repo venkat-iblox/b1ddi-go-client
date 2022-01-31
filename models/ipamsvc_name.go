@@ -23,11 +23,11 @@ type IpamsvcName struct {
 
 	// The name expressed as a single label or FQDN.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// The origin of the name.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 // Validate validates this ipamsvc name

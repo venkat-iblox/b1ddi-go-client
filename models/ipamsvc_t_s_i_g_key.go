@@ -36,7 +36,7 @@ type IpamsvcTSIGKey struct {
 
 	// The resource identifier.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key,omitempty"`
 
 	// The TSIG key name, FQDN.
 	Name string `json:"name,omitempty"`

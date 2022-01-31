@@ -33,7 +33,7 @@ type ConfigCacheFlush struct {
 
 	// The host to alter.
 	// Required: true
-	Ophid *string `json:"ophid"`
+	Ophid *string `json:"ophid,omitempty"`
 
 	// Optional. The time in seconds the command is valid for. Command is executed on the onprem host only if it takes less than this time for the command to be transmitted to the host. Otherwise the onprem host discards this command.
 	//

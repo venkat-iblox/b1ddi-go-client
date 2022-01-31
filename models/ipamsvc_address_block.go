@@ -24,7 +24,7 @@ type IpamsvcAddressBlock struct {
 
 	// The address field in form “a.b.c.d/n” where the “/n” may be omitted. In this case, the CIDR value must be defined in the _cidr_ field. When reading, the _address_ field is always in the form “a.b.c.d”.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// The Automated Scope Management configuration for the address block.
 	AsmConfig *IpamsvcASMConfig `json:"asm_config,omitempty"`
@@ -78,7 +78,7 @@ type IpamsvcAddressBlock struct {
 
 	// Determines if DDNS updates are enabled at the address block level.
 	// Defaults to _true_.
-	DdnsSendUpdates bool `json:"ddns_send_updates,omitempty"`
+	DdnsSendUpdates *bool `json:"ddns_send_updates,omitempty"`
 
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
@@ -90,7 +90,7 @@ type IpamsvcAddressBlock struct {
 	// When false, DHCP server will simply attempt to update the DNS entries per the request, regardless of whether or not they conflict with existing entries owned by other DHCP4 clients.
 	//
 	// Defaults to _true_.
-	DdnsUseConflictResolution bool `json:"ddns_use_conflict_resolution,omitempty"`
+	DdnsUseConflictResolution *bool `json:"ddns_use_conflict_resolution,omitempty"`
 
 	// The shared DHCP configuration that controls how leases are issued for the address block.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
@@ -152,7 +152,7 @@ type IpamsvcAddressBlock struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 
 	// The tags for the address block in JSON format.
 	Tags interface{} `json:"tags,omitempty"`

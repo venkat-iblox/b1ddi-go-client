@@ -40,7 +40,7 @@ type IpamsvcBulkCopyIPSpace struct {
 
 	// The resource identifier.
 	// Required: true
-	Target *string `json:"target"`
+	Target *string `json:"target,omitempty"`
 }
 
 // Validate validates this ipamsvc bulk copy IP space

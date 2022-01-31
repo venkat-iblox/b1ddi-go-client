@@ -52,13 +52,13 @@ type ConfigView struct {
 	// Ignored if _dnssec_enabled_ is _false_.
 	//
 	// Defaults to _true_.
-	DnssecEnableValidation bool `json:"dnssec_enable_validation,omitempty"`
+	DnssecEnableValidation *bool `json:"dnssec_enable_validation,omitempty"`
 
 	// Optional. Master toggle for all DNSSEC processing.
 	// Other _dnssec_*_ configuration is unused if this is disabled.
 	//
 	// Defaults to _true_.
-	DnssecEnabled bool `json:"dnssec_enabled,omitempty"`
+	DnssecEnabled *bool `json:"dnssec_enabled,omitempty"`
 
 	// DNSSEC root keys. The root keys are not configurable.
 	//
@@ -77,7 +77,7 @@ type ConfigView struct {
 	// Ignored if either _dnssec_enabled_ or _dnssec_enable_validation_ is _false_.
 	//
 	// Defaults to _true_.
-	DnssecValidateExpiry bool `json:"dnssec_validate_expiry,omitempty"`
+	DnssecValidateExpiry *bool `json:"dnssec_validate_expiry,omitempty"`
 
 	// Optional. _true_ to enable EDNS client subnet for recursive queries.
 	// Other _ecs_*_ fields are ignored if this field is not enabled.
@@ -195,7 +195,7 @@ type ConfigView struct {
 
 	// Name of view.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// _notify_ all external secondary DNS servers.
 	//
@@ -216,7 +216,7 @@ type ConfigView struct {
 	// Optional. _true_ to allow recursive DNS queries.
 	//
 	// Defaults to _true_.
-	RecursionEnabled bool `json:"recursion_enabled,omitempty"`
+	RecursionEnabled *bool `json:"recursion_enabled,omitempty"`
 
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`
@@ -239,7 +239,7 @@ type ConfigView struct {
 	// Optional. Use default forwarders to resolve queries for subzones.
 	//
 	// Defaults to _true_.
-	UseForwardersForSubzones bool `json:"use_forwarders_for_subzones,omitempty"`
+	UseForwardersForSubzones *bool `json:"use_forwarders_for_subzones,omitempty"`
 
 	// Optional. ZoneAuthority.
 	ZoneAuthority *ConfigZoneAuthority `json:"zone_authority,omitempty"`

@@ -196,7 +196,7 @@ type DataRecord struct {
 	// length_kind  | A string indicating the size in bits of a sub-subfield that is prepended to the value and encodes the length of the value. Valid values are:<ul><li>_8_: If _type_ is _ASCII_ or _BASE64_. </li><li>_16_: If _type_ is _HEX_.</li></ul>Defaults to none. <br><br>| Only required for some types.
 	// value        | A string representing the value for the sub-subfield | Yes
 	// Required: true
-	Rdata interface{} `json:"rdata"`
+	Rdata interface{} `json:"rdata,omitempty"`
 
 	// The DNS resource record type-specific non-protocol source.
 	// The source is a combination of indicators, each tracking how the DNS resource record appeared in system.
@@ -242,7 +242,7 @@ type DataRecord struct {
 	// SRV   | 33           | Service record
 	// TXT   | 16           | Text record
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 
 	// The timestamp when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true

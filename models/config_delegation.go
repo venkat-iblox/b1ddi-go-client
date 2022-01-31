@@ -36,7 +36,7 @@ type ConfigDelegation struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true

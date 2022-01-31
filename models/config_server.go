@@ -182,7 +182,7 @@ type ConfigServer struct {
 
 	// Name of configuration.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// _notify_ all external secondary DNS servers.
 	//

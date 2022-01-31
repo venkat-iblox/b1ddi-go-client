@@ -44,7 +44,7 @@ type ConfigForwardZone struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// The resource identifier.
 	Hosts []string `json:"hosts"`

@@ -26,11 +26,11 @@ type IpamsvcExclusionRange struct {
 
 	// The end address of the exclusion range.
 	// Required: true
-	End *string `json:"end"`
+	End *string `json:"end,omitempty"`
 
 	// The start address of the exclusion range.
 	// Required: true
-	Start *string `json:"start"`
+	Start *string `json:"start,omitempty"`
 }
 
 // Validate validates this ipamsvc exclusion range

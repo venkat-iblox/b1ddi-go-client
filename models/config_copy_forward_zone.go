@@ -51,7 +51,7 @@ type ConfigCopyForwardZone struct {
 
 	// The resource identifier.
 	// Required: true
-	TargetView *string `json:"target_view"`
+	TargetView *string `json:"target_view,omitempty"`
 }
 
 // Validate validates this config copy forward zone

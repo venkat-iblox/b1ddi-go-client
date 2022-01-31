@@ -51,7 +51,7 @@ type ConfigCopyAuthZone struct {
 
 	// The resource identifier.
 	// Required: true
-	TargetView *string `json:"target_view"`
+	TargetView *string `json:"target_view,omitempty"`
 }
 
 // Validate validates this config copy auth zone

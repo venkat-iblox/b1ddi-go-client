@@ -71,7 +71,7 @@ type ConfigZoneAuthority struct {
 	// Optional. Use default value for master name server.
 	//
 	// Defaults to true.
-	UseDefaultMname bool `json:"use_default_mname,omitempty"`
+	UseDefaultMname *bool `json:"use_default_mname,omitempty"`
 }
 
 // Validate validates this config zone authority

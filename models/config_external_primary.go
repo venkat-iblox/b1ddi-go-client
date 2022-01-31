@@ -46,7 +46,7 @@ type ConfigExternalPrimary struct {
 	// * _nsg_,
 	// * _primary_.
 	// Required: true
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 // Validate validates this config external primary

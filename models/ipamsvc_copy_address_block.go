@@ -46,7 +46,7 @@ type IpamsvcCopyAddressBlock struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 }
 
 // Validate validates this ipamsvc copy address block

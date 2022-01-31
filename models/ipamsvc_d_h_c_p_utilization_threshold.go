@@ -23,17 +23,17 @@ type IpamsvcDHCPUtilizationThreshold struct {
 
 	// Indicates whether the DHCP utilization threshold is enabled or not.
 	// Required: true
-	Enabled bool `json:"enabled"`
+	Enabled bool `json:"enabled,omitempty"`
 
 	// The high threshold value for DHCP utilization in percentage.
 	// Required: true
 	// Maximum: 100
-	High *int64 `json:"high"`
+	High *int64 `json:"high,omitempty"`
 
 	// The low threshold value for DHCP utilization in percentage.
 	// Required: true
 	// Maximum: 100
-	Low *int64 `json:"low"`
+	Low *int64 `json:"low,omitempty"`
 }
 
 // Validate validates this ipamsvc d h c p utilization threshold

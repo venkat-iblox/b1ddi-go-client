@@ -28,7 +28,7 @@ type ConfigDelegationServer struct {
 
 	// Required. FQDN of nameserver.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// FQDN of nameserver in punycode.
 	// Read Only: true

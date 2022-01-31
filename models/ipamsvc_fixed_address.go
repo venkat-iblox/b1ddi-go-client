@@ -24,7 +24,7 @@ type IpamsvcFixedAddress struct {
 
 	// The reserved address.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// The description for the fixed address. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -71,11 +71,11 @@ type IpamsvcFixedAddress struct {
 	//  * _client_text_ or _client_hex_: match the client identifier,
 	//  * _relay_text_ or _relay_hex_: match the circuit ID or remote ID in the DHCP relay agent option (82).
 	// Required: true
-	MatchType *string `json:"match_type"`
+	MatchType *string `json:"match_type,omitempty"`
 
 	// The value to match.
 	// Required: true
-	MatchValue *string `json:"match_value"`
+	MatchValue *string `json:"match_value,omitempty"`
 
 	// The name of the fixed address. May contain 1 to 256 characters. Can include UTF-8.
 	Name string `json:"name,omitempty"`

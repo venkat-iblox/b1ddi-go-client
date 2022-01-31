@@ -44,7 +44,7 @@ type ConfigAuthZone struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// _gss_tsig_enabled_ enables/disables GSS-TSIG signed dynamic updates.
 	//
@@ -100,7 +100,7 @@ type ConfigAuthZone struct {
 	//  * _external_: zone data owned by an external nameserver,
 	//  * _cloud_: zone data is owned by a BloxOne DDI host.
 	// Required: true
-	PrimaryType *string `json:"primary_type"`
+	PrimaryType *string `json:"primary_type,omitempty"`
 
 	// Zone FQDN in punycode.
 	// Read Only: true
@@ -131,7 +131,7 @@ type ConfigAuthZone struct {
 	// Optional. Use default forwarders to resolve queries for subzones.
 	//
 	// Defaults to _true_.
-	UseForwardersForSubzones bool `json:"use_forwarders_for_subzones,omitempty"`
+	UseForwardersForSubzones *bool `json:"use_forwarders_for_subzones,omitempty"`
 
 	// The resource identifier.
 	View string `json:"view,omitempty"`

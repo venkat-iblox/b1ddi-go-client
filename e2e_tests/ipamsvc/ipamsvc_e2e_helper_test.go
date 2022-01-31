@@ -33,7 +33,7 @@ func TestMain(m *testing.M) {
 	)
 
 	// Create default auth header for all API requests
-	tokenAuth := b1cli.B1DDIToken(token)
+	tokenAuth := b1cli.B1DDIAPIKey(token)
 	transport.DefaultAuthentication = tokenAuth
 
 	// Create the BloxOne IP address management API client

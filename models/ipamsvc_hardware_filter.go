@@ -51,7 +51,7 @@ type IpamsvcHardwareFilter struct {
 
 	// The name of the hardware filter. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// The tags for the hardware filter in JSON format.
 	Tags interface{} `json:"tags,omitempty"`

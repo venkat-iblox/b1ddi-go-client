@@ -38,7 +38,7 @@ type IpamsvcRange struct {
 
 	// The end IP address of the range.
 	// Required: true
-	End *string `json:"end"`
+	End *string `json:"end,omitempty"`
 
 	// The list of all exclusion ranges in the scope of the range.
 	ExclusionRanges []*IpamsvcExclusionRange `json:"exclusion_ranges"`
@@ -69,11 +69,11 @@ type IpamsvcRange struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 
 	// The start IP address of the range.
 	// Required: true
-	Start *string `json:"start"`
+	Start *string `json:"start,omitempty"`
 
 	// The tags for the range in JSON format.
 	Tags interface{} `json:"tags,omitempty"`

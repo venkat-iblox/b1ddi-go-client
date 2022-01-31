@@ -29,7 +29,7 @@ type ConfigACLItem struct {
 	//  * _allow_,
 	//  * _deny_.
 	// Required: true
-	Access *string `json:"access"`
+	Access *string `json:"access,omitempty"`
 
 	// The resource identifier.
 	ACL string `json:"acl,omitempty"`
@@ -47,7 +47,7 @@ type ConfigACLItem struct {
 	//  * _acl_,
 	//  * _tsig_key_.
 	// Required: true
-	Element *string `json:"element"`
+	Element *string `json:"element,omitempty"`
 
 	// Optional. TSIG key.
 	//

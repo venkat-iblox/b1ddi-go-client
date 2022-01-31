@@ -31,7 +31,7 @@ type ConfigKerberosKey struct {
 
 	// The resource identifier.
 	// Required: true
-	Key *string `json:"key"`
+	Key *string `json:"key,omitempty"`
 
 	// Kerberos principal associated with key.
 	// Read Only: true

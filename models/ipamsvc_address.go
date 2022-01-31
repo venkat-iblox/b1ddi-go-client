@@ -24,7 +24,7 @@ type IpamsvcAddress struct {
 
 	// The address in form "a.b.c.d".
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// The description for the address object. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -66,7 +66,7 @@ type IpamsvcAddress struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 
 	// The state of the address (_used_ or _free_).
 	// Read Only: true

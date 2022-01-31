@@ -24,7 +24,7 @@ type IpamsvcSubnet struct {
 
 	// The address of the subnet in the form “a.b.c.d/n” where the “/n” may be omitted. In this case, the CIDR value must be defined in the _cidr_ field. When reading, the _address_ field is always in the form “a.b.c.d”.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// The Automated Scope Management configuration for the subnet.
 	AsmConfig *IpamsvcASMConfig `json:"asm_config,omitempty"`
@@ -159,7 +159,7 @@ type IpamsvcSubnet struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space"`
+	Space *string `json:"space,omitempty"`
 
 	// The tags for the subnet in JSON format.
 	Tags interface{} `json:"tags,omitempty"`

@@ -23,11 +23,11 @@ type ConfigRootNS struct {
 
 	// IPv4 address.
 	// Required: true
-	Address *string `json:"address"`
+	Address *string `json:"address,omitempty"`
 
 	// FQDN.
 	// Required: true
-	Fqdn *string `json:"fqdn"`
+	Fqdn *string `json:"fqdn,omitempty"`
 
 	// FQDN in punycode.
 	// Read Only: true

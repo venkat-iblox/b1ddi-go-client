@@ -44,7 +44,7 @@ type ConfigBulkCopyView struct {
 
 	// The resource identifier.
 	// Required: true
-	Target *string `json:"target"`
+	Target *string `json:"target,omitempty"`
 }
 
 // Validate validates this config bulk copy view

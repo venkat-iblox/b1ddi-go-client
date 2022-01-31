@@ -25,10 +25,10 @@ type IpamsvcASMConfig struct {
 	AsmThreshold int64 `json:"asm_threshold,omitempty"`
 
 	// Indicates if Automated Scope Management is enabled.
-	Enable bool `json:"enable,omitempty"`
+	Enable *bool `json:"enable,omitempty"`
 
 	// Indicates if ASM should send notifications to the user.
-	EnableNotification bool `json:"enable_notification,omitempty"`
+	EnableNotification *bool `json:"enable_notification,omitempty"`
 
 	// The forecast period in days.
 	ForecastPeriod int64 `json:"forecast_period,omitempty"`

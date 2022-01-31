@@ -33,11 +33,11 @@ type IpamsvcOptionFilterRule struct {
 	//  * _hex_substring_: value is the specified hexadecimal substring of the option,
 	//  * _not_hex_substring_: value is not the specified hexadecimal substring of the option.
 	// Required: true
-	Compare *string `json:"compare"`
+	Compare *string `json:"compare,omitempty"`
 
 	// The resource identifier.
 	// Required: true
-	OptionCode *string `json:"option_code"`
+	OptionCode *string `json:"option_code,omitempty"`
 
 	// The value to match against.
 	OptionValue string `json:"option_value,omitempty"`

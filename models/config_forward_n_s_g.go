@@ -43,7 +43,7 @@ type ConfigForwardNSG struct {
 
 	// Name of the object.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// The resource identifier.
 	Nsgs []string `json:"nsgs"`

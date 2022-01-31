@@ -50,7 +50,7 @@ type IpamsvcDDNSZone struct {
 
 	// The resource identifier.
 	// Required: true
-	Zone *string `json:"zone"`
+	Zone *string `json:"zone,omitempty"`
 }
 
 // Validate validates this ipamsvc d DNS zone

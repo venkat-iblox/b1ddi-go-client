@@ -35,7 +35,7 @@ type IpamsvcOptionSpace struct {
 
 	// The name of the option space. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 
 	// The type of protocol for the option space (_ipv4_ or _ipv6_).
 	// Read Only: true
