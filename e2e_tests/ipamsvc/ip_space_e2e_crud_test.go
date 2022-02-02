@@ -5,6 +5,7 @@ package e2e_tests
 
 import (
 	"context"
+	"github.com/go-openapi/swag"
 	"testing"
 	"time"
 
@@ -24,10 +25,10 @@ func TestIPSpaceCRUD(t *testing.T) {
 	}{
 		"CreateReadUpdateNameDelete": {
 			instance: &models.IpamsvcIPSpace{
-				Name: stringPointer("ip_space_go_client_e2e_test"),
+				Name: swag.String("ip_space_go_client_e2e_test"),
 			},
 			updateFunc: func(instance *models.IpamsvcIPSpace) {
-				instance.Name = stringPointer("ip_space_updated_go_client_e2e_test")
+				instance.Name = swag.String("ip_space_updated_go_client_e2e_test")
 			},
 		},
 	}
