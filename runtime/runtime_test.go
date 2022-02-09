@@ -32,6 +32,16 @@ func Test_TrimIDPrefix(t *testing.T) {
 			pathPattern: "/ipam/ip_space/{id}",
 			id:          "id-without-prefix",
 		},
+		{
+			expectedId:  "id-without-prefix",
+			pathPattern: "/ipam/ip_space/{id}",
+			id:          "id-without-prefix",
+		},
+		{
+			expectedId:  "id-and-path-without-common-prefix",
+			pathPattern: "a",
+			id:          "id-and-path-without-common-prefix",
+		},
 	}
 
 	for _, tc := range testCases {

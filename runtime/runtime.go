@@ -23,7 +23,7 @@ func TrimIDPrefix(pathPattern string, id string) string {
 	for !strings.HasPrefix(id, prefix) {
 		prefix = prefix[0 : len(prefix)-1]
 		if len(prefix) == 0 {
-			return id
+			return strings.TrimPrefix(id, "/")
 		}
 	}
 	if strings.HasPrefix(pathPattern, prefix+"{id}") {
