@@ -26,24 +26,24 @@ type ConfigAuthNSG struct {
 	Comment string `json:"comment,omitempty"`
 
 	// Optional. DNS primaries external to BloxOne DDI. Order is not significant.
-	ExternalPrimaries []*ConfigExternalPrimary `json:"external_primaries"`
+	ExternalPrimaries []*ConfigExternalPrimary `json:"external_primaries,omitempty"`
 
 	// DNS secondaries external to BloxOne DDI. Order is not significant.
-	ExternalSecondaries []*ConfigExternalSecondary `json:"external_secondaries"`
+	ExternalSecondaries []*ConfigExternalSecondary `json:"external_secondaries,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
 	// Optional. BloxOne DDI hosts acting as internal secondaries. Order is not significant.
-	InternalSecondaries []*ConfigInternalSecondary `json:"internal_secondaries"`
+	InternalSecondaries []*ConfigInternalSecondary `json:"internal_secondaries,omitempty"`
 
 	// Name of the object.
 	// Required: true
 	Name *string `json:"name,omitempty"`
 
 	// The resource identifier.
-	Nsgs []string `json:"nsgs"`
+	Nsgs []string `json:"nsgs,omitempty"`
 
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`

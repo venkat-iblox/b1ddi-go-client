@@ -28,7 +28,7 @@ type ConfigGlobal struct {
 	// Error if there are duplicate items in the list.
 	//
 	// Defaults to empty.
-	CustomRootNs []*ConfigRootNS `json:"custom_root_ns"`
+	CustomRootNs []*ConfigRootNS `json:"custom_root_ns,omitempty"`
 
 	// Optional. _true_ to use custom root nameservers instead of the default ones.
 	//
@@ -53,14 +53,14 @@ type ConfigGlobal struct {
 	//
 	// A default list is provided by cloud management and included here for config generation.
 	// Read Only: true
-	DnssecRootKeys []*ConfigTrustAnchor `json:"dnssec_root_keys"`
+	DnssecRootKeys []*ConfigTrustAnchor `json:"dnssec_root_keys,omitempty"`
 
 	// Optional. DNSSEC trust anchors.
 	//
 	// Error if there are list items with duplicate (_zone_, _sep_, _algorithm_) combinations.
 	//
 	// Defaults to empty.
-	DnssecTrustAnchors []*ConfigTrustAnchor `json:"dnssec_trust_anchors"`
+	DnssecTrustAnchors []*ConfigTrustAnchor `json:"dnssec_trust_anchors,omitempty"`
 
 	// Optional. _true_ to reject expired DNSSEC keys.
 	// Ignored if either _dnssec_enabled_ or _dnssec_enable_validation_ is _false_.
@@ -99,7 +99,7 @@ type ConfigGlobal struct {
 	// Error if there are duplicate FQDNs in the list.
 	//
 	// Defaults to empty.
-	EcsZones []*ConfigECSZone `json:"ecs_zones"`
+	EcsZones []*ConfigECSZone `json:"ecs_zones,omitempty"`
 
 	// Optional. _edns_udp_size_ represents the edns UDP size.
 	// The size a querying DNS server advertises to the DNS server it’s sending a query to.
@@ -113,7 +113,7 @@ type ConfigGlobal struct {
 	// Error if there are items in the list with duplicate addresses.
 	//
 	// Defaults to empty.
-	Forwarders []*ConfigForwarder `json:"forwarders"`
+	Forwarders []*ConfigForwarder `json:"forwarders,omitempty"`
 
 	// Optional. _true_ to only forward.
 	//
@@ -133,7 +133,7 @@ type ConfigGlobal struct {
 	// _kerberos_keys_ contains a list of keys for GSS-TSIG signed dynamic updates.
 	//
 	// Defaults to empty.
-	KerberosKeys []*ConfigKerberosKey `json:"kerberos_keys"`
+	KerberosKeys []*ConfigKerberosKey `json:"kerberos_keys,omitempty"`
 
 	// Optional. Unused in the current on-prem DNS server implementation.
 	//
@@ -186,7 +186,7 @@ type ConfigGlobal struct {
 	// Also used for recursive queries if that ACL is unset.
 	//
 	// Defaults to empty.
-	QueryACL []*ConfigACLItem `json:"query_acl"`
+	QueryACL []*ConfigACLItem `json:"query_acl,omitempty"`
 
 	// Optional. Source port for outbound DNS queries.
 	// When set to 0 the port is unspecified and the implementation may randomize it using any available ports.
@@ -197,7 +197,7 @@ type ConfigGlobal struct {
 	// Optional. Clients must match this ACL to make recursive queries. If this ACL is empty, then the _query_acl_ field will be used instead.
 	//
 	// Defaults to empty.
-	RecursionACL []*ConfigACLItem `json:"recursion_acl"`
+	RecursionACL []*ConfigACLItem `json:"recursion_acl,omitempty"`
 
 	// Optional. _true_ to allow recursive DNS queries.
 	//
@@ -231,12 +231,12 @@ type ConfigGlobal struct {
 	// Optional. Clients must match this ACL to receive zone transfers.
 	//
 	// Defaults to "deny any".
-	TransferACL []*ConfigACLItem `json:"transfer_acl"`
+	TransferACL []*ConfigACLItem `json:"transfer_acl,omitempty"`
 
 	// Optional. Specifies which hosts are allowed to issue Dynamic DNS updates for authoritative zones of _primary_type_ _cloud_.
 	//
 	// Defaults to empty.
-	UpdateACL []*ConfigACLItem `json:"update_acl"`
+	UpdateACL []*ConfigACLItem `json:"update_acl,omitempty"`
 
 	// Optional. Use default forwarders to resolve queries for subzones.
 	//

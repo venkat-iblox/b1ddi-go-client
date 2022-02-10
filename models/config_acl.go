@@ -32,7 +32,7 @@ type ConfigACL struct {
 	// Optional. Ordered list of access control elements.
 	//
 	// Elements are evaluated in order to determine access. If evaluation reaches the end of the list then access is denied.
-	List []*ConfigACLItem `json:"list"`
+	List []*ConfigACLItem `json:"list,omitempty"`
 
 	// ACL object name.
 	// Required: true

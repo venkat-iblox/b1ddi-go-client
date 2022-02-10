@@ -34,7 +34,7 @@ type ConfigHost struct {
 
 	// Anycast address configured to the host. Order is not significant.
 	// Read Only: true
-	AnycastAddresses []string `json:"anycast_addresses"`
+	AnycastAddresses []string `json:"anycast_addresses,omitempty"`
 
 	// Host associated server configuration.
 	AssociatedServer *ConfigHostAssociatedServer `json:"associated_server,omitempty"`
@@ -71,7 +71,7 @@ type ConfigHost struct {
 	// Optional. _kerberos_keys_ contains a list of keys for GSS-TSIG signed dynamic updates.
 	//
 	// Defaults to empty.
-	KerberosKeys []*ConfigKerberosKey `json:"kerberos_keys"`
+	KerberosKeys []*ConfigKerberosKey `json:"kerberos_keys,omitempty"`
 
 	// Host display name.
 	// Read Only: true

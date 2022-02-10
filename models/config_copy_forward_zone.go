@@ -24,20 +24,20 @@ type ConfigCopyForwardZone struct {
 	Comment string `json:"comment,omitempty"`
 
 	// Optional. External DNS servers to forward to. Order is not significant.
-	ExternalForwarders []*ConfigForwarder `json:"external_forwarders"`
+	ExternalForwarders []*ConfigForwarder `json:"external_forwarders,omitempty"`
 
 	// The resource identifier.
-	Hosts []string `json:"hosts"`
+	Hosts []string `json:"hosts,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
 	// The resource identifier.
-	InternalForwarders []string `json:"internal_forwarders"`
+	InternalForwarders []string `json:"internal_forwarders,omitempty"`
 
 	// The resource identifier.
-	Nsgs []string `json:"nsgs"`
+	Nsgs []string `json:"nsgs,omitempty"`
 
 	// Indicates whether child objects should be copied or not.
 	//

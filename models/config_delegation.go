@@ -26,7 +26,7 @@ type ConfigDelegation struct {
 	Comment string `json:"comment,omitempty"`
 
 	// Required. DNS zone delegation servers. Order is not significant.
-	DelegationServers []*ConfigDelegationServer `json:"delegation_servers"`
+	DelegationServers []*ConfigDelegationServer `json:"delegation_servers,omitempty"`
 
 	// Optional. _true_ to disable object. A disabled object is effectively non-existent when generating resource records.
 	Disabled bool `json:"disabled,omitempty"`

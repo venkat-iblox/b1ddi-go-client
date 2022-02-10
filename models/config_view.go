@@ -36,7 +36,7 @@ type ConfigView struct {
 	// Error if there are duplicate items in the list.
 	//
 	// Defaults to empty.
-	CustomRootNs []*ConfigRootNS `json:"custom_root_ns"`
+	CustomRootNs []*ConfigRootNS `json:"custom_root_ns,omitempty"`
 
 	// Optional. _true_ to use custom root nameservers instead of the default ones.
 	//
@@ -71,7 +71,7 @@ type ConfigView struct {
 	// Error if there are list items with duplicate (_zone_, _sep_, _algorithm_) combinations.
 	//
 	// Defaults to empty.
-	DnssecTrustAnchors []*ConfigTrustAnchor `json:"dnssec_trust_anchors"`
+	DnssecTrustAnchors []*ConfigTrustAnchor `json:"dnssec_trust_anchors,omitempty"`
 
 	// Optional. _true_ to reject expired DNSSEC keys.
 	// Ignored if either _dnssec_enabled_ or _dnssec_enable_validation_ is _false_.
@@ -110,7 +110,7 @@ type ConfigView struct {
 	// Error if there are duplicate FQDNs in the list.
 	//
 	// Defaults to empty.
-	EcsZones []*ConfigECSZone `json:"ecs_zones"`
+	EcsZones []*ConfigECSZone `json:"ecs_zones,omitempty"`
 
 	// Optional. _edns_udp_size_ represents the edns UDP size.
 	// The size a querying DNS server advertises to the DNS server it’s sending a query to.
@@ -124,7 +124,7 @@ type ConfigView struct {
 	// Error if there are items in the list with duplicate addresses.
 	//
 	// Defaults to empty.
-	Forwarders []*ConfigForwarder `json:"forwarders"`
+	Forwarders []*ConfigForwarder `json:"forwarders,omitempty"`
 
 	// Optional. _true_ to only forward.
 	//
@@ -144,7 +144,7 @@ type ConfigView struct {
 	InheritanceSources *ConfigViewInheritance `json:"inheritance_sources,omitempty"`
 
 	// The resource identifier.
-	IPSpaces []string `json:"ip_spaces"`
+	IPSpaces []string `json:"ip_spaces,omitempty"`
 
 	// Optional. Unused in the current on-prem DNS server implementation.
 	//
@@ -156,12 +156,12 @@ type ConfigView struct {
 	// Optional. Specifies which clients have access to the view.
 	//
 	// Defaults to empty.
-	MatchClientsACL []*ConfigACLItem `json:"match_clients_acl"`
+	MatchClientsACL []*ConfigACLItem `json:"match_clients_acl,omitempty"`
 
 	// Optional. Specifies which destination addresses have access to the view.
 	//
 	// Defaults to empty.
-	MatchDestinationsACL []*ConfigACLItem `json:"match_destinations_acl"`
+	MatchDestinationsACL []*ConfigACLItem `json:"match_destinations_acl,omitempty"`
 
 	// Optional. If _true_ only recursive queries from matching clients access the view.
 	//
@@ -206,12 +206,12 @@ type ConfigView struct {
 	// Also used for recursive queries if that ACL is unset.
 	//
 	// Defaults to empty.
-	QueryACL []*ConfigACLItem `json:"query_acl"`
+	QueryACL []*ConfigACLItem `json:"query_acl,omitempty"`
 
 	// Optional. Clients must match this ACL to make recursive queries. If this ACL is empty, then the _query_acl_ will be used instead.
 	//
 	// Defaults to empty.
-	RecursionACL []*ConfigACLItem `json:"recursion_acl"`
+	RecursionACL []*ConfigACLItem `json:"recursion_acl,omitempty"`
 
 	// Optional. _true_ to allow recursive DNS queries.
 	//
@@ -224,12 +224,12 @@ type ConfigView struct {
 	// Optional. Clients must match this ACL to receive zone transfers.
 	//
 	// Defaults to empty.
-	TransferACL []*ConfigACLItem `json:"transfer_acl"`
+	TransferACL []*ConfigACLItem `json:"transfer_acl,omitempty"`
 
 	// Optional. Specifies which hosts are allowed to issue Dynamic DNS updates for authoritative zones of _primary_type_ _cloud_.
 	//
 	// Defaults to empty.
-	UpdateACL []*ConfigACLItem `json:"update_acl"`
+	UpdateACL []*ConfigACLItem `json:"update_acl,omitempty"`
 
 	// The timestamp when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true

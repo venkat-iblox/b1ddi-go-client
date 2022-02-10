@@ -28,13 +28,13 @@ type ConfigForwardZone struct {
 	// The timestamp when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// Optional. _true_ to disable object. A disabled object is effectively non-existent when generating configuration.
 	Disabled bool `json:"disabled,omitempty"`
 
 	// Optional. External DNS servers to forward to. Order is not significant.
-	ExternalForwarders []*ConfigForwarder `json:"external_forwarders"`
+	ExternalForwarders []*ConfigForwarder `json:"external_forwarders,omitempty"`
 
 	// Optional. _true_ to only forward.
 	ForwardOnly bool `json:"forward_only,omitempty"`
@@ -47,14 +47,14 @@ type ConfigForwardZone struct {
 	Fqdn *string `json:"fqdn,omitempty"`
 
 	// The resource identifier.
-	Hosts []string `json:"hosts"`
+	Hosts []string `json:"hosts,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
 	// The resource identifier.
-	InternalForwarders []string `json:"internal_forwarders"`
+	InternalForwarders []string `json:"internal_forwarders,omitempty"`
 
 	// Reverse zone network address in the following format: "ip-address/cidr".
 	// Defaults to empty.
@@ -72,7 +72,7 @@ type ConfigForwardZone struct {
 	Mapping string `json:"mapping,omitempty"`
 
 	// The resource identifier.
-	Nsgs []string `json:"nsgs"`
+	Nsgs []string `json:"nsgs,omitempty"`
 
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`
@@ -87,7 +87,7 @@ type ConfigForwardZone struct {
 	// The timestamp when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The resource identifier.
 	View string `json:"view,omitempty"`
@@ -218,7 +218,7 @@ func (m *ConfigForwardZone) ContextValidate(ctx context.Context, formats strfmt.
 
 func (m *ConfigForwardZone) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -283,7 +283,7 @@ func (m *ConfigForwardZone) contextValidateProtocolFqdn(ctx context.Context, for
 
 func (m *ConfigForwardZone) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

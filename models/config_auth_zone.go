@@ -34,10 +34,10 @@ type ConfigAuthZone struct {
 	Disabled bool `json:"disabled,omitempty"`
 
 	// Optional. DNS primaries external to BloxOne DDI. Order is not significant.
-	ExternalPrimaries []*ConfigExternalPrimary `json:"external_primaries"`
+	ExternalPrimaries []*ConfigExternalPrimary `json:"external_primaries,omitempty"`
 
 	// DNS secondaries external to BloxOne DDI. Order is not significant.
-	ExternalSecondaries []*ConfigExternalSecondary `json:"external_secondaries"`
+	ExternalSecondaries []*ConfigExternalSecondary `json:"external_secondaries,omitempty"`
 
 	// Zone FQDN.
 	// The FQDN supplied at creation will be converted to canonical form.
@@ -66,7 +66,7 @@ type ConfigAuthZone struct {
 	InitialSoaSerial int64 `json:"initial_soa_serial,omitempty"`
 
 	// Optional. BloxOne DDI hosts acting as internal secondaries. Order is not significant.
-	InternalSecondaries []*ConfigInternalSecondary `json:"internal_secondaries"`
+	InternalSecondaries []*ConfigInternalSecondary `json:"internal_secondaries,omitempty"`
 
 	// Reverse zone network address in the following format: "ip-address/cidr".
 	// Defaults to empty.
@@ -89,7 +89,7 @@ type ConfigAuthZone struct {
 	Notify bool `json:"notify,omitempty"`
 
 	// The resource identifier.
-	Nsgs []string `json:"nsgs"`
+	Nsgs []string `json:"nsgs,omitempty"`
 
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`
@@ -110,18 +110,18 @@ type ConfigAuthZone struct {
 	// Also used for recursive queries if that ACL is unset.
 	//
 	// Defaults to empty.
-	QueryACL []*ConfigACLItem `json:"query_acl"`
+	QueryACL []*ConfigACLItem `json:"query_acl,omitempty"`
 
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`
 
 	// Optional. Clients must match this ACL to receive zone transfers.
-	TransferACL []*ConfigACLItem `json:"transfer_acl"`
+	TransferACL []*ConfigACLItem `json:"transfer_acl,omitempty"`
 
 	// Optional. Specifies which hosts are allowed to submit Dynamic DNS updates for authoritative zones of _primary_type_ _cloud_.
 	//
 	// Defaults to empty.
-	UpdateACL []*ConfigACLItem `json:"update_acl"`
+	UpdateACL []*ConfigACLItem `json:"update_acl,omitempty"`
 
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
