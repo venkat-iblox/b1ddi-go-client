@@ -35,7 +35,7 @@ type IpamsvcFixedAddress struct {
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The list of DHCP options. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`

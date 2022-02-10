@@ -52,7 +52,7 @@ type IpamsvcAddress struct {
 	Interface string `json:"interface,omitempty"`
 
 	// The list of all names associated with this address.
-	Names []*IpamsvcName `json:"names"`
+	Names []*IpamsvcName `json:"names,omitempty"`
 
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`

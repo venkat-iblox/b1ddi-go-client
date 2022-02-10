@@ -96,7 +96,7 @@ type IpamsvcAddressBlock struct {
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
 
 	// The list of DHCP options for the address block. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The utilization of IP addresses within the DHCP ranges of the address block.
 	// Read Only: true

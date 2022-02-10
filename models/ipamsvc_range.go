@@ -28,20 +28,20 @@ type IpamsvcRange struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The resource identifier.
 	DhcpHost string `json:"dhcp_host,omitempty"`
 
 	// The list of DHCP options. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The end IP address of the range.
 	// Required: true
 	End *string `json:"end,omitempty"`
 
 	// The list of all exclusion ranges in the scope of the range.
-	ExclusionRanges []*IpamsvcExclusionRange `json:"exclusion_ranges"`
+	ExclusionRanges []*IpamsvcExclusionRange `json:"exclusion_ranges,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -84,7 +84,7 @@ type IpamsvcRange struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The utilization statistics for the range.
 	// Read Only: true
@@ -383,7 +383,7 @@ func (m *IpamsvcRange) ContextValidate(ctx context.Context, formats strfmt.Regis
 
 func (m *IpamsvcRange) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -506,7 +506,7 @@ func (m *IpamsvcRange) contextValidateThreshold(ctx context.Context, formats str
 
 func (m *IpamsvcRange) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

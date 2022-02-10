@@ -28,10 +28,10 @@ type IpamsvcOptionGroup struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The list of DHCP options for the option group. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -47,7 +47,7 @@ type IpamsvcOptionGroup struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this ipamsvc option group
@@ -163,7 +163,7 @@ func (m *IpamsvcOptionGroup) ContextValidate(ctx context.Context, formats strfmt
 
 func (m *IpamsvcOptionGroup) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -201,7 +201,7 @@ func (m *IpamsvcOptionGroup) contextValidateID(ctx context.Context, formats strf
 
 func (m *IpamsvcOptionGroup) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

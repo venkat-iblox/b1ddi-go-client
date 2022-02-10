@@ -24,7 +24,7 @@ type IpamsvcIpamHost struct {
 
 	// The list of all addresses associated with the IPAM host, which may be in different IP spaces.
 	// Required: true
-	Addresses []*IpamsvcHostAddress `json:"addresses"`
+	Addresses []*IpamsvcHostAddress `json:"addresses,omitempty"`
 
 	// The description for the IPAM host. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -32,7 +32,7 @@ type IpamsvcIpamHost struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -47,7 +47,7 @@ type IpamsvcIpamHost struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 }
 
 // Validate validates this ipamsvc ipam host
@@ -171,7 +171,7 @@ func (m *IpamsvcIpamHost) contextValidateAddresses(ctx context.Context, formats 
 
 func (m *IpamsvcIpamHost) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -189,7 +189,7 @@ func (m *IpamsvcIpamHost) contextValidateID(ctx context.Context, formats strfmt.
 
 func (m *IpamsvcIpamHost) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 

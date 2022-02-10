@@ -92,7 +92,7 @@ type IpamsvcGlobal struct {
 	// Error if there are items with duplicate zone in the list.
 	//
 	// Defaults to empty list.
-	DdnsZones []*IpamsvcDDNSZone `json:"ddns_zones"`
+	DdnsZones []*IpamsvcDDNSZone `json:"ddns_zones,omitempty"`
 
 	// The global DHCP configuration that controls how leases are issued.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
@@ -105,7 +105,7 @@ type IpamsvcGlobal struct {
 	// Error if the graph of referenced groups contains cycles.
 	//
 	// Defaults to empty list.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The global DHCP Utilization threshold settings.
 	DhcpThreshold *IpamsvcDHCPUtilizationThreshold `json:"dhcp_threshold,omitempty"`

@@ -99,7 +99,7 @@ type IpamsvcSubnet struct {
 	DhcpHost string `json:"dhcp_host,omitempty"`
 
 	// The DHCP options of the subnet. This can either be a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The utilization of IP addresses within the DHCP ranges of the subnet.
 	// Read Only: true

@@ -23,7 +23,7 @@ import (
 type IpamsvcHardwareFilter struct {
 
 	// The list of addresses to match for the hardware filter.
-	Addresses []string `json:"addresses"`
+	Addresses []string `json:"addresses,omitempty"`
 
 	// The description for the hardware filter. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -31,10 +31,10 @@ type IpamsvcHardwareFilter struct {
 	// Time when the object has been created.
 	// Read Only: true
 	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
 	// The list of DHCP options for the hardware filter. May be either a specific option or a group of options.
-	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options"`
+	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
@@ -59,7 +59,7 @@ type IpamsvcHardwareFilter struct {
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
 	// Format: date-time
-	UpdatedAt strfmt.DateTime `json:"updated_at,omitempty"`
+	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
 	// The resource identifier.
 	VendorSpecificOptionOptionSpace string `json:"vendor_specific_option_option_space,omitempty"`
@@ -178,7 +178,7 @@ func (m *IpamsvcHardwareFilter) ContextValidate(ctx context.Context, formats str
 
 func (m *IpamsvcHardwareFilter) contextValidateCreatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created_at", "body", strfmt.DateTime(m.CreatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
 	}
 
@@ -216,7 +216,7 @@ func (m *IpamsvcHardwareFilter) contextValidateID(ctx context.Context, formats s
 
 func (m *IpamsvcHardwareFilter) contextValidateUpdatedAt(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "updated_at", "body", strfmt.DateTime(m.UpdatedAt)); err != nil {
+	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
 	}
 
