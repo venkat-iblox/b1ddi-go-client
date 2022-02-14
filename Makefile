@@ -1,3 +1,5 @@
+default: test
+
 fmt:
 	go fmt ./...
 
