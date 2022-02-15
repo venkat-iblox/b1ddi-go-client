@@ -30,7 +30,7 @@ func main() {
 	)
 
 	// Create default auth header for all API requests
-	tokenAuth := b1cli.B1DDIToken(os.Getenv("B1DDI_TOKEN"))
+	tokenAuth := b1cli.B1DDIAPIKey(os.Getenv("B1DDI_API_KEY"))
 	transport.DefaultAuthentication = tokenAuth
 
 	// Create the BloxOne API client
