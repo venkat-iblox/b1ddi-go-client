@@ -91,11 +91,15 @@ func TestClient(t *testing.T) {
 		{
 			"ViewRead",
 			&ViewReadParams{
+				Fields:  swag.String("field"),
 				ID:      "view-read-id",
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dns/view/view-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dns/view/view-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

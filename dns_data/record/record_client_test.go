@@ -74,10 +74,14 @@ func TestClient(t *testing.T) {
 		{
 			"RecordRead",
 			&RecordReadParams{
+				Fields:  swag.String("field"),
 				ID:      "record-read-id",
 				Context: context.TODO()},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dns/record/record-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dns/record/record-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

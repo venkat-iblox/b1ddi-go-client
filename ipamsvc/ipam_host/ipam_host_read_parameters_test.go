@@ -70,6 +70,13 @@ func TestIpamHostReadParams_WithFields(t *testing.T) {
 	assert.Equal(t, "fields", *p.Fields)
 }
 
+func TestIpamHostReadParams_WithOrderBy(t *testing.T) {
+	p := NewIpamHostReadParams()
+	p = p.WithOrderBy(swag.String("desc"))
+	require.NotNil(t, p.OrderBy)
+	assert.Equal(t, "desc", *p.OrderBy)
+}
+
 func TestIpamHostReadParams_WithID(t *testing.T) {
 	p := NewIpamHostReadParams()
 	p = p.WithID("test-id")

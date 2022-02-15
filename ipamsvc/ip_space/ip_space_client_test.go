@@ -89,9 +89,16 @@ func TestClient(t *testing.T) {
 		},
 		{
 			"IPSpaceRead",
-			&IPSpaceReadParams{ID: "ip-space-read-id", Context: context.TODO()},
+			&IPSpaceReadParams{
+				ID:      "ip-space-read-id",
+				Fields:  swag.String("field"),
+				Context: context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/ip-space-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/ip_space/ip-space-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

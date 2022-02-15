@@ -88,11 +88,16 @@ func TestClient(t *testing.T) {
 		{
 			"RangeListNextAvailableIP",
 			&RangeListNextAvailableIPParams{
-				ID:      "range-list-next-available-ip-id",
-				Context: context.TODO(),
+				ID:         "range-list-next-available-ip-id",
+				Contiguous: swag.Bool(true),
+				Count:      swag.Int32(5),
+				Context:    context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-list-next-available-ip-id/nextavailableip"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/range/range-list-next-available-ip-id/nextavailableip",
+					RawQuery: "contiguous=true&count=5",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
@@ -101,10 +106,14 @@ func TestClient(t *testing.T) {
 			"RangeRead",
 			&RangeReadParams{
 				ID:      "range-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/range/range-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/infobloxopen/b1ddi-go-client/models"
 	"github.com/infobloxopen/b1ddi-go-client/runtimetest"
 	"io"
@@ -18,56 +19,66 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/global"},
-				Method: http.MethodGet,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"GlobalRead",
 			&GlobalReadParams{
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/global",
+					RawQuery: "_fields=field",
+				},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
 			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/global/global-read-id"},
-				Method: http.MethodGet,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"GlobalRead2",
 			&GlobalRead2Params{
 				ID:      "global-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/global/global-read-id",
+					RawQuery: "_fields=field",
+				},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
 			},
 		},
 
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/global"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{}\n")),
-			},
 			"GlobalUpdate",
 			&GlobalUpdateParams{
 				Body:    &models.IpamsvcGlobal{},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL: &url.URL{
+					Path: "/api/ddi/v1/dhcp/global",
+				},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{}\n")),
+			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/global/global-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"GlobalUpdate2",
 			&GlobalUpdate2Params{
 				ID:      "global-update-id",
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/global/global-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("")),
 			},
 		},
 	}

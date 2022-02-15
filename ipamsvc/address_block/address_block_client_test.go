@@ -179,11 +179,15 @@ func TestClient(t *testing.T) {
 		{
 			"AddressBlockRead",
 			&AddressBlockReadParams{
+				Fields:  swag.String("field"),
 				ID:      "address-block-read-id",
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/address_block/address-block-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/address_block/address-block-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

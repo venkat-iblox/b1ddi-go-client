@@ -73,10 +73,15 @@ func TestClient(t *testing.T) {
 			"IpamHostRead",
 			&IpamHostReadParams{
 				ID:      "ipam-host-read-id",
+				Fields:  swag.String("field"),
+				OrderBy: swag.String("desc"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-read-id"},
+				URL: &url.URL{
+					Path:    "/api/ddi/v1/ipam/host/ipam-host-read-id",
+					RawPath: "_fields=field&_order_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

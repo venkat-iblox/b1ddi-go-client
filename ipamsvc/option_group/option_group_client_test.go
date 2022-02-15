@@ -75,10 +75,14 @@ func TestClient(t *testing.T) {
 			"OptionGroupRead",
 			&OptionGroupReadParams{
 				ID:      "option-group-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_group/option-group-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/option_group/option-group-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

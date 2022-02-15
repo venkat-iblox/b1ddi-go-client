@@ -46,10 +46,14 @@ func TestClient(t *testing.T) {
 			"DNSUsageRead",
 			&DNSUsageReadParams{
 				ID:      "dns-usage-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/dns_usage/dns-usage-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/dns_usage/dns-usage-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

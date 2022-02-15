@@ -73,10 +73,14 @@ func TestClient(t *testing.T) {
 			"OptionFilterRead",
 			&OptionFilterReadParams{
 				ID:      "option-filter-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter/option-filter-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/option_filter/option-filter-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

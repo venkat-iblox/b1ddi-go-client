@@ -57,10 +57,14 @@ func TestClient(t *testing.T) {
 			"AsmRead",
 			&AsmReadParams{
 				ID:      "asm-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/asm/asm-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/asm/asm-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

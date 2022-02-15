@@ -75,10 +75,14 @@ func TestClient(t *testing.T) {
 			"OptionSpaceRead",
 			&OptionSpaceReadParams{
 				ID:      "option-space-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space/option-space-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/option_space/option-space-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

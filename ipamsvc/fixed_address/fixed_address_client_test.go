@@ -77,10 +77,14 @@ func TestClient(t *testing.T) {
 			"FixedAddressRead",
 			&FixedAddressReadParams{
 				ID:      "fixed-address-read-id",
+				Fields:  swag.String("field"),
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/fixed_address/fixed-address-read-id",
+					RawQuery: "_fields=field",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
