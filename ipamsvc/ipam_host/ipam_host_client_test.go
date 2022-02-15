@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/infobloxopen/b1ddi-go-client/models"
 	"github.com/infobloxopen/b1ddi-go-client/runtimetest"
 	"io"
@@ -18,68 +19,79 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{}\n")),
-			},
 			"IpamHostCreate",
 			&IpamHostCreateParams{
 				Body:    &models.IpamsvcIpamHost{},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host"},
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{}\n")),
+			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-delete-id"},
-				Method: http.MethodDelete,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"IpamHostDelete",
 			&IpamHostDeleteParams{
 				ID:      "ipam-host-delete-id",
 				Context: context.TODO(),
 			},
-		},
-		{
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host"},
-				Method: http.MethodGet,
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-delete-id"},
+				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
+		},
+		{
 			"IpamHostList",
 			&IpamHostListParams{
-				Context: context.TODO(),
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
 			},
-		},
-		{
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/host",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
+		},
+		{
 			"IpamHostRead",
 			&IpamHostReadParams{
 				ID:      "ipam-host-read-id",
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-read-id"},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
+			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			"IpamHostUpdate",
 			&IpamHostUpdateParams{
 				ID:      "ipam-host-update-id",
 				Body:    &models.IpamsvcIpamHost{Comment: "Updated comment"},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/host/ipam-host-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -94,7 +106,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initIPAMHostTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

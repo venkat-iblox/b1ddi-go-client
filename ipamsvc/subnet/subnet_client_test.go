@@ -20,28 +20,23 @@ import (
 func TestClient(t *testing.T) {
 	testCases := []struct {
 		testMethodName   string
-		expectedRequest  http.Request
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
 			"SubnetCopy",
+			&SubnetCopyParams{
+				ID:      "subnet-copy-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-copy-id/copy"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&SubnetCopyParams{
-				ID:      "subnet-copy-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"SubnetCreate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{\"address\":\"192.168.1.0\",\"cidr\":24,\"space\":\"ip-space-id\"}\n")),
-			},
 			&SubnetCreateParams{
 				Body: &models.IpamsvcSubnet{
 					Address: swag.String("192.168.1.0"),
@@ -50,79 +45,95 @@ func TestClient(t *testing.T) {
 				},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet"},
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{\"address\":\"192.168.1.0\",\"cidr\":24,\"space\":\"ip-space-id\"}\n")),
+			},
 		},
 		{
 			"SubnetCreateNextAvailableIP",
+			&SubnetCreateNextAvailableIPParams{
+				ID:      "subnet-create-next-available-ip-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-create-next-available-ip-id/nextavailableip"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&SubnetCreateNextAvailableIPParams{
-				ID:      "subnet-create-next-available-ip-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"SubnetDelete",
+			&SubnetDeleteParams{
+				ID:      "subnet-delete-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&SubnetDeleteParams{
-				ID:      "subnet-delete-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"SubnetList",
+			&SubnetListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/subnet",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&SubnetListParams{
-				Context: context.TODO(),
 			},
 		},
 		{
 			"SubnetListNextAvailableIP",
+			&SubnetListNextAvailableIPParams{
+				ID:      "subnet-list-next-available-ip-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-list-next-available-ip-id/nextavailableip"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&SubnetListNextAvailableIPParams{
-				ID:      "subnet-list-next-available-ip-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"SubnetRead",
+			&SubnetReadParams{
+				ID:      "subnet-read-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&SubnetReadParams{
-				ID:      "subnet-read-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"SubnetUpdate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			&SubnetUpdateParams{
 				ID: "subnet-update-id",
 				Body: &models.IpamsvcSubnet{
 					Comment: "Updated comment",
 				},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/subnet/subnet-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -137,7 +148,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initSubnetTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

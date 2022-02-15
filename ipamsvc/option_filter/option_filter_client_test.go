@@ -20,69 +20,80 @@ import (
 func TestClient(t *testing.T) {
 	testCases := []struct {
 		testMethodName   string
-		expectedRequest  http.Request
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
 			"OptionFilterCreate",
+			&OptionFilterCreateParams{
+				Body:    &models.IpamsvcOptionFilter{Name: swag.String("test_name")},
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("{\"name\":\"test_name\"}\n")),
 			},
-			&OptionFilterCreateParams{
-				Body:    &models.IpamsvcOptionFilter{Name: swag.String("test_name")},
-				Context: context.TODO(),
-			},
 		},
 		{
 			"OptionFilterDelete",
+			&OptionFilterDeleteParams{
+				ID:      "option-filter-delete-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter/option-filter-delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&OptionFilterDeleteParams{
-				ID:      "option-filter-delete-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"OptionFilterList",
+			&OptionFilterListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/option_filter",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&OptionFilterListParams{
-				Context: context.TODO(),
 			},
 		},
 		{
 			"OptionFilterRead",
+			&OptionFilterReadParams{
+				ID:      "option-filter-read-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter/option-filter-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&OptionFilterReadParams{
-				ID:      "option-filter-read-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"OptionFilterUpdate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter/option-filter-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			&OptionFilterUpdateParams{
 				ID: "option-filter-update-id",
 				Body: &models.IpamsvcOptionFilter{
 					Comment: "Updated comment",
 				},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_filter/option-filter-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -97,7 +108,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initOptionFilterTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

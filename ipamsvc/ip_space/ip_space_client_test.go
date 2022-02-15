@@ -19,79 +19,94 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
+			"IPSpaceBulkCopy",
+			&IPSpaceBulkCopyParams{Body: &models.IpamsvcBulkCopyIPSpace{}, Context: context.TODO()},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/bulk_copy"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("{\"copy_objects\":null}\n")),
 			},
-			"IPSpaceBulkCopy",
-			&IPSpaceBulkCopyParams{Body: &models.IpamsvcBulkCopyIPSpace{}, Context: context.TODO()},
 		},
 		{
+			"IPSpaceCopy",
+			&IPSpaceCopyParams{ID: "ip-space-copy-id", Context: context.TODO()},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/ip-space-copy-id/copy"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			"IPSpaceCopy",
-			&IPSpaceCopyParams{ID: "ip-space-copy-id", Context: context.TODO()},
 		},
 		{
+			"IPSpaceCreate",
+			&IPSpaceCreateParams{
+				Body: &models.IpamsvcIPSpace{
+					Name:    swag.String("ip_space_go_client_test"),
+					Comment: "Test Comment",
+				},
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Test Comment\",\"name\":\"ip_space_go_client_test\"}\n")),
 			},
-			"IPSpaceCreate",
-			&IPSpaceCreateParams{Body: &models.IpamsvcIPSpace{
-				Name:    swag.String("ip_space_go_client_test"),
-				Comment: "Test Comment",
-			}, Context: context.TODO()},
 		},
 		{
+			"IPSpaceDelete",
+			&IPSpaceDeleteParams{ID: "delete-id", Context: context.TODO()},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			"IPSpaceDelete",
-			&IPSpaceDeleteParams{ID: "delete-id", Context: context.TODO()},
 		},
 		{
+			"IPSpaceList",
+			&IPSpaceListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/ip_space",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			"IPSpaceList",
-
-			&IPSpaceListParams{Context: context.TODO()},
 		},
 		{
+			"IPSpaceRead",
+			&IPSpaceReadParams{ID: "ip-space-read-id", Context: context.TODO()},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/ip-space-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			"IPSpaceRead",
-			&IPSpaceReadParams{ID: "ip-space-read-id", Context: context.TODO()},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/ip-space-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			"IPSpaceUpdate",
 			&IPSpaceUpdateParams{
 				ID:      "ip-space-update-id",
 				Body:    &models.IpamsvcIPSpace{Comment: "Updated comment"},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/ip_space/ip-space-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}

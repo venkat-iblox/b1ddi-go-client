@@ -19,16 +19,11 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/asm"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{\"subnet_id\":\"subnet-id\"}\n")),
-			},
 			"AsmCreate",
 			&AsmCreateParams{
 				Body: &models.IpamsvcASM{
@@ -36,28 +31,38 @@ func TestClient(t *testing.T) {
 				},
 				Context: context.TODO(),
 			},
-		},
-		{
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/asm"},
-				Method: http.MethodGet,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			"AsmList",
-			&AsmListParams{
-				Context: context.TODO(),
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{\"subnet_id\":\"subnet-id\"}\n")),
 			},
 		},
 		{
+			"AsmList",
+			&AsmListParams{
+				Fields:   swag.String("field"),
+				SubnetID: swag.String("subnet-id"),
+				Context:  context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/asm/asm-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/asm",
+					RawQuery: "_fields=field&subnet_id=subnet-id",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
+		},
+		{
 			"AsmRead",
 			&AsmReadParams{
 				ID:      "asm-read-id",
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/asm/asm-read-id"},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
 			},
 		},
 	}
@@ -72,7 +77,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initASMTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

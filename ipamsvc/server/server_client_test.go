@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/infobloxopen/b1ddi-go-client/models"
 	"github.com/infobloxopen/b1ddi-go-client/runtimetest"
 	"io"
@@ -19,69 +20,80 @@ import (
 func TestClient(t *testing.T) {
 	testCases := []struct {
 		testMethodName   string
-		expectedRequest  http.Request
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
 			"ServerCreate",
+			&ServerCreateParams{
+				Body:    &models.IpamsvcServer{},
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("{}\n")),
 			},
-			&ServerCreateParams{
-				Body:    &models.IpamsvcServer{},
-				Context: context.TODO(),
-			},
 		},
 		{
 			"ServerDelete",
+			&ServerDeleteParams{
+				ID:      "server-delete-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server/server-delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&ServerDeleteParams{
-				ID:      "server-delete-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"ServerList",
+			&ServerListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/server",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&ServerListParams{
-				Context: context.TODO(),
 			},
 		},
 		{
 			"ServerRead",
+			&ServerReadParams{
+				ID:      "server-read-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server/server-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&ServerReadParams{
-				ID:      "server-read-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"ServerUpdate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server/server-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			&ServerUpdateParams{
 				ID: "server-update-id",
 				Body: &models.IpamsvcServer{
 					Comment: "Updated comment",
 				},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/server/server-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -96,7 +108,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initServerTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

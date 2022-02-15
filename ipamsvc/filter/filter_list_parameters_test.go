@@ -98,6 +98,13 @@ func TestFilterListParams_WithOrderBy(t *testing.T) {
 	assert.Equal(t, "desc", *p.OrderBy)
 }
 
+func TestFilterListParams_WithPageToken(t *testing.T) {
+	p := NewFilterListParams()
+	p = p.WithPageToken(swag.String("token"))
+	require.NotNil(t, p.PageToken)
+	assert.Equal(t, "token", *p.PageToken)
+}
+
 func TestFilterListParams_WithTfilter(t *testing.T) {
 	p := NewFilterListParams()
 	p = p.WithTfilter(swag.String("tfilter"))

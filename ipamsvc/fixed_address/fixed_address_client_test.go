@@ -19,16 +19,11 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{\"address\":\"192.168.1.15\",\"match_type\":\"mac\",\"match_value\":\"00:00:00:00:00:00\"}\n")),
-			},
 			"FixedAddressCreate",
 			&FixedAddressCreateParams{
 				Body: &models.IpamsvcFixedAddress{
@@ -38,48 +33,59 @@ func TestClient(t *testing.T) {
 				},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address"},
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{\"address\":\"192.168.1.15\",\"match_type\":\"mac\",\"match_value\":\"00:00:00:00:00:00\"}\n")),
+			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-delete-id"},
-				Method: http.MethodDelete,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"FixedAddressDelete",
 			&FixedAddressDeleteParams{
 				ID:      "fixed-address-delete-id",
 				Context: context.TODO(),
 			},
-		},
-		{
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address"},
-				Method: http.MethodGet,
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-delete-id"},
+				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
+		},
+		{
 			"FixedAddressList",
 			&FixedAddressListParams{
-				Context: context.TODO(),
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
 			},
-		},
-		{
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-read-id"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/fixed_address",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
+		},
+		{
 			"FixedAddressRead",
 			&FixedAddressReadParams{
 				ID:      "fixed-address-read-id",
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-read-id"},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
+			},
 		},
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			"FixedAddressUpdate",
 			&FixedAddressUpdateParams{
 				ID: "fixed-address-update-id",
@@ -87,6 +93,11 @@ func TestClient(t *testing.T) {
 					Comment: "Updated comment",
 				},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/fixed_address/fixed-address-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -101,7 +112,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initFixedAddressTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

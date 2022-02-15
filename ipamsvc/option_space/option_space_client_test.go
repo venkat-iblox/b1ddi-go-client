@@ -20,71 +20,82 @@ import (
 func TestClient(t *testing.T) {
 	testCases := []struct {
 		testMethodName   string
-		expectedRequest  http.Request
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
 			"OptionSpaceCreate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{\"name\":\"test_name\"}\n")),
-			},
 			&OptionSpaceCreateParams{
 				Body: &models.IpamsvcOptionSpace{
 					Name: swag.String("test_name"),
 				},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space"},
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{\"name\":\"test_name\"}\n")),
+			},
 		},
 		{
 			"OptionSpaceDelete",
+			&OptionSpaceDeleteParams{
+				ID:      "option-space-delete-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space/option-space-delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&OptionSpaceDeleteParams{
-				ID:      "option-space-delete-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"OptionSpaceList",
+			&OptionSpaceListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/option_space",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&OptionSpaceListParams{
-				Context: context.TODO(),
 			},
 		},
 		{
 			"OptionSpaceRead",
+			&OptionSpaceReadParams{
+				ID:      "option-space-read-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space/option-space-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&OptionSpaceReadParams{
-				ID:      "option-space-read-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"OptionSpaceUpdate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space/option-space-update-id"},
-				Method: http.MethodPatch,
-				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
-			},
 			&OptionSpaceUpdateParams{
 				ID: "option-space-update-id",
 				Body: &models.IpamsvcOptionSpace{
 					Comment: "Updated comment",
 				},
 				Context: context.TODO(),
+			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/option_space/option-space-update-id"},
+				Method: http.MethodPatch,
+				Body:   io.NopCloser(strings.NewReader("{\"comment\":\"Updated comment\"}\n")),
 			},
 		},
 	}
@@ -99,7 +110,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initOptionSpaceTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

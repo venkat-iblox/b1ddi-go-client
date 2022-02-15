@@ -12,6 +12,9 @@ import (
 func InitTestServer(t *testing.T, expectedRequest http.Request, respBody interface{}) *httptest.Server {
 	return httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, expectedRequest.URL.Path, r.URL.Path)
+		if expectedRequest.URL.RawQuery != "" {
+			assert.Equal(t, expectedRequest.URL.RawQuery, r.URL.RawQuery)
+		}
 		assert.Equal(t, expectedRequest.Method, r.Method)
 
 		expectedBody, err := io.ReadAll(expectedRequest.Body)

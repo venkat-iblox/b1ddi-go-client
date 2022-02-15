@@ -83,3 +83,38 @@ func TestAddressBlockListParams_WithLimit(t *testing.T) {
 	require.NotNil(t, p.Limit)
 	assert.Equal(t, int64(20), *p.Limit)
 }
+
+func TestAddressBlockListParams_WithOffset(t *testing.T) {
+	p := NewAddressBlockListParams()
+	p = p.WithOffset(swag.Int64(20))
+	require.NotNil(t, p.Offset)
+	assert.Equal(t, int64(20), *p.Offset)
+}
+
+func TestAddressBlockListParams_WithOrderBy(t *testing.T) {
+	p := NewAddressBlockListParams()
+	p = p.WithOrderBy(swag.String("desc"))
+	require.NotNil(t, p.OrderBy)
+	assert.Equal(t, "desc", *p.OrderBy)
+}
+
+func TestAddressBlockListParams_WithPageToken(t *testing.T) {
+	p := NewAddressBlockListParams()
+	p = p.WithPageToken(swag.String("token"))
+	require.NotNil(t, p.PageToken)
+	assert.Equal(t, "token", *p.PageToken)
+}
+
+func TestAddressBlockListParams_WithTfilter(t *testing.T) {
+	p := NewAddressBlockListParams()
+	p = p.WithTfilter(swag.String("tfilter"))
+	require.NotNil(t, p.Tfilter)
+	assert.Equal(t, "tfilter", *p.Tfilter)
+}
+
+func TestAddressBlockListParams_WithTorderBy(t *testing.T) {
+	p := NewAddressBlockListParams()
+	p = p.WithTorderBy(swag.String("desc"))
+	require.NotNil(t, p.TorderBy)
+	assert.Equal(t, "desc", *p.TorderBy)
+}

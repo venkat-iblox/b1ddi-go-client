@@ -6,6 +6,7 @@ import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/infobloxopen/b1ddi-go-client/runtimetest"
 	"io"
 	"net/http"
@@ -17,19 +18,30 @@ import (
 
 func TestClient(t *testing.T) {
 	testCases := []struct {
-		expectedRequest  http.Request
 		testMethodName   string
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/dhcp/filter"},
-				Method: http.MethodGet,
-				Body:   io.NopCloser(strings.NewReader("")),
-			},
 			"FilterList",
 			&FilterListParams{
-				Context: context.TODO(),
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
+			http.Request{
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/dhcp/filter",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
+				Method: http.MethodGet,
+				Body:   io.NopCloser(strings.NewReader("")),
 			},
 		},
 	}
@@ -44,7 +56,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initFilterTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),

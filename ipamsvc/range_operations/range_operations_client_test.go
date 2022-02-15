@@ -20,16 +20,11 @@ import (
 func TestClient(t *testing.T) {
 	testCases := []struct {
 		testMethodName   string
-		expectedRequest  http.Request
 		testMethodParams interface{}
+		expectedRequest  http.Request
 	}{
 		{
 			"RangeCreate",
-			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range"},
-				Method: http.MethodPost,
-				Body:   io.NopCloser(strings.NewReader("{\"end\":\"192.168.1.30\",\"space\":\"ip-space-id\",\"start\":\"192.168.1.15\"}\n")),
-			},
 			&RangeCreateParams{
 				Body: &models.IpamsvcRange{
 					Start: swag.String("192.168.1.15"),
@@ -38,76 +33,92 @@ func TestClient(t *testing.T) {
 				},
 				Context: context.TODO(),
 			},
+			http.Request{
+				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range"},
+				Method: http.MethodPost,
+				Body:   io.NopCloser(strings.NewReader("{\"end\":\"192.168.1.30\",\"space\":\"ip-space-id\",\"start\":\"192.168.1.15\"}\n")),
+			},
 		},
 		{
 			"RangeCreateNextAvailableIP",
+			&RangeCreateNextAvailableIPParams{
+				ID:      "range-create-next-available-ip-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-create-next-available-ip-id/nextavailableip"},
 				Method: http.MethodPost,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&RangeCreateNextAvailableIPParams{
-				ID:      "range-create-next-available-ip-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"RangeDelete",
+			&RangeDeleteParams{
+				ID:      "range-delete-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-delete-id"},
 				Method: http.MethodDelete,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&RangeDeleteParams{
-				ID:      "range-delete-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"RangeList",
+			&RangeListParams{
+				Fields:    swag.String("field"),
+				Filter:    swag.String("filter"),
+				Limit:     swag.Int64(int64(20)),
+				Offset:    swag.Int64(int64(20)),
+				OrderBy:   swag.String("desc"),
+				PageToken: swag.String("token"),
+				Tfilter:   swag.String("tfilter"),
+				TorderBy:  swag.String("desc"),
+				Context:   context.TODO(),
+			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/range",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&RangeListParams{
-				Context: context.TODO(),
 			},
 		},
 		{
 			"RangeListNextAvailableIP",
+			&RangeListNextAvailableIPParams{
+				ID:      "range-list-next-available-ip-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-list-next-available-ip-id/nextavailableip"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&RangeListNextAvailableIPParams{
-				ID:      "range-list-next-available-ip-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"RangeRead",
+			&RangeReadParams{
+				ID:      "range-read-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-read-id"},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
-			&RangeReadParams{
-				ID:      "range-read-id",
-				Context: context.TODO(),
-			},
 		},
 		{
 			"RangeUpdate",
+			&RangeUpdateParams{
+				ID:      "range-update-id",
+				Context: context.TODO(),
+			},
 			http.Request{
 				URL:    &url.URL{Path: "/api/ddi/v1/ipam/range/range-update-id"},
 				Method: http.MethodPatch,
 				Body:   io.NopCloser(strings.NewReader("")),
-			},
-			&RangeUpdateParams{
-				ID:      "range-update-id",
-				Context: context.TODO(),
 			},
 		},
 	}
@@ -122,7 +133,7 @@ func TestClient(t *testing.T) {
 			// Initialize the client
 			c := initRangeOperationsTestClient(s.URL)
 
-			// Compose test function call parameters
+			// Compose test method call parameters
 			methodParams := []reflect.Value{
 				reflect.ValueOf(tc.testMethodParams),
 				reflect.New(reflect.TypeOf((*runtime.ClientAuthInfoWriter)(nil)).Elem()).Elem(),
