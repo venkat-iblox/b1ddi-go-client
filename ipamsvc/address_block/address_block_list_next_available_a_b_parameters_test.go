@@ -63,6 +63,27 @@ func TestAddressBlockListNextAvailableABParams_WithHTTPClient(t *testing.T) {
 	assert.Equal(t, cli, p.HTTPClient)
 }
 
+func TestAddressBlockListNextAvailableABParams_WithCidr(t *testing.T) {
+	p := NewAddressBlockListNextAvailableABParams()
+	p = p.WithCidr(swag.Int32(25))
+	require.NotNil(t, p.Cidr)
+	assert.Equal(t, int32(25), *p.Cidr)
+}
+
+func TestAddressBlockListNextAvailableABParams_WithComment(t *testing.T) {
+	p := NewAddressBlockListNextAvailableABParams()
+	p = p.WithComment(swag.String("comment"))
+	require.NotNil(t, p.Comment)
+	assert.Equal(t, "comment", *p.Comment)
+}
+
+func TestAddressBlockListNextAvailableABParams_WithCount(t *testing.T) {
+	p := NewAddressBlockListNextAvailableABParams()
+	p = p.WithCount(swag.Int32(5))
+	require.NotNil(t, p.Count)
+	assert.Equal(t, int32(5), *p.Count)
+}
+
 func TestAddressBlockListNextAvailableABParams_WithID(t *testing.T) {
 	p := NewAddressBlockListNextAvailableABParams()
 	p = p.WithID("test-id")

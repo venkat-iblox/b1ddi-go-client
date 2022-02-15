@@ -3,6 +3,7 @@ package address_block
 import (
 	"context"
 	"github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/swag"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -60,6 +61,20 @@ func TestAddressBlockListNextAvailableIPParams_WithHTTPClient(t *testing.T) {
 	p = p.WithHTTPClient(cli)
 	require.NotNil(t, p.HTTPClient)
 	assert.Equal(t, cli, p.HTTPClient)
+}
+
+func TestAddressBlockListNextAvailableIPParams_WithContiguous(t *testing.T) {
+	p := NewAddressBlockListNextAvailableIPParams()
+	p = p.WithContiguous(swag.Bool(true))
+	require.NotNil(t, p.Contiguous)
+	assert.Equal(t, true, *p.Contiguous)
+}
+
+func TestAddressBlockListNextAvailableIPParams_WithCount(t *testing.T) {
+	p := NewAddressBlockListNextAvailableIPParams()
+	p = p.WithCount(swag.Int32(5))
+	require.NotNil(t, p.Count)
+	assert.Equal(t, int32(5), *p.Count)
 }
 
 func TestAddressBlockListNextAvailableIPParams_WithID(t *testing.T) {

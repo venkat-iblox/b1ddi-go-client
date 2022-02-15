@@ -112,7 +112,10 @@ func TestClient(t *testing.T) {
 				Context:   context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/address_block"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/address_block",
+					RawQuery: "_fields=field&_filter=filter&_limit=20&_offset=20&_order_by=desc&_page_token=token&_tfilter=tfilter&_torder_by=desc",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
@@ -120,11 +123,18 @@ func TestClient(t *testing.T) {
 		{
 			"AddressBlockListNextAvailableAB",
 			&AddressBlockListNextAvailableABParams{
+				Cidr:    swag.Int32(25),
+				Comment: swag.String("test-comment"),
+				Count:   swag.Int32(5),
+				Name:    swag.String("test-name"),
 				ID:      "address-block-next-available-address-block-id",
 				Context: context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/address_block/address-block-next-available-address-block-id/nextavailableaddressblock"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/address_block/address-block-next-available-address-block-id/nextavailableaddressblock",
+					RawQuery: "cidr=25&comment=test-comment&count=5&name=test-name",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
@@ -132,11 +142,16 @@ func TestClient(t *testing.T) {
 		{
 			"AddressBlockListNextAvailableIP",
 			&AddressBlockListNextAvailableIPParams{
-				ID:      "address-block-next-available-ip-id",
-				Context: context.TODO(),
+				Contiguous: swag.Bool(true),
+				Count:      swag.Int32(5),
+				ID:         "address-block-next-available-ip-id",
+				Context:    context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/address_block/address-block-next-available-ip-id/nextavailableip"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/address_block/address-block-next-available-ip-id/nextavailableip",
+					RawQuery: "contiguous=true&count=5",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},
@@ -144,11 +159,19 @@ func TestClient(t *testing.T) {
 		{
 			"AddressBlockListNextAvailableSubnet",
 			&AddressBlockListNextAvailableSubnetParams{
-				ID:      "address-block-next-available-subnet-id",
-				Context: context.TODO(),
+				Cidr:     swag.Int32(25),
+				Comment:  swag.String("comment"),
+				Count:    swag.Int32(2),
+				DhcpHost: swag.String("dhcp-host"),
+				Name:     swag.String("name"),
+				ID:       "address-block-next-available-subnet-id",
+				Context:  context.TODO(),
 			},
 			http.Request{
-				URL:    &url.URL{Path: "/api/ddi/v1/ipam/address_block/address-block-next-available-subnet-id/nextavailablesubnet"},
+				URL: &url.URL{
+					Path:     "/api/ddi/v1/ipam/address_block/address-block-next-available-subnet-id/nextavailablesubnet",
+					RawQuery: "cidr=25&comment=comment&count=2&dhcp_host=dhcp-host&name=name",
+				},
 				Method: http.MethodGet,
 				Body:   io.NopCloser(strings.NewReader("")),
 			},

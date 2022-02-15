@@ -63,6 +63,34 @@ func TestAddressBlockListNextAvailableSubnetParams_WithHTTPClient(t *testing.T) 
 	assert.Equal(t, cli, p.HTTPClient)
 }
 
+func TestAddressBlockListNextAvailableSubnetParams_WithCidr(t *testing.T) {
+	p := NewAddressBlockListNextAvailableSubnetParams()
+	p = p.WithCidr(swag.Int32(25))
+	require.NotNil(t, p.Cidr)
+	assert.Equal(t, int32(25), *p.Cidr)
+}
+
+func TestAddressBlockListNextAvailableSubnetParams_WithComment(t *testing.T) {
+	p := NewAddressBlockListNextAvailableSubnetParams()
+	p = p.WithComment(swag.String("comment"))
+	require.NotNil(t, p.Comment)
+	assert.Equal(t, "comment", *p.Comment)
+}
+
+func TestAddressBlockListNextAvailableSubnetParams_WithCount(t *testing.T) {
+	p := NewAddressBlockListNextAvailableSubnetParams()
+	p = p.WithCount(swag.Int32(2))
+	require.NotNil(t, p.Count)
+	assert.Equal(t, int32(2), *p.Count)
+}
+
+func TestAddressBlockListNextAvailableSubnetParams_WithDhcpHost(t *testing.T) {
+	p := NewAddressBlockListNextAvailableSubnetParams()
+	p = p.WithDhcpHost(swag.String("dhcp-host"))
+	require.NotNil(t, p.DhcpHost)
+	assert.Equal(t, "dhcp-host", *p.DhcpHost)
+}
+
 func TestAddressBlockListNextAvailableSubnetParams_WithID(t *testing.T) {
 	p := NewAddressBlockListNextAvailableSubnetParams()
 	p = p.WithID("test-id")
