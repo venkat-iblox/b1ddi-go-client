@@ -1,5 +1,5 @@
 // Package runtime contains BloxOne DDI API helper
-// runtime abstractions for internal client use
+// runtime abstractions for internal client use.
 package runtime
 
 import (
@@ -12,7 +12,9 @@ import (
 )
 
 // TrimIDPrefix removes app ID and resource type prefixes from the ID property.
+//
 // If no prefix is found, TrimIDPrefix will return the original id value.
+//
 // More about BloxOne DDI resource IDs:
 // https://github.com/infobloxopen/atlas-app-toolkit/tree/v1.1.2/rpc/resource#resource
 func TrimIDPrefix(pathPattern string, id string) string {
@@ -34,7 +36,7 @@ func TrimIDPrefix(pathPattern string, id string) string {
 
 }
 
-// NewAPIHTTPError creates a new API HTTP error
+// NewAPIHTTPError creates a new API HTTP error.
 func NewAPIHTTPError(opName string, payload io.Reader, code int) *APIHTTPError {
 	body, err := ioutil.ReadAll(payload)
 	if err != nil {
@@ -49,11 +51,12 @@ func NewAPIHTTPError(opName string, payload io.Reader, code int) *APIHTTPError {
 	}
 }
 
-// APIHTTPError wraps runtime.APIError, and modifies response processing logic
+// APIHTTPError wraps runtime.APIError, and modifies response processing logic.
 type APIHTTPError struct {
 	runtime.APIError
 }
 
+// Error method prints APIHTTPError error message.
 func (a *APIHTTPError) Error() string {
 	return fmt.Sprintf("%s (status %d): \n%s", a.OperationName, a.Code, a.Response)
 }

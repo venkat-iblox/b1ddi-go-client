@@ -1,6 +1,16 @@
+# Overview
+
+This library enables the management of BloxOne DDI resources.
+
+The following BloxOne DDI APIs are supported:
+
+- [IP Address Management (Ipamsvc API)](https://csp.infoblox.com/apidoc/?url=https://csp.infoblox.com/apidoc/docs/Ipamsvc)
+- [DNS Configuration (DNSConfig API)](https://csp.infoblox.com/apidoc/?url=https://csp.infoblox.com/apidoc/docs/DnsConfig)
+- [DNS Data (DnsData API)](https://csp.infoblox.com/apidoc/?url=https://csp.infoblox.com/apidoc/docs/DnsData)
+
 # Installation
 
-To install `b1ddi-go-client` use `go get` 
+To install `b1ddi-go-client` use `go get` command:
 
 ```bash
 go get github.com/infobloxopen/b1ddi-go-client
@@ -10,7 +20,7 @@ go get github.com/infobloxopen/b1ddi-go-client
 
 ## Examples
 
-Following program will print subnet mask of each subnet in the B1DDI API:
+The following program will print the subnet mask of each subnet in the BloxOne DDI environment:
 ```go
 package main
 
