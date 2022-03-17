@@ -20,11 +20,11 @@ var cli ipamsvc.IPAddressManagementAPI
 func TestMain(m *testing.M) {
 	host := os.Getenv("B1DDI_HOST")
 	if host == "" {
-		panic("B1DDI_HOST host value is empty")
+		panic("B1DDI_HOST value is empty")
 	}
 	token := os.Getenv("B1DDI_API_KEY")
 	if token == "" {
-		panic("B1DDI_API_KEY value is empty")
+		panic("B1DDI_API_KEY token value is empty")
 	}
 
 	// Create new go-swagger runtime client

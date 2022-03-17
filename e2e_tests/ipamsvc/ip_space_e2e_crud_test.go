@@ -33,10 +33,6 @@ func TestIPSpaceCRUD(t *testing.T) {
 		},
 	}
 
-	if len(testCases) == 0 {
-		t.Skip("No test cases are provided")
-	}
-
 	for name, tc := range testCases {
 		t.Run(name, func(t *testing.T) {
 			createResp, err := cli.IPSpace.IPSpaceCreate(
