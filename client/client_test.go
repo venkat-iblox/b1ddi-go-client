@@ -23,10 +23,10 @@ func TestNewClient(t *testing.T) {
 	assert.NotNil(t, cli.DNSDataAPI)
 }
 
-func TestB1DDIAPIKey(t *testing.T) {
+func TestBLOXONEAPIKey(t *testing.T) {
 	key := "KxPlKBne1NtqkcgaUgiU29cME9Y0I13JtZ8QPyDLTalv0yXLriJZgXF4lDXYV31Ky"
 
-	authFunc := B1DDIAPIKey(key)
+	authFunc := BLOXONEAPIKey(key)
 
 	req := &runtime.TestClientRequest{}
 

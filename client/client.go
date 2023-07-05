@@ -4,6 +4,7 @@ package client
 import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
 	"github.com/infobloxopen/b1ddi-go-client/dns_config"
 	"github.com/infobloxopen/b1ddi-go-client/dns_data"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc"
@@ -25,10 +26,10 @@ func NewClient(transport runtime.ClientTransport, formats strfmt.Registry) *Clie
 	}
 }
 
-// B1DDIAPIKey provides a header for the BloxOne DDI API authentication.
+// BLOXONEAPIKey provides a header for the BloxOne DDI API authentication.
 //
 // See https://docs.infoblox.com/display/BloxOneDDI/BloxOne+DDI+API+Guide learn how to get the API key.
-func B1DDIAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
+func BLOXONEAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
 	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
 		return r.SetHeaderParam("Authorization", "Token "+apiKey)
 	})
