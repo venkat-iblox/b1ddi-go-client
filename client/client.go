@@ -2,12 +2,13 @@
 package client
 
 import (
+	"fmt"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
 	"github.com/infobloxopen/b1ddi-go-client/dns_config"
 	"github.com/infobloxopen/b1ddi-go-client/dns_data"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc"
+	"net/http"
 )
 
 // Client is an aggregation of different BloxOne DDI API clients.
@@ -26,11 +27,37 @@ func NewClient(transport runtime.ClientTransport, formats strfmt.Registry) *Clie
 	}
 }
 
-// BLOXONEAPIKey provides a header for the BloxOne DDI API authentication.
+// BloxOneAPIKey provides a header for the BloxOne DDI API authentication.
 //
 // See https://docs.infoblox.com/display/BloxOneDDI/BloxOne+DDI+API+Guide learn how to get the API key.
-func BLOXONEAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
+func BloxOneAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
 	return runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
 		return r.SetHeaderParam("Authorization", "Token "+apiKey)
 	})
+}
+
+func NewTransport(headers map[string]string) *customTransport {
+	return &customTransport{
+		originalTransport: http.DefaultTransport,
+		headers:           headers,
+	}
+}
+
+type customTransport struct {
+	originalTransport http.RoundTripper
+	headers           map[string]string
+}
+
+func (c *customTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	for key, val := range c.headers {
+		r.Header.Add(key, val)
+	}
+	r.Header.Add("x-infoblox-sdk", fmt.Sprintf("golang-sdk/v%s", "1.0.0"))
+
+	resp, err := c.originalTransport.RoundTrip(r)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
 }
