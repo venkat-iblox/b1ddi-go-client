@@ -2,6 +2,7 @@
 package client
 
 import (
+	"crypto/tls"
 	"fmt"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -37,8 +38,13 @@ func BloxOneAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
 }
 
 func NewTransport(headers map[string]string) *customTransport {
+	transport := http.DefaultTransport
+	transport.(*http.Transport).TLSClientConfig = &tls.Config{
+		MaxVersion: tls.VersionTLS12,
+		MinVersion: tls.VersionTLS12,
+	}
 	return &customTransport{
-		originalTransport: http.DefaultTransport,
+		originalTransport: transport,
 		headers:           headers,
 	}
 }
