@@ -10,6 +10,7 @@ import (
 	"github.com/infobloxopen/b1ddi-go-client/dns_data"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc"
 	"net/http"
+	"os"
 )
 
 // Client is an aggregation of different BloxOne DDI API clients.
@@ -38,11 +39,17 @@ func BloxOneAPIKey(apiKey string) runtime.ClientAuthInfoWriter {
 }
 
 func NewTransport(headers map[string]string) *customTransport {
+	w, err := os.OpenFile("/Users/vvenkatasubramanian/Desktop/ssl-key.log", os.O_WRONLY, 0755)
+	if err != nil {
+		fmt.Errorf("%v\n", err)
+	}
 	transport := http.DefaultTransport
 	transport.(*http.Transport).TLSClientConfig = &tls.Config{
-		MaxVersion: tls.VersionTLS12,
-		MinVersion: tls.VersionTLS12,
+		MaxVersion:   tls.VersionTLS12,
+		MinVersion:   tls.VersionTLS12,
+		KeyLogWriter: w,
 	}
+
 	return &customTransport{
 		originalTransport: transport,
 		headers:           headers,
