@@ -87,6 +87,11 @@ func (m *ConfigCustomRootNSBlock) contextValidateCustomRootNs(ctx context.Contex
 	for i := 0; i < len(m.CustomRootNs); i++ {
 
 		if m.CustomRootNs[i] != nil {
+
+			if swag.IsZero(m.CustomRootNs[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomRootNs[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_root_ns" + "." + strconv.Itoa(i))

@@ -41,7 +41,8 @@ func NewAddressBlockDeleteNoContent() *AddressBlockDeleteNoContent {
 	return &AddressBlockDeleteNoContent{}
 }
 
-/* AddressBlockDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AddressBlockDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

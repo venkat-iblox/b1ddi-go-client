@@ -52,10 +52,12 @@ func NewAuthZoneDeleteParamsWithHTTPClient(client *http.Client) *AuthZoneDeleteP
 	}
 }
 
-/* AuthZoneDeleteParams contains all the parameters to send to the API endpoint
-   for the auth zone delete operation.
+/*
+AuthZoneDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone delete operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneDeleteParams struct {
 

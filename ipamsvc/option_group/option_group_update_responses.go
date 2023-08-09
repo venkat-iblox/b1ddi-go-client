@@ -43,7 +43,8 @@ func NewOptionGroupUpdateCreated() *OptionGroupUpdateCreated {
 	return &OptionGroupUpdateCreated{}
 }
 
-/* OptionGroupUpdateCreated describes a response with status code 201, with default header values.
+/*
+OptionGroupUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

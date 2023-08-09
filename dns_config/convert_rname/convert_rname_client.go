@@ -36,9 +36,9 @@ type ClientService interface {
 }
 
 /*
-  ConvertRnameConvertRName converts the object
+ConvertRnameConvertRName converts the object
 
-  Use this method to convert email address to the master file RNAME format.
+Use this method to convert email address to the master file RNAME format.
 */
 func (a *Client) ConvertRnameConvertRName(params *ConvertRnameConvertRNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConvertRnameConvertRNameOK, error) {
 	// TODO: Validate the params before sending

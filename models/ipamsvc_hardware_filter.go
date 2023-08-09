@@ -49,9 +49,12 @@ type IpamsvcHardwareFilter struct {
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
+	// The lease lifetime duration in seconds.
+	LeaseTime int64 `json:"lease_time,omitempty"`
+
 	// The name of the hardware filter. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// The tags for the hardware filter in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -190,6 +193,11 @@ func (m *IpamsvcHardwareFilter) contextValidateDhcpOptions(ctx context.Context, 
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))

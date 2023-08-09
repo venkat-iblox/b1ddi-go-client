@@ -54,10 +54,12 @@ func NewOptionSpaceUpdateParamsWithHTTPClient(client *http.Client) *OptionSpaceU
 	}
 }
 
-/* OptionSpaceUpdateParams contains all the parameters to send to the API endpoint
-   for the option space update operation.
+/*
+OptionSpaceUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option space update operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionSpaceUpdateParams struct {
 

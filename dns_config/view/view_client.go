@@ -48,9 +48,10 @@ type ClientService interface {
 }
 
 /*
-  ViewBulkCopy copies the specified auth zone and forward zone objects in the view
+	ViewBulkCopy copies the specified auth zone and forward zone objects in the view
 
-  Use this method to bulk copy __AuthZone__ and __ForwardZone__ objects from one __View__ object to another __View__ object.
+	Use this method to bulk copy __AuthZone__ and __ForwardZone__ objects from one __View__ object to another __View__ object.
+
 The __AuthZone__ object represents an authoritative zone.
 The __ForwardZone__ object represents a forwarding zone.
 */
@@ -91,9 +92,10 @@ func (a *Client) ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.Clien
 }
 
 /*
-  ViewCreate creates the view object
+	ViewCreate creates the view object
 
-  Use this method to create a View object.
+	Use this method to create a View object.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewCreateCreated, error) {
@@ -133,9 +135,10 @@ func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAut
 }
 
 /*
-  ViewDelete moves the view object to recyclebin
+	ViewDelete moves the view object to recyclebin
 
-  Use this method to move a View object to Recyclebin.
+	Use this method to move a View object to Recyclebin.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewDeleteNoContent, error) {
@@ -178,9 +181,10 @@ func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
-  ViewList lists view objects
+	ViewList lists view objects
 
-  Use this method to list View objects.
+	Use this method to list View objects.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewList(params *ViewListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewListOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) ViewList(params *ViewListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  ViewRead reads the view object
+	ViewRead reads the view object
 
-  Use this method to read a View object.
+	Use this method to read a View object.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewRead(params *ViewReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewReadOK, error) {
@@ -265,9 +270,10 @@ func (a *Client) ViewRead(params *ViewReadParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  ViewUpdate updates the view object
+	ViewUpdate updates the view object
 
-  Use this method to update a View object.
+	Use this method to update a View object.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewUpdateCreated, error) {

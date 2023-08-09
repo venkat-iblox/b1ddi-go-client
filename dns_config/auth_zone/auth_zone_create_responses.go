@@ -43,7 +43,8 @@ func NewAuthZoneCreateCreated() *AuthZoneCreateCreated {
 	return &AuthZoneCreateCreated{}
 }
 
-/* AuthZoneCreateCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

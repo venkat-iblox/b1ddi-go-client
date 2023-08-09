@@ -52,10 +52,12 @@ func NewOptionCodeDeleteParamsWithHTTPClient(client *http.Client) *OptionCodeDel
 	}
 }
 
-/* OptionCodeDeleteParams contains all the parameters to send to the API endpoint
-   for the option code delete operation.
+/*
+OptionCodeDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option code delete operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionCodeDeleteParams struct {
 

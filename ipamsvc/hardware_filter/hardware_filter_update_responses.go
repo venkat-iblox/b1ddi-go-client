@@ -43,7 +43,8 @@ func NewHardwareFilterUpdateCreated() *HardwareFilterUpdateCreated {
 	return &HardwareFilterUpdateCreated{}
 }
 
-/* HardwareFilterUpdateCreated describes a response with status code 201, with default header values.
+/*
+HardwareFilterUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

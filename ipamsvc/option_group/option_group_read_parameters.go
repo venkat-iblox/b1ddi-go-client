@@ -52,10 +52,12 @@ func NewOptionGroupReadParamsWithHTTPClient(client *http.Client) *OptionGroupRea
 	}
 }
 
-/* OptionGroupReadParams contains all the parameters to send to the API endpoint
-   for the option group read operation.
+/*
+OptionGroupReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option group read operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionGroupReadParams struct {
 

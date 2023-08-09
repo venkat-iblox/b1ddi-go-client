@@ -43,7 +43,8 @@ func NewAddressUpdateCreated() *AddressUpdateCreated {
 	return &AddressUpdateCreated{}
 }
 
-/* AddressUpdateCreated describes a response with status code 201, with default header values.
+/*
+AddressUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

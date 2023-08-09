@@ -54,10 +54,12 @@ func NewRecordUpdateParamsWithHTTPClient(client *http.Client) *RecordUpdateParam
 	}
 }
 
-/* RecordUpdateParams contains all the parameters to send to the API endpoint
-   for the record update operation.
+/*
+RecordUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the record update operation.
+
+	Typically these are written to a http.Request.
 */
 type RecordUpdateParams struct {
 

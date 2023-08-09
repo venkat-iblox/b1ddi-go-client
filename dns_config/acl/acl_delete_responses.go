@@ -41,7 +41,8 @@ func NewACLDeleteNoContent() *ACLDeleteNoContent {
 	return &ACLDeleteNoContent{}
 }
 
-/* ACLDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ACLDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

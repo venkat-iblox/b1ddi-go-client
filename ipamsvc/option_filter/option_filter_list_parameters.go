@@ -53,10 +53,12 @@ func NewOptionFilterListParamsWithHTTPClient(client *http.Client) *OptionFilterL
 	}
 }
 
-/* OptionFilterListParams contains all the parameters to send to the API endpoint
-   for the option filter list operation.
+/*
+OptionFilterListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option filter list operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionFilterListParams struct {
 

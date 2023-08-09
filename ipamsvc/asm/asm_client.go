@@ -42,9 +42,10 @@ type ClientService interface {
 }
 
 /*
-  AsmCreate updates subnet and ranges for automated scope management
+	AsmCreate updates subnet and ranges for automated scope management
 
-  Use this method to update the subnet and range for Automated Scope Management.
+	Use this method to update the subnet and range for Automated Scope Management.
+
 The __ASM__ object generates and returns the suggestions from the ASM suggestion engine and allows for updating the subnet and range.
 This method attempts to expand the scope by expanding a range or adding a new range and, if necessary, expanding the subnet.
 */
@@ -85,9 +86,10 @@ func (a *Client) AsmCreate(params *AsmCreateParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  AsmList retrieves suggested updates for automated scope management
+	AsmList retrieves suggested updates for automated scope management
 
-  Use this method to retrieve __ASM__ objects for Automated Scope Management.
+	Use this method to retrieve __ASM__ objects for Automated Scope Management.
+
 The __ASM__ object returns the suggested updates for the subnet from the ASM suggestion engine and allows for updating the subnet and range information.
 */
 func (a *Client) AsmList(params *AsmListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AsmListOK, error) {
@@ -127,9 +129,10 @@ func (a *Client) AsmList(params *AsmListParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  AsmRead retrieves the suggested update for automated scope management
+	AsmRead retrieves the suggested update for automated scope management
 
-  Use this method to retrieve an __ASM__ object for Automated Scope Management.
+	Use this method to retrieve an __ASM__ object for Automated Scope Management.
+
 The __ASM__ object returns the suggested updates for the subnet from the ASM suggestion engine and allows for updating the subnet and range information.
 */
 func (a *Client) AsmRead(params *AsmReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AsmReadOK, error) {

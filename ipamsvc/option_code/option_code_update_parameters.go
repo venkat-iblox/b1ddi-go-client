@@ -54,10 +54,12 @@ func NewOptionCodeUpdateParamsWithHTTPClient(client *http.Client) *OptionCodeUpd
 	}
 }
 
-/* OptionCodeUpdateParams contains all the parameters to send to the API endpoint
-   for the option code update operation.
+/*
+OptionCodeUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option code update operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionCodeUpdateParams struct {
 

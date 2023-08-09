@@ -43,7 +43,8 @@ func NewAuthNsgCreateCreated() *AuthNsgCreateCreated {
 	return &AuthNsgCreateCreated{}
 }
 
-/* AuthNsgCreateCreated describes a response with status code 201, with default header values.
+/*
+AuthNsgCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

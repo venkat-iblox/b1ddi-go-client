@@ -52,9 +52,10 @@ type ClientService interface {
 }
 
 /*
-  SubnetCopy copies the subnet
+	SubnetCopy copies the subnet
 
-  Use this method to copy a __Subnet__ object.
+	Use this method to copy a __Subnet__ object.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetCopy(params *SubnetCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetCopyCreated, error) {
@@ -97,9 +98,10 @@ func (a *Client) SubnetCopy(params *SubnetCopyParams, authInfo runtime.ClientAut
 }
 
 /*
-  SubnetCreate creates the subnet
+	SubnetCreate creates the subnet
 
-  Use this method to create a __Subnet__ object.
+	Use this method to create a __Subnet__ object.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetCreate(params *SubnetCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetCreateCreated, error) {
@@ -139,9 +141,10 @@ func (a *Client) SubnetCreate(params *SubnetCreateParams, authInfo runtime.Clien
 }
 
 /*
-  SubnetCreateNextAvailableIP allocates the next available IP address
+	SubnetCreateNextAvailableIP allocates the next available IP address
 
-  Use this method to allocate the next available IP address.
+	Use this method to allocate the next available IP address.
+
 This allocates one or more __Address__ (_ipam/address_) resource from available addresses, when the IP address is not known prior to allocation.
 */
 func (a *Client) SubnetCreateNextAvailableIP(params *SubnetCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetCreateNextAvailableIPCreated, error) {
@@ -184,9 +187,10 @@ func (a *Client) SubnetCreateNextAvailableIP(params *SubnetCreateNextAvailableIP
 }
 
 /*
-  SubnetDelete moves the subnet to the recycle bin
+	SubnetDelete moves the subnet to the recycle bin
 
-  Use this method to move a __Subnet__ object to the recycle bin.
+	Use this method to move a __Subnet__ object to the recycle bin.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetDelete(params *SubnetDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetDeleteNoContent, error) {
@@ -229,9 +233,10 @@ func (a *Client) SubnetDelete(params *SubnetDeleteParams, authInfo runtime.Clien
 }
 
 /*
-  SubnetList retrieves subnets
+	SubnetList retrieves subnets
 
-  Use this method to retrieve __Subnet__ objects.
+	Use this method to retrieve __Subnet__ objects.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetList(params *SubnetListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetListOK, error) {
@@ -271,9 +276,10 @@ func (a *Client) SubnetList(params *SubnetListParams, authInfo runtime.ClientAut
 }
 
 /*
-  SubnetListNextAvailableIP retrieves the next available IP address
+	SubnetListNextAvailableIP retrieves the next available IP address
 
-  Use this method to retrieve the next available IP address.
+	Use this method to retrieve the next available IP address.
+
 This returns one or more __Address__ (_ipam/address_) resource from available addresses, when IP address is not known prior to allocation.
 */
 func (a *Client) SubnetListNextAvailableIP(params *SubnetListNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetListNextAvailableIPOK, error) {
@@ -316,9 +322,10 @@ func (a *Client) SubnetListNextAvailableIP(params *SubnetListNextAvailableIPPara
 }
 
 /*
-  SubnetRead retrieves the subnet
+	SubnetRead retrieves the subnet
 
-  Use this method to retrieve a __Subnet__ object.
+	Use this method to retrieve a __Subnet__ object.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetRead(params *SubnetReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetReadOK, error) {
@@ -361,9 +368,10 @@ func (a *Client) SubnetRead(params *SubnetReadParams, authInfo runtime.ClientAut
 }
 
 /*
-  SubnetUpdate updates the subnet
+	SubnetUpdate updates the subnet
 
-  Use this method to update a __Subnet__ object.
+	Use this method to update a __Subnet__ object.
+
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
 */
 func (a *Client) SubnetUpdate(params *SubnetUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SubnetUpdateCreated, error) {

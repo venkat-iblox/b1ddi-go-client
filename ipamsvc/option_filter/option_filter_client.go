@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  OptionFilterCreate creates the d h c p option filter
+	OptionFilterCreate creates the d h c p option filter
 
-  Use this method to create an __OptionFilter__ object.
+	Use this method to create an __OptionFilter__ object.
+
 The __OptionFilter__ object applies options to DHCP clients with matching options. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) OptionFilterCreate(params *OptionFilterCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionFilterCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) OptionFilterCreate(params *OptionFilterCreateParams, authInfo r
 }
 
 /*
-  OptionFilterDelete moves the d h c p option filter to the recycle bin
+	OptionFilterDelete moves the d h c p option filter to the recycle bin
 
-  Use this method to move an __OptionFilter__ object to the recycle bin.
+	Use this method to move an __OptionFilter__ object to the recycle bin.
+
 The __OptionFilter__ object applies options to DHCP clients with matching options. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) OptionFilterDelete(params *OptionFilterDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionFilterDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) OptionFilterDelete(params *OptionFilterDeleteParams, authInfo r
 }
 
 /*
-  OptionFilterList retrieves d h c p option filters
+	OptionFilterList retrieves d h c p option filters
 
-  Use this method to retrieve __OptionFilter__ objects.
+	Use this method to retrieve __OptionFilter__ objects.
+
 The __OptionFilter__ object applies options to DHCP clients with matching options. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) OptionFilterList(params *OptionFilterListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionFilterListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionFilterList(params *OptionFilterListParams, authInfo runti
 }
 
 /*
-  OptionFilterRead retrieves the d h c p option filter
+	OptionFilterRead retrieves the d h c p option filter
 
-  Use this method to retrieve an __OptionFilter__ object.
+	Use this method to retrieve an __OptionFilter__ object.
+
 The __OptionFilter__ object applies options to DHCP clients with matching options. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) OptionFilterRead(params *OptionFilterReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionFilterReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) OptionFilterRead(params *OptionFilterReadParams, authInfo runti
 }
 
 /*
-  OptionFilterUpdate updates the d h c p option filter
+	OptionFilterUpdate updates the d h c p option filter
 
-  Use this method to update an __OptionFilter__ object.
+	Use this method to update an __OptionFilter__ object.
+
 The __OptionFilter__ object applies options to DHCP clients with matching options. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) OptionFilterUpdate(params *OptionFilterUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionFilterUpdateCreated, error) {

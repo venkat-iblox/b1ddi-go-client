@@ -43,7 +43,8 @@ func NewRecordSOASerialIncrementCreated() *RecordSOASerialIncrementCreated {
 	return &RecordSOASerialIncrementCreated{}
 }
 
-/* RecordSOASerialIncrementCreated describes a response with status code 201, with default header values.
+/*
+RecordSOASerialIncrementCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

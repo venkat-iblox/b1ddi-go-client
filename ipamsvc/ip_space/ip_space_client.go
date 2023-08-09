@@ -50,9 +50,10 @@ type ClientService interface {
 }
 
 /*
-  IPSpaceBulkCopy copies the specified address block and subnets in the IP space
+	IPSpaceBulkCopy copies the specified address block and subnets in the IP space
 
-  Use this method to bulk copy __AddressBlock__ and __Subnet__ objects from one __IPSpace__ object to another __IPSpace__ object.
+	Use this method to bulk copy __AddressBlock__ and __Subnet__ objects from one __IPSpace__ object to another __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
@@ -97,9 +98,10 @@ func (a *Client) IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime
 }
 
 /*
-  IPSpaceCopy copies the IP space
+	IPSpaceCopy copies the IP space
 
-  Use this method to copy an __IPSpace__ object.
+	Use this method to copy an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCopyCreated, error) {
@@ -142,9 +144,10 @@ func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceCreate creates the IP space
+	IPSpaceCreate creates the IP space
 
-  Use this method to create an __IPSpace__ object.
+	Use this method to create an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCreateCreated, error) {
@@ -184,9 +187,10 @@ func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.Cli
 }
 
 /*
-  IPSpaceDelete moves the IP space to the recycle bin
+	IPSpaceDelete moves the IP space to the recycle bin
 
-  Use this method to move an __IPSpace__ object to the recycle bin.
+	Use this method to move an __IPSpace__ object to the recycle bin.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceDeleteNoContent, error) {
@@ -229,9 +233,10 @@ func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  IPSpaceList retrieves IP spaces
+	IPSpaceList retrieves IP spaces
 
-  Use this method to retrieve __IPSpace__ objects.
+	Use this method to retrieve __IPSpace__ objects.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceList(params *IPSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceListOK, error) {
@@ -271,9 +276,10 @@ func (a *Client) IPSpaceList(params *IPSpaceListParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceRead retrieves the IP space
+	IPSpaceRead retrieves the IP space
 
-  Use this method to retrieve an __IPSpace__ object.
+	Use this method to retrieve an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceRead(params *IPSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceReadOK, error) {
@@ -316,9 +322,10 @@ func (a *Client) IPSpaceRead(params *IPSpaceReadParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceUpdate updates the IP space
+	IPSpaceUpdate updates the IP space
 
-  Use this method to update an __IPSpace__ object.
+	Use this method to update an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceUpdateCreated, error) {

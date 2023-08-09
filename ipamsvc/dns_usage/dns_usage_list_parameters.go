@@ -53,10 +53,12 @@ func NewDNSUsageListParamsWithHTTPClient(client *http.Client) *DNSUsageListParam
 	}
 }
 
-/* DNSUsageListParams contains all the parameters to send to the API endpoint
-   for the dns usage list operation.
+/*
+DNSUsageListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dns usage list operation.
+
+	Typically these are written to a http.Request.
 */
 type DNSUsageListParams struct {
 

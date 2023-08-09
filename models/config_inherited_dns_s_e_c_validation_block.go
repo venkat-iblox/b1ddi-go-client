@@ -99,6 +99,11 @@ func (m *ConfigInheritedDNSSECValidationBlock) contextValidateDisplayName(ctx co
 func (m *ConfigInheritedDNSSECValidationBlock) contextValidateValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Value != nil {
+
+		if swag.IsZero(m.Value) { // not required
+			return nil
+		}
+
 		if err := m.Value.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("value")

@@ -84,6 +84,11 @@ func (m *DataSOASerialIncrementRequest) ContextValidate(ctx context.Context, for
 func (m *DataSOASerialIncrementRequest) contextValidateFields(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Fields != nil {
+
+		if swag.IsZero(m.Fields) { // not required
+			return nil
+		}
+
 		if err := m.Fields.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fields")

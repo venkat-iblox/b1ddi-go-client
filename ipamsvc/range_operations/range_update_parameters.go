@@ -54,10 +54,12 @@ func NewRangeUpdateParamsWithHTTPClient(client *http.Client) *RangeUpdateParams 
 	}
 }
 
-/* RangeUpdateParams contains all the parameters to send to the API endpoint
-   for the range update operation.
+/*
+RangeUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the range update operation.
+
+	Typically these are written to a http.Request.
 */
 type RangeUpdateParams struct {
 

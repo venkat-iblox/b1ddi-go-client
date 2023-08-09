@@ -43,7 +43,8 @@ func NewHostListOK() *HostListOK {
 	return &HostListOK{}
 }
 
-/* HostListOK describes a response with status code 200, with default header values.
+/*
+HostListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

@@ -52,10 +52,12 @@ func NewOptionSpaceReadParamsWithHTTPClient(client *http.Client) *OptionSpaceRea
 	}
 }
 
-/* OptionSpaceReadParams contains all the parameters to send to the API endpoint
-   for the option space read operation.
+/*
+OptionSpaceReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option space read operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionSpaceReadParams struct {
 

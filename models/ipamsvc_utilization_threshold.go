@@ -23,17 +23,17 @@ type IpamsvcUtilizationThreshold struct {
 
 	// Indicates whether the utilization threshold for IP addresses is enabled or not.
 	// Required: true
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 
 	// The high threshold value for the percentage of used IP addresses relative to the total IP addresses available in the scope of the object. Thresholds are inclusive in the comparison test.
 	// Required: true
 	// Maximum: 100
-	High *int64 `json:"high,omitempty"`
+	High *int64 `json:"high"`
 
 	// The low threshold value for the percentage of used IP addresses relative to the total IP addresses available in the scope of the object. Thresholds are inclusive in the comparison test.
 	// Required: true
 	// Maximum: 100
-	Low *int64 `json:"low,omitempty"`
+	Low *int64 `json:"low"`
 }
 
 // Validate validates this ipamsvc utilization threshold

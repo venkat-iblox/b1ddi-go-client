@@ -43,7 +43,8 @@ func NewForwardZoneCopyCreated() *ForwardZoneCopyCreated {
 	return &ForwardZoneCopyCreated{}
 }
 
-/* ForwardZoneCopyCreated describes a response with status code 201, with default header values.
+/*
+ForwardZoneCopyCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

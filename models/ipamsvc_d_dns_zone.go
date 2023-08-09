@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -26,17 +27,22 @@ type IpamsvcDDNSZone struct {
 	// If _zone_ is defined, the _fqdn_ field must be empty.
 	Fqdn string `json:"fqdn,omitempty"`
 
-	// The IPv4 addresses of the nameservers in the zone.
+	// _gss_tsig_enabled_ enables/disables GSS-TSIG signed dynamic updates.
 	//
-	// Each IP should be unique across the list of nameservers.
-	Nameservers []string `json:"nameservers"`
+	// Defaults to _false_.
+	GssTsigEnabled bool `json:"gss_tsig_enabled,omitempty"`
+
+	// The Nameservers in the zone.
+	//
+	// Each nameserver IP should be unique across the list of nameservers.
+	Nameservers []*IpamsvcNameserver `json:"nameservers"`
 
 	// Indicates if TSIG key should be used for the update.
 	//
 	// Defaults to _false_.
 	TsigEnabled bool `json:"tsig_enabled,omitempty"`
 
-	// The TSIG key. Required if _tsig_enable_ is _true_.
+	// The TSIG key. Required if _tsig_enabled_ is _true_.
 	//
 	// Defaults to empty.
 	TsigKey *IpamsvcTSIGKey `json:"tsig_key,omitempty"`
@@ -50,12 +56,16 @@ type IpamsvcDDNSZone struct {
 
 	// The resource identifier.
 	// Required: true
-	Zone *string `json:"zone,omitempty"`
+	Zone *string `json:"zone"`
 }
 
 // Validate validates this ipamsvc d DNS zone
 func (m *IpamsvcDDNSZone) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateNameservers(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateTsigKey(formats); err != nil {
 		res = append(res, err)
@@ -68,6 +78,32 @@ func (m *IpamsvcDDNSZone) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IpamsvcDDNSZone) validateNameservers(formats strfmt.Registry) error {
+	if swag.IsZero(m.Nameservers) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Nameservers); i++ {
+		if swag.IsZero(m.Nameservers[i]) { // not required
+			continue
+		}
+
+		if m.Nameservers[i] != nil {
+			if err := m.Nameservers[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("nameservers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("nameservers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -103,6 +139,10 @@ func (m *IpamsvcDDNSZone) validateZone(formats strfmt.Registry) error {
 func (m *IpamsvcDDNSZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateNameservers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTsigKey(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -117,9 +157,39 @@ func (m *IpamsvcDDNSZone) ContextValidate(ctx context.Context, formats strfmt.Re
 	return nil
 }
 
+func (m *IpamsvcDDNSZone) contextValidateNameservers(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Nameservers); i++ {
+
+		if m.Nameservers[i] != nil {
+
+			if swag.IsZero(m.Nameservers[i]) { // not required
+				return nil
+			}
+
+			if err := m.Nameservers[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("nameservers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("nameservers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *IpamsvcDDNSZone) contextValidateTsigKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TsigKey != nil {
+
+		if swag.IsZero(m.TsigKey) { // not required
+			return nil
+		}
+
 		if err := m.TsigKey.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tsig_key")

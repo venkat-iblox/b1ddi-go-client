@@ -43,7 +43,8 @@ func NewDhcpHostListAssociationsOK() *DhcpHostListAssociationsOK {
 	return &DhcpHostListAssociationsOK{}
 }
 
-/* DhcpHostListAssociationsOK describes a response with status code 200, with default header values.
+/*
+DhcpHostListAssociationsOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

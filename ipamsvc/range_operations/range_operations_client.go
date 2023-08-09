@@ -50,9 +50,10 @@ type ClientService interface {
 }
 
 /*
-  RangeCreate creates the range
+	RangeCreate creates the range
 
-  Use this method to create a __Range__ object.
+	Use this method to create a __Range__ object.
+
 A __Range__ object represents a set of contiguous IP addresses in the same IP space with no gap, expressed as a (start, end) pair within a given subnet that are grouped together for administrative purpose and protocol management. The start and end values are not required to align with CIDR boundaries.
 */
 func (a *Client) RangeCreate(params *RangeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeCreateCreated, error) {
@@ -92,9 +93,10 @@ func (a *Client) RangeCreate(params *RangeCreateParams, authInfo runtime.ClientA
 }
 
 /*
-  RangeCreateNextAvailableIP allocates the next available IP address
+	RangeCreateNextAvailableIP allocates the next available IP address
 
-  Use this method to allocate the next available IP address.
+	Use this method to allocate the next available IP address.
+
 This allocates one or more __Address__ (_ipam/address_) resource from available addresses, when the IP address is not known prior to allocation.
 */
 func (a *Client) RangeCreateNextAvailableIP(params *RangeCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeCreateNextAvailableIPCreated, error) {
@@ -137,9 +139,10 @@ func (a *Client) RangeCreateNextAvailableIP(params *RangeCreateNextAvailableIPPa
 }
 
 /*
-  RangeDelete moves the range to the recycle bin
+	RangeDelete moves the range to the recycle bin
 
-  Use this method to move a __Range__ object to the recycle bin.
+	Use this method to move a __Range__ object to the recycle bin.
+
 A __Range__ object represents a set of contiguous IP addresses in the same IP space with no gap, expressed as a (start, end) pair within a given subnet that are grouped together for administrative purpose and protocol management. The start and end values are not required to align with CIDR boundaries.
 */
 func (a *Client) RangeDelete(params *RangeDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeDeleteNoContent, error) {
@@ -182,9 +185,10 @@ func (a *Client) RangeDelete(params *RangeDeleteParams, authInfo runtime.ClientA
 }
 
 /*
-  RangeList retrieves ranges
+	RangeList retrieves ranges
 
-  Use this method to retrieve __Range__ objects.
+	Use this method to retrieve __Range__ objects.
+
 A __Range__ object represents a set of contiguous IP addresses in the same IP space with no gap, expressed as a (start, end) pair within a given subnet that are grouped together for administrative purpose and protocol management. The start and end values are not required to align with CIDR boundaries.
 */
 func (a *Client) RangeList(params *RangeListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeListOK, error) {
@@ -224,9 +228,10 @@ func (a *Client) RangeList(params *RangeListParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  RangeListNextAvailableIP retrieves the next available IP address
+	RangeListNextAvailableIP retrieves the next available IP address
 
-  Use this method to retrieve the next available IP address.
+	Use this method to retrieve the next available IP address.
+
 This returns one or more __Address__ (_ipam/address_) resource from available addresses, when IP address is not known prior to allocation.
 */
 func (a *Client) RangeListNextAvailableIP(params *RangeListNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeListNextAvailableIPOK, error) {
@@ -269,9 +274,10 @@ func (a *Client) RangeListNextAvailableIP(params *RangeListNextAvailableIPParams
 }
 
 /*
-  RangeRead retrieves the range
+	RangeRead retrieves the range
 
-  Use this method to retrieve a __Range__ object.
+	Use this method to retrieve a __Range__ object.
+
 A __Range__ object represents a set of contiguous IP addresses in the same IP space with no gap, expressed as a (start, end) pair within a given subnet that are grouped together for administrative purpose and protocol management. The start and end values are not required to align with CIDR boundaries.
 */
 func (a *Client) RangeRead(params *RangeReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeReadOK, error) {
@@ -314,9 +320,10 @@ func (a *Client) RangeRead(params *RangeReadParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  RangeUpdate updates the range
+	RangeUpdate updates the range
 
-  Use this method to update a __Range__ object.
+	Use this method to update a __Range__ object.
+
 A __Range__ object represents a set of contiguous IP addresses in the same IP space with no gap, expressed as a (start, end) pair within a given subnet that are grouped together for administrative purpose and protocol management. The start and end values are not required to align with CIDR boundaries.
 */
 func (a *Client) RangeUpdate(params *RangeUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RangeUpdateCreated, error) {

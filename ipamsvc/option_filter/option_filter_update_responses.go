@@ -43,7 +43,8 @@ func NewOptionFilterUpdateCreated() *OptionFilterUpdateCreated {
 	return &OptionFilterUpdateCreated{}
 }
 
-/* OptionFilterUpdateCreated describes a response with status code 201, with default header values.
+/*
+OptionFilterUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

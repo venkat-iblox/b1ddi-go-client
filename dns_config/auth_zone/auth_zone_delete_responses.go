@@ -41,7 +41,8 @@ func NewAuthZoneDeleteNoContent() *AuthZoneDeleteNoContent {
 	return &AuthZoneDeleteNoContent{}
 }
 
-/* AuthZoneDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AuthZoneDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

@@ -86,7 +86,7 @@ type IpamsvcASM struct {
 
 	// The resource identifier.
 	// Required: true
-	SubnetID *string `json:"subnet_id,omitempty"`
+	SubnetID *string `json:"subnet_id"`
 
 	// The resource identifier.
 	SubnetRange string `json:"subnet_range,omitempty"`

@@ -43,7 +43,8 @@ func NewViewUpdateCreated() *ViewUpdateCreated {
 	return &ViewUpdateCreated{}
 }
 
-/* ViewUpdateCreated describes a response with status code 201, with default header values.
+/*
+ViewUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

@@ -41,7 +41,8 @@ func NewSubnetDeleteNoContent() *SubnetDeleteNoContent {
 	return &SubnetDeleteNoContent{}
 }
 
-/* SubnetDeleteNoContent describes a response with status code 204, with default header values.
+/*
+SubnetDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

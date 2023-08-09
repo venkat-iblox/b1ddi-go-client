@@ -53,10 +53,12 @@ func NewForwardNsgListParamsWithHTTPClient(client *http.Client) *ForwardNsgListP
 	}
 }
 
-/* ForwardNsgListParams contains all the parameters to send to the API endpoint
-   for the forward nsg list operation.
+/*
+ForwardNsgListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward nsg list operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardNsgListParams struct {
 

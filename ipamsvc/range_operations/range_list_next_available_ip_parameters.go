@@ -53,10 +53,12 @@ func NewRangeListNextAvailableIPParamsWithHTTPClient(client *http.Client) *Range
 	}
 }
 
-/* RangeListNextAvailableIPParams contains all the parameters to send to the API endpoint
-   for the range list next available IP operation.
+/*
+RangeListNextAvailableIPParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the range list next available IP operation.
+
+	Typically these are written to a http.Request.
 */
 type RangeListNextAvailableIPParams struct {
 

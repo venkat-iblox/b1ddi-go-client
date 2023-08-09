@@ -43,7 +43,8 @@ func NewACLCreateCreated() *ACLCreateCreated {
 	return &ACLCreateCreated{}
 }
 
-/* ACLCreateCreated describes a response with status code 201, with default header values.
+/*
+ACLCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

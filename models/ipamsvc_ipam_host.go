@@ -23,8 +23,10 @@ import (
 type IpamsvcIpamHost struct {
 
 	// The list of all addresses associated with the IPAM host, which may be in different IP spaces.
-	// Required: true
 	Addresses []*IpamsvcHostAddress `json:"addresses,omitempty"`
+
+	// This flag specifies if resource records have to be auto generated for the host.
+	AutoGenerateRecords bool `json:"auto_generate_records,omitempty"`
 
 	// The description for the IPAM host. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -34,12 +36,18 @@ type IpamsvcIpamHost struct {
 	// Format: date-time
 	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
 
+	// The name records to be generated for the host.
+	//
+	// This field is required if _auto_generate_records_ is true.
+	HostNames []*IpamsvcHostName `json:"host_names"`
+
 	// The resource identifier.
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
-	// The name of the IPAM host. May contain 1 to 256 characters. Can include UTF-8.
-	Name string `json:"name,omitempty"`
+	// The name of the IPAM host. Must contain 1 to 256 characters. Can include UTF-8.
+	// Required: true
+	Name *string `json:"name"`
 
 	// The tags for the IPAM host in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -62,6 +70,14 @@ func (m *IpamsvcIpamHost) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateHostNames(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
@@ -73,9 +89,8 @@ func (m *IpamsvcIpamHost) Validate(formats strfmt.Registry) error {
 }
 
 func (m *IpamsvcIpamHost) validateAddresses(formats strfmt.Registry) error {
-
-	if err := validate.Required("addresses", "body", m.Addresses); err != nil {
-		return err
+	if swag.IsZero(m.Addresses) { // not required
+		return nil
 	}
 
 	for i := 0; i < len(m.Addresses); i++ {
@@ -111,6 +126,41 @@ func (m *IpamsvcIpamHost) validateCreatedAt(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IpamsvcIpamHost) validateHostNames(formats strfmt.Registry) error {
+	if swag.IsZero(m.HostNames) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.HostNames); i++ {
+		if swag.IsZero(m.HostNames[i]) { // not required
+			continue
+		}
+
+		if m.HostNames[i] != nil {
+			if err := m.HostNames[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("host_names" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("host_names" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcIpamHost) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *IpamsvcIpamHost) validateUpdatedAt(formats strfmt.Registry) error {
 	if swag.IsZero(m.UpdatedAt) { // not required
 		return nil
@@ -135,6 +185,10 @@ func (m *IpamsvcIpamHost) ContextValidate(ctx context.Context, formats strfmt.Re
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateHostNames(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -154,6 +208,11 @@ func (m *IpamsvcIpamHost) contextValidateAddresses(ctx context.Context, formats 
 	for i := 0; i < len(m.Addresses); i++ {
 
 		if m.Addresses[i] != nil {
+
+			if swag.IsZero(m.Addresses[i]) { // not required
+				return nil
+			}
+
 			if err := m.Addresses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("addresses" + "." + strconv.Itoa(i))
@@ -173,6 +232,31 @@ func (m *IpamsvcIpamHost) contextValidateCreatedAt(ctx context.Context, formats 
 
 	if err := validate.ReadOnly(ctx, "created_at", "body", m.CreatedAt); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcIpamHost) contextValidateHostNames(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.HostNames); i++ {
+
+		if m.HostNames[i] != nil {
+
+			if swag.IsZero(m.HostNames[i]) { // not required
+				return nil
+			}
+
+			if err := m.HostNames[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("host_names" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("host_names" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

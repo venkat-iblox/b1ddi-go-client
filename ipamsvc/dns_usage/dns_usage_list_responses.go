@@ -43,7 +43,8 @@ func NewDNSUsageListOK() *DNSUsageListOK {
 	return &DNSUsageListOK{}
 }
 
-/* DNSUsageListOK describes a response with status code 200, with default header values.
+/*
+DNSUsageListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

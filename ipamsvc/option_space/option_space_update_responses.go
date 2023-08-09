@@ -43,7 +43,8 @@ func NewOptionSpaceUpdateCreated() *OptionSpaceUpdateCreated {
 	return &OptionSpaceUpdateCreated{}
 }
 
-/* OptionSpaceUpdateCreated describes a response with status code 201, with default header values.
+/*
+OptionSpaceUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  FixedAddressCreate creates the fixed address
+	FixedAddressCreate creates the fixed address
 
-  Use this method to create a __FixedAddress__ object.
+	Use this method to create a __FixedAddress__ object.
+
 The __FixedAddress__ object reserves an address for a specific client. It must have a _match_type_ and a valid corresponding _match_value_ so that it can match that client.
 */
 func (a *Client) FixedAddressCreate(params *FixedAddressCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixedAddressCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) FixedAddressCreate(params *FixedAddressCreateParams, authInfo r
 }
 
 /*
-  FixedAddressDelete moves the fixed address to the recycle bin
+	FixedAddressDelete moves the fixed address to the recycle bin
 
-  Use this method to move a __FixedAddress__ object to the recycle bin.
+	Use this method to move a __FixedAddress__ object to the recycle bin.
+
 The __FixedAddress__ object reserves an address for a specific client. It must have a _match_type_ and a valid corresponding _match_value_ so that it can match that client.
 */
 func (a *Client) FixedAddressDelete(params *FixedAddressDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixedAddressDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) FixedAddressDelete(params *FixedAddressDeleteParams, authInfo r
 }
 
 /*
-  FixedAddressList retrieves fixed addresses
+	FixedAddressList retrieves fixed addresses
 
-  Use this method to retrieve __FixedAddress__ objects.
+	Use this method to retrieve __FixedAddress__ objects.
+
 The __FixedAddress__ object reserves an address for a specific client. It must have a _match_type_ and a valid corresponding _match_value_ so that it can match that client.
 */
 func (a *Client) FixedAddressList(params *FixedAddressListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixedAddressListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) FixedAddressList(params *FixedAddressListParams, authInfo runti
 }
 
 /*
-  FixedAddressRead retrieves the fixed address
+	FixedAddressRead retrieves the fixed address
 
-  Use this method to retrieve a __FixedAddress__ object.
+	Use this method to retrieve a __FixedAddress__ object.
+
 The __FixedAddress__ object reserves an address for a specific client. It must have a _match_type_ and a valid corresponding _match_value_ so that it can match that client.
 */
 func (a *Client) FixedAddressRead(params *FixedAddressReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixedAddressReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) FixedAddressRead(params *FixedAddressReadParams, authInfo runti
 }
 
 /*
-  FixedAddressUpdate updates the fixed address
+	FixedAddressUpdate updates the fixed address
 
-  Use this method to update a __FixedAddress__ object.
+	Use this method to update a __FixedAddress__ object.
+
 The __FixedAddress__ object reserves an address for a specific client. It must have a _match_type_ and a valid corresponding _match_value_ so that it can match that client.
 */
 func (a *Client) FixedAddressUpdate(params *FixedAddressUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FixedAddressUpdateCreated, error) {

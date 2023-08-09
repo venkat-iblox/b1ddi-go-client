@@ -48,9 +48,10 @@ type ClientService interface {
 }
 
 /*
-  RecordCreate creates the DNS resource record
+	RecordCreate creates the DNS resource record
 
-  Use this method to create a DNS __Record__ object.
+	Use this method to create a DNS __Record__ object.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordCreate(params *RecordCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordCreateCreated, error) {
@@ -90,9 +91,10 @@ func (a *Client) RecordCreate(params *RecordCreateParams, authInfo runtime.Clien
 }
 
 /*
-  RecordDelete moves the DNS resource record to recycle bin
+	RecordDelete moves the DNS resource record to recycle bin
 
-  Use this method to move a DNS __Record__ object to the recycle bin.
+	Use this method to move a DNS __Record__ object to the recycle bin.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordDelete(params *RecordDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordDeleteNoContent, error) {
@@ -135,9 +137,10 @@ func (a *Client) RecordDelete(params *RecordDeleteParams, authInfo runtime.Clien
 }
 
 /*
-  RecordList retrieves DNS resource records
+	RecordList retrieves DNS resource records
 
-  Use this method to retrieve DNS __Record__ objects.
+	Use this method to retrieve DNS __Record__ objects.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordList(params *RecordListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordListOK, error) {
@@ -177,9 +180,10 @@ func (a *Client) RecordList(params *RecordListParams, authInfo runtime.ClientAut
 }
 
 /*
-  RecordRead retrieves the DNS resource record
+	RecordRead retrieves the DNS resource record
 
-  Use this method to retrieve a DNS __Record__ object.
+	Use this method to retrieve a DNS __Record__ object.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordRead(params *RecordReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordReadOK, error) {
@@ -222,9 +226,10 @@ func (a *Client) RecordRead(params *RecordReadParams, authInfo runtime.ClientAut
 }
 
 /*
-  RecordSOASerialIncrement increments serial number for the s o a record
+	RecordSOASerialIncrement increments serial number for the s o a record
 
-  Use this method to increment the serial number for an SOA (Start of Authority) _Record_ object.
+	Use this method to increment the serial number for an SOA (Start of Authority) _Record_ object.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordSOASerialIncrement(params *RecordSOASerialIncrementParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordSOASerialIncrementCreated, error) {
@@ -267,9 +272,10 @@ func (a *Client) RecordSOASerialIncrement(params *RecordSOASerialIncrementParams
 }
 
 /*
-  RecordUpdate updates the DNS resource record
+	RecordUpdate updates the DNS resource record
 
-  Use this method to update a DNS __Record__ object.
+	Use this method to update a DNS __Record__ object.
+
 A __Record__ object represents a DNS resource record in an authoritative zone.
 */
 func (a *Client) RecordUpdate(params *RecordUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RecordUpdateCreated, error) {

@@ -43,7 +43,8 @@ func NewRecordReadOK() *RecordReadOK {
 	return &RecordReadOK{}
 }
 
-/* RecordReadOK describes a response with status code 200, with default header values.
+/*
+RecordReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

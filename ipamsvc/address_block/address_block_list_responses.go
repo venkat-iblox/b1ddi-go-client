@@ -43,7 +43,8 @@ func NewAddressBlockListOK() *AddressBlockListOK {
 	return &AddressBlockListOK{}
 }
 
-/* AddressBlockListOK describes a response with status code 200, with default header values.
+/*
+AddressBlockListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

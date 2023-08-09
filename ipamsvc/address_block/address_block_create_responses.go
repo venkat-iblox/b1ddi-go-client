@@ -43,7 +43,8 @@ func NewAddressBlockCreateCreated() *AddressBlockCreateCreated {
 	return &AddressBlockCreateCreated{}
 }
 
-/* AddressBlockCreateCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

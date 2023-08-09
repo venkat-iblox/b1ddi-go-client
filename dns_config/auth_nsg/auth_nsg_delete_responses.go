@@ -41,7 +41,8 @@ func NewAuthNsgDeleteNoContent() *AuthNsgDeleteNoContent {
 	return &AuthNsgDeleteNoContent{}
 }
 
-/* AuthNsgDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AuthNsgDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

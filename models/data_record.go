@@ -26,6 +26,7 @@ import (
 type DataRecord struct {
 
 	// Synthetic field, used to determine _zone_ and/or _name_in_zone_ field for records.
+	// Read Only: true
 	AbsoluteNameSpec string `json:"absolute_name_spec,omitempty"`
 
 	// The absolute domain name of the zone where this record belongs.
@@ -71,6 +72,9 @@ type DataRecord struct {
 	// The inheritance configuration.
 	InheritanceSources *DataRecordInheritance `json:"inheritance_sources,omitempty"`
 
+	// The resource identifier.
+	IpamHost string `json:"ipam_host,omitempty"`
+
 	// The relative owner name to the zone origin. Must be specified for creating the DNS resource record and is read only for other operations.
 	NameInZone string `json:"name_in_zone,omitempty"`
 
@@ -90,6 +94,9 @@ type DataRecord struct {
 	// -----------|----------------------------------------
 	// address    | For GET operation it contains the IPv4 or IPv6 address represented by the PTR record.<br><br>For POST and PATCH operations it can be used to create/update a PTR record based on the IP address it represents. In this case, in addition to the _address_ in the options field, need to specify the _view_ field. |
 	Options interface{} `json:"options,omitempty"`
+
+	// external DNS provider metadata.
+	ProviderMetadata interface{} `json:"provider_metadata,omitempty"`
 
 	// The DNS resource record data in JSON format. Certain DNS resource record-specific subfields are required for creating the DNS resource record.
 	//
@@ -196,7 +203,7 @@ type DataRecord struct {
 	// length_kind  | A string indicating the size in bits of a sub-subfield that is prepended to the value and encodes the length of the value. Valid values are:<ul><li>_8_: If _type_ is _ASCII_ or _BASE64_. </li><li>_16_: If _type_ is _HEX_.</li></ul>Defaults to none. <br><br>| Only required for some types.
 	// value        | A string representing the value for the sub-subfield | Yes
 	// Required: true
-	Rdata interface{} `json:"rdata,omitempty"`
+	Rdata interface{} `json:"rdata"`
 
 	// The DNS resource record type-specific non-protocol source.
 	// The source is a combination of indicators, each tracking how the DNS resource record appeared in system.
@@ -208,13 +215,24 @@ type DataRecord struct {
 	// _SYSTEM_                            |  Record was created automatically based on name server assignment. Valid for _SOA_, _NS_, _A_, _AAAA_, and _PTR_ record types.
 	// _DYNAMIC_                           |  Record was created dynamically by performing dynamic update. Valid for all record types except _SOA_.
 	// _DELEGATED_                         |  Record was created automatically based on delegation servers assignment. Always extends the _SYSTEM_ bit. Valid for _NS_, _A_, _AAAA_, and _PTR_ record types.
+	// _DTC_                               |  Record was created automatically based on the DTC configuration. Always extends the _SYSTEM_ bit. Valid only for _IBMETA_ record type with _LBDN_ subtype.
 	// _STATIC_, _SYSTEM_                  |  Record was created manually by API call but it is obfuscated by record generated based on name server assignment.
 	// _DYNAMIC_, _SYSTEM_                 |  Record was created dynamically by DDNS but it is obfuscated by record generated based on name server assignment.
 	// _DELEGATED_, _SYSTEM_               |  Record was created automatically based on delegation servers assignment. _SYSTEM_ will always accompany _DELEGATED_.
+	// _DTC_, _SYSTEM_                     |  Record was created automatically based on the DTC configuration. _SYSTEM_ will always accompany _DTC_.
 	// _STATIC_, _SYSTEM_, _DELEGATED_     |  Record was created manually by API call but it is obfuscated by record generated based on name server assignment as a result of creating a delegation.
 	// _DYNAMIC_, _SYSTEM_, _DELEGATED_    |  Record was created dynamically by DDNS but it is obfuscated by record generated based on name server assignment as a result of creating a delegation.
 	// Read Only: true
 	Source []string `json:"source,omitempty"`
+
+	// The DNS resource record subtype specified in the textual mnemonic format. Valid only in case _type_ is _IBMETA_.
+	//
+	// Value | Numeric Type | Description
+	// ------|--------------|---------------------------------------------
+	// | 0            | Default value
+	// LBDN  | 1            | LBDN record
+	// Read Only: true
+	Subtype string `json:"subtype,omitempty"`
 
 	// The tags for the DNS resource record in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -226,23 +244,24 @@ type DataRecord struct {
 
 	// The DNS resource record type specified in the textual mnemonic format or in the "TYPEnnn" format where "nnn" indicates the numeric type value.
 	//
-	// Value | Numeric Type | Description
-	// ------|--------------|---------------------------------------------
-	// A     | 1            | Address record
-	// AAAA  | 28           | IPv6 Address record
-	// CAA   | 257          | Certification Authority Authorization record
-	// CNAME | 5            | Canonical Name record
-	// DNAME | 39           | Delegation Name record
-	// DHCID | 49           | DHCP Identifier record
-	// MX    | 15           | Mail Exchanger record
-	// NAPTR | 35           | Naming Authority Pointer record
-	// NS    | 2            | Name Server record
-	// PTR   | 12           | Pointer record
-	// SOA   | 6            | Start of Authority record
-	// SRV   | 33           | Service record
-	// TXT   | 16           | Text record
+	// Value  | Numeric Type | Description
+	// -------|--------------|---------------------------------------------
+	// A      | 1            | Address record
+	// AAAA   | 28           | IPv6 Address record
+	// CAA    | 257          | Certification Authority Authorization record
+	// CNAME  | 5            | Canonical Name record
+	// DNAME  | 39           | Delegation Name record
+	// DHCID  | 49           | DHCP Identifier record
+	// MX     | 15           | Mail Exchanger record
+	// NAPTR  | 35           | Naming Authority Pointer record
+	// NS     | 2            | Name Server record
+	// PTR    | 12           | Pointer record
+	// SOA    | 6            | Start of Authority record
+	// SRV    | 33           | Service record
+	// TXT    | 16           | Text record
+	// IBMETA | 65536        | Infoblox meta records, not valid for DNS protocol (read-only)
 	// Required: true
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type"`
 
 	// The timestamp when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true
@@ -355,6 +374,10 @@ func (m *DataRecord) validateUpdatedAt(formats strfmt.Registry) error {
 func (m *DataRecord) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAbsoluteNameSpec(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAbsoluteZoneName(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -391,6 +414,10 @@ func (m *DataRecord) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSubtype(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -402,6 +429,15 @@ func (m *DataRecord) ContextValidate(ctx context.Context, formats strfmt.Registr
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *DataRecord) contextValidateAbsoluteNameSpec(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "absolute_name_spec", "body", string(m.AbsoluteNameSpec)); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -471,6 +507,11 @@ func (m *DataRecord) contextValidateID(ctx context.Context, formats strfmt.Regis
 func (m *DataRecord) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -487,6 +528,15 @@ func (m *DataRecord) contextValidateInheritanceSources(ctx context.Context, form
 func (m *DataRecord) contextValidateSource(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "source", "body", []string(m.Source)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DataRecord) contextValidateSubtype(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "subtype", "body", string(m.Subtype)); err != nil {
 		return err
 	}
 

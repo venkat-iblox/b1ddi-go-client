@@ -52,10 +52,12 @@ func NewRecordDeleteParamsWithHTTPClient(client *http.Client) *RecordDeleteParam
 	}
 }
 
-/* RecordDeleteParams contains all the parameters to send to the API endpoint
-   for the record delete operation.
+/*
+RecordDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the record delete operation.
+
+	Typically these are written to a http.Request.
 */
 type RecordDeleteParams struct {
 

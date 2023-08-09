@@ -8,10 +8,8 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // ConfigCacheFlush CacheFlush
@@ -31,9 +29,11 @@ type ConfigCacheFlush struct {
 	// Defaults to '.'
 	Fqdn string `json:"fqdn,omitempty"`
 
-	// The host to alter.
-	// Required: true
-	Ophid *string `json:"ophid,omitempty"`
+	// The host to alter. Either _ophid_ or _service_id_ should be provided.
+	Ophid string `json:"ophid,omitempty"`
+
+	// Service Id. Either _ophid_ or _service_id_ should be provided.
+	ServiceID string `json:"service_id,omitempty"`
 
 	// Optional. The time in seconds the command is valid for. Command is executed on the onprem host only if it takes less than this time for the command to be transmitted to the host. Otherwise the onprem host discards this command.
 	//
@@ -46,24 +46,6 @@ type ConfigCacheFlush struct {
 
 // Validate validates this config cache flush
 func (m *ConfigCacheFlush) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateOphid(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ConfigCacheFlush) validateOphid(formats strfmt.Registry) error {
-
-	if err := validate.Required("ophid", "body", m.Ophid); err != nil {
-		return err
-	}
-
 	return nil
 }
 

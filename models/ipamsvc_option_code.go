@@ -28,7 +28,7 @@ type IpamsvcOptionCode struct {
 	// Required: true
 	// Maximum: 254
 	// Minimum: 1
-	Code *int64 `json:"code,omitempty"`
+	Code *int64 `json:"code"`
 
 	// The description for the option code. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -44,11 +44,11 @@ type IpamsvcOptionCode struct {
 
 	// The name of the option code. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// The resource identifier.
 	// Required: true
-	OptionSpace *string `json:"option_space,omitempty"`
+	OptionSpace *string `json:"option_space"`
 
 	// The source for the option code.
 	//
@@ -78,7 +78,7 @@ type IpamsvcOptionCode struct {
 	// * _uint16_
 	// * _uint32_
 	// Required: true
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type"`
 
 	// Time when the object has been updated. Equals to _created_at_ if not updated after creation.
 	// Read Only: true

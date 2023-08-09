@@ -41,7 +41,8 @@ func NewOptionSpaceDeleteNoContent() *OptionSpaceDeleteNoContent {
 	return &OptionSpaceDeleteNoContent{}
 }
 
-/* OptionSpaceDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionSpaceDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

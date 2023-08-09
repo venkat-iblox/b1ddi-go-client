@@ -54,10 +54,12 @@ func NewRecordCreateParamsWithHTTPClient(client *http.Client) *RecordCreateParam
 	}
 }
 
-/* RecordCreateParams contains all the parameters to send to the API endpoint
-   for the record create operation.
+/*
+RecordCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the record create operation.
+
+	Typically these are written to a http.Request.
 */
 type RecordCreateParams struct {
 

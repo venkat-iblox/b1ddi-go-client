@@ -46,13 +46,19 @@ type IpamsvcOptionFilter struct {
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
+	// The lease lifetime duration in seconds.
+	LeaseTime int64 `json:"lease_time,omitempty"`
+
 	// The name of the option filter. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
+
+	// The type of protocol of option filter (_ip4_ or _ip6_).
+	Protocol string `json:"protocol,omitempty"`
 
 	// The list of option filter rules to match.
 	// Required: true
-	Rules *IpamsvcOptionFilterRuleList `json:"rules,omitempty"`
+	Rules *IpamsvcOptionFilterRuleList `json:"rules"`
 
 	// The tags for the option filter in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -219,6 +225,11 @@ func (m *IpamsvcOptionFilter) contextValidateDhcpOptions(ctx context.Context, fo
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
@@ -246,6 +257,7 @@ func (m *IpamsvcOptionFilter) contextValidateID(ctx context.Context, formats str
 func (m *IpamsvcOptionFilter) contextValidateRules(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Rules != nil {
+
 		if err := m.Rules.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("rules")

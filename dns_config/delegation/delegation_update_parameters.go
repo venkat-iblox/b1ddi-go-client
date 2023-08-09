@@ -54,10 +54,12 @@ func NewDelegationUpdateParamsWithHTTPClient(client *http.Client) *DelegationUpd
 	}
 }
 
-/* DelegationUpdateParams contains all the parameters to send to the API endpoint
-   for the delegation update operation.
+/*
+DelegationUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delegation update operation.
+
+	Typically these are written to a http.Request.
 */
 type DelegationUpdateParams struct {
 

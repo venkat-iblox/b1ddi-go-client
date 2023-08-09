@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  AuthNsgCreate creates the auth n s g object
+	AuthNsgCreate creates the auth n s g object
 
-  Use this method to create an AuthNSG object.
+	Use this method to create an AuthNSG object.
+
 The _dns/auth_nsg_ object represents an Authoritative DNS Server Group for authoritative zones.
 */
 func (a *Client) AuthNsgCreate(params *AuthNsgCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthNsgCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) AuthNsgCreate(params *AuthNsgCreateParams, authInfo runtime.Cli
 }
 
 /*
-  AuthNsgDelete moves the auth n s g object to recyclebin
+	AuthNsgDelete moves the auth n s g object to recyclebin
 
-  Use this method to move an AuthNSG object to Recyclebin.
+	Use this method to move an AuthNSG object to Recyclebin.
+
 The _dns/auth_nsg_ object represents an Authoritative DNS Server Group for authoritative zones.
 */
 func (a *Client) AuthNsgDelete(params *AuthNsgDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthNsgDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) AuthNsgDelete(params *AuthNsgDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  AuthNsgList lists auth n s g objects
+	AuthNsgList lists auth n s g objects
 
-  Use this method to list AuthNSG objects.
+	Use this method to list AuthNSG objects.
+
 The _dns/auth_nsg_ object represents an Authoritative DNS Server Group for authoritative zones.
 */
 func (a *Client) AuthNsgList(params *AuthNsgListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthNsgListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) AuthNsgList(params *AuthNsgListParams, authInfo runtime.ClientA
 }
 
 /*
-  AuthNsgRead reads the auth n s g object
+	AuthNsgRead reads the auth n s g object
 
-  Use this method to read an AuthNSG object.
+	Use this method to read an AuthNSG object.
+
 The _dns/auth_nsg_ object represents an Authoritative DNS Server Group for authoritative zones.
 */
 func (a *Client) AuthNsgRead(params *AuthNsgReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthNsgReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) AuthNsgRead(params *AuthNsgReadParams, authInfo runtime.ClientA
 }
 
 /*
-  AuthNsgUpdate updates the auth n s g object
+	AuthNsgUpdate updates the auth n s g object
 
-  Use this method to update an AuthNSG object.
+	Use this method to update an AuthNSG object.
+
 The _dns/auth_nsg_ object represents an Authoritative DNS Server Group for authoritative zones.
 */
 func (a *Client) AuthNsgUpdate(params *AuthNsgUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthNsgUpdateCreated, error) {

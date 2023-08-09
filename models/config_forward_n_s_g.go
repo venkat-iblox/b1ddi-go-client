@@ -43,7 +43,7 @@ type ConfigForwardNSG struct {
 
 	// Name of the object.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// The resource identifier.
 	Nsgs []string `json:"nsgs,omitempty"`
@@ -128,6 +128,11 @@ func (m *ConfigForwardNSG) contextValidateExternalForwarders(ctx context.Context
 	for i := 0; i < len(m.ExternalForwarders); i++ {
 
 		if m.ExternalForwarders[i] != nil {
+
+			if swag.IsZero(m.ExternalForwarders[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalForwarders[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_forwarders" + "." + strconv.Itoa(i))

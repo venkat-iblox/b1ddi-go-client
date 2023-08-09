@@ -52,10 +52,12 @@ func NewOptionFilterDeleteParamsWithHTTPClient(client *http.Client) *OptionFilte
 	}
 }
 
-/* OptionFilterDeleteParams contains all the parameters to send to the API endpoint
-   for the option filter delete operation.
+/*
+OptionFilterDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option filter delete operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionFilterDeleteParams struct {
 

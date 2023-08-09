@@ -41,7 +41,8 @@ func NewRangeDeleteNoContent() *RangeDeleteNoContent {
 	return &RangeDeleteNoContent{}
 }
 
-/* RangeDeleteNoContent describes a response with status code 204, with default header values.
+/*
+RangeDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

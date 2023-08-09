@@ -54,10 +54,12 @@ func NewAddressCreateParamsWithHTTPClient(client *http.Client) *AddressCreatePar
 	}
 }
 
-/* AddressCreateParams contains all the parameters to send to the API endpoint
-   for the address create operation.
+/*
+AddressCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address create operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressCreateParams struct {
 

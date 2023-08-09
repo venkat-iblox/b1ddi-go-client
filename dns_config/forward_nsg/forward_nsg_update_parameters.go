@@ -54,10 +54,12 @@ func NewForwardNsgUpdateParamsWithHTTPClient(client *http.Client) *ForwardNsgUpd
 	}
 }
 
-/* ForwardNsgUpdateParams contains all the parameters to send to the API endpoint
-   for the forward nsg update operation.
+/*
+ForwardNsgUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward nsg update operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardNsgUpdateParams struct {
 

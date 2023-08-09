@@ -43,7 +43,8 @@ func NewFixedAddressCreateCreated() *FixedAddressCreateCreated {
 	return &FixedAddressCreateCreated{}
 }
 
-/* FixedAddressCreateCreated describes a response with status code 201, with default header values.
+/*
+FixedAddressCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

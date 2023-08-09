@@ -52,10 +52,12 @@ func NewHostReadParamsWithHTTPClient(client *http.Client) *HostReadParams {
 	}
 }
 
-/* HostReadParams contains all the parameters to send to the API endpoint
-   for the host read operation.
+/*
+HostReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the host read operation.
+
+	Typically these are written to a http.Request.
 */
 type HostReadParams struct {
 

@@ -43,7 +43,8 @@ func NewServerUpdateCreated() *ServerUpdateCreated {
 	return &ServerUpdateCreated{}
 }
 
-/* ServerUpdateCreated describes a response with status code 201, with default header values.
+/*
+ServerUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

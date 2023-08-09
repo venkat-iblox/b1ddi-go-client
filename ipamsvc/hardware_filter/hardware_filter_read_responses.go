@@ -43,7 +43,8 @@ func NewHardwareFilterReadOK() *HardwareFilterReadOK {
 	return &HardwareFilterReadOK{}
 }
 
-/* HardwareFilterReadOK describes a response with status code 200, with default header values.
+/*
+HardwareFilterReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

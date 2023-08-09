@@ -43,7 +43,8 @@ func NewOptionGroupCreateCreated() *OptionGroupCreateCreated {
 	return &OptionGroupCreateCreated{}
 }
 
-/* OptionGroupCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionGroupCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

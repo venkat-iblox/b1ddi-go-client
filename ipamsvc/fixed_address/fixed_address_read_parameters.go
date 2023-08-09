@@ -52,10 +52,12 @@ func NewFixedAddressReadParamsWithHTTPClient(client *http.Client) *FixedAddressR
 	}
 }
 
-/* FixedAddressReadParams contains all the parameters to send to the API endpoint
-   for the fixed address read operation.
+/*
+FixedAddressReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fixed address read operation.
+
+	Typically these are written to a http.Request.
 */
 type FixedAddressReadParams struct {
 

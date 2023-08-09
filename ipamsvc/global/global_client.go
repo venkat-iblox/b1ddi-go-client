@@ -44,9 +44,10 @@ type ClientService interface {
 }
 
 /*
-  GlobalRead retrieves the global configuration
+	GlobalRead retrieves the global configuration
 
-  Use this method to retrieve the __Global__ configuration object.
+	Use this method to retrieve the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalRead(params *GlobalReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalReadOK, error) {
@@ -86,9 +87,10 @@ func (a *Client) GlobalRead(params *GlobalReadParams, authInfo runtime.ClientAut
 }
 
 /*
-  GlobalRead2 retrieves the global configuration
+	GlobalRead2 retrieves the global configuration
 
-  Use this method to retrieve the __Global__ configuration object.
+	Use this method to retrieve the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalRead2(params *GlobalRead2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalRead2OK, error) {
@@ -131,9 +133,10 @@ func (a *Client) GlobalRead2(params *GlobalRead2Params, authInfo runtime.ClientA
 }
 
 /*
-  GlobalUpdate updates the global configuration
+	GlobalUpdate updates the global configuration
 
-  Use this method to update the __Global__ configuration object.
+	Use this method to update the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdateCreated, error) {
@@ -173,9 +176,10 @@ func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.Clien
 }
 
 /*
-  GlobalUpdate2 updates the global configuration
+	GlobalUpdate2 updates the global configuration
 
-  Use this method to update the __Global__ configuration object.
+	Use this method to update the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdate2Created, error) {

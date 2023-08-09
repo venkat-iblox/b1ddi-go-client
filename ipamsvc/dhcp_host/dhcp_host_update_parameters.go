@@ -54,10 +54,12 @@ func NewDhcpHostUpdateParamsWithHTTPClient(client *http.Client) *DhcpHostUpdateP
 	}
 }
 
-/* DhcpHostUpdateParams contains all the parameters to send to the API endpoint
-   for the dhcp host update operation.
+/*
+DhcpHostUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dhcp host update operation.
+
+	Typically these are written to a http.Request.
 */
 type DhcpHostUpdateParams struct {
 

@@ -53,10 +53,12 @@ func NewAddressBlockListNextAvailableABParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* AddressBlockListNextAvailableABParams contains all the parameters to send to the API endpoint
-   for the address block list next available a b operation.
+/*
+AddressBlockListNextAvailableABParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block list next available a b operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockListNextAvailableABParams struct {
 

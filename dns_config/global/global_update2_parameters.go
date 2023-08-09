@@ -54,10 +54,12 @@ func NewGlobalUpdate2ParamsWithHTTPClient(client *http.Client) *GlobalUpdate2Par
 	}
 }
 
-/* GlobalUpdate2Params contains all the parameters to send to the API endpoint
-   for the global update2 operation.
+/*
+GlobalUpdate2Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the global update2 operation.
+
+	Typically these are written to a http.Request.
 */
 type GlobalUpdate2Params struct {
 

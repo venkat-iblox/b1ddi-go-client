@@ -54,10 +54,12 @@ func NewACLUpdateParamsWithHTTPClient(client *http.Client) *ACLUpdateParams {
 	}
 }
 
-/* ACLUpdateParams contains all the parameters to send to the API endpoint
-   for the acl update operation.
+/*
+ACLUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the acl update operation.
+
+	Typically these are written to a http.Request.
 */
 type ACLUpdateParams struct {
 

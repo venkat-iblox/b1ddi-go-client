@@ -41,7 +41,8 @@ func NewOptionGroupDeleteNoContent() *OptionGroupDeleteNoContent {
 	return &OptionGroupDeleteNoContent{}
 }
 
-/* OptionGroupDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionGroupDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

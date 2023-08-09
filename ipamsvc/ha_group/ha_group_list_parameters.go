@@ -53,10 +53,12 @@ func NewHaGroupListParamsWithHTTPClient(client *http.Client) *HaGroupListParams 
 	}
 }
 
-/* HaGroupListParams contains all the parameters to send to the API endpoint
-   for the ha group list operation.
+/*
+HaGroupListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ha group list operation.
+
+	Typically these are written to a http.Request.
 */
 type HaGroupListParams struct {
 
@@ -152,6 +154,14 @@ type HaGroupListParams struct {
 	   This parameter is used for sorting by tags.
 	*/
 	TorderBy *string
+
+	/* CollectStats.
+
+	   collect_stats gets the HA group stats(state, status, heartbeat) if set to _true_ in the _GET_ _/dhcp/ha_group_ request.
+
+	   Format: boolean
+	*/
+	CollectStats *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -294,6 +304,17 @@ func (o *HaGroupListParams) SetTorderBy(torderBy *string) {
 	o.TorderBy = torderBy
 }
 
+// WithCollectStats adds the collectStats to the ha group list params
+func (o *HaGroupListParams) WithCollectStats(collectStats *bool) *HaGroupListParams {
+	o.SetCollectStats(collectStats)
+	return o
+}
+
+// SetCollectStats adds the collectStats to the ha group list params
+func (o *HaGroupListParams) SetCollectStats(collectStats *bool) {
+	o.CollectStats = collectStats
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *HaGroupListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -433,6 +454,23 @@ func (o *HaGroupListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if qTorderBy != "" {
 
 			if err := r.SetQueryParam("_torder_by", qTorderBy); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CollectStats != nil {
+
+		// query param collect_stats
+		var qrCollectStats bool
+
+		if o.CollectStats != nil {
+			qrCollectStats = *o.CollectStats
+		}
+		qCollectStats := swag.FormatBool(qrCollectStats)
+		if qCollectStats != "" {
+
+			if err := r.SetQueryParam("collect_stats", qCollectStats); err != nil {
 				return err
 			}
 		}

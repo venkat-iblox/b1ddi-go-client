@@ -52,10 +52,12 @@ func NewServerReadParamsWithHTTPClient(client *http.Client) *ServerReadParams {
 	}
 }
 
-/* ServerReadParams contains all the parameters to send to the API endpoint
-   for the server read operation.
+/*
+ServerReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the server read operation.
+
+	Typically these are written to a http.Request.
 */
 type ServerReadParams struct {
 

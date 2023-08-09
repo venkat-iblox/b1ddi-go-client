@@ -54,10 +54,12 @@ func NewOptionCodeCreateParamsWithHTTPClient(client *http.Client) *OptionCodeCre
 	}
 }
 
-/* OptionCodeCreateParams contains all the parameters to send to the API endpoint
-   for the option code create operation.
+/*
+OptionCodeCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option code create operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionCodeCreateParams struct {
 

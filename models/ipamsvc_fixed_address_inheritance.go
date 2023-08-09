@@ -164,6 +164,11 @@ func (m *IpamsvcFixedAddressInheritance) ContextValidate(ctx context.Context, fo
 func (m *IpamsvcFixedAddressInheritance) contextValidateDhcpOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpOptions != nil {
+
+		if swag.IsZero(m.DhcpOptions) { // not required
+			return nil
+		}
+
 		if err := m.DhcpOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_options")
@@ -180,6 +185,11 @@ func (m *IpamsvcFixedAddressInheritance) contextValidateDhcpOptions(ctx context.
 func (m *IpamsvcFixedAddressInheritance) contextValidateHeaderOptionFilename(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionFilename != nil {
+
+		if swag.IsZero(m.HeaderOptionFilename) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionFilename.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_filename")
@@ -196,6 +206,11 @@ func (m *IpamsvcFixedAddressInheritance) contextValidateHeaderOptionFilename(ctx
 func (m *IpamsvcFixedAddressInheritance) contextValidateHeaderOptionServerAddress(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionServerAddress != nil {
+
+		if swag.IsZero(m.HeaderOptionServerAddress) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionServerAddress.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_server_address")
@@ -212,6 +227,11 @@ func (m *IpamsvcFixedAddressInheritance) contextValidateHeaderOptionServerAddres
 func (m *IpamsvcFixedAddressInheritance) contextValidateHeaderOptionServerName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionServerName != nil {
+
+		if swag.IsZero(m.HeaderOptionServerName) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionServerName.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_server_name")

@@ -52,10 +52,12 @@ func NewAddressBlockCreateNextAvailableIPParamsWithHTTPClient(client *http.Clien
 	}
 }
 
-/* AddressBlockCreateNextAvailableIPParams contains all the parameters to send to the API endpoint
-   for the address block create next available IP operation.
+/*
+AddressBlockCreateNextAvailableIPParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block create next available IP operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockCreateNextAvailableIPParams struct {
 

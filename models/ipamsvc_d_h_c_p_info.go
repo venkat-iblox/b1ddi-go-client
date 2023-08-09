@@ -42,6 +42,29 @@ type IpamsvcDHCPInfo struct {
 	// Read Only: true
 	Fingerprint string `json:"fingerprint,omitempty"`
 
+	// Identity Association Identifier (IAID) of the lease.
+	// Applicable only for DHCPv6.
+	// Read Only: true
+	Iaid int64 `json:"iaid,omitempty"`
+
+	// Lease type.
+	// Applicable only for address under DHCP control. The value can be empty for address not under DHCP control.
+	//
+	// Valid values are:
+	// * _DHCPv6NonTemporaryAddress_: DHCPv6 non-temporary address (NA)
+	// * _DHCPv6TemporaryAddress_: DHCPv6 temporary address (TA)
+	// * _DHCPv6PrefixDelegation_: DHCPv6 prefix delegation (PD)
+	// * _DHCPv4_: DHCPv4 lease
+	// Read Only: true
+	LeaseType string `json:"lease_type,omitempty"`
+
+	// The length of time that a valid address is preferred (i.e., the time until deprecation).
+	// When the preferred lifetime expires, the address becomes deprecated on the client. It is still considered leased on the server.
+	// Applicable only for DHCPv6.
+	// Read Only: true
+	// Format: date-time
+	PreferredLifetime strfmt.DateTime `json:"preferred_lifetime,omitempty"`
+
 	// The remaining time, in seconds, until which the _state_, when set to _leased_, will remain in that state.
 	// Read Only: true
 	Remain int64 `json:"remain,omitempty"`
@@ -72,6 +95,10 @@ func (m *IpamsvcDHCPInfo) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePreferredLifetime(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStart(formats); err != nil {
 		res = append(res, err)
 	}
@@ -92,6 +119,18 @@ func (m *IpamsvcDHCPInfo) validateEnd(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("end", "body", "date-time", m.End.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDHCPInfo) validatePreferredLifetime(formats strfmt.Registry) error {
+	if swag.IsZero(m.PreferredLifetime) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("preferred_lifetime", "body", "date-time", m.PreferredLifetime.String(), formats); err != nil {
 		return err
 	}
 
@@ -143,6 +182,18 @@ func (m *IpamsvcDHCPInfo) ContextValidate(ctx context.Context, formats strfmt.Re
 	}
 
 	if err := m.contextValidateFingerprint(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateIaid(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLeaseType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePreferredLifetime(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -207,6 +258,33 @@ func (m *IpamsvcDHCPInfo) contextValidateEnd(ctx context.Context, formats strfmt
 func (m *IpamsvcDHCPInfo) contextValidateFingerprint(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "fingerprint", "body", string(m.Fingerprint)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDHCPInfo) contextValidateIaid(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "iaid", "body", int64(m.Iaid)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDHCPInfo) contextValidateLeaseType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "lease_type", "body", string(m.LeaseType)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDHCPInfo) contextValidatePreferredLifetime(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "preferred_lifetime", "body", strfmt.DateTime(m.PreferredLifetime)); err != nil {
 		return err
 	}
 

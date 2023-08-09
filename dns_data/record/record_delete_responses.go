@@ -41,7 +41,8 @@ func NewRecordDeleteNoContent() *RecordDeleteNoContent {
 	return &RecordDeleteNoContent{}
 }
 
-/* RecordDeleteNoContent describes a response with status code 204, with default header values.
+/*
+RecordDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

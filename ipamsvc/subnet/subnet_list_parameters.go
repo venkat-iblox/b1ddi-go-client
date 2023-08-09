@@ -53,10 +53,12 @@ func NewSubnetListParamsWithHTTPClient(client *http.Client) *SubnetListParams {
 	}
 }
 
-/* SubnetListParams contains all the parameters to send to the API endpoint
-   for the subnet list operation.
+/*
+SubnetListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the subnet list operation.
+
+	Typically these are written to a http.Request.
 */
 type SubnetListParams struct {
 

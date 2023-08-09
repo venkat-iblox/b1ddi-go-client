@@ -43,7 +43,8 @@ func NewSubnetCopyCreated() *SubnetCopyCreated {
 	return &SubnetCopyCreated{}
 }
 
-/* SubnetCopyCreated describes a response with status code 201, with default header values.
+/*
+SubnetCopyCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

@@ -39,7 +39,10 @@ type IpamsvcOptionGroup struct {
 
 	// The name of the option group. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
+
+	// The type of protocol (_ip4_ or _ip6_).
+	Protocol string `json:"protocol,omitempty"`
 
 	// The tags for the option group in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -175,6 +178,11 @@ func (m *IpamsvcOptionGroup) contextValidateDhcpOptions(ctx context.Context, for
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))

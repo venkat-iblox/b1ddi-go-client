@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  OptionCodeCreate creates the d h c p option code
+	OptionCodeCreate creates the d h c p option code
 
-  Use this method to create an __OptionCode__ object.
+	Use this method to create an __OptionCode__ object.
+
 The __OptionCode__ object defines a DHCP option code.
 */
 func (a *Client) OptionCodeCreate(params *OptionCodeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionCodeCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) OptionCodeCreate(params *OptionCodeCreateParams, authInfo runti
 }
 
 /*
-  OptionCodeDelete deletes the d h c p option code
+	OptionCodeDelete deletes the d h c p option code
 
-  Use this method to delete an __OptionCode__ object.
+	Use this method to delete an __OptionCode__ object.
+
 The __OptionCode__ object defines a DHCP option code.
 */
 func (a *Client) OptionCodeDelete(params *OptionCodeDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionCodeDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) OptionCodeDelete(params *OptionCodeDeleteParams, authInfo runti
 }
 
 /*
-  OptionCodeList retrieves d h c p option codes
+	OptionCodeList retrieves d h c p option codes
 
-  Use this method to retrieve __OptionCode__ objects.
+	Use this method to retrieve __OptionCode__ objects.
+
 The __OptionCode__ object defines a DHCP option code.
 */
 func (a *Client) OptionCodeList(params *OptionCodeListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionCodeListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionCodeList(params *OptionCodeListParams, authInfo runtime.C
 }
 
 /*
-  OptionCodeRead retrieves the d h c p option code
+	OptionCodeRead retrieves the d h c p option code
 
-  Use this method to retrieve an __OptionCode__ object.
+	Use this method to retrieve an __OptionCode__ object.
+
 The __OptionCode__ object defines a DHCP option code.
 */
 func (a *Client) OptionCodeRead(params *OptionCodeReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionCodeReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) OptionCodeRead(params *OptionCodeReadParams, authInfo runtime.C
 }
 
 /*
-  OptionCodeUpdate updates the d h c p option code
+	OptionCodeUpdate updates the d h c p option code
 
-  Use this method to update an __OptionCode__ object.
+	Use this method to update an __OptionCode__ object.
+
 The __OptionCode__ object defines a DHCP option code.
 */
 func (a *Client) OptionCodeUpdate(params *OptionCodeUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionCodeUpdateCreated, error) {

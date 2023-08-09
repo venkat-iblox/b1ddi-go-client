@@ -33,6 +33,10 @@ type IpamsvcFilter struct {
 	// Read Only: true
 	Name string `json:"name,omitempty"`
 
+	// The type of protocol of the filter (_ip4_ or _ip6_).
+	// Read Only: true
+	Protocol string `json:"protocol,omitempty"`
+
 	// The tags for the DHCP filter in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
 
@@ -59,6 +63,10 @@ func (m *IpamsvcFilter) ContextValidate(ctx context.Context, formats strfmt.Regi
 	}
 
 	if err := m.contextValidateName(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProtocol(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,6 +101,15 @@ func (m *IpamsvcFilter) contextValidateID(ctx context.Context, formats strfmt.Re
 func (m *IpamsvcFilter) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "name", "body", string(m.Name)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcFilter) contextValidateProtocol(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "protocol", "body", string(m.Protocol)); err != nil {
 		return err
 	}
 

@@ -41,7 +41,8 @@ func NewFixedAddressDeleteNoContent() *FixedAddressDeleteNoContent {
 	return &FixedAddressDeleteNoContent{}
 }
 
-/* FixedAddressDeleteNoContent describes a response with status code 204, with default header values.
+/*
+FixedAddressDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

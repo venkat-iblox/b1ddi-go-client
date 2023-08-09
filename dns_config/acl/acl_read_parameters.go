@@ -52,10 +52,12 @@ func NewACLReadParamsWithHTTPClient(client *http.Client) *ACLReadParams {
 	}
 }
 
-/* ACLReadParams contains all the parameters to send to the API endpoint
-   for the acl read operation.
+/*
+ACLReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the acl read operation.
+
+	Typically these are written to a http.Request.
 */
 type ACLReadParams struct {
 

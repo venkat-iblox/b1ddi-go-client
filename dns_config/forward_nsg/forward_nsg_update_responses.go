@@ -43,7 +43,8 @@ func NewForwardNsgUpdateCreated() *ForwardNsgUpdateCreated {
 	return &ForwardNsgUpdateCreated{}
 }
 
-/* ForwardNsgUpdateCreated describes a response with status code 201, with default header values.
+/*
+ForwardNsgUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

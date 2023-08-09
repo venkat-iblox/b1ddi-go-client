@@ -43,7 +43,8 @@ func NewForwardNsgReadOK() *ForwardNsgReadOK {
 	return &ForwardNsgReadOK{}
 }
 
-/* ForwardNsgReadOK describes a response with status code 200, with default header values.
+/*
+ForwardNsgReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

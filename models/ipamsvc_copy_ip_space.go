@@ -33,7 +33,7 @@ type IpamsvcCopyIPSpace struct {
 
 	// The name for the copied IP space. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// Indicates whether copying should skip an object in case of error and continue with next, or abort copying in case of error.
 	//

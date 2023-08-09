@@ -43,7 +43,8 @@ func NewIpamHostCreateCreated() *IpamHostCreateCreated {
 	return &IpamHostCreateCreated{}
 }
 
-/* IpamHostCreateCreated describes a response with status code 201, with default header values.
+/*
+IpamHostCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

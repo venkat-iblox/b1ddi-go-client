@@ -43,7 +43,8 @@ func NewHaGroupUpdateCreated() *HaGroupUpdateCreated {
 	return &HaGroupUpdateCreated{}
 }
 
-/* HaGroupUpdateCreated describes a response with status code 201, with default header values.
+/*
+HaGroupUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

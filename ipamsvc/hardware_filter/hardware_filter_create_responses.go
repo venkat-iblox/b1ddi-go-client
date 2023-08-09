@@ -43,7 +43,8 @@ func NewHardwareFilterCreateCreated() *HardwareFilterCreateCreated {
 	return &HardwareFilterCreateCreated{}
 }
 
-/* HardwareFilterCreateCreated describes a response with status code 201, with default header values.
+/*
+HardwareFilterCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

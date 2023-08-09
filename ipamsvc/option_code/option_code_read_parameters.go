@@ -52,10 +52,12 @@ func NewOptionCodeReadParamsWithHTTPClient(client *http.Client) *OptionCodeReadP
 	}
 }
 
-/* OptionCodeReadParams contains all the parameters to send to the API endpoint
-   for the option code read operation.
+/*
+OptionCodeReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option code read operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionCodeReadParams struct {
 

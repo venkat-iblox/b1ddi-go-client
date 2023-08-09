@@ -22,6 +22,7 @@ import (
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/hardware_filter"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/ip_space"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/ipam_host"
+	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/leases_command"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/option_code"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/option_filter"
 	"github.com/infobloxopen/b1ddi-go-client/ipamsvc/option_group"
@@ -85,6 +86,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *IPAddressM
 	cli.HardwareFilter = hardware_filter.New(transport, formats)
 	cli.IPSpace = ip_space.New(transport, formats)
 	cli.IpamHost = ipam_host.New(transport, formats)
+	cli.LeasesCommand = leases_command.New(transport, formats)
 	cli.OptionCode = option_code.New(transport, formats)
 	cli.OptionFilter = option_filter.New(transport, formats)
 	cli.OptionGroup = option_group.New(transport, formats)
@@ -160,6 +162,8 @@ type IPAddressManagementAPI struct {
 
 	IpamHost ipam_host.ClientService
 
+	LeasesCommand leases_command.ClientService
+
 	OptionCode option_code.ClientService
 
 	OptionFilter option_filter.ClientService
@@ -192,6 +196,7 @@ func (c *IPAddressManagementAPI) SetTransport(transport runtime.ClientTransport)
 	c.HardwareFilter.SetTransport(transport)
 	c.IPSpace.SetTransport(transport)
 	c.IpamHost.SetTransport(transport)
+	c.LeasesCommand.SetTransport(transport)
 	c.OptionCode.SetTransport(transport)
 	c.OptionFilter.SetTransport(transport)
 	c.OptionGroup.SetTransport(transport)

@@ -54,10 +54,12 @@ func NewIPSpaceUpdateParamsWithHTTPClient(client *http.Client) *IPSpaceUpdatePar
 	}
 }
 
-/* IPSpaceUpdateParams contains all the parameters to send to the API endpoint
-   for the ip space update operation.
+/*
+IPSpaceUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip space update operation.
+
+	Typically these are written to a http.Request.
 */
 type IPSpaceUpdateParams struct {
 

@@ -43,7 +43,8 @@ func NewAuthZoneUpdateCreated() *AuthZoneUpdateCreated {
 	return &AuthZoneUpdateCreated{}
 }
 
-/* AuthZoneUpdateCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

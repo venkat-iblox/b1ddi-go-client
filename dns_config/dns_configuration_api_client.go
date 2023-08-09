@@ -21,6 +21,7 @@ import (
 	"github.com/infobloxopen/b1ddi-go-client/dns_config/forward_zone"
 	"github.com/infobloxopen/b1ddi-go-client/dns_config/global"
 	"github.com/infobloxopen/b1ddi-go-client/dns_config/host"
+	"github.com/infobloxopen/b1ddi-go-client/dns_config/lbdn"
 	serverops "github.com/infobloxopen/b1ddi-go-client/dns_config/server"
 	"github.com/infobloxopen/b1ddi-go-client/dns_config/view"
 )
@@ -78,6 +79,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *DNSConfigu
 	cli.ForwardZone = forward_zone.New(transport, formats)
 	cli.Global = global.New(transport, formats)
 	cli.Host = host.New(transport, formats)
+	cli.Lbdn = lbdn.New(transport, formats)
 	cli.Server = serverops.New(transport, formats)
 	cli.View = view.New(transport, formats)
 	return cli
@@ -146,6 +148,8 @@ type DNSConfigurationAPI struct {
 
 	Host host.ClientService
 
+	Lbdn lbdn.ClientService
+
 	Server serverops.ClientService
 
 	View view.ClientService
@@ -167,6 +171,7 @@ func (c *DNSConfigurationAPI) SetTransport(transport runtime.ClientTransport) {
 	c.ForwardZone.SetTransport(transport)
 	c.Global.SetTransport(transport)
 	c.Host.SetTransport(transport)
+	c.Lbdn.SetTransport(transport)
 	c.Server.SetTransport(transport)
 	c.View.SetTransport(transport)
 }

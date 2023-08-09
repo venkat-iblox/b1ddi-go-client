@@ -53,10 +53,12 @@ func NewAuthZoneListParamsWithHTTPClient(client *http.Client) *AuthZoneListParam
 	}
 }
 
-/* AuthZoneListParams contains all the parameters to send to the API endpoint
-   for the auth zone list operation.
+/*
+AuthZoneListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone list operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneListParams struct {
 

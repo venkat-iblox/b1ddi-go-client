@@ -43,7 +43,8 @@ func NewHostUpdateCreated() *HostUpdateCreated {
 	return &HostUpdateCreated{}
 }
 
-/* HostUpdateCreated describes a response with status code 201, with default header values.
+/*
+HostUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

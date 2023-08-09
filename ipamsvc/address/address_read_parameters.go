@@ -52,10 +52,12 @@ func NewAddressReadParamsWithHTTPClient(client *http.Client) *AddressReadParams 
 	}
 }
 
-/* AddressReadParams contains all the parameters to send to the API endpoint
-   for the address read operation.
+/*
+AddressReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address read operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressReadParams struct {
 

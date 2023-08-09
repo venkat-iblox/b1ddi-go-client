@@ -53,10 +53,12 @@ func NewRecordListParamsWithHTTPClient(client *http.Client) *RecordListParams {
 	}
 }
 
-/* RecordListParams contains all the parameters to send to the API endpoint
-   for the record list operation.
+/*
+RecordListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the record list operation.
+
+	Typically these are written to a http.Request.
 */
 type RecordListParams struct {
 

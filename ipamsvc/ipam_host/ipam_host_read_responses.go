@@ -43,7 +43,8 @@ func NewIpamHostReadOK() *IpamHostReadOK {
 	return &IpamHostReadOK{}
 }
 
-/* IpamHostReadOK describes a response with status code 200, with default header values.
+/*
+IpamHostReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

@@ -54,10 +54,12 @@ func NewForwardZoneUpdateParamsWithHTTPClient(client *http.Client) *ForwardZoneU
 	}
 }
 
-/* ForwardZoneUpdateParams contains all the parameters to send to the API endpoint
-   for the forward zone update operation.
+/*
+ForwardZoneUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward zone update operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardZoneUpdateParams struct {
 

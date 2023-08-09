@@ -43,7 +43,8 @@ func NewOptionSpaceCreateCreated() *OptionSpaceCreateCreated {
 	return &OptionSpaceCreateCreated{}
 }
 
-/* OptionSpaceCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionSpaceCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

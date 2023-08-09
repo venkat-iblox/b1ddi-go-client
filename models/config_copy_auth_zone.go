@@ -51,7 +51,7 @@ type ConfigCopyAuthZone struct {
 
 	// The resource identifier.
 	// Required: true
-	TargetView *string `json:"target_view,omitempty"`
+	TargetView *string `json:"target_view"`
 }
 
 // Validate validates this config copy auth zone
@@ -198,6 +198,11 @@ func (m *ConfigCopyAuthZone) contextValidateExternalPrimaries(ctx context.Contex
 	for i := 0; i < len(m.ExternalPrimaries); i++ {
 
 		if m.ExternalPrimaries[i] != nil {
+
+			if swag.IsZero(m.ExternalPrimaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalPrimaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_primaries" + "." + strconv.Itoa(i))
@@ -218,6 +223,11 @@ func (m *ConfigCopyAuthZone) contextValidateExternalSecondaries(ctx context.Cont
 	for i := 0; i < len(m.ExternalSecondaries); i++ {
 
 		if m.ExternalSecondaries[i] != nil {
+
+			if swag.IsZero(m.ExternalSecondaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalSecondaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_secondaries" + "." + strconv.Itoa(i))
@@ -247,6 +257,11 @@ func (m *ConfigCopyAuthZone) contextValidateInternalSecondaries(ctx context.Cont
 	for i := 0; i < len(m.InternalSecondaries); i++ {
 
 		if m.InternalSecondaries[i] != nil {
+
+			if swag.IsZero(m.InternalSecondaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.InternalSecondaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("internal_secondaries" + "." + strconv.Itoa(i))

@@ -43,7 +43,8 @@ func NewOptionFilterCreateCreated() *OptionFilterCreateCreated {
 	return &OptionFilterCreateCreated{}
 }
 
-/* OptionFilterCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionFilterCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

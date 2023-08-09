@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  ForwardNsgCreate creates the forward n s g object
+	ForwardNsgCreate creates the forward n s g object
 
-  Use this method to create a ForwardNSG object.
+	Use this method to create a ForwardNSG object.
+
 The _dns/forward_nsg_ object represents a Forward DNS Server Group for forward zones.
 */
 func (a *Client) ForwardNsgCreate(params *ForwardNsgCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardNsgCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) ForwardNsgCreate(params *ForwardNsgCreateParams, authInfo runti
 }
 
 /*
-  ForwardNsgDelete moves the forward n s g object to recyclebin
+	ForwardNsgDelete moves the forward n s g object to recyclebin
 
-  Use this method to move a ForwardNSG object to Recyclebin.
+	Use this method to move a ForwardNSG object to Recyclebin.
+
 The _dns/forward_nsg_ object represents a Forward DNS Server Group for forward zones.
 */
 func (a *Client) ForwardNsgDelete(params *ForwardNsgDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardNsgDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) ForwardNsgDelete(params *ForwardNsgDeleteParams, authInfo runti
 }
 
 /*
-  ForwardNsgList lists forward n s g objects
+	ForwardNsgList lists forward n s g objects
 
-  Use this method to list ForwardNSG objects.
+	Use this method to list ForwardNSG objects.
+
 The _dns/forward_nsg_ object represents a Forward DNS Server Group for forward zones.
 */
 func (a *Client) ForwardNsgList(params *ForwardNsgListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardNsgListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) ForwardNsgList(params *ForwardNsgListParams, authInfo runtime.C
 }
 
 /*
-  ForwardNsgRead reads the forward n s g object
+	ForwardNsgRead reads the forward n s g object
 
-  Use this method to read a ForwardNSG object.
+	Use this method to read a ForwardNSG object.
+
 The _dns/forward_nsg_ object represents a Forward DNS Server Group for forward zones.
 */
 func (a *Client) ForwardNsgRead(params *ForwardNsgReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardNsgReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) ForwardNsgRead(params *ForwardNsgReadParams, authInfo runtime.C
 }
 
 /*
-  ForwardNsgUpdate updates the forward n s g object
+	ForwardNsgUpdate updates the forward n s g object
 
-  Use this method to update a ForwardNSG object.
+	Use this method to update a ForwardNSG object.
+
 The _dns/forward_nsg_ object represents a Forward DNS Server Group for forward zones.
 */
 func (a *Client) ForwardNsgUpdate(params *ForwardNsgUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardNsgUpdateCreated, error) {

@@ -52,10 +52,12 @@ func NewForwardNsgDeleteParamsWithHTTPClient(client *http.Client) *ForwardNsgDel
 	}
 }
 
-/* ForwardNsgDeleteParams contains all the parameters to send to the API endpoint
-   for the forward nsg delete operation.
+/*
+ForwardNsgDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward nsg delete operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardNsgDeleteParams struct {
 

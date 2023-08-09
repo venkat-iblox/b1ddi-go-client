@@ -54,10 +54,12 @@ func NewAuthZoneCopyParamsWithHTTPClient(client *http.Client) *AuthZoneCopyParam
 	}
 }
 
-/* AuthZoneCopyParams contains all the parameters to send to the API endpoint
-   for the auth zone copy operation.
+/*
+AuthZoneCopyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone copy operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneCopyParams struct {
 

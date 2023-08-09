@@ -41,7 +41,8 @@ func NewViewDeleteNoContent() *ViewDeleteNoContent {
 	return &ViewDeleteNoContent{}
 }
 
-/* ViewDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ViewDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

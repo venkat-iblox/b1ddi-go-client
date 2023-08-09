@@ -53,10 +53,12 @@ func NewAddressBlockListParamsWithHTTPClient(client *http.Client) *AddressBlockL
 	}
 }
 
-/* AddressBlockListParams contains all the parameters to send to the API endpoint
-   for the address block list operation.
+/*
+AddressBlockListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block list operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockListParams struct {
 

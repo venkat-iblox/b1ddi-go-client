@@ -24,7 +24,7 @@ type IpamsvcAddressBlock struct {
 
 	// The address field in form “a.b.c.d/n” where the “/n” may be omitted. In this case, the CIDR value must be defined in the _cidr_ field. When reading, the _address_ field is always in the form “a.b.c.d”.
 	// Required: true
-	Address *string `json:"address,omitempty"`
+	Address *string `json:"address"`
 
 	// The Automated Scope Management configuration for the address block.
 	AsmConfig *IpamsvcASMConfig `json:"asm_config,omitempty"`
@@ -58,6 +58,17 @@ type IpamsvcAddressBlock struct {
 	// Defaults to _client_.
 	DdnsClientUpdate string `json:"ddns_client_update,omitempty"`
 
+	// The mode used for resolving conflicts while performing DDNS updates.
+	//
+	// Valid values are:
+	// * _check_with_dhcid_: It includes adding a DHCID record and checking that record via conflict detection as per RFC 4703.
+	// * _no_check_with_dhcid_: This will ignore conflict detection but add a DHCID record when creating/updating an entry.
+	// * _check_exists_with_dhcid_: This will check if there is an existing DHCID record but does not verify the value of the record matches the update. This will also update the DHCID record for the entry.
+	// * _no_check_without_dhcid_: This ignores conflict detection and will not add a DHCID record when creating/updating a DDNS entry.
+	//
+	// Defaults to _check_with_dhcid_.
+	DdnsConflictResolutionMode string `json:"ddns_conflict_resolution_mode,omitempty"`
+
 	// The domain suffix for DDNS updates. FQDN, may be empty.
 	//
 	// Defaults to empty.
@@ -79,6 +90,11 @@ type IpamsvcAddressBlock struct {
 	// Determines if DDNS updates are enabled at the address block level.
 	// Defaults to _true_.
 	DdnsSendUpdates *bool `json:"ddns_send_updates,omitempty"`
+
+	// DDNS TTL value - to be calculated as a simple percentage of the lease's lifetime, using the parameter's value as the percentage.
+	// It is specified as a percentage (e.g. 25, 75).
+	// Defaults to unspecified.
+	DdnsTTLPercent float32 `json:"ddns_ttl_percent,omitempty"`
 
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
@@ -102,6 +118,12 @@ type IpamsvcAddressBlock struct {
 	// Read Only: true
 	DhcpUtilization *IpamsvcDHCPUtilization `json:"dhcp_utilization,omitempty"`
 
+	// The discovery attributes for this address block in JSON format.
+	DiscoveryAttrs interface{} `json:"discovery_attrs,omitempty"`
+
+	// The discovery metadata for this address block in JSON format.
+	DiscoveryMetadata interface{} `json:"discovery_metadata,omitempty"`
+
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
 
@@ -113,9 +135,9 @@ type IpamsvcAddressBlock struct {
 
 	// The character to replace non-matching characters with, when hostname rewrite is enabled.
 	//
-	// Any single ASCII character.
+	// Any single ASCII character or no character if the invalid characters should be removed without replacement.
 	//
-	// Defaults to "_".
+	// Defaults to "-".
 	HostnameRewriteChar string `json:"hostname_rewrite_char,omitempty"`
 
 	// Indicates if client supplied hostnames will be rewritten prior to DDNS update by replacing every character that does not match _hostname_rewrite_regex_ by _hostname_rewrite_char_.
@@ -146,13 +168,13 @@ type IpamsvcAddressBlock struct {
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`
 
-	// The type of protocol of address block (_ipv4_ or _ipv6_).
+	// The type of protocol of address block (_ip4_ or _ip6_).
 	// Read Only: true
 	Protocol string `json:"protocol,omitempty"`
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space,omitempty"`
+	Space *string `json:"space"`
 
 	// The tags for the address block in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -165,9 +187,20 @@ type IpamsvcAddressBlock struct {
 	// Format: date-time
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// The IP address utilization statistics for the address block.
+	// The usage is a combination of indicators, each tracking a specific associated use. Listed below are usage indicators with their meaning:
+	//  usage indicator        | description
+	//  ---------------------- | --------------------------------
+	//  _DISCOVERED_           |  AddressBlock was discovered by some network discovery probe like Network Insight in NIOS.
+	// Read Only: true
+	Usage []string `json:"usage"`
+
+	// The IPV4 address utilization statistics for the address block.
 	// Read Only: true
 	Utilization *IpamsvcUtilization `json:"utilization,omitempty"`
+
+	// The utilization of IPV6 addresses in the Address block.
+	// Read Only: true
+	UtilizationV6 *IpamsvcUtilizationV6 `json:"utilization_v6,omitempty"`
 }
 
 // Validate validates this ipamsvc address block
@@ -219,6 +252,10 @@ func (m *IpamsvcAddressBlock) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUtilization(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUtilizationV6(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -426,6 +463,25 @@ func (m *IpamsvcAddressBlock) validateUtilization(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *IpamsvcAddressBlock) validateUtilizationV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.UtilizationV6) { // not required
+		return nil
+	}
+
+	if m.UtilizationV6 != nil {
+		if err := m.UtilizationV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ipamsvc address block based on the context it is used
 func (m *IpamsvcAddressBlock) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -474,7 +530,15 @@ func (m *IpamsvcAddressBlock) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateUsage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUtilization(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUtilizationV6(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -487,6 +551,11 @@ func (m *IpamsvcAddressBlock) ContextValidate(ctx context.Context, formats strfm
 func (m *IpamsvcAddressBlock) contextValidateAsmConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmConfig != nil {
+
+		if swag.IsZero(m.AsmConfig) { // not required
+			return nil
+		}
+
 		if err := m.AsmConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_config")
@@ -521,6 +590,11 @@ func (m *IpamsvcAddressBlock) contextValidateCreatedAt(ctx context.Context, form
 func (m *IpamsvcAddressBlock) contextValidateDhcpConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpConfig != nil {
+
+		if swag.IsZero(m.DhcpConfig) { // not required
+			return nil
+		}
+
 		if err := m.DhcpConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_config")
@@ -539,6 +613,11 @@ func (m *IpamsvcAddressBlock) contextValidateDhcpOptions(ctx context.Context, fo
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
@@ -557,6 +636,11 @@ func (m *IpamsvcAddressBlock) contextValidateDhcpOptions(ctx context.Context, fo
 func (m *IpamsvcAddressBlock) contextValidateDhcpUtilization(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpUtilization != nil {
+
+		if swag.IsZero(m.DhcpUtilization) { // not required
+			return nil
+		}
+
 		if err := m.DhcpUtilization.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_utilization")
@@ -582,6 +666,11 @@ func (m *IpamsvcAddressBlock) contextValidateID(ctx context.Context, formats str
 func (m *IpamsvcAddressBlock) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -607,6 +696,11 @@ func (m *IpamsvcAddressBlock) contextValidateProtocol(ctx context.Context, forma
 func (m *IpamsvcAddressBlock) contextValidateThreshold(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Threshold != nil {
+
+		if swag.IsZero(m.Threshold) { // not required
+			return nil
+		}
+
 		if err := m.Threshold.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("threshold")
@@ -629,14 +723,49 @@ func (m *IpamsvcAddressBlock) contextValidateUpdatedAt(ctx context.Context, form
 	return nil
 }
 
+func (m *IpamsvcAddressBlock) contextValidateUsage(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "usage", "body", []string(m.Usage)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *IpamsvcAddressBlock) contextValidateUtilization(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Utilization != nil {
+
+		if swag.IsZero(m.Utilization) { // not required
+			return nil
+		}
+
 		if err := m.Utilization.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("utilization")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("utilization")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcAddressBlock) contextValidateUtilizationV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.UtilizationV6 != nil {
+
+		if swag.IsZero(m.UtilizationV6) { // not required
+			return nil
+		}
+
+		if err := m.UtilizationV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
 			}
 			return err
 		}

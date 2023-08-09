@@ -26,11 +26,17 @@ type IpamsvcDHCPInheritance struct {
 	// The inheritance configuration for _ddns_client_update_ field.
 	DdnsClientUpdate *InheritanceInheritedString `json:"ddns_client_update,omitempty"`
 
+	// The inheritance configuration for _ddns_conflict_resolution_mode_ field.
+	DdnsConflictResolutionMode *InheritanceInheritedString `json:"ddns_conflict_resolution_mode,omitempty"`
+
 	// The inheritance configuration for _ddns_enabled_ field. Only action allowed is 'inherit'.
 	DdnsEnabled *InheritanceInheritedBool `json:"ddns_enabled,omitempty"`
 
 	// The inheritance configuration for _ddns_generate_name_ and _ddns_generated_prefix_ fields.
 	DdnsHostnameBlock *IpamsvcInheritedDDNSHostnameBlock `json:"ddns_hostname_block,omitempty"`
+
+	// The inheritance configuration for _ddns_ttl_percent_ field.
+	DdnsTTLPercent *InheritanceInheritedFloat `json:"ddns_ttl_percent,omitempty"`
 
 	// The inheritance configuration for _ddns_send_updates_ and _ddns_domain_ fields.
 	DdnsUpdateBlock *IpamsvcInheritedDDNSUpdateBlock `json:"ddns_update_block,omitempty"`
@@ -72,11 +78,19 @@ func (m *IpamsvcDHCPInheritance) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDdnsConflictResolutionMode(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDdnsEnabled(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateDdnsHostnameBlock(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDdnsTTLPercent(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -160,6 +174,25 @@ func (m *IpamsvcDHCPInheritance) validateDdnsClientUpdate(formats strfmt.Registr
 	return nil
 }
 
+func (m *IpamsvcDHCPInheritance) validateDdnsConflictResolutionMode(formats strfmt.Registry) error {
+	if swag.IsZero(m.DdnsConflictResolutionMode) { // not required
+		return nil
+	}
+
+	if m.DdnsConflictResolutionMode != nil {
+		if err := m.DdnsConflictResolutionMode.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ddns_conflict_resolution_mode")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ddns_conflict_resolution_mode")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcDHCPInheritance) validateDdnsEnabled(formats strfmt.Registry) error {
 	if swag.IsZero(m.DdnsEnabled) { // not required
 		return nil
@@ -190,6 +223,25 @@ func (m *IpamsvcDHCPInheritance) validateDdnsHostnameBlock(formats strfmt.Regist
 				return ve.ValidateName("ddns_hostname_block")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ddns_hostname_block")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDHCPInheritance) validateDdnsTTLPercent(formats strfmt.Registry) error {
+	if swag.IsZero(m.DdnsTTLPercent) { // not required
+		return nil
+	}
+
+	if m.DdnsTTLPercent != nil {
+		if err := m.DdnsTTLPercent.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ddns_ttl_percent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ddns_ttl_percent")
 			}
 			return err
 		}
@@ -381,11 +433,19 @@ func (m *IpamsvcDHCPInheritance) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDdnsConflictResolutionMode(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDdnsEnabled(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateDdnsHostnameBlock(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDdnsTTLPercent(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -434,6 +494,11 @@ func (m *IpamsvcDHCPInheritance) ContextValidate(ctx context.Context, formats st
 func (m *IpamsvcDHCPInheritance) contextValidateAsmConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmConfig != nil {
+
+		if swag.IsZero(m.AsmConfig) { // not required
+			return nil
+		}
+
 		if err := m.AsmConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_config")
@@ -450,6 +515,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateAsmConfig(ctx context.Context, f
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsClientUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsClientUpdate != nil {
+
+		if swag.IsZero(m.DdnsClientUpdate) { // not required
+			return nil
+		}
+
 		if err := m.DdnsClientUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_client_update")
@@ -463,9 +533,35 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsClientUpdate(ctx context.Con
 	return nil
 }
 
+func (m *IpamsvcDHCPInheritance) contextValidateDdnsConflictResolutionMode(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DdnsConflictResolutionMode != nil {
+
+		if swag.IsZero(m.DdnsConflictResolutionMode) { // not required
+			return nil
+		}
+
+		if err := m.DdnsConflictResolutionMode.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ddns_conflict_resolution_mode")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ddns_conflict_resolution_mode")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsEnabled(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsEnabled != nil {
+
+		if swag.IsZero(m.DdnsEnabled) { // not required
+			return nil
+		}
+
 		if err := m.DdnsEnabled.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_enabled")
@@ -482,6 +578,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsEnabled(ctx context.Context,
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsHostnameBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsHostnameBlock != nil {
+
+		if swag.IsZero(m.DdnsHostnameBlock) { // not required
+			return nil
+		}
+
 		if err := m.DdnsHostnameBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_hostname_block")
@@ -495,9 +596,35 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsHostnameBlock(ctx context.Co
 	return nil
 }
 
+func (m *IpamsvcDHCPInheritance) contextValidateDdnsTTLPercent(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DdnsTTLPercent != nil {
+
+		if swag.IsZero(m.DdnsTTLPercent) { // not required
+			return nil
+		}
+
+		if err := m.DdnsTTLPercent.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ddns_ttl_percent")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ddns_ttl_percent")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsUpdateBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsUpdateBlock != nil {
+
+		if swag.IsZero(m.DdnsUpdateBlock) { // not required
+			return nil
+		}
+
 		if err := m.DdnsUpdateBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_update_block")
@@ -514,6 +641,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsUpdateBlock(ctx context.Cont
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsUpdateOnRenew(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsUpdateOnRenew != nil {
+
+		if swag.IsZero(m.DdnsUpdateOnRenew) { // not required
+			return nil
+		}
+
 		if err := m.DdnsUpdateOnRenew.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_update_on_renew")
@@ -530,6 +662,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsUpdateOnRenew(ctx context.Co
 func (m *IpamsvcDHCPInheritance) contextValidateDdnsUseConflictResolution(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DdnsUseConflictResolution != nil {
+
+		if swag.IsZero(m.DdnsUseConflictResolution) { // not required
+			return nil
+		}
+
 		if err := m.DdnsUseConflictResolution.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ddns_use_conflict_resolution")
@@ -546,6 +683,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDdnsUseConflictResolution(ctx co
 func (m *IpamsvcDHCPInheritance) contextValidateDhcpConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpConfig != nil {
+
+		if swag.IsZero(m.DhcpConfig) { // not required
+			return nil
+		}
+
 		if err := m.DhcpConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_config")
@@ -562,6 +704,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDhcpConfig(ctx context.Context, 
 func (m *IpamsvcDHCPInheritance) contextValidateDhcpOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpOptions != nil {
+
+		if swag.IsZero(m.DhcpOptions) { // not required
+			return nil
+		}
+
 		if err := m.DhcpOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_options")
@@ -578,6 +725,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateDhcpOptions(ctx context.Context,
 func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionFilename(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionFilename != nil {
+
+		if swag.IsZero(m.HeaderOptionFilename) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionFilename.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_filename")
@@ -594,6 +746,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionFilename(ctx context
 func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionServerAddress(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionServerAddress != nil {
+
+		if swag.IsZero(m.HeaderOptionServerAddress) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionServerAddress.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_server_address")
@@ -610,6 +767,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionServerAddress(ctx co
 func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionServerName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HeaderOptionServerName != nil {
+
+		if swag.IsZero(m.HeaderOptionServerName) { // not required
+			return nil
+		}
+
 		if err := m.HeaderOptionServerName.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("header_option_server_name")
@@ -626,6 +788,11 @@ func (m *IpamsvcDHCPInheritance) contextValidateHeaderOptionServerName(ctx conte
 func (m *IpamsvcDHCPInheritance) contextValidateHostnameRewriteBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HostnameRewriteBlock != nil {
+
+		if swag.IsZero(m.HostnameRewriteBlock) { // not required
+			return nil
+		}
+
 		if err := m.HostnameRewriteBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hostname_rewrite_block")

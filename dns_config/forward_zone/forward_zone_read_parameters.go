@@ -52,10 +52,12 @@ func NewForwardZoneReadParamsWithHTTPClient(client *http.Client) *ForwardZoneRea
 	}
 }
 
-/* ForwardZoneReadParams contains all the parameters to send to the API endpoint
-   for the forward zone read operation.
+/*
+ForwardZoneReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward zone read operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardZoneReadParams struct {
 

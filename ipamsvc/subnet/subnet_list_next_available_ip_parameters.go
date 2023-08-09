@@ -53,10 +53,12 @@ func NewSubnetListNextAvailableIPParamsWithHTTPClient(client *http.Client) *Subn
 	}
 }
 
-/* SubnetListNextAvailableIPParams contains all the parameters to send to the API endpoint
-   for the subnet list next available IP operation.
+/*
+SubnetListNextAvailableIPParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the subnet list next available IP operation.
+
+	Typically these are written to a http.Request.
 */
 type SubnetListNextAvailableIPParams struct {
 

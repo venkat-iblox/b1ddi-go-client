@@ -43,7 +43,8 @@ func NewAddressCreateCreated() *AddressCreateCreated {
 	return &AddressCreateCreated{}
 }
 
-/* AddressCreateCreated describes a response with status code 201, with default header values.
+/*
+AddressCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

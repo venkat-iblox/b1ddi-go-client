@@ -21,11 +21,23 @@ import (
 // swagger:model ipamsvcDHCPConfig
 type IpamsvcDHCPConfig struct {
 
-	// Disable to allow leases only for known clients, those for which a fixed address is configured.
+	// The abandoned reclaim time in seconds for IPV4 clients.
+	AbandonedReclaimTime int64 `json:"abandoned_reclaim_time,omitempty"`
+
+	// The abandoned reclaim time in seconds for IPV6 clients.
+	AbandonedReclaimTimeV6 int64 `json:"abandoned_reclaim_time_v6,omitempty"`
+
+	// Disable to allow leases only for known IPv4 clients, those for which a fixed address is configured.
 	AllowUnknown *bool `json:"allow_unknown,omitempty"`
+
+	// Disable to allow leases only for known IPV6 clients, those for which a fixed address is configured.
+	AllowUnknownV6 bool `json:"allow_unknown_v6,omitempty"`
 
 	// The resource identifier.
 	Filters []string `json:"filters"`
+
+	// The resource identifier.
+	FiltersV6 []string `json:"filters_v6"`
 
 	// Enable to ignore the client UID when issuing a DHCP lease. Use this option to prevent assigning two IP addresses for a client which does not have a UID during one phase of PXE boot but acquires one for the other phase.
 	IgnoreClientUID bool `json:"ignore_client_uid,omitempty"`
@@ -35,6 +47,9 @@ type IpamsvcDHCPConfig struct {
 
 	// The lease duration in seconds.
 	LeaseTime int64 `json:"lease_time,omitempty"`
+
+	// The lease duration in seconds for IPV6 clients.
+	LeaseTimeV6 int64 `json:"lease_time_v6,omitempty"`
 }
 
 // Validate validates this ipamsvc d h c p config
@@ -96,6 +111,11 @@ func (m *IpamsvcDHCPConfig) contextValidateIgnoreList(ctx context.Context, forma
 	for i := 0; i < len(m.IgnoreList); i++ {
 
 		if m.IgnoreList[i] != nil {
+
+			if swag.IsZero(m.IgnoreList[i]) { // not required
+				return nil
+			}
+
 			if err := m.IgnoreList[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ignore_list" + "." + strconv.Itoa(i))

@@ -74,6 +74,11 @@ func (m *ConfigHostInheritance) ContextValidate(ctx context.Context, formats str
 func (m *ConfigHostInheritance) contextValidateKerberosKeys(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.KerberosKeys != nil {
+
+		if swag.IsZero(m.KerberosKeys) { // not required
+			return nil
+		}
+
 		if err := m.KerberosKeys.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kerberos_keys")

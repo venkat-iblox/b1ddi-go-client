@@ -43,7 +43,8 @@ func NewIpamHostUpdateCreated() *IpamHostUpdateCreated {
 	return &IpamHostUpdateCreated{}
 }
 
-/* IpamHostUpdateCreated describes a response with status code 201, with default header values.
+/*
+IpamHostUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

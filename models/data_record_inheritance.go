@@ -74,6 +74,11 @@ func (m *DataRecordInheritance) ContextValidate(ctx context.Context, formats str
 func (m *DataRecordInheritance) contextValidateTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TTL != nil {
+
+		if swag.IsZero(m.TTL) { // not required
+			return nil
+		}
+
 		if err := m.TTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ttl")

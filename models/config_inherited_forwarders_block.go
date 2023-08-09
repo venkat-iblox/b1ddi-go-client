@@ -16,7 +16,7 @@ import (
 
 // ConfigInheritedForwardersBlock InheritedForwardersBlock
 //
-// Inheritance block for fields: _forwarders_, _forwarders_only_.
+// Inheritance block for fields: _forwarders_, _forwarders_only_, _use_root_forwarders_for_local_resolution_with_b1td_.
 //
 // swagger:model configInheritedForwardersBlock
 type ConfigInheritedForwardersBlock struct {
@@ -99,6 +99,11 @@ func (m *ConfigInheritedForwardersBlock) contextValidateDisplayName(ctx context.
 func (m *ConfigInheritedForwardersBlock) contextValidateValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Value != nil {
+
+		if swag.IsZero(m.Value) { // not required
+			return nil
+		}
+
 		if err := m.Value.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("value")

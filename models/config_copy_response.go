@@ -19,6 +19,9 @@ import (
 // swagger:model configCopyResponse
 type ConfigCopyResponse struct {
 
+	// The description of the resource that was requested to be copied.
+	Description string `json:"description,omitempty"`
+
 	// The resource identifier.
 	// Read Only: true
 	ID string `json:"id,omitempty"`

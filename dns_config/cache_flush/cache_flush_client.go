@@ -36,9 +36,10 @@ type ClientService interface {
 }
 
 /*
-  CacheFlushCreate creates the cache flush object
+	CacheFlushCreate creates the cache flush object
 
-  Use this method to create a Cache Flush object.
+	Use this method to create a Cache Flush object.
+
 The Cache Flush object is for removing entries from the DNS cache on a host. The host must be available and running DNS for this to succeed.
 */
 func (a *Client) CacheFlushCreate(params *CacheFlushCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CacheFlushCreateCreated, error) {

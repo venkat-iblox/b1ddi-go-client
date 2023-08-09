@@ -42,9 +42,10 @@ type ClientService interface {
 }
 
 /*
-  HostList lists DNS host objects
+	HostList lists DNS host objects
 
-  Use this method to list DNS Host objects.
+	Use this method to list DNS Host objects.
+
 A DNS Host object associates DNS configuration with hosts.
 */
 func (a *Client) HostList(params *HostListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HostListOK, error) {
@@ -84,9 +85,10 @@ func (a *Client) HostList(params *HostListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  HostRead reads the DNS host object
+	HostRead reads the DNS host object
 
-  Use this method to read a DNS Host object.
+	Use this method to read a DNS Host object.
+
 A DNS Host object associates DNS configuration with hosts.
 */
 func (a *Client) HostRead(params *HostReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HostReadOK, error) {
@@ -129,9 +131,10 @@ func (a *Client) HostRead(params *HostReadParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  HostUpdate updates the DNS host object
+	HostUpdate updates the DNS host object
 
-  Use this method to update a DNS Host object.
+	Use this method to update a DNS Host object.
+
 A DNS Host object associates DNS configuration with hosts.
 */
 func (a *Client) HostUpdate(params *HostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HostUpdateCreated, error) {

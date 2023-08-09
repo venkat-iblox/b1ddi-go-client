@@ -43,7 +43,8 @@ func NewACLReadOK() *ACLReadOK {
 	return &ACLReadOK{}
 }
 
-/* ACLReadOK describes a response with status code 200, with default header values.
+/*
+ACLReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

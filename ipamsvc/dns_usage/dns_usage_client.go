@@ -40,9 +40,9 @@ type ClientService interface {
 }
 
 /*
-  DNSUsageList retrieves DNS usage for multiple objects
+DNSUsageList retrieves DNS usage for multiple objects
 
-  Use this method to retrieve __DNSUsage__ objects.
+Use this method to retrieve __DNSUsage__ objects.
 */
 func (a *Client) DNSUsageList(params *DNSUsageListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSUsageListOK, error) {
 	// TODO: Validate the params before sending
@@ -81,9 +81,9 @@ func (a *Client) DNSUsageList(params *DNSUsageListParams, authInfo runtime.Clien
 }
 
 /*
-  DNSUsageRead retrieves the DNS usage
+DNSUsageRead retrieves the DNS usage
 
-  Use this method to retrieve a __DNSUsage__ object.
+Use this method to retrieve a __DNSUsage__ object.
 */
 func (a *Client) DNSUsageRead(params *DNSUsageReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSUsageReadOK, error) {
 	// TODO: Validate the params before sending

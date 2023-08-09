@@ -43,7 +43,8 @@ func NewOptionGroupReadOK() *OptionGroupReadOK {
 	return &OptionGroupReadOK{}
 }
 
-/* OptionGroupReadOK describes a response with status code 200, with default header values.
+/*
+OptionGroupReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

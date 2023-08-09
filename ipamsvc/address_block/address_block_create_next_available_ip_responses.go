@@ -43,7 +43,8 @@ func NewAddressBlockCreateNextAvailableIPCreated() *AddressBlockCreateNextAvaila
 	return &AddressBlockCreateNextAvailableIPCreated{}
 }
 
-/* AddressBlockCreateNextAvailableIPCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateNextAvailableIPCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

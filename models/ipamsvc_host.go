@@ -25,6 +25,10 @@ type IpamsvcHost struct {
 	// Read Only: true
 	Address string `json:"address,omitempty"`
 
+	// Anycast address configured to the host. Order is not significant.
+	// Read Only: true
+	AnycastAddresses []string `json:"anycast_addresses"`
+
 	// The DHCP Config Profile for the on-prem host.
 	AssociatedServer *IpamsvcHostAssociatedServer `json:"associated_server,omitempty"`
 
@@ -51,11 +55,24 @@ type IpamsvcHost struct {
 	// Read Only: true
 	Ophid string `json:"ophid,omitempty"`
 
+	// External provider identifier.
+	// Read Only: true
+	ProviderID string `json:"provider_id,omitempty"`
+
 	// The resource identifier.
 	Server string `json:"server,omitempty"`
 
 	// The tags of the on-prem host in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
+
+	// Defines the type of host.
+	// Allowed values:
+	//  * _bloxone_ddi_: host type is BloxOne DDI,
+	//  * _microsoft_azure_: host type is Microsoft Azure,
+	//  * _amazon_web_service_: host type is Amazon Web Services.
+	//  * _microsoft_active_directory_: host type is Microsoft Active Directory.
+	// Read Only: true
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this ipamsvc host
@@ -99,6 +116,10 @@ func (m *IpamsvcHost) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAnycastAddresses(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAssociatedServer(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -123,6 +144,14 @@ func (m *IpamsvcHost) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateProviderID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -138,9 +167,23 @@ func (m *IpamsvcHost) contextValidateAddress(ctx context.Context, formats strfmt
 	return nil
 }
 
+func (m *IpamsvcHost) contextValidateAnycastAddresses(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anycast_addresses", "body", []string(m.AnycastAddresses)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *IpamsvcHost) contextValidateAssociatedServer(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AssociatedServer != nil {
+
+		if swag.IsZero(m.AssociatedServer) { // not required
+			return nil
+		}
+
 		if err := m.AssociatedServer.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("associated_server")
@@ -193,6 +236,24 @@ func (m *IpamsvcHost) contextValidateName(ctx context.Context, formats strfmt.Re
 func (m *IpamsvcHost) contextValidateOphid(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "ophid", "body", string(m.Ophid)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcHost) contextValidateProviderID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "provider_id", "body", string(m.ProviderID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcHost) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "type", "body", string(m.Type)); err != nil {
 		return err
 	}
 

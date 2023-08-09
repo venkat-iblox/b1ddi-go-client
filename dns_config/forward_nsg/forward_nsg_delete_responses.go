@@ -41,7 +41,8 @@ func NewForwardNsgDeleteNoContent() *ForwardNsgDeleteNoContent {
 	return &ForwardNsgDeleteNoContent{}
 }
 
-/* ForwardNsgDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ForwardNsgDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

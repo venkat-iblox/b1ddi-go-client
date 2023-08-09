@@ -43,7 +43,8 @@ func NewViewListOK() *ViewListOK {
 	return &ViewListOK{}
 }
 
-/* ViewListOK describes a response with status code 200, with default header values.
+/*
+ViewListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

@@ -52,10 +52,12 @@ func NewAuthZoneReadParamsWithHTTPClient(client *http.Client) *AuthZoneReadParam
 	}
 }
 
-/* AuthZoneReadParams contains all the parameters to send to the API endpoint
-   for the auth zone read operation.
+/*
+AuthZoneReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone read operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneReadParams struct {
 

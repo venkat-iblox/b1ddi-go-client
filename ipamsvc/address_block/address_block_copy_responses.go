@@ -43,7 +43,8 @@ func NewAddressBlockCopyCreated() *AddressBlockCopyCreated {
 	return &AddressBlockCopyCreated{}
 }
 
-/* AddressBlockCopyCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCopyCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

@@ -43,7 +43,8 @@ func NewRangeCreateCreated() *RangeCreateCreated {
 	return &RangeCreateCreated{}
 }
 
-/* RangeCreateCreated describes a response with status code 201, with default header values.
+/*
+RangeCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

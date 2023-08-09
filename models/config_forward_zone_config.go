@@ -91,6 +91,11 @@ func (m *ConfigForwardZoneConfig) contextValidateExternalForwarders(ctx context.
 	for i := 0; i < len(m.ExternalForwarders); i++ {
 
 		if m.ExternalForwarders[i] != nil {
+
+			if swag.IsZero(m.ExternalForwarders[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalForwarders[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_forwarders" + "." + strconv.Itoa(i))

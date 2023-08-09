@@ -54,10 +54,12 @@ func NewForwardZoneCopyParamsWithHTTPClient(client *http.Client) *ForwardZoneCop
 	}
 }
 
-/* ForwardZoneCopyParams contains all the parameters to send to the API endpoint
-   for the forward zone copy operation.
+/*
+ForwardZoneCopyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward zone copy operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardZoneCopyParams struct {
 

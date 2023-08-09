@@ -43,7 +43,8 @@ func NewAsmCreateCreated() *AsmCreateCreated {
 	return &AsmCreateCreated{}
 }
 
-/* AsmCreateCreated describes a response with status code 201, with default header values.
+/*
+AsmCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

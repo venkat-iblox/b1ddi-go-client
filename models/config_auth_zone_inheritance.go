@@ -252,6 +252,11 @@ func (m *ConfigAuthZoneInheritance) ContextValidate(ctx context.Context, formats
 func (m *ConfigAuthZoneInheritance) contextValidateGssTsigEnabled(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GssTsigEnabled != nil {
+
+		if swag.IsZero(m.GssTsigEnabled) { // not required
+			return nil
+		}
+
 		if err := m.GssTsigEnabled.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gss_tsig_enabled")
@@ -268,6 +273,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateGssTsigEnabled(ctx context.Co
 func (m *ConfigAuthZoneInheritance) contextValidateNotify(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Notify != nil {
+
+		if swag.IsZero(m.Notify) { // not required
+			return nil
+		}
+
 		if err := m.Notify.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("notify")
@@ -284,6 +294,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateNotify(ctx context.Context, f
 func (m *ConfigAuthZoneInheritance) contextValidateQueryACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.QueryACL != nil {
+
+		if swag.IsZero(m.QueryACL) { // not required
+			return nil
+		}
+
 		if err := m.QueryACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("query_acl")
@@ -300,6 +315,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateQueryACL(ctx context.Context,
 func (m *ConfigAuthZoneInheritance) contextValidateTransferACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TransferACL != nil {
+
+		if swag.IsZero(m.TransferACL) { // not required
+			return nil
+		}
+
 		if err := m.TransferACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("transfer_acl")
@@ -316,6 +336,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateTransferACL(ctx context.Conte
 func (m *ConfigAuthZoneInheritance) contextValidateUpdateACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdateACL != nil {
+
+		if swag.IsZero(m.UpdateACL) { // not required
+			return nil
+		}
+
 		if err := m.UpdateACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("update_acl")
@@ -332,6 +357,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateUpdateACL(ctx context.Context
 func (m *ConfigAuthZoneInheritance) contextValidateUseForwardersForSubzones(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UseForwardersForSubzones != nil {
+
+		if swag.IsZero(m.UseForwardersForSubzones) { // not required
+			return nil
+		}
+
 		if err := m.UseForwardersForSubzones.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("use_forwarders_for_subzones")
@@ -348,6 +378,11 @@ func (m *ConfigAuthZoneInheritance) contextValidateUseForwardersForSubzones(ctx 
 func (m *ConfigAuthZoneInheritance) contextValidateZoneAuthority(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ZoneAuthority != nil {
+
+		if swag.IsZero(m.ZoneAuthority) { // not required
+			return nil
+		}
+
 		if err := m.ZoneAuthority.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("zone_authority")

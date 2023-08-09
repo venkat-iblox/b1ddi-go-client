@@ -43,7 +43,8 @@ func NewAsmListOK() *AsmListOK {
 	return &AsmListOK{}
 }
 
-/* AsmListOK describes a response with status code 200, with default header values.
+/*
+AsmListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

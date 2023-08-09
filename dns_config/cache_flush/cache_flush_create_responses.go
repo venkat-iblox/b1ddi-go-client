@@ -43,7 +43,8 @@ func NewCacheFlushCreateCreated() *CacheFlushCreateCreated {
 	return &CacheFlushCreateCreated{}
 }
 
-/* CacheFlushCreateCreated describes a response with status code 201, with default header values.
+/*
+CacheFlushCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

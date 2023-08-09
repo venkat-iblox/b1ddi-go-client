@@ -43,7 +43,8 @@ func NewRecordUpdateCreated() *RecordUpdateCreated {
 	return &RecordUpdateCreated{}
 }
 
-/* RecordUpdateCreated describes a response with status code 201, with default header values.
+/*
+RecordUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

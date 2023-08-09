@@ -54,10 +54,12 @@ func NewRangeCreateParamsWithHTTPClient(client *http.Client) *RangeCreateParams 
 	}
 }
 
-/* RangeCreateParams contains all the parameters to send to the API endpoint
-   for the range create operation.
+/*
+RangeCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the range create operation.
+
+	Typically these are written to a http.Request.
 */
 type RangeCreateParams struct {
 

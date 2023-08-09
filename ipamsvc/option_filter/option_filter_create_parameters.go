@@ -54,10 +54,12 @@ func NewOptionFilterCreateParamsWithHTTPClient(client *http.Client) *OptionFilte
 	}
 }
 
-/* OptionFilterCreateParams contains all the parameters to send to the API endpoint
-   for the option filter create operation.
+/*
+OptionFilterCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option filter create operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionFilterCreateParams struct {
 

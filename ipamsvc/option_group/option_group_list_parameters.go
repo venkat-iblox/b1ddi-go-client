@@ -53,10 +53,12 @@ func NewOptionGroupListParamsWithHTTPClient(client *http.Client) *OptionGroupLis
 	}
 }
 
-/* OptionGroupListParams contains all the parameters to send to the API endpoint
-   for the option group list operation.
+/*
+OptionGroupListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option group list operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionGroupListParams struct {
 

@@ -43,7 +43,8 @@ func NewDelegationUpdateCreated() *DelegationUpdateCreated {
 	return &DelegationUpdateCreated{}
 }
 
-/* DelegationUpdateCreated describes a response with status code 201, with default header values.
+/*
+DelegationUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

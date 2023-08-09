@@ -41,7 +41,8 @@ func NewOptionFilterDeleteNoContent() *OptionFilterDeleteNoContent {
 	return &OptionFilterDeleteNoContent{}
 }
 
-/* OptionFilterDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionFilterDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

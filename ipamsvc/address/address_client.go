@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  AddressCreate creates the IP address
+	AddressCreate creates the IP address
 
-  Use this method to create an __Address__ object.
+	Use this method to create an __Address__ object.
+
 The __Address__ object represents any single IP address within a given IP space.
 */
 func (a *Client) AddressCreate(params *AddressCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) AddressCreate(params *AddressCreateParams, authInfo runtime.Cli
 }
 
 /*
-  AddressDelete moves the IP address to the recycle bin
+	AddressDelete moves the IP address to the recycle bin
 
-  Use this method to move an __Address__ object to the recycle bin.
+	Use this method to move an __Address__ object to the recycle bin.
+
 The __Address__ object represents any single IP address within a given IP space.
 */
 func (a *Client) AddressDelete(params *AddressDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) AddressDelete(params *AddressDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  AddressList retrieves IP addresses
+	AddressList retrieves IP addresses
 
-  Use this method to retrieve __Address__ objects.
+	Use this method to retrieve __Address__ objects.
+
 The __Address__ object represents any single IP address within a given IP space.
 */
 func (a *Client) AddressList(params *AddressListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) AddressList(params *AddressListParams, authInfo runtime.ClientA
 }
 
 /*
-  AddressRead retrieves the IP address
+	AddressRead retrieves the IP address
 
-  Use this method to retrieve an __Address__ object.
+	Use this method to retrieve an __Address__ object.
+
 The __Address__ object represents any single IP address within a given IP space.
 */
 func (a *Client) AddressRead(params *AddressReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) AddressRead(params *AddressReadParams, authInfo runtime.ClientA
 }
 
 /*
-  AddressUpdate updates the IP address
+	AddressUpdate updates the IP address
 
-  Use this method to update an __Address__ object.
+	Use this method to update an __Address__ object.
+
 The __Address__ object represents any single IP address within a given IP space.
 */
 func (a *Client) AddressUpdate(params *AddressUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressUpdateCreated, error) {

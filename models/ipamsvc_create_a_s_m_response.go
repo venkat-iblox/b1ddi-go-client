@@ -74,6 +74,11 @@ func (m *IpamsvcCreateASMResponse) ContextValidate(ctx context.Context, formats 
 func (m *IpamsvcCreateASMResponse) contextValidateResult(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Result != nil {
+
+		if swag.IsZero(m.Result) { // not required
+			return nil
+		}
+
 		if err := m.Result.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("result")

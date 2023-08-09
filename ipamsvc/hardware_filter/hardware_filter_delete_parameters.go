@@ -52,10 +52,12 @@ func NewHardwareFilterDeleteParamsWithHTTPClient(client *http.Client) *HardwareF
 	}
 }
 
-/* HardwareFilterDeleteParams contains all the parameters to send to the API endpoint
-   for the hardware filter delete operation.
+/*
+HardwareFilterDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the hardware filter delete operation.
+
+	Typically these are written to a http.Request.
 */
 type HardwareFilterDeleteParams struct {
 

@@ -41,7 +41,8 @@ func NewIpamHostDeleteNoContent() *IpamHostDeleteNoContent {
 	return &IpamHostDeleteNoContent{}
 }
 
-/* IpamHostDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamHostDeleteNoContent describes a response with status code 204, with default header values.
 
 No Content
 */

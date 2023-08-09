@@ -52,10 +52,12 @@ func NewAsmListParamsWithHTTPClient(client *http.Client) *AsmListParams {
 	}
 }
 
-/* AsmListParams contains all the parameters to send to the API endpoint
-   for the asm list operation.
+/*
+AsmListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the asm list operation.
+
+	Typically these are written to a http.Request.
 */
 type AsmListParams struct {
 

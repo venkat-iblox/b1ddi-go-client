@@ -54,10 +54,12 @@ func NewHaGroupCreateParamsWithHTTPClient(client *http.Client) *HaGroupCreatePar
 	}
 }
 
-/* HaGroupCreateParams contains all the parameters to send to the API endpoint
-   for the ha group create operation.
+/*
+HaGroupCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ha group create operation.
+
+	Typically these are written to a http.Request.
 */
 type HaGroupCreateParams struct {
 

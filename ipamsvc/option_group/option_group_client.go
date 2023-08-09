@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  OptionGroupCreate creates the d h c p option group
+	OptionGroupCreate creates the d h c p option group
 
-  Use this method to create an __OptionGroup__ object.
+	Use this method to create an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo run
 }
 
 /*
-  OptionGroupDelete moves the d h c p option group to the recycle bin
+	OptionGroupDelete moves the d h c p option group to the recycle bin
 
-  Use this method to move an __OptionGroup__ object to the recycle bin.
+	Use this method to move an __OptionGroup__ object to the recycle bin.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo run
 }
 
 /*
-  OptionGroupList retrieves d h c p option groups
+	OptionGroupList retrieves d h c p option groups
 
-  Use this method to retrieve __OptionGroup__ objects.
+	Use this method to retrieve __OptionGroup__ objects.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupList(params *OptionGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionGroupList(params *OptionGroupListParams, authInfo runtime
 }
 
 /*
-  OptionGroupRead retrieves the d h c p option group
+	OptionGroupRead retrieves the d h c p option group
 
-  Use this method to retrieve an __OptionGroup__ object.
+	Use this method to retrieve an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupRead(params *OptionGroupReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) OptionGroupRead(params *OptionGroupReadParams, authInfo runtime
 }
 
 /*
-  OptionGroupUpdate updates the d h c p option group
+	OptionGroupUpdate updates the d h c p option group
 
-  Use this method to update an __OptionGroup__ object.
+	Use this method to update an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupUpdateCreated, error) {

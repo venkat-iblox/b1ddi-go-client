@@ -43,7 +43,8 @@ func NewGlobalUpdateCreated() *GlobalUpdateCreated {
 	return &GlobalUpdateCreated{}
 }
 
-/* GlobalUpdateCreated describes a response with status code 201, with default header values.
+/*
+GlobalUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

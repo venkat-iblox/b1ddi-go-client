@@ -52,10 +52,12 @@ func NewConvertDomainNameConvertParamsWithHTTPClient(client *http.Client) *Conve
 	}
 }
 
-/* ConvertDomainNameConvertParams contains all the parameters to send to the API endpoint
-   for the convert domain name convert operation.
+/*
+ConvertDomainNameConvertParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the convert domain name convert operation.
+
+	Typically these are written to a http.Request.
 */
 type ConvertDomainNameConvertParams struct {
 

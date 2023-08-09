@@ -53,10 +53,12 @@ func NewDelegationListParamsWithHTTPClient(client *http.Client) *DelegationListP
 	}
 }
 
-/* DelegationListParams contains all the parameters to send to the API endpoint
-   for the delegation list operation.
+/*
+DelegationListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delegation list operation.
+
+	Typically these are written to a http.Request.
 */
 type DelegationListParams struct {
 

@@ -54,10 +54,12 @@ func NewAddressBlockCopyParamsWithHTTPClient(client *http.Client) *AddressBlockC
 	}
 }
 
-/* AddressBlockCopyParams contains all the parameters to send to the API endpoint
-   for the address block copy operation.
+/*
+AddressBlockCopyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block copy operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockCopyParams struct {
 

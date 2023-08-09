@@ -44,9 +44,10 @@ type ClientService interface {
 }
 
 /*
-  DhcpHostList retrieves d h c p hosts
+	DhcpHostList retrieves d h c p hosts
 
-  Use this method to retrieve DHCP __Host__ objects.
+	Use this method to retrieve DHCP __Host__ objects.
+
 A DHCP __Host__ object associates a __DHCPConfigProfile__ object with an on-prem host.
 */
 func (a *Client) DhcpHostList(params *DhcpHostListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DhcpHostListOK, error) {
@@ -86,9 +87,9 @@ func (a *Client) DhcpHostList(params *DhcpHostListParams, authInfo runtime.Clien
 }
 
 /*
-  DhcpHostListAssociations retrieves d h c p host associations
+DhcpHostListAssociations retrieves d h c p host associations
 
-  Use this method to retrieve __HostAssociation__ objects.
+Use this method to retrieve __HostAssociation__ objects.
 */
 func (a *Client) DhcpHostListAssociations(params *DhcpHostListAssociationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DhcpHostListAssociationsOK, error) {
 	// TODO: Validate the params before sending
@@ -130,9 +131,10 @@ func (a *Client) DhcpHostListAssociations(params *DhcpHostListAssociationsParams
 }
 
 /*
-  DhcpHostRead retrieves the d h c p host
+	DhcpHostRead retrieves the d h c p host
 
-  Use this method to retrieve a DHCP Host object.
+	Use this method to retrieve a DHCP Host object.
+
 A DHCP __Host__ object associates a __DHCPConfigProfile__ object with an on-prem host.
 */
 func (a *Client) DhcpHostRead(params *DhcpHostReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DhcpHostReadOK, error) {
@@ -175,9 +177,10 @@ func (a *Client) DhcpHostRead(params *DhcpHostReadParams, authInfo runtime.Clien
 }
 
 /*
-  DhcpHostUpdate updates the d h c p hosts
+	DhcpHostUpdate updates the d h c p hosts
 
-  Use this method to update a DHCP __Host__ object.
+	Use this method to update a DHCP __Host__ object.
+
 A DHCP __Host__ object associates a __DHCPConfigProfile__ object with an on-prem host.
 */
 func (a *Client) DhcpHostUpdate(params *DhcpHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DhcpHostUpdateCreated, error) {

@@ -29,7 +29,7 @@ type ConfigACLItem struct {
 	//  * _allow_,
 	//  * _deny_.
 	// Required: true
-	Access *string `json:"access,omitempty"`
+	Access *string `json:"access"`
 
 	// The resource identifier.
 	ACL string `json:"acl,omitempty"`
@@ -47,7 +47,7 @@ type ConfigACLItem struct {
 	//  * _acl_,
 	//  * _tsig_key_.
 	// Required: true
-	Element *string `json:"element,omitempty"`
+	Element *string `json:"element"`
 
 	// Optional. TSIG key.
 	//
@@ -131,6 +131,11 @@ func (m *ConfigACLItem) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *ConfigACLItem) contextValidateTsigKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TsigKey != nil {
+
+		if swag.IsZero(m.TsigKey) { // not required
+			return nil
+		}
+
 		if err := m.TsigKey.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tsig_key")

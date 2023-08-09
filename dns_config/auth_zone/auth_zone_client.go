@@ -48,9 +48,10 @@ type ClientService interface {
 }
 
 /*
-  AuthZoneCopy copies the auth zone object
+	AuthZoneCopy copies the auth zone object
 
-  Use this method to copy an __AuthZone__ object to a different __View__.
+	Use this method to copy an __AuthZone__ object to a different __View__.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneCopy(params *AuthZoneCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneCopyCreated, error) {
@@ -90,9 +91,10 @@ func (a *Client) AuthZoneCopy(params *AuthZoneCopyParams, authInfo runtime.Clien
 }
 
 /*
-  AuthZoneCreate creates the auth zone object
+	AuthZoneCreate creates the auth zone object
 
-  Use this method to create an AuthZone object.
+	Use this method to create an AuthZone object.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneCreate(params *AuthZoneCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneCreateCreated, error) {
@@ -132,9 +134,10 @@ func (a *Client) AuthZoneCreate(params *AuthZoneCreateParams, authInfo runtime.C
 }
 
 /*
-  AuthZoneDelete moves the auth zone object to recyclebin
+	AuthZoneDelete moves the auth zone object to recyclebin
 
-  Use this method to move an AuthZone object to Recyclebin.
+	Use this method to move an AuthZone object to Recyclebin.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneDelete(params *AuthZoneDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneDeleteNoContent, error) {
@@ -177,9 +180,10 @@ func (a *Client) AuthZoneDelete(params *AuthZoneDeleteParams, authInfo runtime.C
 }
 
 /*
-  AuthZoneList lists auth zone objects
+	AuthZoneList lists auth zone objects
 
-  Use this method to list AuthZone objects.
+	Use this method to list AuthZone objects.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneList(params *AuthZoneListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneListOK, error) {
@@ -219,9 +223,10 @@ func (a *Client) AuthZoneList(params *AuthZoneListParams, authInfo runtime.Clien
 }
 
 /*
-  AuthZoneRead reads the auth zone object
+	AuthZoneRead reads the auth zone object
 
-  Use this method to read an AuthZone object.
+	Use this method to read an AuthZone object.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneRead(params *AuthZoneReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneReadOK, error) {
@@ -264,9 +269,10 @@ func (a *Client) AuthZoneRead(params *AuthZoneReadParams, authInfo runtime.Clien
 }
 
 /*
-  AuthZoneUpdate updates the auth zone object
+	AuthZoneUpdate updates the auth zone object
 
-  Use this method to update an AuthZone object.
+	Use this method to update an AuthZone object.
+
 This object (_dns/auth_zone_) represents an authoritative zone.
 */
 func (a *Client) AuthZoneUpdate(params *AuthZoneUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AuthZoneUpdateCreated, error) {

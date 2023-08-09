@@ -54,10 +54,12 @@ func NewForwardNsgCreateParamsWithHTTPClient(client *http.Client) *ForwardNsgCre
 	}
 }
 
-/* ForwardNsgCreateParams contains all the parameters to send to the API endpoint
-   for the forward nsg create operation.
+/*
+ForwardNsgCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward nsg create operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardNsgCreateParams struct {
 

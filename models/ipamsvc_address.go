@@ -24,7 +24,7 @@ type IpamsvcAddress struct {
 
 	// The address in form "a.b.c.d".
 	// Required: true
-	Address *string `json:"address,omitempty"`
+	Address *string `json:"address"`
 
 	// The description for the address object. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -37,6 +37,16 @@ type IpamsvcAddress struct {
 	// The DHCP information associated with this object.
 	// Read Only: true
 	DhcpInfo *IpamsvcDHCPInfo `json:"dhcp_info,omitempty"`
+
+	// Read only. Represent the value of the same field in the associated _dhcp/fixed_address_ object.
+	// Read Only: true
+	DisableDhcp bool `json:"disable_dhcp,omitempty"`
+
+	// The discovery attributes for this address in JSON format.
+	DiscoveryAttrs interface{} `json:"discovery_attrs,omitempty"`
+
+	// The discovery metadata for this address in JSON format.
+	DiscoveryMetadata interface{} `json:"discovery_metadata,omitempty"`
 
 	// The resource identifier.
 	Host string `json:"host,omitempty"`
@@ -57,7 +67,7 @@ type IpamsvcAddress struct {
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`
 
-	// The type of protocol (_ipv4_ or _ipv6_).
+	// The type of protocol (_ip4_ or _ip6_).
 	// Read Only: true
 	Protocol string `json:"protocol,omitempty"`
 
@@ -66,7 +76,7 @@ type IpamsvcAddress struct {
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space,omitempty"`
+	Space *string `json:"space"`
 
 	// The state of the address (_used_ or _free_).
 	// Read Only: true
@@ -90,7 +100,9 @@ type IpamsvcAddress struct {
 	//  _DHCP_                 |  Address was created by the DHCP component.
 	//  _DHCP_, _FIXEDADDRESS_ |  Address was created by the API call _dhcp/fixed_address_.
 	//  _DHCP_, _LEASED_       |  An active lease for that address was issued by a DHCP server.
+	//  _DHCP_, _DISABLED_     |  Address is disabled.
 	//  _DNS_                  |  Address is used by one or more DNS records.
+	//  _DISCOVERED_           |  Address was discovered by some network discovery probe like Network Insight in NIOS.
 	// Read Only: true
 	Usage []string `json:"usage,omitempty"`
 }
@@ -228,6 +240,10 @@ func (m *IpamsvcAddress) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDisableDhcp(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -270,6 +286,11 @@ func (m *IpamsvcAddress) contextValidateCreatedAt(ctx context.Context, formats s
 func (m *IpamsvcAddress) contextValidateDhcpInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpInfo != nil {
+
+		if swag.IsZero(m.DhcpInfo) { // not required
+			return nil
+		}
+
 		if err := m.DhcpInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_info")
@@ -278,6 +299,15 @@ func (m *IpamsvcAddress) contextValidateDhcpInfo(ctx context.Context, formats st
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcAddress) contextValidateDisableDhcp(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "disable_dhcp", "body", bool(m.DisableDhcp)); err != nil {
+		return err
 	}
 
 	return nil
@@ -297,6 +327,11 @@ func (m *IpamsvcAddress) contextValidateNames(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Names); i++ {
 
 		if m.Names[i] != nil {
+
+			if swag.IsZero(m.Names[i]) { // not required
+				return nil
+			}
+
 			if err := m.Names[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("names" + "." + strconv.Itoa(i))

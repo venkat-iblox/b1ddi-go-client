@@ -43,7 +43,8 @@ func NewRecordListOK() *RecordListOK {
 	return &RecordListOK{}
 }
 
-/* RecordListOK describes a response with status code 200, with default header values.
+/*
+RecordListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

@@ -20,6 +20,9 @@ import (
 // swagger:model configViewInheritance
 type ConfigViewInheritance struct {
 
+	// Field config for _add_edns_option_in_outgoing_query_ field from _View_ object.
+	AddEdnsOptionInOutgoingQuery *Inheritance2InheritedBool `json:"add_edns_option_in_outgoing_query,omitempty"`
+
 	// Optional. Field config for _custom_root_ns_block_ field from _View_ object.
 	CustomRootNsBlock *ConfigInheritedCustomRootNSBlock `json:"custom_root_ns_block,omitempty"`
 
@@ -31,6 +34,12 @@ type ConfigViewInheritance struct {
 
 	// Optional. Field config for _edns_udp_size_ field from [View] object.
 	EdnsUDPSize *Inheritance2InheritedUInt32 `json:"edns_udp_size,omitempty"`
+
+	// Optional. Field config for _filter_aaaa_acl_ field from _View_ object.
+	FilterAaaaACL *ConfigInheritedACLItems `json:"filter_aaaa_acl,omitempty"`
+
+	// Optional. Field config for _filter_aaaa_on_v4_ field from _View_ object.
+	FilterAaaaOnV4 *Inheritance2InheritedString `json:"filter_aaaa_on_v4,omitempty"`
 
 	// Optional. Field config for _forwarders_block_ field from _View_ object.
 	ForwardersBlock *ConfigInheritedForwardersBlock `json:"forwarders_block,omitempty"`
@@ -68,6 +77,12 @@ type ConfigViewInheritance struct {
 	// Optional. Field config for _recursion_enabled_ field from _View_ object.
 	RecursionEnabled *Inheritance2InheritedBool `json:"recursion_enabled,omitempty"`
 
+	// Optional. Field config for _sort_list_ field from _View_ object.
+	SortList *ConfigInheritedSortListItems `json:"sort_list,omitempty"`
+
+	// Field config for _synthesize_address_records_from_https_ field from _View_ object.
+	SynthesizeAddressRecordsFromHTTPS *Inheritance2InheritedBool `json:"synthesize_address_records_from_https,omitempty"`
+
 	// Optional. Field config for _transfer_acl_ field from _View_ object.
 	TransferACL *ConfigInheritedACLItems `json:"transfer_acl,omitempty"`
 
@@ -85,6 +100,10 @@ type ConfigViewInheritance struct {
 func (m *ConfigViewInheritance) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAddEdnsOptionInOutgoingQuery(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCustomRootNsBlock(formats); err != nil {
 		res = append(res, err)
 	}
@@ -98,6 +117,14 @@ func (m *ConfigViewInheritance) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateEdnsUDPSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFilterAaaaACL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFilterAaaaOnV4(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +176,14 @@ func (m *ConfigViewInheritance) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSortList(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSynthesizeAddressRecordsFromHTTPS(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTransferACL(formats); err != nil {
 		res = append(res, err)
 	}
@@ -168,6 +203,25 @@ func (m *ConfigViewInheritance) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *ConfigViewInheritance) validateAddEdnsOptionInOutgoingQuery(formats strfmt.Registry) error {
+	if swag.IsZero(m.AddEdnsOptionInOutgoingQuery) { // not required
+		return nil
+	}
+
+	if m.AddEdnsOptionInOutgoingQuery != nil {
+		if err := m.AddEdnsOptionInOutgoingQuery.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_edns_option_in_outgoing_query")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_edns_option_in_outgoing_query")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -239,6 +293,44 @@ func (m *ConfigViewInheritance) validateEdnsUDPSize(formats strfmt.Registry) err
 				return ve.ValidateName("edns_udp_size")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("edns_udp_size")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigViewInheritance) validateFilterAaaaACL(formats strfmt.Registry) error {
+	if swag.IsZero(m.FilterAaaaACL) { // not required
+		return nil
+	}
+
+	if m.FilterAaaaACL != nil {
+		if err := m.FilterAaaaACL.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filter_aaaa_acl")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filter_aaaa_acl")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigViewInheritance) validateFilterAaaaOnV4(formats strfmt.Registry) error {
+	if swag.IsZero(m.FilterAaaaOnV4) { // not required
+		return nil
+	}
+
+	if m.FilterAaaaOnV4 != nil {
+		if err := m.FilterAaaaOnV4.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filter_aaaa_on_v4")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filter_aaaa_on_v4")
 			}
 			return err
 		}
@@ -475,6 +567,44 @@ func (m *ConfigViewInheritance) validateRecursionEnabled(formats strfmt.Registry
 	return nil
 }
 
+func (m *ConfigViewInheritance) validateSortList(formats strfmt.Registry) error {
+	if swag.IsZero(m.SortList) { // not required
+		return nil
+	}
+
+	if m.SortList != nil {
+		if err := m.SortList.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sort_list")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sort_list")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigViewInheritance) validateSynthesizeAddressRecordsFromHTTPS(formats strfmt.Registry) error {
+	if swag.IsZero(m.SynthesizeAddressRecordsFromHTTPS) { // not required
+		return nil
+	}
+
+	if m.SynthesizeAddressRecordsFromHTTPS != nil {
+		if err := m.SynthesizeAddressRecordsFromHTTPS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synthesize_address_records_from_https")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synthesize_address_records_from_https")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigViewInheritance) validateTransferACL(formats strfmt.Registry) error {
 	if swag.IsZero(m.TransferACL) { // not required
 		return nil
@@ -555,6 +685,10 @@ func (m *ConfigViewInheritance) validateZoneAuthority(formats strfmt.Registry) e
 func (m *ConfigViewInheritance) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAddEdnsOptionInOutgoingQuery(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCustomRootNsBlock(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -568,6 +702,14 @@ func (m *ConfigViewInheritance) ContextValidate(ctx context.Context, formats str
 	}
 
 	if err := m.contextValidateEdnsUDPSize(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFilterAaaaACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFilterAaaaOnV4(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -619,6 +761,14 @@ func (m *ConfigViewInheritance) ContextValidate(ctx context.Context, formats str
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSortList(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSynthesizeAddressRecordsFromHTTPS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTransferACL(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -641,9 +791,35 @@ func (m *ConfigViewInheritance) ContextValidate(ctx context.Context, formats str
 	return nil
 }
 
+func (m *ConfigViewInheritance) contextValidateAddEdnsOptionInOutgoingQuery(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AddEdnsOptionInOutgoingQuery != nil {
+
+		if swag.IsZero(m.AddEdnsOptionInOutgoingQuery) { // not required
+			return nil
+		}
+
+		if err := m.AddEdnsOptionInOutgoingQuery.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("add_edns_option_in_outgoing_query")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("add_edns_option_in_outgoing_query")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigViewInheritance) contextValidateCustomRootNsBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CustomRootNsBlock != nil {
+
+		if swag.IsZero(m.CustomRootNsBlock) { // not required
+			return nil
+		}
+
 		if err := m.CustomRootNsBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("custom_root_ns_block")
@@ -660,6 +836,11 @@ func (m *ConfigViewInheritance) contextValidateCustomRootNsBlock(ctx context.Con
 func (m *ConfigViewInheritance) contextValidateDnssecValidationBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DnssecValidationBlock != nil {
+
+		if swag.IsZero(m.DnssecValidationBlock) { // not required
+			return nil
+		}
+
 		if err := m.DnssecValidationBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dnssec_validation_block")
@@ -676,6 +857,11 @@ func (m *ConfigViewInheritance) contextValidateDnssecValidationBlock(ctx context
 func (m *ConfigViewInheritance) contextValidateEcsBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EcsBlock != nil {
+
+		if swag.IsZero(m.EcsBlock) { // not required
+			return nil
+		}
+
 		if err := m.EcsBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ecs_block")
@@ -692,6 +878,11 @@ func (m *ConfigViewInheritance) contextValidateEcsBlock(ctx context.Context, for
 func (m *ConfigViewInheritance) contextValidateEdnsUDPSize(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EdnsUDPSize != nil {
+
+		if swag.IsZero(m.EdnsUDPSize) { // not required
+			return nil
+		}
+
 		if err := m.EdnsUDPSize.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edns_udp_size")
@@ -705,9 +896,56 @@ func (m *ConfigViewInheritance) contextValidateEdnsUDPSize(ctx context.Context, 
 	return nil
 }
 
+func (m *ConfigViewInheritance) contextValidateFilterAaaaACL(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FilterAaaaACL != nil {
+
+		if swag.IsZero(m.FilterAaaaACL) { // not required
+			return nil
+		}
+
+		if err := m.FilterAaaaACL.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filter_aaaa_acl")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filter_aaaa_acl")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigViewInheritance) contextValidateFilterAaaaOnV4(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FilterAaaaOnV4 != nil {
+
+		if swag.IsZero(m.FilterAaaaOnV4) { // not required
+			return nil
+		}
+
+		if err := m.FilterAaaaOnV4.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filter_aaaa_on_v4")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filter_aaaa_on_v4")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigViewInheritance) contextValidateForwardersBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ForwardersBlock != nil {
+
+		if swag.IsZero(m.ForwardersBlock) { // not required
+			return nil
+		}
+
 		if err := m.ForwardersBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("forwarders_block")
@@ -724,6 +962,11 @@ func (m *ConfigViewInheritance) contextValidateForwardersBlock(ctx context.Conte
 func (m *ConfigViewInheritance) contextValidateGssTsigEnabled(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GssTsigEnabled != nil {
+
+		if swag.IsZero(m.GssTsigEnabled) { // not required
+			return nil
+		}
+
 		if err := m.GssTsigEnabled.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gss_tsig_enabled")
@@ -740,6 +983,11 @@ func (m *ConfigViewInheritance) contextValidateGssTsigEnabled(ctx context.Contex
 func (m *ConfigViewInheritance) contextValidateLameTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LameTTL != nil {
+
+		if swag.IsZero(m.LameTTL) { // not required
+			return nil
+		}
+
 		if err := m.LameTTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lame_ttl")
@@ -756,6 +1004,11 @@ func (m *ConfigViewInheritance) contextValidateLameTTL(ctx context.Context, form
 func (m *ConfigViewInheritance) contextValidateMatchRecursiveOnly(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MatchRecursiveOnly != nil {
+
+		if swag.IsZero(m.MatchRecursiveOnly) { // not required
+			return nil
+		}
+
 		if err := m.MatchRecursiveOnly.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("match_recursive_only")
@@ -772,6 +1025,11 @@ func (m *ConfigViewInheritance) contextValidateMatchRecursiveOnly(ctx context.Co
 func (m *ConfigViewInheritance) contextValidateMaxCacheTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaxCacheTTL != nil {
+
+		if swag.IsZero(m.MaxCacheTTL) { // not required
+			return nil
+		}
+
 		if err := m.MaxCacheTTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("max_cache_ttl")
@@ -788,6 +1046,11 @@ func (m *ConfigViewInheritance) contextValidateMaxCacheTTL(ctx context.Context, 
 func (m *ConfigViewInheritance) contextValidateMaxNegativeTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaxNegativeTTL != nil {
+
+		if swag.IsZero(m.MaxNegativeTTL) { // not required
+			return nil
+		}
+
 		if err := m.MaxNegativeTTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("max_negative_ttl")
@@ -804,6 +1067,11 @@ func (m *ConfigViewInheritance) contextValidateMaxNegativeTTL(ctx context.Contex
 func (m *ConfigViewInheritance) contextValidateMaxUDPSize(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaxUDPSize != nil {
+
+		if swag.IsZero(m.MaxUDPSize) { // not required
+			return nil
+		}
+
 		if err := m.MaxUDPSize.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("max_udp_size")
@@ -820,6 +1088,11 @@ func (m *ConfigViewInheritance) contextValidateMaxUDPSize(ctx context.Context, f
 func (m *ConfigViewInheritance) contextValidateMinimalResponses(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MinimalResponses != nil {
+
+		if swag.IsZero(m.MinimalResponses) { // not required
+			return nil
+		}
+
 		if err := m.MinimalResponses.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("minimal_responses")
@@ -836,6 +1109,11 @@ func (m *ConfigViewInheritance) contextValidateMinimalResponses(ctx context.Cont
 func (m *ConfigViewInheritance) contextValidateNotify(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Notify != nil {
+
+		if swag.IsZero(m.Notify) { // not required
+			return nil
+		}
+
 		if err := m.Notify.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("notify")
@@ -852,6 +1130,11 @@ func (m *ConfigViewInheritance) contextValidateNotify(ctx context.Context, forma
 func (m *ConfigViewInheritance) contextValidateQueryACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.QueryACL != nil {
+
+		if swag.IsZero(m.QueryACL) { // not required
+			return nil
+		}
+
 		if err := m.QueryACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("query_acl")
@@ -868,6 +1151,11 @@ func (m *ConfigViewInheritance) contextValidateQueryACL(ctx context.Context, for
 func (m *ConfigViewInheritance) contextValidateRecursionACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RecursionACL != nil {
+
+		if swag.IsZero(m.RecursionACL) { // not required
+			return nil
+		}
+
 		if err := m.RecursionACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("recursion_acl")
@@ -884,6 +1172,11 @@ func (m *ConfigViewInheritance) contextValidateRecursionACL(ctx context.Context,
 func (m *ConfigViewInheritance) contextValidateRecursionEnabled(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RecursionEnabled != nil {
+
+		if swag.IsZero(m.RecursionEnabled) { // not required
+			return nil
+		}
+
 		if err := m.RecursionEnabled.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("recursion_enabled")
@@ -897,9 +1190,56 @@ func (m *ConfigViewInheritance) contextValidateRecursionEnabled(ctx context.Cont
 	return nil
 }
 
+func (m *ConfigViewInheritance) contextValidateSortList(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SortList != nil {
+
+		if swag.IsZero(m.SortList) { // not required
+			return nil
+		}
+
+		if err := m.SortList.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sort_list")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sort_list")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigViewInheritance) contextValidateSynthesizeAddressRecordsFromHTTPS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SynthesizeAddressRecordsFromHTTPS != nil {
+
+		if swag.IsZero(m.SynthesizeAddressRecordsFromHTTPS) { // not required
+			return nil
+		}
+
+		if err := m.SynthesizeAddressRecordsFromHTTPS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("synthesize_address_records_from_https")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("synthesize_address_records_from_https")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigViewInheritance) contextValidateTransferACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TransferACL != nil {
+
+		if swag.IsZero(m.TransferACL) { // not required
+			return nil
+		}
+
 		if err := m.TransferACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("transfer_acl")
@@ -916,6 +1256,11 @@ func (m *ConfigViewInheritance) contextValidateTransferACL(ctx context.Context, 
 func (m *ConfigViewInheritance) contextValidateUpdateACL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdateACL != nil {
+
+		if swag.IsZero(m.UpdateACL) { // not required
+			return nil
+		}
+
 		if err := m.UpdateACL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("update_acl")
@@ -932,6 +1277,11 @@ func (m *ConfigViewInheritance) contextValidateUpdateACL(ctx context.Context, fo
 func (m *ConfigViewInheritance) contextValidateUseForwardersForSubzones(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UseForwardersForSubzones != nil {
+
+		if swag.IsZero(m.UseForwardersForSubzones) { // not required
+			return nil
+		}
+
 		if err := m.UseForwardersForSubzones.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("use_forwarders_for_subzones")
@@ -948,6 +1298,11 @@ func (m *ConfigViewInheritance) contextValidateUseForwardersForSubzones(ctx cont
 func (m *ConfigViewInheritance) contextValidateZoneAuthority(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ZoneAuthority != nil {
+
+		if swag.IsZero(m.ZoneAuthority) { // not required
+			return nil
+		}
+
 		if err := m.ZoneAuthority.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("zone_authority")

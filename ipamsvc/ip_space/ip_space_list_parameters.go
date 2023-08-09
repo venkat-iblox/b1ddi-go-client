@@ -53,10 +53,12 @@ func NewIPSpaceListParamsWithHTTPClient(client *http.Client) *IPSpaceListParams 
 	}
 }
 
-/* IPSpaceListParams contains all the parameters to send to the API endpoint
-   for the ip space list operation.
+/*
+IPSpaceListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip space list operation.
+
+	Typically these are written to a http.Request.
 */
 type IPSpaceListParams struct {
 

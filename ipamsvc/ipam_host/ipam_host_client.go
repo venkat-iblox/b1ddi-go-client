@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  IpamHostCreate creates the IP a m host
+	IpamHostCreate creates the IP a m host
 
-  Use this method to create an __IpamHost__ object.
+	Use this method to create an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.C
 }
 
 /*
-  IpamHostDelete moves the IP a m host to the recycle bin
+	IpamHostDelete moves the IP a m host to the recycle bin
 
-  Use this method to move an __IpamHost__ object to the recycle bin.
+	Use this method to move an __IpamHost__ object to the recycle bin.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.C
 }
 
 /*
-  IpamHostList retrieves the IP a m hosts
+	IpamHostList retrieves the IP a m hosts
 
-  Use this method to retrieve __IpamHost__ objects.
+	Use this method to retrieve __IpamHost__ objects.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostList(params *IpamHostListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) IpamHostList(params *IpamHostListParams, authInfo runtime.Clien
 }
 
 /*
-  IpamHostRead retrieves the IP a m host
+	IpamHostRead retrieves the IP a m host
 
-  Use this method to retrieve an __IpamHost__ object.
+	Use this method to retrieve an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostRead(params *IpamHostReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) IpamHostRead(params *IpamHostReadParams, authInfo runtime.Clien
 }
 
 /*
-  IpamHostUpdate updates the IP a m host
+	IpamHostUpdate updates the IP a m host
 
-  Use this method to update an __IpamHost__ object.
+	Use this method to update an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostUpdateCreated, error) {

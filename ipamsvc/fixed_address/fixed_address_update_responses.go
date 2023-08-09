@@ -43,7 +43,8 @@ func NewFixedAddressUpdateCreated() *FixedAddressUpdateCreated {
 	return &FixedAddressUpdateCreated{}
 }
 
-/* FixedAddressUpdateCreated describes a response with status code 201, with default header values.
+/*
+FixedAddressUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

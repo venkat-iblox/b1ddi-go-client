@@ -54,10 +54,12 @@ func NewRecordSOASerialIncrementParamsWithHTTPClient(client *http.Client) *Recor
 	}
 }
 
-/* RecordSOASerialIncrementParams contains all the parameters to send to the API endpoint
-   for the record s o a serial increment operation.
+/*
+RecordSOASerialIncrementParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the record s o a serial increment operation.
+
+	Typically these are written to a http.Request.
 */
 type RecordSOASerialIncrementParams struct {
 

@@ -43,7 +43,8 @@ func NewSubnetListOK() *SubnetListOK {
 	return &SubnetListOK{}
 }
 
-/* SubnetListOK describes a response with status code 200, with default header values.
+/*
+SubnetListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

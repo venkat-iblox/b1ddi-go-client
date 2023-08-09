@@ -43,24 +43,25 @@ func NewViewBulkCopyCreated() *ViewBulkCopyCreated {
 	return &ViewBulkCopyCreated{}
 }
 
-/* ViewBulkCopyCreated describes a response with status code 201, with default header values.
+/*
+ViewBulkCopyCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */
 type ViewBulkCopyCreated struct {
-	Payload *models.ConfigBulkCopyViewResponse
+	Payload *models.ConfigBulkCopyResponse
 }
 
 func (o *ViewBulkCopyCreated) Error() string {
 	return fmt.Sprintf("[POST /dns/view/bulk_copy][%d] viewBulkCopyCreated  %+v", 201, o.Payload)
 }
-func (o *ViewBulkCopyCreated) GetPayload() *models.ConfigBulkCopyViewResponse {
+func (o *ViewBulkCopyCreated) GetPayload() *models.ConfigBulkCopyResponse {
 	return o.Payload
 }
 
 func (o *ViewBulkCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ConfigBulkCopyViewResponse)
+	o.Payload = new(models.ConfigBulkCopyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

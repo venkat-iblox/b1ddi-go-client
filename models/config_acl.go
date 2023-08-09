@@ -36,7 +36,7 @@ type ConfigACL struct {
 
 	// ACL object name.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`
@@ -127,6 +127,11 @@ func (m *ConfigACL) contextValidateList(ctx context.Context, formats strfmt.Regi
 	for i := 0; i < len(m.List); i++ {
 
 		if m.List[i] != nil {
+
+			if swag.IsZero(m.List[i]) { // not required
+				return nil
+			}
+
 			if err := m.List[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("list" + "." + strconv.Itoa(i))

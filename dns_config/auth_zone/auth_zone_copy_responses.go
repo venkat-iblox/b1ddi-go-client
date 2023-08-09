@@ -43,7 +43,8 @@ func NewAuthZoneCopyCreated() *AuthZoneCopyCreated {
 	return &AuthZoneCopyCreated{}
 }
 
-/* AuthZoneCopyCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneCopyCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

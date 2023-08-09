@@ -54,10 +54,12 @@ func NewOptionGroupUpdateParamsWithHTTPClient(client *http.Client) *OptionGroupU
 	}
 }
 
-/* OptionGroupUpdateParams contains all the parameters to send to the API endpoint
-   for the option group update operation.
+/*
+OptionGroupUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option group update operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionGroupUpdateParams struct {
 

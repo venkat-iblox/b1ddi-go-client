@@ -43,7 +43,8 @@ func NewSubnetCreateCreated() *SubnetCreateCreated {
 	return &SubnetCreateCreated{}
 }
 
-/* SubnetCreateCreated describes a response with status code 201, with default header values.
+/*
+SubnetCreateCreated describes a response with status code 201, with default header values.
 
 POST operation response
 */

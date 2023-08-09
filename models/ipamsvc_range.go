@@ -36,12 +36,20 @@ type IpamsvcRange struct {
 	// The list of DHCP options. May be either a specific option or a group of options.
 	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
+	// Optional. _true_ to disable object. A disabled object is effectively non-existent when generating configuration.
+	//
+	// Defaults to _false_.
+	DisableDhcp bool `json:"disable_dhcp,omitempty"`
+
 	// The end IP address of the range.
 	// Required: true
-	End *string `json:"end,omitempty"`
+	End *string `json:"end"`
 
 	// The list of all exclusion ranges in the scope of the range.
 	ExclusionRanges []*IpamsvcExclusionRange `json:"exclusion_ranges,omitempty"`
+
+	// The list of all allow/deny filters of the range.
+	Filters []*IpamsvcAccessFilter `json:"filters"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -63,17 +71,17 @@ type IpamsvcRange struct {
 	// The resource identifier.
 	Parent string `json:"parent,omitempty"`
 
-	// The type of protocol (_ipv4_ or _ipv6_).
+	// The type of protocol (_ip4_ or _ip6_).
 	// Read Only: true
 	Protocol string `json:"protocol,omitempty"`
 
 	// The resource identifier.
 	// Required: true
-	Space *string `json:"space,omitempty"`
+	Space *string `json:"space"`
 
 	// The start IP address of the range.
 	// Required: true
-	Start *string `json:"start,omitempty"`
+	Start *string `json:"start"`
 
 	// The tags for the range in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -86,9 +94,13 @@ type IpamsvcRange struct {
 	// Format: date-time
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// The utilization statistics for the range.
+	// The utilization statistics of IPV4 addresses for the range.
 	// Read Only: true
 	Utilization *IpamsvcUtilization `json:"utilization,omitempty"`
+
+	// The utilization of IPV6 addresses in the range.
+	// Read Only: true
+	UtilizationV6 *IpamsvcUtilizationV6 `json:"utilization_v6,omitempty"`
 }
 
 // Validate validates this ipamsvc range
@@ -108,6 +120,10 @@ func (m *IpamsvcRange) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateExclusionRanges(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFilters(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -136,6 +152,10 @@ func (m *IpamsvcRange) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUtilization(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUtilizationV6(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -208,6 +228,32 @@ func (m *IpamsvcRange) validateExclusionRanges(formats strfmt.Registry) error {
 					return ve.ValidateName("exclusion_ranges" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("exclusion_ranges" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcRange) validateFilters(formats strfmt.Registry) error {
+	if swag.IsZero(m.Filters) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Filters); i++ {
+		if swag.IsZero(m.Filters[i]) { // not required
+			continue
+		}
+
+		if m.Filters[i] != nil {
+			if err := m.Filters[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filters" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -331,6 +377,25 @@ func (m *IpamsvcRange) validateUtilization(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IpamsvcRange) validateUtilizationV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.UtilizationV6) { // not required
+		return nil
+	}
+
+	if m.UtilizationV6 != nil {
+		if err := m.UtilizationV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ipamsvc range based on the context it is used
 func (m *IpamsvcRange) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -344,6 +409,10 @@ func (m *IpamsvcRange) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateExclusionRanges(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFilters(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -375,6 +444,10 @@ func (m *IpamsvcRange) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateUtilizationV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -395,6 +468,11 @@ func (m *IpamsvcRange) contextValidateDhcpOptions(ctx context.Context, formats s
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
@@ -415,11 +493,41 @@ func (m *IpamsvcRange) contextValidateExclusionRanges(ctx context.Context, forma
 	for i := 0; i < len(m.ExclusionRanges); i++ {
 
 		if m.ExclusionRanges[i] != nil {
+
+			if swag.IsZero(m.ExclusionRanges[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExclusionRanges[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("exclusion_ranges" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("exclusion_ranges" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcRange) contextValidateFilters(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Filters); i++ {
+
+		if m.Filters[i] != nil {
+
+			if swag.IsZero(m.Filters[i]) { // not required
+				return nil
+			}
+
+			if err := m.Filters[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filters" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -448,6 +556,11 @@ func (m *IpamsvcRange) contextValidateInheritanceAssignedHosts(ctx context.Conte
 	for i := 0; i < len(m.InheritanceAssignedHosts); i++ {
 
 		if m.InheritanceAssignedHosts[i] != nil {
+
+			if swag.IsZero(m.InheritanceAssignedHosts[i]) { // not required
+				return nil
+			}
+
 			if err := m.InheritanceAssignedHosts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("inheritance_assigned_hosts" + "." + strconv.Itoa(i))
@@ -466,6 +579,11 @@ func (m *IpamsvcRange) contextValidateInheritanceAssignedHosts(ctx context.Conte
 func (m *IpamsvcRange) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -491,6 +609,11 @@ func (m *IpamsvcRange) contextValidateProtocol(ctx context.Context, formats strf
 func (m *IpamsvcRange) contextValidateThreshold(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Threshold != nil {
+
+		if swag.IsZero(m.Threshold) { // not required
+			return nil
+		}
+
 		if err := m.Threshold.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("threshold")
@@ -516,11 +639,37 @@ func (m *IpamsvcRange) contextValidateUpdatedAt(ctx context.Context, formats str
 func (m *IpamsvcRange) contextValidateUtilization(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Utilization != nil {
+
+		if swag.IsZero(m.Utilization) { // not required
+			return nil
+		}
+
 		if err := m.Utilization.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("utilization")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("utilization")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcRange) contextValidateUtilizationV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.UtilizationV6 != nil {
+
+		if swag.IsZero(m.UtilizationV6) { // not required
+			return nil
+		}
+
+		if err := m.UtilizationV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
 			}
 			return err
 		}

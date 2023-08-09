@@ -35,10 +35,9 @@ type IpamsvcOptionSpace struct {
 
 	// The name of the option space. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
-	// The type of protocol for the option space (_ipv4_ or _ipv6_).
-	// Read Only: true
+	// The type of protocol for the option space (_ip4_ or _ip6_).
 	Protocol string `json:"protocol,omitempty"`
 
 	// The tags for the option space in JSON format.
@@ -117,10 +116,6 @@ func (m *IpamsvcOptionSpace) ContextValidate(ctx context.Context, formats strfmt
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateProtocol(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateUpdatedAt(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -143,15 +138,6 @@ func (m *IpamsvcOptionSpace) contextValidateCreatedAt(ctx context.Context, forma
 func (m *IpamsvcOptionSpace) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "id", "body", string(m.ID)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *IpamsvcOptionSpace) contextValidateProtocol(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "protocol", "body", string(m.Protocol)); err != nil {
 		return err
 	}
 

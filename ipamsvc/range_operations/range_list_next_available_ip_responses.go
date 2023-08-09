@@ -43,7 +43,8 @@ func NewRangeListNextAvailableIPOK() *RangeListNextAvailableIPOK {
 	return &RangeListNextAvailableIPOK{}
 }
 
-/* RangeListNextAvailableIPOK describes a response with status code 200, with default header values.
+/*
+RangeListNextAvailableIPOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

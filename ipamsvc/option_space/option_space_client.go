@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  OptionSpaceCreate creates the d h c p option space
+	OptionSpaceCreate creates the d h c p option space
 
-  Use this method to create an __OptionSpace__ object.
+	Use this method to create an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceCreateCreated, error) {
@@ -88,9 +89,10 @@ func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo run
 }
 
 /*
-  OptionSpaceDelete moves the d h c p option space to the recycle bin
+	OptionSpaceDelete moves the d h c p option space to the recycle bin
 
-  Use this method to move an __OptionSpace__ object to the recycle bin.
+	Use this method to move an __OptionSpace__ object to the recycle bin.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceDeleteNoContent, error) {
@@ -133,9 +135,10 @@ func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo run
 }
 
 /*
-  OptionSpaceList retrieves d h c p option spaces
+	OptionSpaceList retrieves d h c p option spaces
 
-  Use this method to retrieve __OptionSpace__ objects.
+	Use this method to retrieve __OptionSpace__ objects.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceList(params *OptionSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionSpaceList(params *OptionSpaceListParams, authInfo runtime
 }
 
 /*
-  OptionSpaceRead retrieves the d h c p option space
+	OptionSpaceRead retrieves the d h c p option space
 
-  Use this method to retrieve an __OptionSpace__ object.
+	Use this method to retrieve an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceRead(params *OptionSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceReadOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) OptionSpaceRead(params *OptionSpaceReadParams, authInfo runtime
 }
 
 /*
-  OptionSpaceUpdate updates the d h c p option space
+	OptionSpaceUpdate updates the d h c p option space
 
-  Use this method to update an __OptionSpace__ object.
+	Use this method to update an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceUpdateCreated, error) {

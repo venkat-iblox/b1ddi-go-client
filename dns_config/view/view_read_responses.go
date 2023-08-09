@@ -43,7 +43,8 @@ func NewViewReadOK() *ViewReadOK {
 	return &ViewReadOK{}
 }
 
-/* ViewReadOK describes a response with status code 200, with default header values.
+/*
+ViewReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

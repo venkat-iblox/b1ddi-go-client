@@ -43,7 +43,8 @@ func NewAuthNsgUpdateCreated() *AuthNsgUpdateCreated {
 	return &AuthNsgUpdateCreated{}
 }
 
-/* AuthNsgUpdateCreated describes a response with status code 201, with default header values.
+/*
+AuthNsgUpdateCreated describes a response with status code 201, with default header values.
 
 PATCH operation response
 */

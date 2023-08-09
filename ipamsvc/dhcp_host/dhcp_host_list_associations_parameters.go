@@ -52,10 +52,12 @@ func NewDhcpHostListAssociationsParamsWithHTTPClient(client *http.Client) *DhcpH
 	}
 }
 
-/* DhcpHostListAssociationsParams contains all the parameters to send to the API endpoint
-   for the dhcp host list associations operation.
+/*
+DhcpHostListAssociationsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dhcp host list associations operation.
+
+	Typically these are written to a http.Request.
 */
 type DhcpHostListAssociationsParams struct {
 

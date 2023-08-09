@@ -52,10 +52,12 @@ func NewHardwareFilterReadParamsWithHTTPClient(client *http.Client) *HardwareFil
 	}
 }
 
-/* HardwareFilterReadParams contains all the parameters to send to the API endpoint
-   for the hardware filter read operation.
+/*
+HardwareFilterReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the hardware filter read operation.
+
+	Typically these are written to a http.Request.
 */
 type HardwareFilterReadParams struct {
 
