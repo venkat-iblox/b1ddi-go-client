@@ -31,34 +31,35 @@ func (o *AddressBlockCreateNextAvailableSubnetReader) ReadResponse(response runt
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockCreateNextAvailableSubnetCreated()
+	result := NewAddressBlockCreateNextAvailableSubnetOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockCreateNextAvailableSubnetCreated creates a AddressBlockCreateNextAvailableSubnetCreated with default headers values
-func NewAddressBlockCreateNextAvailableSubnetCreated() *AddressBlockCreateNextAvailableSubnetCreated {
-	return &AddressBlockCreateNextAvailableSubnetCreated{}
+// NewAddressBlockCreateNextAvailableSubnetOK creates a AddressBlockCreateNextAvailableSubnetOK with default headers values
+func NewAddressBlockCreateNextAvailableSubnetOK() *AddressBlockCreateNextAvailableSubnetOK {
+	return &AddressBlockCreateNextAvailableSubnetOK{}
 }
 
-/* AddressBlockCreateNextAvailableSubnetCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateNextAvailableSubnetOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressBlockCreateNextAvailableSubnetCreated struct {
+type AddressBlockCreateNextAvailableSubnetOK struct {
 	Payload *models.IpamsvcCreateNextAvailableSubnetResponse
 }
 
-func (o *AddressBlockCreateNextAvailableSubnetCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailablesubnet][%d] addressBlockCreateNextAvailableSubnetCreated  %+v", 201, o.Payload)
+func (o *AddressBlockCreateNextAvailableSubnetOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailablesubnet][%d] addressBlockCreateNextAvailableSubnetOK  %+v", 200, o.Payload)
 }
-func (o *AddressBlockCreateNextAvailableSubnetCreated) GetPayload() *models.IpamsvcCreateNextAvailableSubnetResponse {
+func (o *AddressBlockCreateNextAvailableSubnetOK) GetPayload() *models.IpamsvcCreateNextAvailableSubnetResponse {
 	return o.Payload
 }
 
-func (o *AddressBlockCreateNextAvailableSubnetCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockCreateNextAvailableSubnetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateNextAvailableSubnetResponse)
 
