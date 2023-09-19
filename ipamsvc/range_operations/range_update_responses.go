@@ -31,34 +31,35 @@ func (o *RangeUpdateReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewRangeUpdateCreated()
+	result := NewRangeUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewRangeUpdateCreated creates a RangeUpdateCreated with default headers values
-func NewRangeUpdateCreated() *RangeUpdateCreated {
-	return &RangeUpdateCreated{}
+// NewRangeUpdateOK creates a RangeUpdateOK with default headers values
+func NewRangeUpdateOK() *RangeUpdateOK {
+	return &RangeUpdateOK{}
 }
 
-/* RangeUpdateCreated describes a response with status code 201, with default header values.
+/*
+RangeUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type RangeUpdateCreated struct {
+type RangeUpdateOK struct {
 	Payload *models.IpamsvcUpdateRangeResponse
 }
 
-func (o *RangeUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/range/{id}][%d] rangeUpdateCreated  %+v", 201, o.Payload)
+func (o *RangeUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /ipam/range/{id}][%d] rangeUpdateOK  %+v", 200, o.Payload)
 }
-func (o *RangeUpdateCreated) GetPayload() *models.IpamsvcUpdateRangeResponse {
+func (o *RangeUpdateOK) GetPayload() *models.IpamsvcUpdateRangeResponse {
 	return o.Payload
 }
 
-func (o *RangeUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *RangeUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateRangeResponse)
 

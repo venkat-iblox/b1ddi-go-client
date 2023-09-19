@@ -31,34 +31,35 @@ func (o *ForwardNsgUpdateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardNsgUpdateCreated()
+	result := NewForwardNsgUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardNsgUpdateCreated creates a ForwardNsgUpdateCreated with default headers values
-func NewForwardNsgUpdateCreated() *ForwardNsgUpdateCreated {
-	return &ForwardNsgUpdateCreated{}
+// NewForwardNsgUpdateOK creates a ForwardNsgUpdateOK with default headers values
+func NewForwardNsgUpdateOK() *ForwardNsgUpdateOK {
+	return &ForwardNsgUpdateOK{}
 }
 
-/* ForwardNsgUpdateCreated describes a response with status code 201, with default header values.
+/*
+ForwardNsgUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type ForwardNsgUpdateCreated struct {
+type ForwardNsgUpdateOK struct {
 	Payload *models.ConfigUpdateForwardNSGResponse
 }
 
-func (o *ForwardNsgUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/forward_nsg/{id}][%d] forwardNsgUpdateCreated  %+v", 201, o.Payload)
+func (o *ForwardNsgUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/forward_nsg/{id}][%d] forwardNsgUpdateOK  %+v", 200, o.Payload)
 }
-func (o *ForwardNsgUpdateCreated) GetPayload() *models.ConfigUpdateForwardNSGResponse {
+func (o *ForwardNsgUpdateOK) GetPayload() *models.ConfigUpdateForwardNSGResponse {
 	return o.Payload
 }
 
-func (o *ForwardNsgUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardNsgUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateForwardNSGResponse)
 

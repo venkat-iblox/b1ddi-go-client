@@ -31,34 +31,35 @@ func (o *IPSpaceUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIPSpaceUpdateCreated()
+	result := NewIPSpaceUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIPSpaceUpdateCreated creates a IPSpaceUpdateCreated with default headers values
-func NewIPSpaceUpdateCreated() *IPSpaceUpdateCreated {
-	return &IPSpaceUpdateCreated{}
+// NewIPSpaceUpdateOK creates a IPSpaceUpdateOK with default headers values
+func NewIPSpaceUpdateOK() *IPSpaceUpdateOK {
+	return &IPSpaceUpdateOK{}
 }
 
-/* IPSpaceUpdateCreated describes a response with status code 201, with default header values.
+/*
+IPSpaceUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type IPSpaceUpdateCreated struct {
+type IPSpaceUpdateOK struct {
 	Payload *models.IpamsvcUpdateIPSpaceResponse
 }
 
-func (o *IPSpaceUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/ip_space/{id}][%d] ipSpaceUpdateCreated  %+v", 201, o.Payload)
+func (o *IPSpaceUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /ipam/ip_space/{id}][%d] ipSpaceUpdateOK  %+v", 200, o.Payload)
 }
-func (o *IPSpaceUpdateCreated) GetPayload() *models.IpamsvcUpdateIPSpaceResponse {
+func (o *IPSpaceUpdateOK) GetPayload() *models.IpamsvcUpdateIPSpaceResponse {
 	return o.Payload
 }
 
-func (o *IPSpaceUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IPSpaceUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateIPSpaceResponse)
 

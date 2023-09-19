@@ -27,11 +27,11 @@ type ConfigECSZone struct {
 	// * _allow_,
 	// * _deny_.
 	// Required: true
-	Access *string `json:"access,omitempty"`
+	Access *string `json:"access"`
 
 	// Zone FQDN.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// Zone FQDN in punycode.
 	// Read Only: true

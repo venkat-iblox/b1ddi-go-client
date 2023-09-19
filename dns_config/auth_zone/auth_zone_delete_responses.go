@@ -29,30 +29,31 @@ func (o *AuthZoneDeleteReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthZoneDeleteNoContent()
+	result := NewAuthZoneDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthZoneDeleteNoContent creates a AuthZoneDeleteNoContent with default headers values
-func NewAuthZoneDeleteNoContent() *AuthZoneDeleteNoContent {
-	return &AuthZoneDeleteNoContent{}
+// NewAuthZoneDeleteOK creates a AuthZoneDeleteOK with default headers values
+func NewAuthZoneDeleteOK() *AuthZoneDeleteOK {
+	return &AuthZoneDeleteOK{}
 }
 
-/* AuthZoneDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AuthZoneDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type AuthZoneDeleteNoContent struct {
+type AuthZoneDeleteOK struct {
 }
 
-func (o *AuthZoneDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/auth_zone/{id}][%d] authZoneDeleteNoContent ", 204)
+func (o *AuthZoneDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/auth_zone/{id}][%d] authZoneDeleteOK ", 200)
 }
 
-func (o *AuthZoneDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthZoneDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

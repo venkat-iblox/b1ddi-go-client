@@ -53,10 +53,12 @@ func NewFixedAddressListParamsWithHTTPClient(client *http.Client) *FixedAddressL
 	}
 }
 
-/* FixedAddressListParams contains all the parameters to send to the API endpoint
-   for the fixed address list operation.
+/*
+FixedAddressListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fixed address list operation.
+
+	Typically these are written to a http.Request.
 */
 type FixedAddressListParams struct {
 

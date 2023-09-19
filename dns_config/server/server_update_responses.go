@@ -31,34 +31,35 @@ func (o *ServerUpdateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewServerUpdateCreated()
+	result := NewServerUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewServerUpdateCreated creates a ServerUpdateCreated with default headers values
-func NewServerUpdateCreated() *ServerUpdateCreated {
-	return &ServerUpdateCreated{}
+// NewServerUpdateOK creates a ServerUpdateOK with default headers values
+func NewServerUpdateOK() *ServerUpdateOK {
+	return &ServerUpdateOK{}
 }
 
-/* ServerUpdateCreated describes a response with status code 201, with default header values.
+/*
+ServerUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type ServerUpdateCreated struct {
+type ServerUpdateOK struct {
 	Payload *models.ConfigUpdateServerResponse
 }
 
-func (o *ServerUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/server/{id}][%d] serverUpdateCreated  %+v", 201, o.Payload)
+func (o *ServerUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/server/{id}][%d] serverUpdateOK  %+v", 200, o.Payload)
 }
-func (o *ServerUpdateCreated) GetPayload() *models.ConfigUpdateServerResponse {
+func (o *ServerUpdateOK) GetPayload() *models.ConfigUpdateServerResponse {
 	return o.Payload
 }
 
-func (o *ServerUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ServerUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateServerResponse)
 

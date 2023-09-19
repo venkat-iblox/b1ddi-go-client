@@ -53,10 +53,12 @@ func NewViewListParamsWithHTTPClient(client *http.Client) *ViewListParams {
 	}
 }
 
-/* ViewListParams contains all the parameters to send to the API endpoint
-   for the view list operation.
+/*
+ViewListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the view list operation.
+
+	Typically these are written to a http.Request.
 */
 type ViewListParams struct {
 

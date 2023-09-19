@@ -31,34 +31,35 @@ func (o *OptionGroupCreateReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionGroupCreateCreated()
+	result := NewOptionGroupCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionGroupCreateCreated creates a OptionGroupCreateCreated with default headers values
-func NewOptionGroupCreateCreated() *OptionGroupCreateCreated {
-	return &OptionGroupCreateCreated{}
+// NewOptionGroupCreateOK creates a OptionGroupCreateOK with default headers values
+func NewOptionGroupCreateOK() *OptionGroupCreateOK {
+	return &OptionGroupCreateOK{}
 }
 
-/* OptionGroupCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionGroupCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type OptionGroupCreateCreated struct {
+type OptionGroupCreateOK struct {
 	Payload *models.IpamsvcCreateOptionGroupResponse
 }
 
-func (o *OptionGroupCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/option_group][%d] optionGroupCreateCreated  %+v", 201, o.Payload)
+func (o *OptionGroupCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/option_group][%d] optionGroupCreateOK  %+v", 200, o.Payload)
 }
-func (o *OptionGroupCreateCreated) GetPayload() *models.IpamsvcCreateOptionGroupResponse {
+func (o *OptionGroupCreateOK) GetPayload() *models.IpamsvcCreateOptionGroupResponse {
 	return o.Payload
 }
 
-func (o *OptionGroupCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionGroupCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateOptionGroupResponse)
 

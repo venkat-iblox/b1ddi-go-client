@@ -24,7 +24,7 @@ type IpamsvcFixedAddress struct {
 
 	// The reserved address.
 	// Required: true
-	Address *string `json:"address,omitempty"`
+	Address *string `json:"address"`
 
 	// The description for the fixed address. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
@@ -36,6 +36,11 @@ type IpamsvcFixedAddress struct {
 
 	// The list of DHCP options. May be either a specific option or a group of options.
 	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
+
+	// Optional. _true_ to disable object. The fixed address is converted to an exclusion when generating configuration.
+	//
+	// Defaults to _false_.
+	DisableDhcp bool `json:"disable_dhcp,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
@@ -67,15 +72,16 @@ type IpamsvcFixedAddress struct {
 	IPSpace string `json:"ip_space,omitempty"`
 
 	// Indicates how to match the client:
-	//  * _mac_: match the client MAC address,
-	//  * _client_text_ or _client_hex_: match the client identifier,
-	//  * _relay_text_ or _relay_hex_: match the circuit ID or remote ID in the DHCP relay agent option (82).
+	//  * _mac_: match the client MAC address for both IPv4 and IPv6,
+	//  * _client_text_ or _client_hex_: match the client identifier for IPv4 only,
+	//  * _relay_text_ or _relay_hex_: match the circuit ID or remote ID in the DHCP relay agent option (82) for IPv4 only,
+	//  * _duid_: match the DHCP unique identifier, currently match only for IPv6 protocol.
 	// Required: true
-	MatchType *string `json:"match_type,omitempty"`
+	MatchType *string `json:"match_type"`
 
 	// The value to match.
 	// Required: true
-	MatchValue *string `json:"match_value,omitempty"`
+	MatchValue *string `json:"match_value"`
 
 	// The name of the fixed address. May contain 1 to 256 characters. Can include UTF-8.
 	Name string `json:"name,omitempty"`
@@ -304,6 +310,11 @@ func (m *IpamsvcFixedAddress) contextValidateDhcpOptions(ctx context.Context, fo
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
@@ -337,6 +348,11 @@ func (m *IpamsvcFixedAddress) contextValidateInheritanceAssignedHosts(ctx contex
 	for i := 0; i < len(m.InheritanceAssignedHosts); i++ {
 
 		if m.InheritanceAssignedHosts[i] != nil {
+
+			if swag.IsZero(m.InheritanceAssignedHosts[i]) { // not required
+				return nil
+			}
+
 			if err := m.InheritanceAssignedHosts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("inheritance_assigned_hosts" + "." + strconv.Itoa(i))
@@ -355,6 +371,11 @@ func (m *IpamsvcFixedAddress) contextValidateInheritanceAssignedHosts(ctx contex
 func (m *IpamsvcFixedAddress) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")

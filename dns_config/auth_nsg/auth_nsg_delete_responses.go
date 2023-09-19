@@ -29,30 +29,31 @@ func (o *AuthNsgDeleteReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthNsgDeleteNoContent()
+	result := NewAuthNsgDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthNsgDeleteNoContent creates a AuthNsgDeleteNoContent with default headers values
-func NewAuthNsgDeleteNoContent() *AuthNsgDeleteNoContent {
-	return &AuthNsgDeleteNoContent{}
+// NewAuthNsgDeleteOK creates a AuthNsgDeleteOK with default headers values
+func NewAuthNsgDeleteOK() *AuthNsgDeleteOK {
+	return &AuthNsgDeleteOK{}
 }
 
-/* AuthNsgDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AuthNsgDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type AuthNsgDeleteNoContent struct {
+type AuthNsgDeleteOK struct {
 }
 
-func (o *AuthNsgDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/auth_nsg/{id}][%d] authNsgDeleteNoContent ", 204)
+func (o *AuthNsgDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/auth_nsg/{id}][%d] authNsgDeleteOK ", 200)
 }
 
-func (o *AuthNsgDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthNsgDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

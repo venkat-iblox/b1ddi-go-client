@@ -31,34 +31,35 @@ func (o *AsmCreateReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAsmCreateCreated()
+	result := NewAsmCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAsmCreateCreated creates a AsmCreateCreated with default headers values
-func NewAsmCreateCreated() *AsmCreateCreated {
-	return &AsmCreateCreated{}
+// NewAsmCreateOK creates a AsmCreateOK with default headers values
+func NewAsmCreateOK() *AsmCreateOK {
+	return &AsmCreateOK{}
 }
 
-/* AsmCreateCreated describes a response with status code 201, with default header values.
+/*
+AsmCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AsmCreateCreated struct {
+type AsmCreateOK struct {
 	Payload *models.IpamsvcCreateASMResponse
 }
 
-func (o *AsmCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/asm][%d] asmCreateCreated  %+v", 201, o.Payload)
+func (o *AsmCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/asm][%d] asmCreateOK  %+v", 200, o.Payload)
 }
-func (o *AsmCreateCreated) GetPayload() *models.IpamsvcCreateASMResponse {
+func (o *AsmCreateOK) GetPayload() *models.IpamsvcCreateASMResponse {
 	return o.Payload
 }
 
-func (o *AsmCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AsmCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateASMResponse)
 

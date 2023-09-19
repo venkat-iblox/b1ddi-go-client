@@ -8,26 +8,87 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
-// IpamsvcCopyIPSpaceResponse ipamsvc copy IP space response
+// IpamsvcCopyIPSpaceResponse CopyIPSpaceResponse
+//
+// The response format to copy the __IPSpace__ object.
 //
 // swagger:model ipamsvcCopyIPSpaceResponse
 type IpamsvcCopyIPSpaceResponse struct {
 
-	// The resource identifier.
-	OperationID string `json:"operation_id,omitempty"`
+	// result
+	Result *IpamsvcCopyResponse `json:"result,omitempty"`
 }
 
 // Validate validates this ipamsvc copy IP space response
 func (m *IpamsvcCopyIPSpaceResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResult(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this ipamsvc copy IP space response based on context it is used
+func (m *IpamsvcCopyIPSpaceResponse) validateResult(formats strfmt.Registry) error {
+	if swag.IsZero(m.Result) { // not required
+		return nil
+	}
+
+	if m.Result != nil {
+		if err := m.Result.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("result")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("result")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this ipamsvc copy IP space response based on the context it is used
 func (m *IpamsvcCopyIPSpaceResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateResult(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *IpamsvcCopyIPSpaceResponse) contextValidateResult(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Result != nil {
+
+		if swag.IsZero(m.Result) { // not required
+			return nil
+		}
+
+		if err := m.Result.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("result")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("result")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

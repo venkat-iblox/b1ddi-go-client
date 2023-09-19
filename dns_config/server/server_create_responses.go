@@ -31,34 +31,35 @@ func (o *ServerCreateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewServerCreateCreated()
+	result := NewServerCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewServerCreateCreated creates a ServerCreateCreated with default headers values
-func NewServerCreateCreated() *ServerCreateCreated {
-	return &ServerCreateCreated{}
+// NewServerCreateOK creates a ServerCreateOK with default headers values
+func NewServerCreateOK() *ServerCreateOK {
+	return &ServerCreateOK{}
 }
 
-/* ServerCreateCreated describes a response with status code 201, with default header values.
+/*
+ServerCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ServerCreateCreated struct {
+type ServerCreateOK struct {
 	Payload *models.ConfigCreateServerResponse
 }
 
-func (o *ServerCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/server][%d] serverCreateCreated  %+v", 201, o.Payload)
+func (o *ServerCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/server][%d] serverCreateOK  %+v", 200, o.Payload)
 }
-func (o *ServerCreateCreated) GetPayload() *models.ConfigCreateServerResponse {
+func (o *ServerCreateOK) GetPayload() *models.ConfigCreateServerResponse {
 	return o.Payload
 }
 
-func (o *ServerCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ServerCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateServerResponse)
 

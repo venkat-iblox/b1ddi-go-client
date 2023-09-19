@@ -29,30 +29,31 @@ func (o *OptionGroupDeleteReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionGroupDeleteNoContent()
+	result := NewOptionGroupDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionGroupDeleteNoContent creates a OptionGroupDeleteNoContent with default headers values
-func NewOptionGroupDeleteNoContent() *OptionGroupDeleteNoContent {
-	return &OptionGroupDeleteNoContent{}
+// NewOptionGroupDeleteOK creates a OptionGroupDeleteOK with default headers values
+func NewOptionGroupDeleteOK() *OptionGroupDeleteOK {
+	return &OptionGroupDeleteOK{}
 }
 
-/* OptionGroupDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionGroupDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type OptionGroupDeleteNoContent struct {
+type OptionGroupDeleteOK struct {
 }
 
-func (o *OptionGroupDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/option_group/{id}][%d] optionGroupDeleteNoContent ", 204)
+func (o *OptionGroupDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/option_group/{id}][%d] optionGroupDeleteOK ", 200)
 }
 
-func (o *OptionGroupDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionGroupDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

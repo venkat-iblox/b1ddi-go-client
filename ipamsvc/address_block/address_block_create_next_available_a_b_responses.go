@@ -31,34 +31,35 @@ func (o *AddressBlockCreateNextAvailableABReader) ReadResponse(response runtime.
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockCreateNextAvailableABCreated()
+	result := NewAddressBlockCreateNextAvailableABOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockCreateNextAvailableABCreated creates a AddressBlockCreateNextAvailableABCreated with default headers values
-func NewAddressBlockCreateNextAvailableABCreated() *AddressBlockCreateNextAvailableABCreated {
-	return &AddressBlockCreateNextAvailableABCreated{}
+// NewAddressBlockCreateNextAvailableABOK creates a AddressBlockCreateNextAvailableABOK with default headers values
+func NewAddressBlockCreateNextAvailableABOK() *AddressBlockCreateNextAvailableABOK {
+	return &AddressBlockCreateNextAvailableABOK{}
 }
 
-/* AddressBlockCreateNextAvailableABCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateNextAvailableABOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressBlockCreateNextAvailableABCreated struct {
+type AddressBlockCreateNextAvailableABOK struct {
 	Payload *models.IpamsvcCreateNextAvailableABResponse
 }
 
-func (o *AddressBlockCreateNextAvailableABCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailableaddressblock][%d] addressBlockCreateNextAvailableABCreated  %+v", 201, o.Payload)
+func (o *AddressBlockCreateNextAvailableABOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailableaddressblock][%d] addressBlockCreateNextAvailableABOK  %+v", 200, o.Payload)
 }
-func (o *AddressBlockCreateNextAvailableABCreated) GetPayload() *models.IpamsvcCreateNextAvailableABResponse {
+func (o *AddressBlockCreateNextAvailableABOK) GetPayload() *models.IpamsvcCreateNextAvailableABResponse {
 	return o.Payload
 }
 
-func (o *AddressBlockCreateNextAvailableABCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockCreateNextAvailableABOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateNextAvailableABResponse)
 

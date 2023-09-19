@@ -43,7 +43,8 @@ func NewGlobalRead2OK() *GlobalRead2OK {
 	return &GlobalRead2OK{}
 }
 
-/* GlobalRead2OK describes a response with status code 200, with default header values.
+/*
+GlobalRead2OK describes a response with status code 200, with default header values.
 
 GET operation response
 */

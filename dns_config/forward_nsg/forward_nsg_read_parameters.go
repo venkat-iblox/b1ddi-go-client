@@ -52,10 +52,12 @@ func NewForwardNsgReadParamsWithHTTPClient(client *http.Client) *ForwardNsgReadP
 	}
 }
 
-/* ForwardNsgReadParams contains all the parameters to send to the API endpoint
-   for the forward nsg read operation.
+/*
+ForwardNsgReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward nsg read operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardNsgReadParams struct {
 

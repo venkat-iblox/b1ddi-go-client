@@ -17,7 +17,7 @@ import (
 
 // ConfigForwardZone ForwardZone
 //
-// Forward zone
+// # Forward zone
 //
 // swagger:model configForwardZone
 type ConfigForwardZone struct {
@@ -44,7 +44,7 @@ type ConfigForwardZone struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// The resource identifier.
 	Hosts []string `json:"hosts,omitempty"`
@@ -91,6 +91,10 @@ type ConfigForwardZone struct {
 
 	// The resource identifier.
 	View string `json:"view,omitempty"`
+
+	// The list of a forward zone warnings.
+	// Read Only: true
+	Warnings []*ConfigWarning `json:"warnings"`
 }
 
 // Validate validates this config forward zone
@@ -110,6 +114,10 @@ func (m *ConfigForwardZone) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWarnings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,6 +186,32 @@ func (m *ConfigForwardZone) validateUpdatedAt(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ConfigForwardZone) validateWarnings(formats strfmt.Registry) error {
+	if swag.IsZero(m.Warnings) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Warnings); i++ {
+		if swag.IsZero(m.Warnings[i]) { // not required
+			continue
+		}
+
+		if m.Warnings[i] != nil {
+			if err := m.Warnings[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("warnings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("warnings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this config forward zone based on the context it is used
 func (m *ConfigForwardZone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -210,6 +244,10 @@ func (m *ConfigForwardZone) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateWarnings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -230,6 +268,11 @@ func (m *ConfigForwardZone) contextValidateExternalForwarders(ctx context.Contex
 	for i := 0; i < len(m.ExternalForwarders); i++ {
 
 		if m.ExternalForwarders[i] != nil {
+
+			if swag.IsZero(m.ExternalForwarders[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalForwarders[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_forwarders" + "." + strconv.Itoa(i))
@@ -285,6 +328,35 @@ func (m *ConfigForwardZone) contextValidateUpdatedAt(ctx context.Context, format
 
 	if err := validate.ReadOnly(ctx, "updated_at", "body", m.UpdatedAt); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ConfigForwardZone) contextValidateWarnings(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "warnings", "body", []*ConfigWarning(m.Warnings)); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Warnings); i++ {
+
+		if m.Warnings[i] != nil {
+
+			if swag.IsZero(m.Warnings[i]) { // not required
+				return nil
+			}
+
+			if err := m.Warnings[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("warnings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("warnings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

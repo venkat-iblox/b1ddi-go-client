@@ -31,34 +31,35 @@ func (o *RangeCreateReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewRangeCreateCreated()
+	result := NewRangeCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewRangeCreateCreated creates a RangeCreateCreated with default headers values
-func NewRangeCreateCreated() *RangeCreateCreated {
-	return &RangeCreateCreated{}
+// NewRangeCreateOK creates a RangeCreateOK with default headers values
+func NewRangeCreateOK() *RangeCreateOK {
+	return &RangeCreateOK{}
 }
 
-/* RangeCreateCreated describes a response with status code 201, with default header values.
+/*
+RangeCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type RangeCreateCreated struct {
+type RangeCreateOK struct {
 	Payload *models.IpamsvcCreateRangeResponse
 }
 
-func (o *RangeCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/range][%d] rangeCreateCreated  %+v", 201, o.Payload)
+func (o *RangeCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/range][%d] rangeCreateOK  %+v", 200, o.Payload)
 }
-func (o *RangeCreateCreated) GetPayload() *models.IpamsvcCreateRangeResponse {
+func (o *RangeCreateOK) GetPayload() *models.IpamsvcCreateRangeResponse {
 	return o.Payload
 }
 
-func (o *RangeCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *RangeCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateRangeResponse)
 

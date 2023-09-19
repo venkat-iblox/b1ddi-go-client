@@ -52,10 +52,12 @@ func NewGlobalReadParamsWithHTTPClient(client *http.Client) *GlobalReadParams {
 	}
 }
 
-/* GlobalReadParams contains all the parameters to send to the API endpoint
-   for the global read operation.
+/*
+GlobalReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the global read operation.
+
+	Typically these are written to a http.Request.
 */
 type GlobalReadParams struct {
 

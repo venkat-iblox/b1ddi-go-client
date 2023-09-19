@@ -25,6 +25,11 @@ type IpamsvcGlobal struct {
 	// The global Automated Scope Management configuration.
 	AsmConfig *IpamsvcASMConfig `json:"asm_config,omitempty"`
 
+	// The Kerberos principal name. It uses the typical Kerberos notation: <SERVICE-NAME>/<server-domain-name>@<REALM>.
+	//
+	// Defaults to empty.
+	ClientPrincipal string `json:"client_principal,omitempty"`
+
 	// The global configuration to control who does the DDNS updates.
 	//
 	// Valid values are:
@@ -36,6 +41,17 @@ type IpamsvcGlobal struct {
 	//
 	// Defaults to _client_.
 	DdnsClientUpdate string `json:"ddns_client_update,omitempty"`
+
+	// The mode used for resolving conflicts while performing DDNS updates.
+	//
+	// Valid values are:
+	// * _check_with_dhcid_: It includes adding a DHCID record and checking that record via conflict detection as per RFC 4703.
+	// * _no_check_with_dhcid_: This will ignore conflict detection but add a DHCID record when creating/updating an entry.
+	// * _check_exists_with_dhcid_: This will check if there is an existing DHCID record but does not verify the value of the record matches the update. This will also update the DHCID record for the entry.
+	// * _no_check_without_dhcid_: This ignores conflict detection and will not add a DHCID record when creating/updating a DDNS entry.
+	//
+	// Defaults to _check_with_dhcid_.
+	DdnsConflictResolutionMode string `json:"ddns_conflict_resolution_mode,omitempty"`
 
 	// The domain suffix for DDNS updates. FQDN, may be empty.
 	//
@@ -70,6 +86,11 @@ type IpamsvcGlobal struct {
 	// Defaults to _true_.
 	DdnsSendUpdates bool `json:"ddns_send_updates,omitempty"`
 
+	// DDNS TTL value - to be calculated as a simple percentage of the lease's lifetime, using the parameter's value as the percentage.
+	// It is specified as a percentage (e.g. 25, 75).
+	// Defaults to unspecified.
+	DdnsTTLPercent float32 `json:"ddns_ttl_percent,omitempty"`
+
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
 	// Defaults to _false_.
@@ -97,7 +118,7 @@ type IpamsvcGlobal struct {
 	// The global DHCP configuration that controls how leases are issued.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
 
-	// The list of DHCP options or group of options.
+	// The list of DHCP options or group of options for IPv4.
 	// An option list is ordered and may include both option groups and specific options.
 	// Multiple occurrences of the same option or group is not an error.
 	// The last occurrence of an option in the list will be used.
@@ -107,8 +128,26 @@ type IpamsvcGlobal struct {
 	// Defaults to empty list.
 	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
 
+	// The list of DHCP options or group of options for IPv6.
+	// An option list is ordered and may include both option groups and specific options.
+	// Multiple occurrences of the same option or group is not an error.
+	// The last occurrence of an option in the list will be used.
+	//
+	// Error if the graph of referenced groups contains cycles.
+	//
+	// Defaults to empty list.
+	DhcpOptionsV6 []*IpamsvcOptionItem `json:"dhcp_options_v6,omitempty"`
+
 	// The global DHCP Utilization threshold settings.
 	DhcpThreshold *IpamsvcDHCPUtilizationThreshold `json:"dhcp_threshold,omitempty"`
+
+	// The behavior when GSS-TSIG should be used (a matching external DNS server is configured) but no GSS-TSIG key is available.
+	// If configured to _false_ (the default) this DNS server is skipped, if configured to _true_ the DNS server is ignored
+	// and the DNS update is sent with the configured DHCP-DDNS protection e.g. TSIG key or without any protection when
+	// none was configured.
+	//
+	// Defaults to _false_.
+	GssTsigFallback bool `json:"gss_tsig_fallback,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
@@ -121,9 +160,9 @@ type IpamsvcGlobal struct {
 
 	// The character to replace non-matching characters with, when hostname rewrite is enabled in global configuration.
 	//
-	// Any single ASCII character.
+	// Any single ASCII character or no character if the invalid characters should be removed without replacement.
 	//
-	// Defaults to "_".
+	// Defaults to "-".
 	HostnameRewriteChar string `json:"hostname_rewrite_char,omitempty"`
 
 	// The global configuration to indicate if the hostnames supplied by the client will be rewritten prior to DDNS update by replacing every character that does not match _hostname_rewrite_regex_ by _hostname_rewrite_char_.
@@ -142,10 +181,51 @@ type IpamsvcGlobal struct {
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
+	// Address of Kerberos Key Distribution Center.
+	//
+	// Defaults to empty.
+	KerberosKdc string `json:"kerberos_kdc,omitempty"`
+
+	// _kerberos_keys_ contains a list of keys for GSS-TSIG signed dynamic updates.
+	//
+	// Defaults to empty.
+	KerberosKeys []*IpamsvcKerberosKey `json:"kerberos_keys"`
+
+	// Time interval (in seconds) the keys for each configured external DNS server are checked for rekeying,
+	// i.e. a new key is created to replace the current usable one when its age is greater than the _kerberos_rekey_interval_ value.
+	//
+	// Defaults to 120 seconds.
+	KerberosRekeyInterval int64 `json:"kerberos_rekey_interval,omitempty"`
+
+	// Time interval (in seconds) to retry to create a key if any error occurred previously for any configured external DNS server.
+	//
+	// Defaults to 30 seconds.
+	KerberosRetryInterval int64 `json:"kerberos_retry_interval,omitempty"`
+
+	// Lifetime (in seconds) of GSS-TSIG keys in the TKEY protocol.
+	//
+	// Defaults to 160 seconds.
+	KerberosTkeyLifetime int64 `json:"kerberos_tkey_lifetime,omitempty"`
+
+	// Determines which protocol is used to establish the security context with the external DNS servers, TCP or UDP.
+	//
+	// Defaults to _tcp_.
+	KerberosTkeyProtocol string `json:"kerberos_tkey_protocol,omitempty"`
+
+	// When enabled, DHCP Server will prefer option 12 over option 81 in the incoming client request.
+	//
+	// Defaults to _false_.
+	PreferOption12 bool `json:"prefer_option_12,omitempty"`
+
 	// When enabled, DHCP Server will remove the suffix from the option 81 in the incoming client request.
 	//
 	// Defaults to _false_.
 	RemoveSuffixOption81 bool `json:"remove_suffix_option_81,omitempty"`
+
+	// The Kerberos principal name of the external DNS server that will receive updates.
+	//
+	// Defaults to empty.
+	ServerPrincipal string `json:"server_principal,omitempty"`
 
 	// The resource identifier.
 	VendorSpecificOptionOptionSpace string `json:"vendor_specific_option_option_space,omitempty"`
@@ -171,7 +251,15 @@ func (m *IpamsvcGlobal) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDhcpOptionsV6(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDhcpThreshold(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKerberosKeys(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -271,6 +359,32 @@ func (m *IpamsvcGlobal) validateDhcpOptions(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IpamsvcGlobal) validateDhcpOptionsV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.DhcpOptionsV6) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.DhcpOptionsV6); i++ {
+		if swag.IsZero(m.DhcpOptionsV6[i]) { // not required
+			continue
+		}
+
+		if m.DhcpOptionsV6[i] != nil {
+			if err := m.DhcpOptionsV6[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *IpamsvcGlobal) validateDhcpThreshold(formats strfmt.Registry) error {
 	if swag.IsZero(m.DhcpThreshold) { // not required
 		return nil
@@ -285,6 +399,32 @@ func (m *IpamsvcGlobal) validateDhcpThreshold(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcGlobal) validateKerberosKeys(formats strfmt.Registry) error {
+	if swag.IsZero(m.KerberosKeys) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.KerberosKeys); i++ {
+		if swag.IsZero(m.KerberosKeys[i]) { // not required
+			continue
+		}
+
+		if m.KerberosKeys[i] != nil {
+			if err := m.KerberosKeys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -310,11 +450,19 @@ func (m *IpamsvcGlobal) ContextValidate(ctx context.Context, formats strfmt.Regi
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDhcpOptionsV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDhcpThreshold(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKerberosKeys(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -327,6 +475,11 @@ func (m *IpamsvcGlobal) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *IpamsvcGlobal) contextValidateAsmConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmConfig != nil {
+
+		if swag.IsZero(m.AsmConfig) { // not required
+			return nil
+		}
+
 		if err := m.AsmConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_config")
@@ -345,6 +498,11 @@ func (m *IpamsvcGlobal) contextValidateDdnsZones(ctx context.Context, formats st
 	for i := 0; i < len(m.DdnsZones); i++ {
 
 		if m.DdnsZones[i] != nil {
+
+			if swag.IsZero(m.DdnsZones[i]) { // not required
+				return nil
+			}
+
 			if err := m.DdnsZones[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ddns_zones" + "." + strconv.Itoa(i))
@@ -363,6 +521,11 @@ func (m *IpamsvcGlobal) contextValidateDdnsZones(ctx context.Context, formats st
 func (m *IpamsvcGlobal) contextValidateDhcpConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpConfig != nil {
+
+		if swag.IsZero(m.DhcpConfig) { // not required
+			return nil
+		}
+
 		if err := m.DhcpConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_config")
@@ -381,6 +544,11 @@ func (m *IpamsvcGlobal) contextValidateDhcpOptions(ctx context.Context, formats 
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
@@ -396,9 +564,39 @@ func (m *IpamsvcGlobal) contextValidateDhcpOptions(ctx context.Context, formats 
 	return nil
 }
 
+func (m *IpamsvcGlobal) contextValidateDhcpOptionsV6(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.DhcpOptionsV6); i++ {
+
+		if m.DhcpOptionsV6[i] != nil {
+
+			if swag.IsZero(m.DhcpOptionsV6[i]) { // not required
+				return nil
+			}
+
+			if err := m.DhcpOptionsV6[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *IpamsvcGlobal) contextValidateDhcpThreshold(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpThreshold != nil {
+
+		if swag.IsZero(m.DhcpThreshold) { // not required
+			return nil
+		}
+
 		if err := m.DhcpThreshold.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_threshold")
@@ -416,6 +614,31 @@ func (m *IpamsvcGlobal) contextValidateID(ctx context.Context, formats strfmt.Re
 
 	if err := validate.ReadOnly(ctx, "id", "body", string(m.ID)); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *IpamsvcGlobal) contextValidateKerberosKeys(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.KerberosKeys); i++ {
+
+		if m.KerberosKeys[i] != nil {
+
+			if swag.IsZero(m.KerberosKeys[i]) { // not required
+				return nil
+			}
+
+			if err := m.KerberosKeys[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

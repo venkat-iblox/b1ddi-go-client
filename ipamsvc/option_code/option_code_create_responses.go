@@ -31,34 +31,35 @@ func (o *OptionCodeCreateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionCodeCreateCreated()
+	result := NewOptionCodeCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionCodeCreateCreated creates a OptionCodeCreateCreated with default headers values
-func NewOptionCodeCreateCreated() *OptionCodeCreateCreated {
-	return &OptionCodeCreateCreated{}
+// NewOptionCodeCreateOK creates a OptionCodeCreateOK with default headers values
+func NewOptionCodeCreateOK() *OptionCodeCreateOK {
+	return &OptionCodeCreateOK{}
 }
 
-/* OptionCodeCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionCodeCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type OptionCodeCreateCreated struct {
+type OptionCodeCreateOK struct {
 	Payload *models.IpamsvcCreateOptionCodeResponse
 }
 
-func (o *OptionCodeCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/option_code][%d] optionCodeCreateCreated  %+v", 201, o.Payload)
+func (o *OptionCodeCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/option_code][%d] optionCodeCreateOK  %+v", 200, o.Payload)
 }
-func (o *OptionCodeCreateCreated) GetPayload() *models.IpamsvcCreateOptionCodeResponse {
+func (o *OptionCodeCreateOK) GetPayload() *models.IpamsvcCreateOptionCodeResponse {
 	return o.Payload
 }
 
-func (o *OptionCodeCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionCodeCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateOptionCodeResponse)
 

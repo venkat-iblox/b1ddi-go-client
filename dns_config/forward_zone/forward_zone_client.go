@@ -32,28 +32,29 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCopyCreated, error)
+	ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCopyOK, error)
 
-	ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCreateCreated, error)
+	ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCreateOK, error)
 
-	ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneDeleteNoContent, error)
+	ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneDeleteOK, error)
 
 	ForwardZoneList(params *ForwardZoneListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneListOK, error)
 
 	ForwardZoneRead(params *ForwardZoneReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneReadOK, error)
 
-	ForwardZoneUpdate(params *ForwardZoneUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneUpdateCreated, error)
+	ForwardZoneUpdate(params *ForwardZoneUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  ForwardZoneCopy copies the forward zone object
+	ForwardZoneCopy copies the forward zone object
 
-  Use this method to copy an __ForwardZone__ object to a different __View__.
+	Use this method to copy an __ForwardZone__ object to a different __View__.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
-func (a *Client) ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCopyCreated, error) {
+func (a *Client) ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCopyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewForwardZoneCopyParams()
@@ -79,7 +80,7 @@ func (a *Client) ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ForwardZoneCopyCreated)
+	success, ok := result.(*ForwardZoneCopyOK)
 	if ok {
 		return success, nil
 	}
@@ -90,12 +91,13 @@ func (a *Client) ForwardZoneCopy(params *ForwardZoneCopyParams, authInfo runtime
 }
 
 /*
-  ForwardZoneCreate creates the forward zone object
+	ForwardZoneCreate creates the forward zone object
 
-  Use this method to create a ForwardZone object.
+	Use this method to create a ForwardZone object.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
-func (a *Client) ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCreateCreated, error) {
+func (a *Client) ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewForwardZoneCreateParams()
@@ -121,7 +123,7 @@ func (a *Client) ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ForwardZoneCreateCreated)
+	success, ok := result.(*ForwardZoneCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -132,12 +134,13 @@ func (a *Client) ForwardZoneCreate(params *ForwardZoneCreateParams, authInfo run
 }
 
 /*
-  ForwardZoneDelete moves the forward zone object to recyclebin
+	ForwardZoneDelete moves the forward zone object to recyclebin
 
-  Use this method to move a Forward Zone object to Recyclebin.
+	Use this method to move a Forward Zone object to Recyclebin.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
-func (a *Client) ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneDeleteNoContent, error) {
+func (a *Client) ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewForwardZoneDeleteParams()
@@ -166,7 +169,7 @@ func (a *Client) ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ForwardZoneDeleteNoContent)
+	success, ok := result.(*ForwardZoneDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -177,9 +180,10 @@ func (a *Client) ForwardZoneDelete(params *ForwardZoneDeleteParams, authInfo run
 }
 
 /*
-  ForwardZoneList lists forward zone objects
+	ForwardZoneList lists forward zone objects
 
-  Use this method to list Forward Zone objects.
+	Use this method to list Forward Zone objects.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
 func (a *Client) ForwardZoneList(params *ForwardZoneListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneListOK, error) {
@@ -219,9 +223,10 @@ func (a *Client) ForwardZoneList(params *ForwardZoneListParams, authInfo runtime
 }
 
 /*
-  ForwardZoneRead reads the forward zone object
+	ForwardZoneRead reads the forward zone object
 
-  Use this method to read a Forward Zone object.
+	Use this method to read a Forward Zone object.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
 func (a *Client) ForwardZoneRead(params *ForwardZoneReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneReadOK, error) {
@@ -264,12 +269,13 @@ func (a *Client) ForwardZoneRead(params *ForwardZoneReadParams, authInfo runtime
 }
 
 /*
-  ForwardZoneUpdate updates the forward zone object
+	ForwardZoneUpdate updates the forward zone object
 
-  Use this method to update a Forward Zone object.
+	Use this method to update a Forward Zone object.
+
 This object (_dns/forward_zone_) represents a forwarding zone.
 */
-func (a *Client) ForwardZoneUpdate(params *ForwardZoneUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneUpdateCreated, error) {
+func (a *Client) ForwardZoneUpdate(params *ForwardZoneUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ForwardZoneUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewForwardZoneUpdateParams()
@@ -298,7 +304,7 @@ func (a *Client) ForwardZoneUpdate(params *ForwardZoneUpdateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ForwardZoneUpdateCreated)
+	success, ok := result.(*ForwardZoneUpdateOK)
 	if ok {
 		return success, nil
 	}

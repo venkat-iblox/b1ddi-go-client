@@ -32,27 +32,28 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceBulkCopyCreated, error)
+	IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceBulkCopyOK, error)
 
-	IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCopyCreated, error)
+	IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCopyOK, error)
 
-	IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCreateCreated, error)
+	IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCreateOK, error)
 
-	IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceDeleteNoContent, error)
+	IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceDeleteOK, error)
 
 	IPSpaceList(params *IPSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceListOK, error)
 
 	IPSpaceRead(params *IPSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceReadOK, error)
 
-	IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceUpdateCreated, error)
+	IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  IPSpaceBulkCopy copies the specified address block and subnets in the IP space
+	IPSpaceBulkCopy copies the specified address block and subnets in the IP space
 
-  Use this method to bulk copy __AddressBlock__ and __Subnet__ objects from one __IPSpace__ object to another __IPSpace__ object.
+	Use this method to bulk copy __AddressBlock__ and __Subnet__ objects from one __IPSpace__ object to another __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 The __Subnet__ object represents a set of addresses from which addresses are assigned to network equipment interfaces.
@@ -60,7 +61,7 @@ The __Subnet__ object represents a set of addresses from which addresses are ass
 The _copy_objects_ specifies the list of objects (_ipam/address_block_ and _ipam/subnet_ only) in the _ipam/ip_space_ object to copy.
 The _target_ specifies the _ipam/ip_space_ object to which the objects must be copied.
 */
-func (a *Client) IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceBulkCopyCreated, error) {
+func (a *Client) IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceBulkCopyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPSpaceBulkCopyParams()
@@ -86,7 +87,7 @@ func (a *Client) IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IPSpaceBulkCopyCreated)
+	success, ok := result.(*IPSpaceBulkCopyOK)
 	if ok {
 		return success, nil
 	}
@@ -97,12 +98,13 @@ func (a *Client) IPSpaceBulkCopy(params *IPSpaceBulkCopyParams, authInfo runtime
 }
 
 /*
-  IPSpaceCopy copies the IP space
+	IPSpaceCopy copies the IP space
 
-  Use this method to copy an __IPSpace__ object.
+	Use this method to copy an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
-func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCopyCreated, error) {
+func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCopyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPSpaceCopyParams()
@@ -131,7 +133,7 @@ func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IPSpaceCopyCreated)
+	success, ok := result.(*IPSpaceCopyOK)
 	if ok {
 		return success, nil
 	}
@@ -142,12 +144,13 @@ func (a *Client) IPSpaceCopy(params *IPSpaceCopyParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceCreate creates the IP space
+	IPSpaceCreate creates the IP space
 
-  Use this method to create an __IPSpace__ object.
+	Use this method to create an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
-func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCreateCreated, error) {
+func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPSpaceCreateParams()
@@ -173,7 +176,7 @@ func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IPSpaceCreateCreated)
+	success, ok := result.(*IPSpaceCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -184,12 +187,13 @@ func (a *Client) IPSpaceCreate(params *IPSpaceCreateParams, authInfo runtime.Cli
 }
 
 /*
-  IPSpaceDelete moves the IP space to the recycle bin
+	IPSpaceDelete moves the IP space to the recycle bin
 
-  Use this method to move an __IPSpace__ object to the recycle bin.
+	Use this method to move an __IPSpace__ object to the recycle bin.
+
 The __IPSpace__ object represents an entire address space.
 */
-func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceDeleteNoContent, error) {
+func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPSpaceDeleteParams()
@@ -218,7 +222,7 @@ func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IPSpaceDeleteNoContent)
+	success, ok := result.(*IPSpaceDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -229,9 +233,10 @@ func (a *Client) IPSpaceDelete(params *IPSpaceDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  IPSpaceList retrieves IP spaces
+	IPSpaceList retrieves IP spaces
 
-  Use this method to retrieve __IPSpace__ objects.
+	Use this method to retrieve __IPSpace__ objects.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceList(params *IPSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceListOK, error) {
@@ -271,9 +276,10 @@ func (a *Client) IPSpaceList(params *IPSpaceListParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceRead retrieves the IP space
+	IPSpaceRead retrieves the IP space
 
-  Use this method to retrieve an __IPSpace__ object.
+	Use this method to retrieve an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
 func (a *Client) IPSpaceRead(params *IPSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceReadOK, error) {
@@ -316,12 +322,13 @@ func (a *Client) IPSpaceRead(params *IPSpaceReadParams, authInfo runtime.ClientA
 }
 
 /*
-  IPSpaceUpdate updates the IP space
+	IPSpaceUpdate updates the IP space
 
-  Use this method to update an __IPSpace__ object.
+	Use this method to update an __IPSpace__ object.
+
 The __IPSpace__ object represents an entire address space.
 */
-func (a *Client) IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceUpdateCreated, error) {
+func (a *Client) IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPSpaceUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPSpaceUpdateParams()
@@ -350,7 +357,7 @@ func (a *Client) IPSpaceUpdate(params *IPSpaceUpdateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IPSpaceUpdateCreated)
+	success, ok := result.(*IPSpaceUpdateOK)
 	if ok {
 		return success, nil
 	}

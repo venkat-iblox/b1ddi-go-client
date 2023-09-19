@@ -54,10 +54,12 @@ func NewAddressBlockCreateParamsWithHTTPClient(client *http.Client) *AddressBloc
 	}
 }
 
-/* AddressBlockCreateParams contains all the parameters to send to the API endpoint
-   for the address block create operation.
+/*
+AddressBlockCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block create operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockCreateParams struct {
 

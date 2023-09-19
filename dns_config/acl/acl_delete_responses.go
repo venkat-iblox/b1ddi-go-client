@@ -29,30 +29,31 @@ func (o *ACLDeleteReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewACLDeleteNoContent()
+	result := NewACLDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewACLDeleteNoContent creates a ACLDeleteNoContent with default headers values
-func NewACLDeleteNoContent() *ACLDeleteNoContent {
-	return &ACLDeleteNoContent{}
+// NewACLDeleteOK creates a ACLDeleteOK with default headers values
+func NewACLDeleteOK() *ACLDeleteOK {
+	return &ACLDeleteOK{}
 }
 
-/* ACLDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ACLDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type ACLDeleteNoContent struct {
+type ACLDeleteOK struct {
 }
 
-func (o *ACLDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/acl/{id}][%d] aclDeleteNoContent ", 204)
+func (o *ACLDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/acl/{id}][%d] aclDeleteOK ", 200)
 }
 
-func (o *ACLDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ACLDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

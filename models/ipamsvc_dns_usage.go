@@ -29,9 +29,9 @@ type IpamsvcDNSUsage struct {
 	// Read Only: true
 	Address string `json:"address,omitempty"`
 
-	// The description for the referenced record. May contain 0 to 1024 characters. Can include UTF-8.
+	// The DNS rdata of the referenced record.
 	// Read Only: true
-	Comment string `json:"comment,omitempty"`
+	DNSRdata string `json:"dns_rdata,omitempty"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -75,7 +75,7 @@ func (m *IpamsvcDNSUsage) ContextValidate(ctx context.Context, formats strfmt.Re
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateComment(ctx, formats); err != nil {
+	if err := m.contextValidateDNSRdata(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -115,9 +115,9 @@ func (m *IpamsvcDNSUsage) contextValidateAddress(ctx context.Context, formats st
 	return nil
 }
 
-func (m *IpamsvcDNSUsage) contextValidateComment(ctx context.Context, formats strfmt.Registry) error {
+func (m *IpamsvcDNSUsage) contextValidateDNSRdata(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "comment", "body", string(m.Comment)); err != nil {
+	if err := validate.ReadOnly(ctx, "dns_rdata", "body", string(m.DNSRdata)); err != nil {
 		return err
 	}
 

@@ -43,7 +43,8 @@ func NewServerListOK() *ServerListOK {
 	return &ServerListOK{}
 }
 
-/* ServerListOK describes a response with status code 200, with default header values.
+/*
+ServerListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

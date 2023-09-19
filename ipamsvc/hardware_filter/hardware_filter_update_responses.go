@@ -31,34 +31,35 @@ func (o *HardwareFilterUpdateReader) ReadResponse(response runtime.ClientRespons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHardwareFilterUpdateCreated()
+	result := NewHardwareFilterUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHardwareFilterUpdateCreated creates a HardwareFilterUpdateCreated with default headers values
-func NewHardwareFilterUpdateCreated() *HardwareFilterUpdateCreated {
-	return &HardwareFilterUpdateCreated{}
+// NewHardwareFilterUpdateOK creates a HardwareFilterUpdateOK with default headers values
+func NewHardwareFilterUpdateOK() *HardwareFilterUpdateOK {
+	return &HardwareFilterUpdateOK{}
 }
 
-/* HardwareFilterUpdateCreated describes a response with status code 201, with default header values.
+/*
+HardwareFilterUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type HardwareFilterUpdateCreated struct {
+type HardwareFilterUpdateOK struct {
 	Payload *models.IpamsvcUpdateHardwareFilterResponse
 }
 
-func (o *HardwareFilterUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/hardware_filter/{id}][%d] hardwareFilterUpdateCreated  %+v", 201, o.Payload)
+func (o *HardwareFilterUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/hardware_filter/{id}][%d] hardwareFilterUpdateOK  %+v", 200, o.Payload)
 }
-func (o *HardwareFilterUpdateCreated) GetPayload() *models.IpamsvcUpdateHardwareFilterResponse {
+func (o *HardwareFilterUpdateOK) GetPayload() *models.IpamsvcUpdateHardwareFilterResponse {
 	return o.Payload
 }
 
-func (o *HardwareFilterUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HardwareFilterUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateHardwareFilterResponse)
 

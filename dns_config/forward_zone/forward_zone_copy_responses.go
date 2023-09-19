@@ -31,34 +31,35 @@ func (o *ForwardZoneCopyReader) ReadResponse(response runtime.ClientResponse, co
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardZoneCopyCreated()
+	result := NewForwardZoneCopyOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardZoneCopyCreated creates a ForwardZoneCopyCreated with default headers values
-func NewForwardZoneCopyCreated() *ForwardZoneCopyCreated {
-	return &ForwardZoneCopyCreated{}
+// NewForwardZoneCopyOK creates a ForwardZoneCopyOK with default headers values
+func NewForwardZoneCopyOK() *ForwardZoneCopyOK {
+	return &ForwardZoneCopyOK{}
 }
 
-/* ForwardZoneCopyCreated describes a response with status code 201, with default header values.
+/*
+ForwardZoneCopyOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ForwardZoneCopyCreated struct {
+type ForwardZoneCopyOK struct {
 	Payload *models.ConfigCopyForwardZoneResponse
 }
 
-func (o *ForwardZoneCopyCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/forward_zone/copy][%d] forwardZoneCopyCreated  %+v", 201, o.Payload)
+func (o *ForwardZoneCopyOK) Error() string {
+	return fmt.Sprintf("[POST /dns/forward_zone/copy][%d] forwardZoneCopyOK  %+v", 200, o.Payload)
 }
-func (o *ForwardZoneCopyCreated) GetPayload() *models.ConfigCopyForwardZoneResponse {
+func (o *ForwardZoneCopyOK) GetPayload() *models.ConfigCopyForwardZoneResponse {
 	return o.Payload
 }
 
-func (o *ForwardZoneCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardZoneCopyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCopyForwardZoneResponse)
 

@@ -29,30 +29,31 @@ func (o *ViewDeleteReader) ReadResponse(response runtime.ClientResponse, consume
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewViewDeleteNoContent()
+	result := NewViewDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewViewDeleteNoContent creates a ViewDeleteNoContent with default headers values
-func NewViewDeleteNoContent() *ViewDeleteNoContent {
-	return &ViewDeleteNoContent{}
+// NewViewDeleteOK creates a ViewDeleteOK with default headers values
+func NewViewDeleteOK() *ViewDeleteOK {
+	return &ViewDeleteOK{}
 }
 
-/* ViewDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ViewDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type ViewDeleteNoContent struct {
+type ViewDeleteOK struct {
 }
 
-func (o *ViewDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/view/{id}][%d] viewDeleteNoContent ", 204)
+func (o *ViewDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/view/{id}][%d] viewDeleteOK ", 200)
 }
 
-func (o *ViewDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ViewDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

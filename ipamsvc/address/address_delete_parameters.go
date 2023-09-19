@@ -52,10 +52,12 @@ func NewAddressDeleteParamsWithHTTPClient(client *http.Client) *AddressDeletePar
 	}
 }
 
-/* AddressDeleteParams contains all the parameters to send to the API endpoint
-   for the address delete operation.
+/*
+AddressDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address delete operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressDeleteParams struct {
 

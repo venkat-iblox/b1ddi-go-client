@@ -54,10 +54,12 @@ func NewACLCreateParamsWithHTTPClient(client *http.Client) *ACLCreateParams {
 	}
 }
 
-/* ACLCreateParams contains all the parameters to send to the API endpoint
-   for the acl create operation.
+/*
+ACLCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the acl create operation.
+
+	Typically these are written to a http.Request.
 */
 type ACLCreateParams struct {
 

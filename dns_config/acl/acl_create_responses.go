@@ -31,34 +31,35 @@ func (o *ACLCreateReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewACLCreateCreated()
+	result := NewACLCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewACLCreateCreated creates a ACLCreateCreated with default headers values
-func NewACLCreateCreated() *ACLCreateCreated {
-	return &ACLCreateCreated{}
+// NewACLCreateOK creates a ACLCreateOK with default headers values
+func NewACLCreateOK() *ACLCreateOK {
+	return &ACLCreateOK{}
 }
 
-/* ACLCreateCreated describes a response with status code 201, with default header values.
+/*
+ACLCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ACLCreateCreated struct {
+type ACLCreateOK struct {
 	Payload *models.ConfigCreateACLResponse
 }
 
-func (o *ACLCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/acl][%d] aclCreateCreated  %+v", 201, o.Payload)
+func (o *ACLCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/acl][%d] aclCreateOK  %+v", 200, o.Payload)
 }
-func (o *ACLCreateCreated) GetPayload() *models.ConfigCreateACLResponse {
+func (o *ACLCreateOK) GetPayload() *models.ConfigCreateACLResponse {
 	return o.Payload
 }
 
-func (o *ACLCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ACLCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateACLResponse)
 

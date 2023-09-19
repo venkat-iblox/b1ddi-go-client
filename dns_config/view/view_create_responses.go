@@ -31,34 +31,35 @@ func (o *ViewCreateReader) ReadResponse(response runtime.ClientResponse, consume
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewViewCreateCreated()
+	result := NewViewCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewViewCreateCreated creates a ViewCreateCreated with default headers values
-func NewViewCreateCreated() *ViewCreateCreated {
-	return &ViewCreateCreated{}
+// NewViewCreateOK creates a ViewCreateOK with default headers values
+func NewViewCreateOK() *ViewCreateOK {
+	return &ViewCreateOK{}
 }
 
-/* ViewCreateCreated describes a response with status code 201, with default header values.
+/*
+ViewCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ViewCreateCreated struct {
+type ViewCreateOK struct {
 	Payload *models.ConfigCreateViewResponse
 }
 
-func (o *ViewCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/view][%d] viewCreateCreated  %+v", 201, o.Payload)
+func (o *ViewCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/view][%d] viewCreateOK  %+v", 200, o.Payload)
 }
-func (o *ViewCreateCreated) GetPayload() *models.ConfigCreateViewResponse {
+func (o *ViewCreateOK) GetPayload() *models.ConfigCreateViewResponse {
 	return o.Payload
 }
 
-func (o *ViewCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ViewCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateViewResponse)
 

@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	OptionGroupCreate(params *OptionGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupCreateCreated, error)
+	OptionGroupCreate(params *OptionGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupCreateOK, error)
 
-	OptionGroupDelete(params *OptionGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupDeleteNoContent, error)
+	OptionGroupDelete(params *OptionGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupDeleteOK, error)
 
 	OptionGroupList(params *OptionGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupListOK, error)
 
 	OptionGroupRead(params *OptionGroupReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupReadOK, error)
 
-	OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupUpdateCreated, error)
+	OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  OptionGroupCreate creates the d h c p option group
+	OptionGroupCreate creates the d h c p option group
 
-  Use this method to create an __OptionGroup__ object.
+	Use this method to create an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
-func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupCreateCreated, error) {
+func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionGroupCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionGroupCreateCreated)
+	success, ok := result.(*OptionGroupCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) OptionGroupCreate(params *OptionGroupCreateParams, authInfo run
 }
 
 /*
-  OptionGroupDelete moves the d h c p option group to the recycle bin
+	OptionGroupDelete moves the d h c p option group to the recycle bin
 
-  Use this method to move an __OptionGroup__ object to the recycle bin.
+	Use this method to move an __OptionGroup__ object to the recycle bin.
+
 The __OptionGroup__ object is a named collection of options.
 */
-func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupDeleteNoContent, error) {
+func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionGroupDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionGroupDeleteNoContent)
+	success, ok := result.(*OptionGroupDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) OptionGroupDelete(params *OptionGroupDeleteParams, authInfo run
 }
 
 /*
-  OptionGroupList retrieves d h c p option groups
+	OptionGroupList retrieves d h c p option groups
 
-  Use this method to retrieve __OptionGroup__ objects.
+	Use this method to retrieve __OptionGroup__ objects.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupList(params *OptionGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionGroupList(params *OptionGroupListParams, authInfo runtime
 }
 
 /*
-  OptionGroupRead retrieves the d h c p option group
+	OptionGroupRead retrieves the d h c p option group
 
-  Use this method to retrieve an __OptionGroup__ object.
+	Use this method to retrieve an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
 func (a *Client) OptionGroupRead(params *OptionGroupReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) OptionGroupRead(params *OptionGroupReadParams, authInfo runtime
 }
 
 /*
-  OptionGroupUpdate updates the d h c p option group
+	OptionGroupUpdate updates the d h c p option group
 
-  Use this method to update an __OptionGroup__ object.
+	Use this method to update an __OptionGroup__ object.
+
 The __OptionGroup__ object is a named collection of options.
 */
-func (a *Client) OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupUpdateCreated, error) {
+func (a *Client) OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionGroupUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionGroupUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) OptionGroupUpdate(params *OptionGroupUpdateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionGroupUpdateCreated)
+	success, ok := result.(*OptionGroupUpdateOK)
 	if ok {
 		return success, nil
 	}

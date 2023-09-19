@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewHaGroupReadParams creates a new HaGroupReadParams object,
@@ -52,10 +53,12 @@ func NewHaGroupReadParamsWithHTTPClient(client *http.Client) *HaGroupReadParams 
 	}
 }
 
-/* HaGroupReadParams contains all the parameters to send to the API endpoint
-   for the ha group read operation.
+/*
+HaGroupReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ha group read operation.
+
+	Typically these are written to a http.Request.
 */
 type HaGroupReadParams struct {
 
@@ -70,6 +73,14 @@ type HaGroupReadParams struct {
 
 	*/
 	Fields *string
+
+	/* CollectStats.
+
+	   collect_stats gets the HA group stats(state, status, heartbeat) if set to _true_ in the _GET_ _/dhcp/ha_group_ request.
+
+	   Format: boolean
+	*/
+	CollectStats *bool
 
 	/* ID.
 
@@ -141,6 +152,17 @@ func (o *HaGroupReadParams) SetFields(fields *string) {
 	o.Fields = fields
 }
 
+// WithCollectStats adds the collectStats to the ha group read params
+func (o *HaGroupReadParams) WithCollectStats(collectStats *bool) *HaGroupReadParams {
+	o.SetCollectStats(collectStats)
+	return o
+}
+
+// SetCollectStats adds the collectStats to the ha group read params
+func (o *HaGroupReadParams) SetCollectStats(collectStats *bool) {
+	o.CollectStats = collectStats
+}
+
 // WithID adds the id to the ha group read params
 func (o *HaGroupReadParams) WithID(id string) *HaGroupReadParams {
 	o.SetID(id)
@@ -172,6 +194,23 @@ func (o *HaGroupReadParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if qFields != "" {
 
 			if err := r.SetQueryParam("_fields", qFields); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CollectStats != nil {
+
+		// query param collect_stats
+		var qrCollectStats bool
+
+		if o.CollectStats != nil {
+			qrCollectStats = *o.CollectStats
+		}
+		qCollectStats := swag.FormatBool(qrCollectStats)
+		if qCollectStats != "" {
+
+			if err := r.SetQueryParam("collect_stats", qCollectStats); err != nil {
 				return err
 			}
 		}

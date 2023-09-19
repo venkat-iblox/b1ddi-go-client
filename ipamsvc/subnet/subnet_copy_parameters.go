@@ -54,10 +54,12 @@ func NewSubnetCopyParamsWithHTTPClient(client *http.Client) *SubnetCopyParams {
 	}
 }
 
-/* SubnetCopyParams contains all the parameters to send to the API endpoint
-   for the subnet copy operation.
+/*
+SubnetCopyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the subnet copy operation.
+
+	Typically these are written to a http.Request.
 */
 type SubnetCopyParams struct {
 

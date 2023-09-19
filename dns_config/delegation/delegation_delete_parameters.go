@@ -52,10 +52,12 @@ func NewDelegationDeleteParamsWithHTTPClient(client *http.Client) *DelegationDel
 	}
 }
 
-/* DelegationDeleteParams contains all the parameters to send to the API endpoint
-   for the delegation delete operation.
+/*
+DelegationDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delegation delete operation.
+
+	Typically these are written to a http.Request.
 */
 type DelegationDeleteParams struct {
 

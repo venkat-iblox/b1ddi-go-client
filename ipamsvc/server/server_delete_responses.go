@@ -29,30 +29,31 @@ func (o *ServerDeleteReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewServerDeleteNoContent()
+	result := NewServerDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewServerDeleteNoContent creates a ServerDeleteNoContent with default headers values
-func NewServerDeleteNoContent() *ServerDeleteNoContent {
-	return &ServerDeleteNoContent{}
+// NewServerDeleteOK creates a ServerDeleteOK with default headers values
+func NewServerDeleteOK() *ServerDeleteOK {
+	return &ServerDeleteOK{}
 }
 
-/* ServerDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ServerDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type ServerDeleteNoContent struct {
+type ServerDeleteOK struct {
 }
 
-func (o *ServerDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/server/{id}][%d] serverDeleteNoContent ", 204)
+func (o *ServerDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/server/{id}][%d] serverDeleteOK ", 200)
 }
 
-func (o *ServerDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ServerDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

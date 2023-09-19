@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceCreateCreated, error)
+	OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceCreateOK, error)
 
-	OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceDeleteNoContent, error)
+	OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceDeleteOK, error)
 
 	OptionSpaceList(params *OptionSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceListOK, error)
 
 	OptionSpaceRead(params *OptionSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceReadOK, error)
 
-	OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceUpdateCreated, error)
+	OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  OptionSpaceCreate creates the d h c p option space
+	OptionSpaceCreate creates the d h c p option space
 
-  Use this method to create an __OptionSpace__ object.
+	Use this method to create an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
-func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceCreateCreated, error) {
+func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionSpaceCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionSpaceCreateCreated)
+	success, ok := result.(*OptionSpaceCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) OptionSpaceCreate(params *OptionSpaceCreateParams, authInfo run
 }
 
 /*
-  OptionSpaceDelete moves the d h c p option space to the recycle bin
+	OptionSpaceDelete moves the d h c p option space to the recycle bin
 
-  Use this method to move an __OptionSpace__ object to the recycle bin.
+	Use this method to move an __OptionSpace__ object to the recycle bin.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
-func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceDeleteNoContent, error) {
+func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionSpaceDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionSpaceDeleteNoContent)
+	success, ok := result.(*OptionSpaceDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) OptionSpaceDelete(params *OptionSpaceDeleteParams, authInfo run
 }
 
 /*
-  OptionSpaceList retrieves d h c p option spaces
+	OptionSpaceList retrieves d h c p option spaces
 
-  Use this method to retrieve __OptionSpace__ objects.
+	Use this method to retrieve __OptionSpace__ objects.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceList(params *OptionSpaceListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) OptionSpaceList(params *OptionSpaceListParams, authInfo runtime
 }
 
 /*
-  OptionSpaceRead retrieves the d h c p option space
+	OptionSpaceRead retrieves the d h c p option space
 
-  Use this method to retrieve an __OptionSpace__ object.
+	Use this method to retrieve an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
 func (a *Client) OptionSpaceRead(params *OptionSpaceReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) OptionSpaceRead(params *OptionSpaceReadParams, authInfo runtime
 }
 
 /*
-  OptionSpaceUpdate updates the d h c p option space
+	OptionSpaceUpdate updates the d h c p option space
 
-  Use this method to update an __OptionSpace__ object.
+	Use this method to update an __OptionSpace__ object.
+
 The __OptionSpace__ object represents a set of DHCP option codes.
 */
-func (a *Client) OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceUpdateCreated, error) {
+func (a *Client) OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OptionSpaceUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOptionSpaceUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) OptionSpaceUpdate(params *OptionSpaceUpdateParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*OptionSpaceUpdateCreated)
+	success, ok := result.(*OptionSpaceUpdateOK)
 	if ok {
 		return success, nil
 	}

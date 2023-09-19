@@ -52,10 +52,12 @@ func NewAuthNsgReadParamsWithHTTPClient(client *http.Client) *AuthNsgReadParams 
 	}
 }
 
-/* AuthNsgReadParams contains all the parameters to send to the API endpoint
-   for the auth nsg read operation.
+/*
+AuthNsgReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth nsg read operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthNsgReadParams struct {
 

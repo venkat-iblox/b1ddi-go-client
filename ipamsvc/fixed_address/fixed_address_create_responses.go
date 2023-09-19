@@ -31,34 +31,35 @@ func (o *FixedAddressCreateReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewFixedAddressCreateCreated()
+	result := NewFixedAddressCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewFixedAddressCreateCreated creates a FixedAddressCreateCreated with default headers values
-func NewFixedAddressCreateCreated() *FixedAddressCreateCreated {
-	return &FixedAddressCreateCreated{}
+// NewFixedAddressCreateOK creates a FixedAddressCreateOK with default headers values
+func NewFixedAddressCreateOK() *FixedAddressCreateOK {
+	return &FixedAddressCreateOK{}
 }
 
-/* FixedAddressCreateCreated describes a response with status code 201, with default header values.
+/*
+FixedAddressCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type FixedAddressCreateCreated struct {
+type FixedAddressCreateOK struct {
 	Payload *models.IpamsvcCreateFixedAddressResponse
 }
 
-func (o *FixedAddressCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/fixed_address][%d] fixedAddressCreateCreated  %+v", 201, o.Payload)
+func (o *FixedAddressCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/fixed_address][%d] fixedAddressCreateOK  %+v", 200, o.Payload)
 }
-func (o *FixedAddressCreateCreated) GetPayload() *models.IpamsvcCreateFixedAddressResponse {
+func (o *FixedAddressCreateOK) GetPayload() *models.IpamsvcCreateFixedAddressResponse {
 	return o.Payload
 }
 
-func (o *FixedAddressCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *FixedAddressCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateFixedAddressResponse)
 

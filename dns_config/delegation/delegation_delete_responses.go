@@ -29,30 +29,31 @@ func (o *DelegationDeleteReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewDelegationDeleteNoContent()
+	result := NewDelegationDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewDelegationDeleteNoContent creates a DelegationDeleteNoContent with default headers values
-func NewDelegationDeleteNoContent() *DelegationDeleteNoContent {
-	return &DelegationDeleteNoContent{}
+// NewDelegationDeleteOK creates a DelegationDeleteOK with default headers values
+func NewDelegationDeleteOK() *DelegationDeleteOK {
+	return &DelegationDeleteOK{}
 }
 
-/* DelegationDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DelegationDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type DelegationDeleteNoContent struct {
+type DelegationDeleteOK struct {
 }
 
-func (o *DelegationDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/delegation/{id}][%d] delegationDeleteNoContent ", 204)
+func (o *DelegationDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/delegation/{id}][%d] delegationDeleteOK ", 200)
 }
 
-func (o *DelegationDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DelegationDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

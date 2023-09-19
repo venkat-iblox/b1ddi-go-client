@@ -23,11 +23,11 @@ type ConfigExternalSecondary struct {
 
 	// IP Address of nameserver.
 	// Required: true
-	Address *string `json:"address,omitempty"`
+	Address *string `json:"address"`
 
 	// FQDN of nameserver.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// FQDN of nameserver in punycode.
 	// Read Only: true
@@ -139,6 +139,11 @@ func (m *ConfigExternalSecondary) contextValidateProtocolFqdn(ctx context.Contex
 func (m *ConfigExternalSecondary) contextValidateTsigKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TsigKey != nil {
+
+		if swag.IsZero(m.TsigKey) { // not required
+			return nil
+		}
+
 		if err := m.TsigKey.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tsig_key")

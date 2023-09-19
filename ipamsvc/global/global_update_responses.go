@@ -31,34 +31,35 @@ func (o *GlobalUpdateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewGlobalUpdateCreated()
+	result := NewGlobalUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewGlobalUpdateCreated creates a GlobalUpdateCreated with default headers values
-func NewGlobalUpdateCreated() *GlobalUpdateCreated {
-	return &GlobalUpdateCreated{}
+// NewGlobalUpdateOK creates a GlobalUpdateOK with default headers values
+func NewGlobalUpdateOK() *GlobalUpdateOK {
+	return &GlobalUpdateOK{}
 }
 
-/* GlobalUpdateCreated describes a response with status code 201, with default header values.
+/*
+GlobalUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type GlobalUpdateCreated struct {
+type GlobalUpdateOK struct {
 	Payload *models.IpamsvcUpdateGlobalResponse
 }
 
-func (o *GlobalUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/global][%d] globalUpdateCreated  %+v", 201, o.Payload)
+func (o *GlobalUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/global][%d] globalUpdateOK  %+v", 200, o.Payload)
 }
-func (o *GlobalUpdateCreated) GetPayload() *models.IpamsvcUpdateGlobalResponse {
+func (o *GlobalUpdateOK) GetPayload() *models.IpamsvcUpdateGlobalResponse {
 	return o.Payload
 }
 
-func (o *GlobalUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GlobalUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateGlobalResponse)
 

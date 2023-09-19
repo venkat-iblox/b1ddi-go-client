@@ -43,7 +43,8 @@ func NewIPSpaceListOK() *IPSpaceListOK {
 	return &IPSpaceListOK{}
 }
 
-/* IPSpaceListOK describes a response with status code 200, with default header values.
+/*
+IPSpaceListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

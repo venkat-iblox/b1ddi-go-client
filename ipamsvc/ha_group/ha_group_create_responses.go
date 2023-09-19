@@ -31,34 +31,35 @@ func (o *HaGroupCreateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHaGroupCreateCreated()
+	result := NewHaGroupCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHaGroupCreateCreated creates a HaGroupCreateCreated with default headers values
-func NewHaGroupCreateCreated() *HaGroupCreateCreated {
-	return &HaGroupCreateCreated{}
+// NewHaGroupCreateOK creates a HaGroupCreateOK with default headers values
+func NewHaGroupCreateOK() *HaGroupCreateOK {
+	return &HaGroupCreateOK{}
 }
 
-/* HaGroupCreateCreated describes a response with status code 201, with default header values.
+/*
+HaGroupCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type HaGroupCreateCreated struct {
+type HaGroupCreateOK struct {
 	Payload *models.IpamsvcCreateHAGroupResponse
 }
 
-func (o *HaGroupCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/ha_group][%d] haGroupCreateCreated  %+v", 201, o.Payload)
+func (o *HaGroupCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/ha_group][%d] haGroupCreateOK  %+v", 200, o.Payload)
 }
-func (o *HaGroupCreateCreated) GetPayload() *models.IpamsvcCreateHAGroupResponse {
+func (o *HaGroupCreateOK) GetPayload() *models.IpamsvcCreateHAGroupResponse {
 	return o.Payload
 }
 
-func (o *HaGroupCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HaGroupCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateHAGroupResponse)
 

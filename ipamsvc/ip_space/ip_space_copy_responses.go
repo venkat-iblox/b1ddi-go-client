@@ -31,34 +31,35 @@ func (o *IPSpaceCopyReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIPSpaceCopyCreated()
+	result := NewIPSpaceCopyOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIPSpaceCopyCreated creates a IPSpaceCopyCreated with default headers values
-func NewIPSpaceCopyCreated() *IPSpaceCopyCreated {
-	return &IPSpaceCopyCreated{}
+// NewIPSpaceCopyOK creates a IPSpaceCopyOK with default headers values
+func NewIPSpaceCopyOK() *IPSpaceCopyOK {
+	return &IPSpaceCopyOK{}
 }
 
-/* IPSpaceCopyCreated describes a response with status code 201, with default header values.
+/*
+IPSpaceCopyOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type IPSpaceCopyCreated struct {
+type IPSpaceCopyOK struct {
 	Payload *models.IpamsvcCopyIPSpaceResponse
 }
 
-func (o *IPSpaceCopyCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/ip_space/{id}/copy][%d] ipSpaceCopyCreated  %+v", 201, o.Payload)
+func (o *IPSpaceCopyOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/ip_space/{id}/copy][%d] ipSpaceCopyOK  %+v", 200, o.Payload)
 }
-func (o *IPSpaceCopyCreated) GetPayload() *models.IpamsvcCopyIPSpaceResponse {
+func (o *IPSpaceCopyOK) GetPayload() *models.IpamsvcCopyIPSpaceResponse {
 	return o.Payload
 }
 
-func (o *IPSpaceCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IPSpaceCopyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCopyIPSpaceResponse)
 

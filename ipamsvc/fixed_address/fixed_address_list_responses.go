@@ -43,7 +43,8 @@ func NewFixedAddressListOK() *FixedAddressListOK {
 	return &FixedAddressListOK{}
 }
 
-/* FixedAddressListOK describes a response with status code 200, with default header values.
+/*
+FixedAddressListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

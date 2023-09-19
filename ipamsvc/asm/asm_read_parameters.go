@@ -52,10 +52,12 @@ func NewAsmReadParamsWithHTTPClient(client *http.Client) *AsmReadParams {
 	}
 }
 
-/* AsmReadParams contains all the parameters to send to the API endpoint
-   for the asm read operation.
+/*
+AsmReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the asm read operation.
+
+	Typically these are written to a http.Request.
 */
 type AsmReadParams struct {
 

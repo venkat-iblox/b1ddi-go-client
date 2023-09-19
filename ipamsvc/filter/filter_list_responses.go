@@ -43,7 +43,8 @@ func NewFilterListOK() *FilterListOK {
 	return &FilterListOK{}
 }
 
-/* FilterListOK describes a response with status code 200, with default header values.
+/*
+FilterListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

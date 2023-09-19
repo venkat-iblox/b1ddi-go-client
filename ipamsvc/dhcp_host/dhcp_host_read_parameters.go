@@ -52,10 +52,12 @@ func NewDhcpHostReadParamsWithHTTPClient(client *http.Client) *DhcpHostReadParam
 	}
 }
 
-/* DhcpHostReadParams contains all the parameters to send to the API endpoint
-   for the dhcp host read operation.
+/*
+DhcpHostReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dhcp host read operation.
+
+	Typically these are written to a http.Request.
 */
 type DhcpHostReadParams struct {
 

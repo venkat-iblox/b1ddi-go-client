@@ -31,34 +31,35 @@ func (o *SubnetUpdateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewSubnetUpdateCreated()
+	result := NewSubnetUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewSubnetUpdateCreated creates a SubnetUpdateCreated with default headers values
-func NewSubnetUpdateCreated() *SubnetUpdateCreated {
-	return &SubnetUpdateCreated{}
+// NewSubnetUpdateOK creates a SubnetUpdateOK with default headers values
+func NewSubnetUpdateOK() *SubnetUpdateOK {
+	return &SubnetUpdateOK{}
 }
 
-/* SubnetUpdateCreated describes a response with status code 201, with default header values.
+/*
+SubnetUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type SubnetUpdateCreated struct {
+type SubnetUpdateOK struct {
 	Payload *models.IpamsvcUpdateSubnetResponse
 }
 
-func (o *SubnetUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/subnet/{id}][%d] subnetUpdateCreated  %+v", 201, o.Payload)
+func (o *SubnetUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /ipam/subnet/{id}][%d] subnetUpdateOK  %+v", 200, o.Payload)
 }
-func (o *SubnetUpdateCreated) GetPayload() *models.IpamsvcUpdateSubnetResponse {
+func (o *SubnetUpdateOK) GetPayload() *models.IpamsvcUpdateSubnetResponse {
 	return o.Payload
 }
 
-func (o *SubnetUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *SubnetUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateSubnetResponse)
 

@@ -43,7 +43,8 @@ func NewAuthNsgReadOK() *AuthNsgReadOK {
 	return &AuthNsgReadOK{}
 }
 
-/* AuthNsgReadOK describes a response with status code 200, with default header values.
+/*
+AuthNsgReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

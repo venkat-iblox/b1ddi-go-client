@@ -46,7 +46,7 @@ type ConfigExternalPrimary struct {
 	// * _nsg_,
 	// * _primary_.
 	// Required: true
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type"`
 }
 
 // Validate validates this config external primary
@@ -125,6 +125,11 @@ func (m *ConfigExternalPrimary) contextValidateProtocolFqdn(ctx context.Context,
 func (m *ConfigExternalPrimary) contextValidateTsigKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TsigKey != nil {
+
+		if swag.IsZero(m.TsigKey) { // not required
+			return nil
+		}
+
 		if err := m.TsigKey.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tsig_key")

@@ -52,10 +52,12 @@ func NewIPSpaceReadParamsWithHTTPClient(client *http.Client) *IPSpaceReadParams 
 	}
 }
 
-/* IPSpaceReadParams contains all the parameters to send to the API endpoint
-   for the ip space read operation.
+/*
+IPSpaceReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip space read operation.
+
+	Typically these are written to a http.Request.
 */
 type IPSpaceReadParams struct {
 

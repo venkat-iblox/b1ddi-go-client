@@ -30,18 +30,19 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CacheFlushCreate(params *CacheFlushCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CacheFlushCreateCreated, error)
+	CacheFlushCreate(params *CacheFlushCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CacheFlushCreateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  CacheFlushCreate creates the cache flush object
+	CacheFlushCreate creates the cache flush object
 
-  Use this method to create a Cache Flush object.
+	Use this method to create a Cache Flush object.
+
 The Cache Flush object is for removing entries from the DNS cache on a host. The host must be available and running DNS for this to succeed.
 */
-func (a *Client) CacheFlushCreate(params *CacheFlushCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CacheFlushCreateCreated, error) {
+func (a *Client) CacheFlushCreate(params *CacheFlushCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CacheFlushCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCacheFlushCreateParams()
@@ -67,7 +68,7 @@ func (a *Client) CacheFlushCreate(params *CacheFlushCreateParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CacheFlushCreateCreated)
+	success, ok := result.(*CacheFlushCreateOK)
 	if ok {
 		return success, nil
 	}

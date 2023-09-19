@@ -52,10 +52,12 @@ func NewOptionFilterReadParamsWithHTTPClient(client *http.Client) *OptionFilterR
 	}
 }
 
-/* OptionFilterReadParams contains all the parameters to send to the API endpoint
-   for the option filter read operation.
+/*
+OptionFilterReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option filter read operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionFilterReadParams struct {
 

@@ -31,34 +31,35 @@ func (o *IPSpaceCreateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIPSpaceCreateCreated()
+	result := NewIPSpaceCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIPSpaceCreateCreated creates a IPSpaceCreateCreated with default headers values
-func NewIPSpaceCreateCreated() *IPSpaceCreateCreated {
-	return &IPSpaceCreateCreated{}
+// NewIPSpaceCreateOK creates a IPSpaceCreateOK with default headers values
+func NewIPSpaceCreateOK() *IPSpaceCreateOK {
+	return &IPSpaceCreateOK{}
 }
 
-/* IPSpaceCreateCreated describes a response with status code 201, with default header values.
+/*
+IPSpaceCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type IPSpaceCreateCreated struct {
+type IPSpaceCreateOK struct {
 	Payload *models.IpamsvcCreateIPSpaceResponse
 }
 
-func (o *IPSpaceCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/ip_space][%d] ipSpaceCreateCreated  %+v", 201, o.Payload)
+func (o *IPSpaceCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/ip_space][%d] ipSpaceCreateOK  %+v", 200, o.Payload)
 }
-func (o *IPSpaceCreateCreated) GetPayload() *models.IpamsvcCreateIPSpaceResponse {
+func (o *IPSpaceCreateOK) GetPayload() *models.IpamsvcCreateIPSpaceResponse {
 	return o.Payload
 }
 
-func (o *IPSpaceCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IPSpaceCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateIPSpaceResponse)
 

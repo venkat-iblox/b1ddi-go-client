@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ServerCreate(params *ServerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerCreateCreated, error)
+	ServerCreate(params *ServerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerCreateOK, error)
 
-	ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteNoContent, error)
+	ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteOK, error)
 
 	ServerList(params *ServerListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListOK, error)
 
 	ServerRead(params *ServerReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerReadOK, error)
 
-	ServerUpdate(params *ServerUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerUpdateCreated, error)
+	ServerUpdate(params *ServerUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  ServerCreate creates the d h c p configuration profile
+	ServerCreate creates the d h c p configuration profile
 
-  Use this method to create a __Server__ object.
+	Use this method to create a __Server__ object.
+
 A __Server__ (DHCP Config Profile) is a named configuration profile that can be shared for specified list of hosts.
 */
-func (a *Client) ServerCreate(params *ServerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerCreateCreated, error) {
+func (a *Client) ServerCreate(params *ServerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewServerCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) ServerCreate(params *ServerCreateParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ServerCreateCreated)
+	success, ok := result.(*ServerCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) ServerCreate(params *ServerCreateParams, authInfo runtime.Clien
 }
 
 /*
-  ServerDelete moves the d h c p configuration profile to the recycle bin
+	ServerDelete moves the d h c p configuration profile to the recycle bin
 
-  Use this method to move a __Server__ object to the recycle bin.
+	Use this method to move a __Server__ object to the recycle bin.
+
 A __Server__ (DHCP Config Profile) is a named configuration profile that can be shared for specified list of hosts.
 */
-func (a *Client) ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteNoContent, error) {
+func (a *Client) ServerDelete(params *ServerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewServerDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) ServerDelete(params *ServerDeleteParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ServerDeleteNoContent)
+	success, ok := result.(*ServerDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) ServerDelete(params *ServerDeleteParams, authInfo runtime.Clien
 }
 
 /*
-  ServerList retrieves d h c p configuration profiles
+	ServerList retrieves d h c p configuration profiles
 
-  Use this method to retrieve __Server__ objects.
+	Use this method to retrieve __Server__ objects.
+
 A __Server__ (DHCP Config Profile) is a named configuration profile that can be shared for specified list of hosts.
 */
 func (a *Client) ServerList(params *ServerListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) ServerList(params *ServerListParams, authInfo runtime.ClientAut
 }
 
 /*
-  ServerRead retrieves the d h c p configuration profile
+	ServerRead retrieves the d h c p configuration profile
 
-  Use this method to retrieve a __Server__ object.
+	Use this method to retrieve a __Server__ object.
+
 A __Server__ (DHCP Config Profile) is a named configuration profile that can be shared for specified list of hosts.
 */
 func (a *Client) ServerRead(params *ServerReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) ServerRead(params *ServerReadParams, authInfo runtime.ClientAut
 }
 
 /*
-  ServerUpdate updates the d h c p configuration profile
+	ServerUpdate updates the d h c p configuration profile
 
-  Use this method to update a __Server__ object.
+	Use this method to update a __Server__ object.
+
 A __Server__ (DHCP Config Profile) is a named configuration profile that can be shared for specified list of hosts.
 */
-func (a *Client) ServerUpdate(params *ServerUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerUpdateCreated, error) {
+func (a *Client) ServerUpdate(params *ServerUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServerUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewServerUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) ServerUpdate(params *ServerUpdateParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ServerUpdateCreated)
+	success, ok := result.(*ServerUpdateOK)
 	if ok {
 		return success, nil
 	}

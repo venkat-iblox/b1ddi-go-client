@@ -16,10 +16,13 @@ import (
 
 // IpamsvcHostAssociationsResponse HostAssociationsResponse
 //
-// The response format to retrieve __HAGroup__ and __Subnet__ objects associated with the DHCP __Host__ object. The host in question is also included in the output, for the convenience reasons.
+// The response format to retrieve __HAGroup__, __Subnet__ and __DHCPPacketStats__ objects associated with the DHCP __Host__ object. The host in question is also included in the output, for the convenience reasons.
 //
 // swagger:model ipamsvcHostAssociationsResponse
 type IpamsvcHostAssociationsResponse struct {
+
+	// The DHCP packets statistics.
+	DhcpPktStats *IpamsvcDHCPPacketStats `json:"dhcp_pkt_stats,omitempty"`
 
 	// The list of HA groups.
 	HaGroups []*IpamsvcHAGroup `json:"ha_groups"`
@@ -34,6 +37,10 @@ type IpamsvcHostAssociationsResponse struct {
 // Validate validates this ipamsvc host associations response
 func (m *IpamsvcHostAssociationsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateDhcpPktStats(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateHaGroups(formats); err != nil {
 		res = append(res, err)
@@ -50,6 +57,25 @@ func (m *IpamsvcHostAssociationsResponse) Validate(formats strfmt.Registry) erro
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IpamsvcHostAssociationsResponse) validateDhcpPktStats(formats strfmt.Registry) error {
+	if swag.IsZero(m.DhcpPktStats) { // not required
+		return nil
+	}
+
+	if m.DhcpPktStats != nil {
+		if err := m.DhcpPktStats.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dhcp_pkt_stats")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dhcp_pkt_stats")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -128,6 +154,10 @@ func (m *IpamsvcHostAssociationsResponse) validateSubnets(formats strfmt.Registr
 func (m *IpamsvcHostAssociationsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDhcpPktStats(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHaGroups(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -146,11 +176,37 @@ func (m *IpamsvcHostAssociationsResponse) ContextValidate(ctx context.Context, f
 	return nil
 }
 
+func (m *IpamsvcHostAssociationsResponse) contextValidateDhcpPktStats(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DhcpPktStats != nil {
+
+		if swag.IsZero(m.DhcpPktStats) { // not required
+			return nil
+		}
+
+		if err := m.DhcpPktStats.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dhcp_pkt_stats")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dhcp_pkt_stats")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcHostAssociationsResponse) contextValidateHaGroups(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.HaGroups); i++ {
 
 		if m.HaGroups[i] != nil {
+
+			if swag.IsZero(m.HaGroups[i]) { // not required
+				return nil
+			}
+
 			if err := m.HaGroups[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ha_groups" + "." + strconv.Itoa(i))
@@ -169,6 +225,11 @@ func (m *IpamsvcHostAssociationsResponse) contextValidateHaGroups(ctx context.Co
 func (m *IpamsvcHostAssociationsResponse) contextValidateHost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Host != nil {
+
+		if swag.IsZero(m.Host) { // not required
+			return nil
+		}
+
 		if err := m.Host.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("host")
@@ -187,6 +248,11 @@ func (m *IpamsvcHostAssociationsResponse) contextValidateSubnets(ctx context.Con
 	for i := 0; i < len(m.Subnets); i++ {
 
 		if m.Subnets[i] != nil {
+
+			if swag.IsZero(m.Subnets[i]) { // not required
+				return nil
+			}
+
 			if err := m.Subnets[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("subnets" + "." + strconv.Itoa(i))

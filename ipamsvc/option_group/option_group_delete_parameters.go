@@ -52,10 +52,12 @@ func NewOptionGroupDeleteParamsWithHTTPClient(client *http.Client) *OptionGroupD
 	}
 }
 
-/* OptionGroupDeleteParams contains all the parameters to send to the API endpoint
-   for the option group delete operation.
+/*
+OptionGroupDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option group delete operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionGroupDeleteParams struct {
 

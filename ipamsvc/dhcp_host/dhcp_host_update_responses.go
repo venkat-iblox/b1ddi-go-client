@@ -31,34 +31,35 @@ func (o *DhcpHostUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewDhcpHostUpdateCreated()
+	result := NewDhcpHostUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewDhcpHostUpdateCreated creates a DhcpHostUpdateCreated with default headers values
-func NewDhcpHostUpdateCreated() *DhcpHostUpdateCreated {
-	return &DhcpHostUpdateCreated{}
+// NewDhcpHostUpdateOK creates a DhcpHostUpdateOK with default headers values
+func NewDhcpHostUpdateOK() *DhcpHostUpdateOK {
+	return &DhcpHostUpdateOK{}
 }
 
-/* DhcpHostUpdateCreated describes a response with status code 201, with default header values.
+/*
+DhcpHostUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type DhcpHostUpdateCreated struct {
+type DhcpHostUpdateOK struct {
 	Payload *models.IpamsvcUpdateHostResponse
 }
 
-func (o *DhcpHostUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/host/{id}][%d] dhcpHostUpdateCreated  %+v", 201, o.Payload)
+func (o *DhcpHostUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/host/{id}][%d] dhcpHostUpdateOK  %+v", 200, o.Payload)
 }
-func (o *DhcpHostUpdateCreated) GetPayload() *models.IpamsvcUpdateHostResponse {
+func (o *DhcpHostUpdateOK) GetPayload() *models.IpamsvcUpdateHostResponse {
 	return o.Payload
 }
 
-func (o *DhcpHostUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DhcpHostUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateHostResponse)
 

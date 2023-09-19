@@ -31,34 +31,35 @@ func (o *DelegationUpdateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewDelegationUpdateCreated()
+	result := NewDelegationUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewDelegationUpdateCreated creates a DelegationUpdateCreated with default headers values
-func NewDelegationUpdateCreated() *DelegationUpdateCreated {
-	return &DelegationUpdateCreated{}
+// NewDelegationUpdateOK creates a DelegationUpdateOK with default headers values
+func NewDelegationUpdateOK() *DelegationUpdateOK {
+	return &DelegationUpdateOK{}
 }
 
-/* DelegationUpdateCreated describes a response with status code 201, with default header values.
+/*
+DelegationUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type DelegationUpdateCreated struct {
+type DelegationUpdateOK struct {
 	Payload *models.ConfigUpdateDelegationResponse
 }
 
-func (o *DelegationUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/delegation/{id}][%d] delegationUpdateCreated  %+v", 201, o.Payload)
+func (o *DelegationUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/delegation/{id}][%d] delegationUpdateOK  %+v", 200, o.Payload)
 }
-func (o *DelegationUpdateCreated) GetPayload() *models.ConfigUpdateDelegationResponse {
+func (o *DelegationUpdateOK) GetPayload() *models.ConfigUpdateDelegationResponse {
 	return o.Payload
 }
 
-func (o *DelegationUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DelegationUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateDelegationResponse)
 

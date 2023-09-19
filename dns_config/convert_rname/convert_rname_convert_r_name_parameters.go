@@ -52,10 +52,12 @@ func NewConvertRnameConvertRNameParamsWithHTTPClient(client *http.Client) *Conve
 	}
 }
 
-/* ConvertRnameConvertRNameParams contains all the parameters to send to the API endpoint
-   for the convert rname convert r name operation.
+/*
+ConvertRnameConvertRNameParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the convert rname convert r name operation.
+
+	Typically these are written to a http.Request.
 */
 type ConvertRnameConvertRNameParams struct {
 

@@ -43,7 +43,8 @@ func NewAddressBlockListNextAvailableIPOK() *AddressBlockListNextAvailableIPOK {
 	return &AddressBlockListNextAvailableIPOK{}
 }
 
-/* AddressBlockListNextAvailableIPOK describes a response with status code 200, with default header values.
+/*
+AddressBlockListNextAvailableIPOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

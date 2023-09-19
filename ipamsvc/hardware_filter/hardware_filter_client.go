@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	HardwareFilterCreate(params *HardwareFilterCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterCreateCreated, error)
+	HardwareFilterCreate(params *HardwareFilterCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterCreateOK, error)
 
-	HardwareFilterDelete(params *HardwareFilterDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterDeleteNoContent, error)
+	HardwareFilterDelete(params *HardwareFilterDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterDeleteOK, error)
 
 	HardwareFilterList(params *HardwareFilterListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterListOK, error)
 
 	HardwareFilterRead(params *HardwareFilterReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterReadOK, error)
 
-	HardwareFilterUpdate(params *HardwareFilterUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterUpdateCreated, error)
+	HardwareFilterUpdate(params *HardwareFilterUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  HardwareFilterCreate creates the hardware filter
+	HardwareFilterCreate creates the hardware filter
 
-  Use this method to create a __HardwareFilter__ object.
+	Use this method to create a __HardwareFilter__ object.
+
 The __HardwareFilter__ object applies options to clients with matching hardware addresses. It must be configured in the _filters_ list of a scope to be effective.
 */
-func (a *Client) HardwareFilterCreate(params *HardwareFilterCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterCreateCreated, error) {
+func (a *Client) HardwareFilterCreate(params *HardwareFilterCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHardwareFilterCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) HardwareFilterCreate(params *HardwareFilterCreateParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HardwareFilterCreateCreated)
+	success, ok := result.(*HardwareFilterCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) HardwareFilterCreate(params *HardwareFilterCreateParams, authIn
 }
 
 /*
-  HardwareFilterDelete moves the hardware filter to the recycle bin
+	HardwareFilterDelete moves the hardware filter to the recycle bin
 
-  Use this method to move a __HardwareFilter__ object to the recycle bin.
+	Use this method to move a __HardwareFilter__ object to the recycle bin.
+
 The __HardwareFilter__ object applies options to clients with matching hardware addresses. It must be configured in the _filters_ list of a scope to be effective.
 */
-func (a *Client) HardwareFilterDelete(params *HardwareFilterDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterDeleteNoContent, error) {
+func (a *Client) HardwareFilterDelete(params *HardwareFilterDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHardwareFilterDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) HardwareFilterDelete(params *HardwareFilterDeleteParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HardwareFilterDeleteNoContent)
+	success, ok := result.(*HardwareFilterDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) HardwareFilterDelete(params *HardwareFilterDeleteParams, authIn
 }
 
 /*
-  HardwareFilterList retrieves hardware filters
+	HardwareFilterList retrieves hardware filters
 
-  Use this method to retrieve __HardwareFilter__ objects.
+	Use this method to retrieve __HardwareFilter__ objects.
+
 The __HardwareFilter__ object applies options to clients with matching hardware addresses. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) HardwareFilterList(params *HardwareFilterListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) HardwareFilterList(params *HardwareFilterListParams, authInfo r
 }
 
 /*
-  HardwareFilterRead retrieves the hardware filter
+	HardwareFilterRead retrieves the hardware filter
 
-  Use this method to retrieve a __HardwareFilter__ object.
+	Use this method to retrieve a __HardwareFilter__ object.
+
 The __HardwareFilter__ object applies options to clients with matching hardware addresses. It must be configured in the _filters_ list of a scope to be effective.
 */
 func (a *Client) HardwareFilterRead(params *HardwareFilterReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) HardwareFilterRead(params *HardwareFilterReadParams, authInfo r
 }
 
 /*
-  HardwareFilterUpdate updates the hardware filter
+	HardwareFilterUpdate updates the hardware filter
 
-  Use this method to update a __HardwareFilter__ object.
+	Use this method to update a __HardwareFilter__ object.
+
 The __HardwareFilter__ object applies options to clients with matching hardware addresses. It must be configured in the _filters_ list of a scope to be effective.
 */
-func (a *Client) HardwareFilterUpdate(params *HardwareFilterUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterUpdateCreated, error) {
+func (a *Client) HardwareFilterUpdate(params *HardwareFilterUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HardwareFilterUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHardwareFilterUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) HardwareFilterUpdate(params *HardwareFilterUpdateParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HardwareFilterUpdateCreated)
+	success, ok := result.(*HardwareFilterUpdateOK)
 	if ok {
 		return success, nil
 	}

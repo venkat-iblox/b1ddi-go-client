@@ -53,10 +53,12 @@ func NewACLListParamsWithHTTPClient(client *http.Client) *ACLListParams {
 	}
 }
 
-/* ACLListParams contains all the parameters to send to the API endpoint
-   for the acl list operation.
+/*
+ACLListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the acl list operation.
+
+	Typically these are written to a http.Request.
 */
 type ACLListParams struct {
 

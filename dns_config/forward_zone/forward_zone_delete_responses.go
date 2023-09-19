@@ -29,30 +29,31 @@ func (o *ForwardZoneDeleteReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardZoneDeleteNoContent()
+	result := NewForwardZoneDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardZoneDeleteNoContent creates a ForwardZoneDeleteNoContent with default headers values
-func NewForwardZoneDeleteNoContent() *ForwardZoneDeleteNoContent {
-	return &ForwardZoneDeleteNoContent{}
+// NewForwardZoneDeleteOK creates a ForwardZoneDeleteOK with default headers values
+func NewForwardZoneDeleteOK() *ForwardZoneDeleteOK {
+	return &ForwardZoneDeleteOK{}
 }
 
-/* ForwardZoneDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ForwardZoneDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type ForwardZoneDeleteNoContent struct {
+type ForwardZoneDeleteOK struct {
 }
 
-func (o *ForwardZoneDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/forward_zone/{id}][%d] forwardZoneDeleteNoContent ", 204)
+func (o *ForwardZoneDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/forward_zone/{id}][%d] forwardZoneDeleteOK ", 200)
 }
 
-func (o *ForwardZoneDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardZoneDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

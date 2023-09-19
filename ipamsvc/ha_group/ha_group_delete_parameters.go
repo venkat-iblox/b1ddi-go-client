@@ -52,10 +52,12 @@ func NewHaGroupDeleteParamsWithHTTPClient(client *http.Client) *HaGroupDeletePar
 	}
 }
 
-/* HaGroupDeleteParams contains all the parameters to send to the API endpoint
-   for the ha group delete operation.
+/*
+HaGroupDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ha group delete operation.
+
+	Typically these are written to a http.Request.
 */
 type HaGroupDeleteParams struct {
 

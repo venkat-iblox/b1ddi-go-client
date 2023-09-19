@@ -39,7 +39,7 @@ type ConfigTrustAnchor struct {
 	//  * _DSA_ = 3,
 	//  * _DSANSEC3SHA1_ = 6,
 	// Required: true
-	Algorithm *int64 `json:"algorithm,omitempty"`
+	Algorithm *int64 `json:"algorithm"`
 
 	// Zone FQDN in punycode.
 	// Read Only: true
@@ -47,7 +47,7 @@ type ConfigTrustAnchor struct {
 
 	// DNSSEC key data. Non-empty, valid base64 string.
 	// Required: true
-	PublicKey *string `json:"public_key,omitempty"`
+	PublicKey *string `json:"public_key"`
 
 	// Optional. Secure Entry Point flag.
 	//
@@ -56,7 +56,7 @@ type ConfigTrustAnchor struct {
 
 	// Zone FQDN.
 	// Required: true
-	Zone *string `json:"zone,omitempty"`
+	Zone *string `json:"zone"`
 }
 
 // Validate validates this config trust anchor

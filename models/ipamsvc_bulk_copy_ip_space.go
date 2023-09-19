@@ -19,7 +19,7 @@ import (
 // swagger:model ipamsvcBulkCopyIPSpace
 type IpamsvcBulkCopyIPSpace struct {
 
-	// Indicates whether dhcp options should be copied or not when objects (_ipam/address_block_ and _ipam/subnet_ only) are copied.
+	// Indicates whether dhcp options for IPv4 should be copied or not when objects (_ipam/address_block_ and _ipam/subnet_ only) are copied.
 	//
 	// Defaults to _false_.
 	CopyDhcpOptions bool `json:"copy_dhcp_options,omitempty"`
@@ -40,7 +40,7 @@ type IpamsvcBulkCopyIPSpace struct {
 
 	// The resource identifier.
 	// Required: true
-	Target *string `json:"target,omitempty"`
+	Target *string `json:"target"`
 }
 
 // Validate validates this ipamsvc bulk copy IP space

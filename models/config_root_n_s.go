@@ -16,18 +16,18 @@ import (
 
 // ConfigRootNS RootNS
 //
-// Root nameserver
+// # Root nameserver
 //
 // swagger:model configRootNS
 type ConfigRootNS struct {
 
 	// IPv4 address.
 	// Required: true
-	Address *string `json:"address,omitempty"`
+	Address *string `json:"address"`
 
 	// FQDN.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// FQDN in punycode.
 	// Read Only: true

@@ -43,7 +43,8 @@ func NewForwardZoneListOK() *ForwardZoneListOK {
 	return &ForwardZoneListOK{}
 }
 
-/* ForwardZoneListOK describes a response with status code 200, with default header values.
+/*
+ForwardZoneListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

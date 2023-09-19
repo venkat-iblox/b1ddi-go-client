@@ -20,11 +20,23 @@ import (
 // swagger:model ipamsvcInheritedDHCPConfig
 type IpamsvcInheritedDHCPConfig struct {
 
+	// The inheritance configuration for _abandoned_reclaim_time_ field from _DHCPConfig_ object.
+	AbandonedReclaimTime *InheritanceInheritedUInt32 `json:"abandoned_reclaim_time,omitempty"`
+
+	// The inheritance configuration for _abandoned_reclaim_time_v6_ field from _DHCPConfig_ object.
+	AbandonedReclaimTimeV6 *InheritanceInheritedUInt32 `json:"abandoned_reclaim_time_v6,omitempty"`
+
 	// The inheritance configuration for _allow_unknown_ field from _DHCPConfig_ object.
 	AllowUnknown *InheritanceInheritedBool `json:"allow_unknown,omitempty"`
 
+	// The inheritance configuration for _allow_unknown_v6_ field from _DHCPConfig_ object.
+	AllowUnknownV6 *InheritanceInheritedBool `json:"allow_unknown_v6,omitempty"`
+
 	// The inheritance configuration for filters field from _DHCPConfig_ object.
 	Filters *InheritedDHCPConfigFilterList `json:"filters,omitempty"`
+
+	// The inheritance configuration for _filters_v6_ field from _DHCPConfig_ object.
+	FiltersV6 *InheritedDHCPConfigFilterList `json:"filters_v6,omitempty"`
 
 	// The inheritance configuration for _ignore_client_uid_ field from _DHCPConfig_ object.
 	IgnoreClientUID *InheritanceInheritedBool `json:"ignore_client_uid,omitempty"`
@@ -34,17 +46,36 @@ type IpamsvcInheritedDHCPConfig struct {
 
 	// The inheritance configuration for _lease_time_ field from _DHCPConfig_ object.
 	LeaseTime *InheritanceInheritedUInt32 `json:"lease_time,omitempty"`
+
+	// The inheritance configuration for _lease_time_v6_ field from _DHCPConfig_ object.
+	LeaseTimeV6 *InheritanceInheritedUInt32 `json:"lease_time_v6,omitempty"`
 }
 
 // Validate validates this ipamsvc inherited d h c p config
 func (m *IpamsvcInheritedDHCPConfig) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAbandonedReclaimTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAbandonedReclaimTimeV6(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateAllowUnknown(formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.validateAllowUnknownV6(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFilters(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFiltersV6(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -60,9 +91,51 @@ func (m *IpamsvcInheritedDHCPConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateLeaseTimeV6(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) validateAbandonedReclaimTime(formats strfmt.Registry) error {
+	if swag.IsZero(m.AbandonedReclaimTime) { // not required
+		return nil
+	}
+
+	if m.AbandonedReclaimTime != nil {
+		if err := m.AbandonedReclaimTime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("abandoned_reclaim_time")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("abandoned_reclaim_time")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) validateAbandonedReclaimTimeV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.AbandonedReclaimTimeV6) { // not required
+		return nil
+	}
+
+	if m.AbandonedReclaimTimeV6 != nil {
+		if err := m.AbandonedReclaimTimeV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("abandoned_reclaim_time_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("abandoned_reclaim_time_v6")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -85,6 +158,25 @@ func (m *IpamsvcInheritedDHCPConfig) validateAllowUnknown(formats strfmt.Registr
 	return nil
 }
 
+func (m *IpamsvcInheritedDHCPConfig) validateAllowUnknownV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.AllowUnknownV6) { // not required
+		return nil
+	}
+
+	if m.AllowUnknownV6 != nil {
+		if err := m.AllowUnknownV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("allow_unknown_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("allow_unknown_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcInheritedDHCPConfig) validateFilters(formats strfmt.Registry) error {
 	if swag.IsZero(m.Filters) { // not required
 		return nil
@@ -96,6 +188,25 @@ func (m *IpamsvcInheritedDHCPConfig) validateFilters(formats strfmt.Registry) er
 				return ve.ValidateName("filters")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("filters")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) validateFiltersV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.FiltersV6) { // not required
+		return nil
+	}
+
+	if m.FiltersV6 != nil {
+		if err := m.FiltersV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filters_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filters_v6")
 			}
 			return err
 		}
@@ -161,15 +272,50 @@ func (m *IpamsvcInheritedDHCPConfig) validateLeaseTime(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *IpamsvcInheritedDHCPConfig) validateLeaseTimeV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.LeaseTimeV6) { // not required
+		return nil
+	}
+
+	if m.LeaseTimeV6 != nil {
+		if err := m.LeaseTimeV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("lease_time_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lease_time_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ipamsvc inherited d h c p config based on the context it is used
 func (m *IpamsvcInheritedDHCPConfig) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAbandonedReclaimTime(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAbandonedReclaimTimeV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateAllowUnknown(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAllowUnknownV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateFilters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFiltersV6(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -185,15 +331,66 @@ func (m *IpamsvcInheritedDHCPConfig) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLeaseTimeV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
+func (m *IpamsvcInheritedDHCPConfig) contextValidateAbandonedReclaimTime(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AbandonedReclaimTime != nil {
+
+		if swag.IsZero(m.AbandonedReclaimTime) { // not required
+			return nil
+		}
+
+		if err := m.AbandonedReclaimTime.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("abandoned_reclaim_time")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("abandoned_reclaim_time")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) contextValidateAbandonedReclaimTimeV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AbandonedReclaimTimeV6 != nil {
+
+		if swag.IsZero(m.AbandonedReclaimTimeV6) { // not required
+			return nil
+		}
+
+		if err := m.AbandonedReclaimTimeV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("abandoned_reclaim_time_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("abandoned_reclaim_time_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcInheritedDHCPConfig) contextValidateAllowUnknown(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AllowUnknown != nil {
+
+		if swag.IsZero(m.AllowUnknown) { // not required
+			return nil
+		}
+
 		if err := m.AllowUnknown.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allow_unknown")
@@ -207,9 +404,35 @@ func (m *IpamsvcInheritedDHCPConfig) contextValidateAllowUnknown(ctx context.Con
 	return nil
 }
 
+func (m *IpamsvcInheritedDHCPConfig) contextValidateAllowUnknownV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AllowUnknownV6 != nil {
+
+		if swag.IsZero(m.AllowUnknownV6) { // not required
+			return nil
+		}
+
+		if err := m.AllowUnknownV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("allow_unknown_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("allow_unknown_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcInheritedDHCPConfig) contextValidateFilters(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Filters != nil {
+
+		if swag.IsZero(m.Filters) { // not required
+			return nil
+		}
+
 		if err := m.Filters.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("filters")
@@ -223,9 +446,35 @@ func (m *IpamsvcInheritedDHCPConfig) contextValidateFilters(ctx context.Context,
 	return nil
 }
 
+func (m *IpamsvcInheritedDHCPConfig) contextValidateFiltersV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FiltersV6 != nil {
+
+		if swag.IsZero(m.FiltersV6) { // not required
+			return nil
+		}
+
+		if err := m.FiltersV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("filters_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("filters_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *IpamsvcInheritedDHCPConfig) contextValidateIgnoreClientUID(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.IgnoreClientUID != nil {
+
+		if swag.IsZero(m.IgnoreClientUID) { // not required
+			return nil
+		}
+
 		if err := m.IgnoreClientUID.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ignore_client_uid")
@@ -242,6 +491,11 @@ func (m *IpamsvcInheritedDHCPConfig) contextValidateIgnoreClientUID(ctx context.
 func (m *IpamsvcInheritedDHCPConfig) contextValidateIgnoreList(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.IgnoreList != nil {
+
+		if swag.IsZero(m.IgnoreList) { // not required
+			return nil
+		}
+
 		if err := m.IgnoreList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ignore_list")
@@ -258,11 +512,37 @@ func (m *IpamsvcInheritedDHCPConfig) contextValidateIgnoreList(ctx context.Conte
 func (m *IpamsvcInheritedDHCPConfig) contextValidateLeaseTime(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LeaseTime != nil {
+
+		if swag.IsZero(m.LeaseTime) { // not required
+			return nil
+		}
+
 		if err := m.LeaseTime.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lease_time")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("lease_time")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcInheritedDHCPConfig) contextValidateLeaseTimeV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LeaseTimeV6 != nil {
+
+		if swag.IsZero(m.LeaseTimeV6) { // not required
+			return nil
+		}
+
+		if err := m.LeaseTimeV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("lease_time_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("lease_time_v6")
 			}
 			return err
 		}

@@ -284,6 +284,11 @@ func (m *ConfigInheritedZoneAuthority) ContextValidate(ctx context.Context, form
 func (m *ConfigInheritedZoneAuthority) contextValidateDefaultTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DefaultTTL != nil {
+
+		if swag.IsZero(m.DefaultTTL) { // not required
+			return nil
+		}
+
 		if err := m.DefaultTTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("default_ttl")
@@ -300,6 +305,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateDefaultTTL(ctx context.Con
 func (m *ConfigInheritedZoneAuthority) contextValidateExpire(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Expire != nil {
+
+		if swag.IsZero(m.Expire) { // not required
+			return nil
+		}
+
 		if err := m.Expire.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("expire")
@@ -316,6 +326,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateExpire(ctx context.Context
 func (m *ConfigInheritedZoneAuthority) contextValidateMnameBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MnameBlock != nil {
+
+		if swag.IsZero(m.MnameBlock) { // not required
+			return nil
+		}
+
 		if err := m.MnameBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mname_block")
@@ -332,6 +347,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateMnameBlock(ctx context.Con
 func (m *ConfigInheritedZoneAuthority) contextValidateNegativeTTL(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NegativeTTL != nil {
+
+		if swag.IsZero(m.NegativeTTL) { // not required
+			return nil
+		}
+
 		if err := m.NegativeTTL.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("negative_ttl")
@@ -348,6 +368,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateNegativeTTL(ctx context.Co
 func (m *ConfigInheritedZoneAuthority) contextValidateProtocolRname(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ProtocolRname != nil {
+
+		if swag.IsZero(m.ProtocolRname) { // not required
+			return nil
+		}
+
 		if err := m.ProtocolRname.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("protocol_rname")
@@ -364,6 +389,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateProtocolRname(ctx context.
 func (m *ConfigInheritedZoneAuthority) contextValidateRefresh(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Refresh != nil {
+
+		if swag.IsZero(m.Refresh) { // not required
+			return nil
+		}
+
 		if err := m.Refresh.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refresh")
@@ -380,6 +410,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateRefresh(ctx context.Contex
 func (m *ConfigInheritedZoneAuthority) contextValidateRetry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Retry != nil {
+
+		if swag.IsZero(m.Retry) { // not required
+			return nil
+		}
+
 		if err := m.Retry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("retry")
@@ -396,6 +431,11 @@ func (m *ConfigInheritedZoneAuthority) contextValidateRetry(ctx context.Context,
 func (m *ConfigInheritedZoneAuthority) contextValidateRname(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Rname != nil {
+
+		if swag.IsZero(m.Rname) { // not required
+			return nil
+		}
+
 		if err := m.Rname.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("rname")

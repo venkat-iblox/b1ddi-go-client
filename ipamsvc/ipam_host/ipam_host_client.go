@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostCreateCreated, error)
+	IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostCreateOK, error)
 
-	IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostDeleteNoContent, error)
+	IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostDeleteOK, error)
 
 	IpamHostList(params *IpamHostListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostListOK, error)
 
 	IpamHostRead(params *IpamHostReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostReadOK, error)
 
-	IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostUpdateCreated, error)
+	IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  IpamHostCreate creates the IP a m host
+	IpamHostCreate creates the IP a m host
 
-  Use this method to create an __IpamHost__ object.
+	Use this method to create an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
-func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostCreateCreated, error) {
+func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIpamHostCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IpamHostCreateCreated)
+	success, ok := result.(*IpamHostCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) IpamHostCreate(params *IpamHostCreateParams, authInfo runtime.C
 }
 
 /*
-  IpamHostDelete moves the IP a m host to the recycle bin
+	IpamHostDelete moves the IP a m host to the recycle bin
 
-  Use this method to move an __IpamHost__ object to the recycle bin.
+	Use this method to move an __IpamHost__ object to the recycle bin.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
-func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostDeleteNoContent, error) {
+func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIpamHostDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IpamHostDeleteNoContent)
+	success, ok := result.(*IpamHostDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) IpamHostDelete(params *IpamHostDeleteParams, authInfo runtime.C
 }
 
 /*
-  IpamHostList retrieves the IP a m hosts
+	IpamHostList retrieves the IP a m hosts
 
-  Use this method to retrieve __IpamHost__ objects.
+	Use this method to retrieve __IpamHost__ objects.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostList(params *IpamHostListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) IpamHostList(params *IpamHostListParams, authInfo runtime.Clien
 }
 
 /*
-  IpamHostRead retrieves the IP a m host
+	IpamHostRead retrieves the IP a m host
 
-  Use this method to retrieve an __IpamHost__ object.
+	Use this method to retrieve an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
 func (a *Client) IpamHostRead(params *IpamHostReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) IpamHostRead(params *IpamHostReadParams, authInfo runtime.Clien
 }
 
 /*
-  IpamHostUpdate updates the IP a m host
+	IpamHostUpdate updates the IP a m host
 
-  Use this method to update an __IpamHost__ object.
+	Use this method to update an __IpamHost__ object.
+
 The __IpamHost__ object (_ipam/host_) represents any network connected equipment that is assigned one or more IP Addresses.
 */
-func (a *Client) IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostUpdateCreated, error) {
+func (a *Client) IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamHostUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIpamHostUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) IpamHostUpdate(params *IpamHostUpdateParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*IpamHostUpdateCreated)
+	success, ok := result.(*IpamHostUpdateOK)
 	if ok {
 		return success, nil
 	}

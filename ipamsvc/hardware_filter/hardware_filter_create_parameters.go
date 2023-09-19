@@ -54,10 +54,12 @@ func NewHardwareFilterCreateParamsWithHTTPClient(client *http.Client) *HardwareF
 	}
 }
 
-/* HardwareFilterCreateParams contains all the parameters to send to the API endpoint
-   for the hardware filter create operation.
+/*
+HardwareFilterCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the hardware filter create operation.
+
+	Typically these are written to a http.Request.
 */
 type HardwareFilterCreateParams struct {
 

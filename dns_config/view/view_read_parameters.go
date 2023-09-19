@@ -52,10 +52,12 @@ func NewViewReadParamsWithHTTPClient(client *http.Client) *ViewReadParams {
 	}
 }
 
-/* ViewReadParams contains all the parameters to send to the API endpoint
-   for the view read operation.
+/*
+ViewReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the view read operation.
+
+	Typically these are written to a http.Request.
 */
 type ViewReadParams struct {
 

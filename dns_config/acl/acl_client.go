@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLCreateCreated, error)
+	ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLCreateOK, error)
 
-	ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLDeleteNoContent, error)
+	ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLDeleteOK, error)
 
 	ACLList(params *ACLListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLListOK, error)
 
 	ACLRead(params *ACLReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLReadOK, error)
 
-	ACLUpdate(params *ACLUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLUpdateCreated, error)
+	ACLUpdate(params *ACLUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  ACLCreate creates the ACL object
+	ACLCreate creates the ACL object
 
-  Use this method to create an ACL object.
+	Use this method to create an ACL object.
+
 ACL object (_dns/acl_) represents a named Access Control List.
 */
-func (a *Client) ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLCreateCreated, error) {
+func (a *Client) ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewACLCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ACLCreateCreated)
+	success, ok := result.(*ACLCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) ACLCreate(params *ACLCreateParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ACLDelete moves the ACL object to recyclebin
+	ACLDelete moves the ACL object to recyclebin
 
-  Use this method to move an ACL object to Recyclebin.
+	Use this method to move an ACL object to Recyclebin.
+
 ACL object (_dns/acl_) represents a named Access Control List.
 */
-func (a *Client) ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLDeleteNoContent, error) {
+func (a *Client) ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewACLDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ACLDeleteNoContent)
+	success, ok := result.(*ACLDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) ACLDelete(params *ACLDeleteParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  ACLList lists ACL objects
+	ACLList lists ACL objects
 
-  Use this method to list ACL objects.
+	Use this method to list ACL objects.
+
 ACL object (_dns/acl_) represents a named Access Control List.
 */
 func (a *Client) ACLList(params *ACLListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) ACLList(params *ACLListParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  ACLRead reads the ACL object
+	ACLRead reads the ACL object
 
-  Use this method to read an ACL object.
+	Use this method to read an ACL object.
+
 ACL object (_dns/acl_) represents a named Access Control List.
 */
 func (a *Client) ACLRead(params *ACLReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) ACLRead(params *ACLReadParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  ACLUpdate updates the ACL object
+	ACLUpdate updates the ACL object
 
-  Use this method to update an ACL object.
+	Use this method to update an ACL object.
+
 ACL object (_dns/acl_) represents a named Access Control List.
 */
-func (a *Client) ACLUpdate(params *ACLUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLUpdateCreated, error) {
+func (a *Client) ACLUpdate(params *ACLUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ACLUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewACLUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) ACLUpdate(params *ACLUpdateParams, authInfo runtime.ClientAuthI
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ACLUpdateCreated)
+	success, ok := result.(*ACLUpdateOK)
 	if ok {
 		return success, nil
 	}

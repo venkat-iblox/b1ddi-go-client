@@ -36,9 +36,9 @@ type ClientService interface {
 }
 
 /*
-  ConvertDomainNameConvert converts the object
+ConvertDomainNameConvert converts the object
 
-  Use this method to convert between Internationalized Domain Name (IDN) and ASCII domain name (Punycode).
+Use this method to convert between Internationalized Domain Name (IDN) and ASCII domain name (Punycode).
 */
 func (a *Client) ConvertDomainNameConvert(params *ConvertDomainNameConvertParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConvertDomainNameConvertOK, error) {
 	// TODO: Validate the params before sending

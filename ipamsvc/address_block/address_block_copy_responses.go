@@ -31,34 +31,35 @@ func (o *AddressBlockCopyReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockCopyCreated()
+	result := NewAddressBlockCopyOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockCopyCreated creates a AddressBlockCopyCreated with default headers values
-func NewAddressBlockCopyCreated() *AddressBlockCopyCreated {
-	return &AddressBlockCopyCreated{}
+// NewAddressBlockCopyOK creates a AddressBlockCopyOK with default headers values
+func NewAddressBlockCopyOK() *AddressBlockCopyOK {
+	return &AddressBlockCopyOK{}
 }
 
-/* AddressBlockCopyCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCopyOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressBlockCopyCreated struct {
+type AddressBlockCopyOK struct {
 	Payload *models.IpamsvcCopyAddressBlockResponse
 }
 
-func (o *AddressBlockCopyCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address_block/{id}/copy][%d] addressBlockCopyCreated  %+v", 201, o.Payload)
+func (o *AddressBlockCopyOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address_block/{id}/copy][%d] addressBlockCopyOK  %+v", 200, o.Payload)
 }
-func (o *AddressBlockCopyCreated) GetPayload() *models.IpamsvcCopyAddressBlockResponse {
+func (o *AddressBlockCopyOK) GetPayload() *models.IpamsvcCopyAddressBlockResponse {
 	return o.Payload
 }
 
-func (o *AddressBlockCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockCopyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCopyAddressBlockResponse)
 

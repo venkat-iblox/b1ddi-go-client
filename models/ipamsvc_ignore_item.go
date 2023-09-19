@@ -26,11 +26,11 @@ type IpamsvcIgnoreItem struct {
 	//  * _client_text_,
 	//  * _hardware_.
 	// Required: true
-	Type *string `json:"type,omitempty"`
+	Type *string `json:"type"`
 
 	// Value to match.
 	// Required: true
-	Value *string `json:"value,omitempty"`
+	Value *string `json:"value"`
 }
 
 // Validate validates this ipamsvc ignore item

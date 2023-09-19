@@ -43,7 +43,8 @@ func NewAsmReadOK() *AsmReadOK {
 	return &AsmReadOK{}
 }
 
-/* AsmReadOK describes a response with status code 200, with default header values.
+/*
+AsmReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

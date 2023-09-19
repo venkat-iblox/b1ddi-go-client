@@ -29,30 +29,31 @@ func (o *HaGroupDeleteReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHaGroupDeleteNoContent()
+	result := NewHaGroupDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHaGroupDeleteNoContent creates a HaGroupDeleteNoContent with default headers values
-func NewHaGroupDeleteNoContent() *HaGroupDeleteNoContent {
-	return &HaGroupDeleteNoContent{}
+// NewHaGroupDeleteOK creates a HaGroupDeleteOK with default headers values
+func NewHaGroupDeleteOK() *HaGroupDeleteOK {
+	return &HaGroupDeleteOK{}
 }
 
-/* HaGroupDeleteNoContent describes a response with status code 204, with default header values.
+/*
+HaGroupDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type HaGroupDeleteNoContent struct {
+type HaGroupDeleteOK struct {
 }
 
-func (o *HaGroupDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/ha_group/{id}][%d] haGroupDeleteNoContent ", 204)
+func (o *HaGroupDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/ha_group/{id}][%d] haGroupDeleteOK ", 200)
 }
 
-func (o *HaGroupDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HaGroupDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

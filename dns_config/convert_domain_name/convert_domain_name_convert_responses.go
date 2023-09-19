@@ -43,7 +43,8 @@ func NewConvertDomainNameConvertOK() *ConvertDomainNameConvertOK {
 	return &ConvertDomainNameConvertOK{}
 }
 
-/* ConvertDomainNameConvertOK describes a response with status code 200, with default header values.
+/*
+ConvertDomainNameConvertOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

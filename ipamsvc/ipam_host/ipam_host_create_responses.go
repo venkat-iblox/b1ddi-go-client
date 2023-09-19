@@ -31,34 +31,35 @@ func (o *IpamHostCreateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIpamHostCreateCreated()
+	result := NewIpamHostCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIpamHostCreateCreated creates a IpamHostCreateCreated with default headers values
-func NewIpamHostCreateCreated() *IpamHostCreateCreated {
-	return &IpamHostCreateCreated{}
+// NewIpamHostCreateOK creates a IpamHostCreateOK with default headers values
+func NewIpamHostCreateOK() *IpamHostCreateOK {
+	return &IpamHostCreateOK{}
 }
 
-/* IpamHostCreateCreated describes a response with status code 201, with default header values.
+/*
+IpamHostCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type IpamHostCreateCreated struct {
+type IpamHostCreateOK struct {
 	Payload *models.IpamsvcCreateIpamHostResponse
 }
 
-func (o *IpamHostCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/host][%d] ipamHostCreateCreated  %+v", 201, o.Payload)
+func (o *IpamHostCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/host][%d] ipamHostCreateOK  %+v", 200, o.Payload)
 }
-func (o *IpamHostCreateCreated) GetPayload() *models.IpamsvcCreateIpamHostResponse {
+func (o *IpamHostCreateOK) GetPayload() *models.IpamsvcCreateIpamHostResponse {
 	return o.Payload
 }
 
-func (o *IpamHostCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IpamHostCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateIpamHostResponse)
 

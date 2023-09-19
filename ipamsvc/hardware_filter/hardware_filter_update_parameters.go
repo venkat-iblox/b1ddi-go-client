@@ -54,10 +54,12 @@ func NewHardwareFilterUpdateParamsWithHTTPClient(client *http.Client) *HardwareF
 	}
 }
 
-/* HardwareFilterUpdateParams contains all the parameters to send to the API endpoint
-   for the hardware filter update operation.
+/*
+HardwareFilterUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the hardware filter update operation.
+
+	Typically these are written to a http.Request.
 */
 type HardwareFilterUpdateParams struct {
 

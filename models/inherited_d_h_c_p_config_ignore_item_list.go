@@ -119,6 +119,11 @@ func (m *InheritedDHCPConfigIgnoreItemList) contextValidateValue(ctx context.Con
 	for i := 0; i < len(m.Value); i++ {
 
 		if m.Value[i] != nil {
+
+			if swag.IsZero(m.Value[i]) { // not required
+				return nil
+			}
+
 			if err := m.Value[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("value" + "." + strconv.Itoa(i))

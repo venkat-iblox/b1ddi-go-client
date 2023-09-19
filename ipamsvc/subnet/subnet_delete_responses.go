@@ -29,30 +29,31 @@ func (o *SubnetDeleteReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewSubnetDeleteNoContent()
+	result := NewSubnetDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewSubnetDeleteNoContent creates a SubnetDeleteNoContent with default headers values
-func NewSubnetDeleteNoContent() *SubnetDeleteNoContent {
-	return &SubnetDeleteNoContent{}
+// NewSubnetDeleteOK creates a SubnetDeleteOK with default headers values
+func NewSubnetDeleteOK() *SubnetDeleteOK {
+	return &SubnetDeleteOK{}
 }
 
-/* SubnetDeleteNoContent describes a response with status code 204, with default header values.
+/*
+SubnetDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type SubnetDeleteNoContent struct {
+type SubnetDeleteOK struct {
 }
 
-func (o *SubnetDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/subnet/{id}][%d] subnetDeleteNoContent ", 204)
+func (o *SubnetDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /ipam/subnet/{id}][%d] subnetDeleteOK ", 200)
 }
 
-func (o *SubnetDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *SubnetDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

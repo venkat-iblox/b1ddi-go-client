@@ -31,34 +31,35 @@ func (o *AuthNsgUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthNsgUpdateCreated()
+	result := NewAuthNsgUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthNsgUpdateCreated creates a AuthNsgUpdateCreated with default headers values
-func NewAuthNsgUpdateCreated() *AuthNsgUpdateCreated {
-	return &AuthNsgUpdateCreated{}
+// NewAuthNsgUpdateOK creates a AuthNsgUpdateOK with default headers values
+func NewAuthNsgUpdateOK() *AuthNsgUpdateOK {
+	return &AuthNsgUpdateOK{}
 }
 
-/* AuthNsgUpdateCreated describes a response with status code 201, with default header values.
+/*
+AuthNsgUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type AuthNsgUpdateCreated struct {
+type AuthNsgUpdateOK struct {
 	Payload *models.ConfigUpdateAuthNSGResponse
 }
 
-func (o *AuthNsgUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/auth_nsg/{id}][%d] authNsgUpdateCreated  %+v", 201, o.Payload)
+func (o *AuthNsgUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/auth_nsg/{id}][%d] authNsgUpdateOK  %+v", 200, o.Payload)
 }
-func (o *AuthNsgUpdateCreated) GetPayload() *models.ConfigUpdateAuthNSGResponse {
+func (o *AuthNsgUpdateOK) GetPayload() *models.ConfigUpdateAuthNSGResponse {
 	return o.Payload
 }
 
-func (o *AuthNsgUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthNsgUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateAuthNSGResponse)
 

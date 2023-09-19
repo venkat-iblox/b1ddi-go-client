@@ -31,36 +31,37 @@ func (o *ViewBulkCopyReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewViewBulkCopyCreated()
+	result := NewViewBulkCopyOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewViewBulkCopyCreated creates a ViewBulkCopyCreated with default headers values
-func NewViewBulkCopyCreated() *ViewBulkCopyCreated {
-	return &ViewBulkCopyCreated{}
+// NewViewBulkCopyOK creates a ViewBulkCopyOK with default headers values
+func NewViewBulkCopyOK() *ViewBulkCopyOK {
+	return &ViewBulkCopyOK{}
 }
 
-/* ViewBulkCopyCreated describes a response with status code 201, with default header values.
+/*
+ViewBulkCopyOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ViewBulkCopyCreated struct {
-	Payload *models.ConfigBulkCopyViewResponse
+type ViewBulkCopyOK struct {
+	Payload *models.ConfigBulkCopyResponse
 }
 
-func (o *ViewBulkCopyCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/view/bulk_copy][%d] viewBulkCopyCreated  %+v", 201, o.Payload)
+func (o *ViewBulkCopyOK) Error() string {
+	return fmt.Sprintf("[POST /dns/view/bulk_copy][%d] viewBulkCopyOK  %+v", 200, o.Payload)
 }
-func (o *ViewBulkCopyCreated) GetPayload() *models.ConfigBulkCopyViewResponse {
+func (o *ViewBulkCopyOK) GetPayload() *models.ConfigBulkCopyResponse {
 	return o.Payload
 }
 
-func (o *ViewBulkCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ViewBulkCopyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ConfigBulkCopyViewResponse)
+	o.Payload = new(models.ConfigBulkCopyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

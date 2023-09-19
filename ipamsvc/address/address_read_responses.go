@@ -43,7 +43,8 @@ func NewAddressReadOK() *AddressReadOK {
 	return &AddressReadOK{}
 }
 
-/* AddressReadOK describes a response with status code 200, with default header values.
+/*
+AddressReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

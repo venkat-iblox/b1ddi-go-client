@@ -54,10 +54,12 @@ func NewForwardZoneCreateParamsWithHTTPClient(client *http.Client) *ForwardZoneC
 	}
 }
 
-/* ForwardZoneCreateParams contains all the parameters to send to the API endpoint
-   for the forward zone create operation.
+/*
+ForwardZoneCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward zone create operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardZoneCreateParams struct {
 

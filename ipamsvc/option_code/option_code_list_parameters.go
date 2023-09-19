@@ -53,10 +53,12 @@ func NewOptionCodeListParamsWithHTTPClient(client *http.Client) *OptionCodeListP
 	}
 }
 
-/* OptionCodeListParams contains all the parameters to send to the API endpoint
-   for the option code list operation.
+/*
+OptionCodeListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option code list operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionCodeListParams struct {
 

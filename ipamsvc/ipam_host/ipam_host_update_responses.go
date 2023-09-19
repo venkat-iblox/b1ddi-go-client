@@ -31,34 +31,35 @@ func (o *IpamHostUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIpamHostUpdateCreated()
+	result := NewIpamHostUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIpamHostUpdateCreated creates a IpamHostUpdateCreated with default headers values
-func NewIpamHostUpdateCreated() *IpamHostUpdateCreated {
-	return &IpamHostUpdateCreated{}
+// NewIpamHostUpdateOK creates a IpamHostUpdateOK with default headers values
+func NewIpamHostUpdateOK() *IpamHostUpdateOK {
+	return &IpamHostUpdateOK{}
 }
 
-/* IpamHostUpdateCreated describes a response with status code 201, with default header values.
+/*
+IpamHostUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type IpamHostUpdateCreated struct {
+type IpamHostUpdateOK struct {
 	Payload *models.IpamsvcUpdateIpamHostResponse
 }
 
-func (o *IpamHostUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/host/{id}][%d] ipamHostUpdateCreated  %+v", 201, o.Payload)
+func (o *IpamHostUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /ipam/host/{id}][%d] ipamHostUpdateOK  %+v", 200, o.Payload)
 }
-func (o *IpamHostUpdateCreated) GetPayload() *models.IpamsvcUpdateIpamHostResponse {
+func (o *IpamHostUpdateOK) GetPayload() *models.IpamsvcUpdateIpamHostResponse {
 	return o.Payload
 }
 
-func (o *IpamHostUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IpamHostUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateIpamHostResponse)
 

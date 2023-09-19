@@ -93,6 +93,11 @@ func (m *ConfigDNSSECValidationBlock) contextValidateDnssecTrustAnchors(ctx cont
 	for i := 0; i < len(m.DnssecTrustAnchors); i++ {
 
 		if m.DnssecTrustAnchors[i] != nil {
+
+			if swag.IsZero(m.DnssecTrustAnchors[i]) { // not required
+				return nil
+			}
+
 			if err := m.DnssecTrustAnchors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dnssec_trust_anchors" + "." + strconv.Itoa(i))

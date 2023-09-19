@@ -31,34 +31,35 @@ func (o *SubnetCreateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewSubnetCreateCreated()
+	result := NewSubnetCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewSubnetCreateCreated creates a SubnetCreateCreated with default headers values
-func NewSubnetCreateCreated() *SubnetCreateCreated {
-	return &SubnetCreateCreated{}
+// NewSubnetCreateOK creates a SubnetCreateOK with default headers values
+func NewSubnetCreateOK() *SubnetCreateOK {
+	return &SubnetCreateOK{}
 }
 
-/* SubnetCreateCreated describes a response with status code 201, with default header values.
+/*
+SubnetCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type SubnetCreateCreated struct {
+type SubnetCreateOK struct {
 	Payload *models.IpamsvcCreateSubnetResponse
 }
 
-func (o *SubnetCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/subnet][%d] subnetCreateCreated  %+v", 201, o.Payload)
+func (o *SubnetCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/subnet][%d] subnetCreateOK  %+v", 200, o.Payload)
 }
-func (o *SubnetCreateCreated) GetPayload() *models.IpamsvcCreateSubnetResponse {
+func (o *SubnetCreateOK) GetPayload() *models.IpamsvcCreateSubnetResponse {
 	return o.Payload
 }
 
-func (o *SubnetCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *SubnetCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateSubnetResponse)
 

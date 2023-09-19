@@ -54,10 +54,12 @@ func NewAuthNsgUpdateParamsWithHTTPClient(client *http.Client) *AuthNsgUpdatePar
 	}
 }
 
-/* AuthNsgUpdateParams contains all the parameters to send to the API endpoint
-   for the auth nsg update operation.
+/*
+AuthNsgUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth nsg update operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthNsgUpdateParams struct {
 

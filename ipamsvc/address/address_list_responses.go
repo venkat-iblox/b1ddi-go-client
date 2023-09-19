@@ -43,7 +43,8 @@ func NewAddressListOK() *AddressListOK {
 	return &AddressListOK{}
 }
 
-/* AddressListOK describes a response with status code 200, with default header values.
+/*
+AddressListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

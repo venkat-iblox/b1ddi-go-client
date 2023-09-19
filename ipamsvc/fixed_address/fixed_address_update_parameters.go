@@ -54,10 +54,12 @@ func NewFixedAddressUpdateParamsWithHTTPClient(client *http.Client) *FixedAddres
 	}
 }
 
-/* FixedAddressUpdateParams contains all the parameters to send to the API endpoint
-   for the fixed address update operation.
+/*
+FixedAddressUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fixed address update operation.
+
+	Typically these are written to a http.Request.
 */
 type FixedAddressUpdateParams struct {
 

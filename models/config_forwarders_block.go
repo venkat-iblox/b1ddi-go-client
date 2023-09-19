@@ -16,7 +16,7 @@ import (
 
 // ConfigForwardersBlock ForwardersBlock
 //
-// Block for fields: _forwarders_, _forwarders_only_.
+// Block for fields: _forwarders_, _forwarders_only_, _use_root_forwarders_for_local_resolution_with_b1td_.
 //
 // swagger:model configForwardersBlock
 type ConfigForwardersBlock struct {
@@ -26,6 +26,9 @@ type ConfigForwardersBlock struct {
 
 	// Optional. Field config for _forwarders_only_ field.
 	ForwardersOnly bool `json:"forwarders_only,omitempty"`
+
+	// Optional. Field config for _use_root_forwarders_for_local_resolution_with_b1td_ field.
+	UseRootForwardersForLocalResolutionWithB1td bool `json:"use_root_forwarders_for_local_resolution_with_b1td,omitempty"`
 }
 
 // Validate validates this config forwarders block
@@ -87,6 +90,11 @@ func (m *ConfigForwardersBlock) contextValidateForwarders(ctx context.Context, f
 	for i := 0; i < len(m.Forwarders); i++ {
 
 		if m.Forwarders[i] != nil {
+
+			if swag.IsZero(m.Forwarders[i]) { // not required
+				return nil
+			}
+
 			if err := m.Forwarders[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("forwarders" + "." + strconv.Itoa(i))

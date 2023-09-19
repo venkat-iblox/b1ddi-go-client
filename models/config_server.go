@@ -22,6 +22,10 @@ import (
 // swagger:model configServer
 type ConfigServer struct {
 
+	// _add_edns_option_in_outgoing_query_ adds client IP, MAC address and view name into outgoing recursive query.
+	// Defaults to _false_.
+	AddEdnsOptionInOutgoingQuery bool `json:"add_edns_option_in_outgoing_query,omitempty"`
+
 	// Optional. Controls manual/automatic views ordering.
 	//
 	// Defaults to _true_.
@@ -114,9 +118,24 @@ type ConfigServer struct {
 	// Defaults to empty.
 	EcsZones []*ConfigECSZone `json:"ecs_zones,omitempty"`
 
+	// Optional. Specifies a list of client addresses for which AAAA filtering is to be applied.
+	//
+	// Defaults to _empty_.
+	FilterAaaaACL []*ConfigACLItem `json:"filter_aaaa_acl"`
+
+	// _filter_aaaa_on_v4_ allows named to omit some IPv6 addresses when responding to IPv4 clients.
+	//
+	// Allowed values:
+	// * _yes_,
+	// * _no_,
+	// * _break_dnssec_.
+	//
+	// Defaults to _no_
+	FilterAaaaOnV4 string `json:"filter_aaaa_on_v4,omitempty"`
+
 	// Optional. List of forwarders.
 	//
-	// Error if empty while _forwarders_only_ is _true_.
+	// Error if empty while _forwarders_only_ or _use_root_forwarders_for_local_resolution_with_b1td_ is _true_.
 	// Error if there are items in the list with duplicate addresses.
 	//
 	// Defaults to empty.
@@ -182,7 +201,7 @@ type ConfigServer struct {
 
 	// Name of configuration.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// _notify_ all external secondary DNS servers.
 	//
@@ -235,6 +254,15 @@ type ConfigServer struct {
 	// Defaults to 0.
 	SecondarySoaQueryLimit int64 `json:"secondary_soa_query_limit,omitempty"`
 
+	// Optional. Specifies a sorted network list for A/AAAA records in DNS query response.
+	//
+	// Defaults to _empty_.
+	SortList []*ConfigSortListItem `json:"sort_list"`
+
+	// _synthesize_address_records_from_https_ enables/disables creation of A/AAAA records from HTTPS RR
+	// Defaults to _false_.
+	SynthesizeAddressRecordsFromHTTPS bool `json:"synthesize_address_records_from_https,omitempty"`
+
 	// Tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`
 
@@ -257,6 +285,11 @@ type ConfigServer struct {
 	//
 	// Defaults to _true_.
 	UseForwardersForSubzones bool `json:"use_forwarders_for_subzones,omitempty"`
+
+	// _use_root_forwarders_for_local_resolution_with_b1td_ allows DNS recursive queries sent to root forwarders
+	// for local resolution when deployed alongside BloxOne Thread Defense.
+	// Defaults to _false_.
+	UseRootForwardersForLocalResolutionWithB1td bool `json:"use_root_forwarders_for_local_resolution_with_b1td,omitempty"`
 
 	// Optional. Ordered list of _dns/display_view_ objects served by any of _dns/host_ assigned to a particular DNS Config Profile.
 	// Automatically determined. Allows re-ordering only.
@@ -287,6 +320,10 @@ func (m *ConfigServer) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateFilterAaaaACL(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateForwarders(formats); err != nil {
 		res = append(res, err)
 	}
@@ -308,6 +345,10 @@ func (m *ConfigServer) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRecursionACL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSortList(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -439,6 +480,32 @@ func (m *ConfigServer) validateEcsZones(formats strfmt.Registry) error {
 					return ve.ValidateName("ecs_zones" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("ecs_zones" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ConfigServer) validateFilterAaaaACL(formats strfmt.Registry) error {
+	if swag.IsZero(m.FilterAaaaACL) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.FilterAaaaACL); i++ {
+		if swag.IsZero(m.FilterAaaaACL[i]) { // not required
+			continue
+		}
+
+		if m.FilterAaaaACL[i] != nil {
+			if err := m.FilterAaaaACL[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filter_aaaa_acl" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filter_aaaa_acl" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -581,6 +648,32 @@ func (m *ConfigServer) validateRecursionACL(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ConfigServer) validateSortList(formats strfmt.Registry) error {
+	if swag.IsZero(m.SortList) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.SortList); i++ {
+		if swag.IsZero(m.SortList[i]) { // not required
+			continue
+		}
+
+		if m.SortList[i] != nil {
+			if err := m.SortList[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("sort_list" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("sort_list" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigServer) validateTransferACL(formats strfmt.Registry) error {
 	if swag.IsZero(m.TransferACL) { // not required
 		return nil
@@ -695,6 +788,10 @@ func (m *ConfigServer) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateFilterAaaaACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateForwarders(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -716,6 +813,10 @@ func (m *ConfigServer) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateRecursionACL(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSortList(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -755,6 +856,11 @@ func (m *ConfigServer) contextValidateCustomRootNs(ctx context.Context, formats 
 	for i := 0; i < len(m.CustomRootNs); i++ {
 
 		if m.CustomRootNs[i] != nil {
+
+			if swag.IsZero(m.CustomRootNs[i]) { // not required
+				return nil
+			}
+
 			if err := m.CustomRootNs[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("custom_root_ns" + "." + strconv.Itoa(i))
@@ -779,6 +885,11 @@ func (m *ConfigServer) contextValidateDnssecRootKeys(ctx context.Context, format
 	for i := 0; i < len(m.DnssecRootKeys); i++ {
 
 		if m.DnssecRootKeys[i] != nil {
+
+			if swag.IsZero(m.DnssecRootKeys[i]) { // not required
+				return nil
+			}
+
 			if err := m.DnssecRootKeys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dnssec_root_keys" + "." + strconv.Itoa(i))
@@ -799,6 +910,11 @@ func (m *ConfigServer) contextValidateDnssecTrustAnchors(ctx context.Context, fo
 	for i := 0; i < len(m.DnssecTrustAnchors); i++ {
 
 		if m.DnssecTrustAnchors[i] != nil {
+
+			if swag.IsZero(m.DnssecTrustAnchors[i]) { // not required
+				return nil
+			}
+
 			if err := m.DnssecTrustAnchors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dnssec_trust_anchors" + "." + strconv.Itoa(i))
@@ -819,6 +935,11 @@ func (m *ConfigServer) contextValidateEcsZones(ctx context.Context, formats strf
 	for i := 0; i < len(m.EcsZones); i++ {
 
 		if m.EcsZones[i] != nil {
+
+			if swag.IsZero(m.EcsZones[i]) { // not required
+				return nil
+			}
+
 			if err := m.EcsZones[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ecs_zones" + "." + strconv.Itoa(i))
@@ -834,11 +955,41 @@ func (m *ConfigServer) contextValidateEcsZones(ctx context.Context, formats strf
 	return nil
 }
 
+func (m *ConfigServer) contextValidateFilterAaaaACL(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.FilterAaaaACL); i++ {
+
+		if m.FilterAaaaACL[i] != nil {
+
+			if swag.IsZero(m.FilterAaaaACL[i]) { // not required
+				return nil
+			}
+
+			if err := m.FilterAaaaACL[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filter_aaaa_acl" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filter_aaaa_acl" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigServer) contextValidateForwarders(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.Forwarders); i++ {
 
 		if m.Forwarders[i] != nil {
+
+			if swag.IsZero(m.Forwarders[i]) { // not required
+				return nil
+			}
+
 			if err := m.Forwarders[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("forwarders" + "." + strconv.Itoa(i))
@@ -866,6 +1017,11 @@ func (m *ConfigServer) contextValidateID(ctx context.Context, formats strfmt.Reg
 func (m *ConfigServer) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -884,6 +1040,11 @@ func (m *ConfigServer) contextValidateKerberosKeys(ctx context.Context, formats 
 	for i := 0; i < len(m.KerberosKeys); i++ {
 
 		if m.KerberosKeys[i] != nil {
+
+			if swag.IsZero(m.KerberosKeys[i]) { // not required
+				return nil
+			}
+
 			if err := m.KerberosKeys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
@@ -904,6 +1065,11 @@ func (m *ConfigServer) contextValidateQueryACL(ctx context.Context, formats strf
 	for i := 0; i < len(m.QueryACL); i++ {
 
 		if m.QueryACL[i] != nil {
+
+			if swag.IsZero(m.QueryACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.QueryACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("query_acl" + "." + strconv.Itoa(i))
@@ -924,6 +1090,11 @@ func (m *ConfigServer) contextValidateRecursionACL(ctx context.Context, formats 
 	for i := 0; i < len(m.RecursionACL); i++ {
 
 		if m.RecursionACL[i] != nil {
+
+			if swag.IsZero(m.RecursionACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.RecursionACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("recursion_acl" + "." + strconv.Itoa(i))
@@ -939,11 +1110,41 @@ func (m *ConfigServer) contextValidateRecursionACL(ctx context.Context, formats 
 	return nil
 }
 
+func (m *ConfigServer) contextValidateSortList(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.SortList); i++ {
+
+		if m.SortList[i] != nil {
+
+			if swag.IsZero(m.SortList[i]) { // not required
+				return nil
+			}
+
+			if err := m.SortList[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("sort_list" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("sort_list" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigServer) contextValidateTransferACL(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.TransferACL); i++ {
 
 		if m.TransferACL[i] != nil {
+
+			if swag.IsZero(m.TransferACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.TransferACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("transfer_acl" + "." + strconv.Itoa(i))
@@ -964,6 +1165,11 @@ func (m *ConfigServer) contextValidateUpdateACL(ctx context.Context, formats str
 	for i := 0; i < len(m.UpdateACL); i++ {
 
 		if m.UpdateACL[i] != nil {
+
+			if swag.IsZero(m.UpdateACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.UpdateACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("update_acl" + "." + strconv.Itoa(i))
@@ -993,6 +1199,11 @@ func (m *ConfigServer) contextValidateViews(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.Views); i++ {
 
 		if m.Views[i] != nil {
+
+			if swag.IsZero(m.Views[i]) { // not required
+				return nil
+			}
+
 			if err := m.Views[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("views" + "." + strconv.Itoa(i))

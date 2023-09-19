@@ -21,6 +21,11 @@ import (
 // swagger:model ipamsvcDDNSBlock
 type IpamsvcDDNSBlock struct {
 
+	// The Kerberos principal name. It uses the typical Kerberos notation: <SERVICE-NAME>/<server-domain-name>@<REALM>.
+	//
+	// Defaults to empty.
+	ClientPrincipal string `json:"client_principal,omitempty"`
+
 	// The domain name for DDNS.
 	DdnsDomain string `json:"ddns_domain,omitempty"`
 
@@ -32,6 +37,50 @@ type IpamsvcDDNSBlock struct {
 
 	// The list of DDNS zones.
 	DdnsZones []*IpamsvcDDNSZone `json:"ddns_zones"`
+
+	// The behavior when GSS-TSIG should be used (a matching external DNS server is configured) but no GSS-TSIG key is available.
+	// If configured to _false_ (the default) this DNS server is skipped, if configured to _true_ the DNS server is ignored
+	// and the DNS update is sent with the configured DHCP-DDNS protection e.g. TSIG key or without any protection when
+	// none was configured.
+	//
+	// Defaults to _false_.
+	GssTsigFallback bool `json:"gss_tsig_fallback,omitempty"`
+
+	// Address of Kerberos Key Distribution Center.
+	//
+	// Defaults to empty.
+	KerberosKdc string `json:"kerberos_kdc,omitempty"`
+
+	// _kerberos_keys_ contains a list of keys for GSS-TSIG signed dynamic updates.
+	//
+	// Defaults to empty.
+	KerberosKeys []*IpamsvcKerberosKey `json:"kerberos_keys"`
+
+	// Time interval (in seconds) the keys for each configured external DNS server are checked for rekeying,
+	// i.e. a new key is created to replace the current usable one when its age is greater than the rekey_interval value.
+	//
+	// Defaults to 120 seconds.
+	KerberosRekeyInterval int64 `json:"kerberos_rekey_interval,omitempty"`
+
+	// Time interval (in seconds) to retry to create a key if any error occurred previously for any configured external DNS server.
+	//
+	// Defaults to 30 seconds.
+	KerberosRetryInterval int64 `json:"kerberos_retry_interval,omitempty"`
+
+	// Lifetime (in seconds) of GSS-TSIG keys in the TKEY protocol.
+	//
+	// Defaults to 160 seconds.
+	KerberosTkeyLifetime int64 `json:"kerberos_tkey_lifetime,omitempty"`
+
+	// Determines which protocol is used to establish the security context with the external DNS servers, TCP or UDP.
+	//
+	// Defaults to _tcp_.
+	KerberosTkeyProtocol string `json:"kerberos_tkey_protocol,omitempty"`
+
+	// The Kerberos principal name of the external DNS server that will receive updates.
+	//
+	// Defaults to empty.
+	ServerPrincipal string `json:"server_principal,omitempty"`
 }
 
 // Validate validates this ipamsvc d DNS block
@@ -39,6 +88,10 @@ func (m *IpamsvcDDNSBlock) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDdnsZones(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKerberosKeys(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -74,11 +127,41 @@ func (m *IpamsvcDDNSBlock) validateDdnsZones(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IpamsvcDDNSBlock) validateKerberosKeys(formats strfmt.Registry) error {
+	if swag.IsZero(m.KerberosKeys) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.KerberosKeys); i++ {
+		if swag.IsZero(m.KerberosKeys[i]) { // not required
+			continue
+		}
+
+		if m.KerberosKeys[i] != nil {
+			if err := m.KerberosKeys[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ipamsvc d DNS block based on the context it is used
 func (m *IpamsvcDDNSBlock) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateDdnsZones(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKerberosKeys(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,11 +176,41 @@ func (m *IpamsvcDDNSBlock) contextValidateDdnsZones(ctx context.Context, formats
 	for i := 0; i < len(m.DdnsZones); i++ {
 
 		if m.DdnsZones[i] != nil {
+
+			if swag.IsZero(m.DdnsZones[i]) { // not required
+				return nil
+			}
+
 			if err := m.DdnsZones[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ddns_zones" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("ddns_zones" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcDDNSBlock) contextValidateKerberosKeys(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.KerberosKeys); i++ {
+
+		if m.KerberosKeys[i] != nil {
+
+			if swag.IsZero(m.KerberosKeys[i]) { // not required
+				return nil
+			}
+
+			if err := m.KerberosKeys[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

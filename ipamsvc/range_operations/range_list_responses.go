@@ -43,7 +43,8 @@ func NewRangeListOK() *RangeListOK {
 	return &RangeListOK{}
 }
 
-/* RangeListOK describes a response with status code 200, with default header values.
+/*
+RangeListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

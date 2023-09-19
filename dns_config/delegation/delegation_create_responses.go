@@ -31,34 +31,35 @@ func (o *DelegationCreateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewDelegationCreateCreated()
+	result := NewDelegationCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewDelegationCreateCreated creates a DelegationCreateCreated with default headers values
-func NewDelegationCreateCreated() *DelegationCreateCreated {
-	return &DelegationCreateCreated{}
+// NewDelegationCreateOK creates a DelegationCreateOK with default headers values
+func NewDelegationCreateOK() *DelegationCreateOK {
+	return &DelegationCreateOK{}
 }
 
-/* DelegationCreateCreated describes a response with status code 201, with default header values.
+/*
+DelegationCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type DelegationCreateCreated struct {
+type DelegationCreateOK struct {
 	Payload *models.ConfigCreateDelegationResponse
 }
 
-func (o *DelegationCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/delegation][%d] delegationCreateCreated  %+v", 201, o.Payload)
+func (o *DelegationCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/delegation][%d] delegationCreateOK  %+v", 200, o.Payload)
 }
-func (o *DelegationCreateCreated) GetPayload() *models.ConfigCreateDelegationResponse {
+func (o *DelegationCreateOK) GetPayload() *models.ConfigCreateDelegationResponse {
 	return o.Payload
 }
 
-func (o *DelegationCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DelegationCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateDelegationResponse)
 

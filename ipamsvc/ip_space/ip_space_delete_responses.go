@@ -29,30 +29,31 @@ func (o *IPSpaceDeleteReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIPSpaceDeleteNoContent()
+	result := NewIPSpaceDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIPSpaceDeleteNoContent creates a IPSpaceDeleteNoContent with default headers values
-func NewIPSpaceDeleteNoContent() *IPSpaceDeleteNoContent {
-	return &IPSpaceDeleteNoContent{}
+// NewIPSpaceDeleteOK creates a IPSpaceDeleteOK with default headers values
+func NewIPSpaceDeleteOK() *IPSpaceDeleteOK {
+	return &IPSpaceDeleteOK{}
 }
 
-/* IPSpaceDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IPSpaceDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type IPSpaceDeleteNoContent struct {
+type IPSpaceDeleteOK struct {
 }
 
-func (o *IPSpaceDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/ip_space/{id}][%d] ipSpaceDeleteNoContent ", 204)
+func (o *IPSpaceDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /ipam/ip_space/{id}][%d] ipSpaceDeleteOK ", 200)
 }
 
-func (o *IPSpaceDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IPSpaceDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

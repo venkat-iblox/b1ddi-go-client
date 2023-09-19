@@ -49,6 +49,17 @@ type IpamsvcIPSpace struct {
 	// Defaults to _client_.
 	DdnsClientUpdate string `json:"ddns_client_update,omitempty"`
 
+	// The mode used for resolving conflicts while performing DDNS updates.
+	//
+	// Valid values are:
+	// * _check_with_dhcid_: It includes adding a DHCID record and checking that record via conflict detection as per RFC 4703.
+	// * _no_check_with_dhcid_: This will ignore conflict detection but add a DHCID record when creating/updating an entry.
+	// * _check_exists_with_dhcid_: This will check if there is an existing DHCID record but does not verify the value of the record matches the update. This will also update the DHCID record for the entry.
+	// * _no_check_without_dhcid_: This ignores conflict detection and will not add a DHCID record when creating/updating a DDNS entry.
+	//
+	// Defaults to _check_with_dhcid_.
+	DdnsConflictResolutionMode string `json:"ddns_conflict_resolution_mode,omitempty"`
+
 	// The domain suffix for DDNS updates. FQDN, may be empty.
 	//
 	// Defaults to empty.
@@ -71,6 +82,11 @@ type IpamsvcIPSpace struct {
 	// Defaults to _true_.
 	DdnsSendUpdates *bool `json:"ddns_send_updates,omitempty"`
 
+	// DDNS TTL value - to be calculated as a simple percentage of the lease's lifetime, using the parameter's value as the percentage.
+	// It is specified as a percentage (e.g. 25, 75).
+	// Defaults to unspecified.
+	DdnsTTLPercent float32 `json:"ddns_ttl_percent,omitempty"`
+
 	// Instructs the DHCP server to always update the DNS information when a lease is renewed even if its DNS information has not changed.
 	//
 	// Defaults to _false_.
@@ -86,8 +102,11 @@ type IpamsvcIPSpace struct {
 	// The shared DHCP configuration for the IP space that controls how leases are issued.
 	DhcpConfig *IpamsvcDHCPConfig `json:"dhcp_config,omitempty"`
 
-	// The list of DHCP options for the IP space. May be either a specific option or a group of options.
+	// The list of IPv4 DHCP options for IP space. May be either a specific option or a group of options.
 	DhcpOptions []*IpamsvcOptionItem `json:"dhcp_options,omitempty"`
+
+	// The list of IPv6 DHCP options for IP space. May be either a specific option or a group of options.
+	DhcpOptionsV6 []*IpamsvcOptionItem `json:"dhcp_options_v6,omitempty"`
 
 	// The configuration for header option filename field.
 	HeaderOptionFilename string `json:"header_option_filename,omitempty"`
@@ -100,9 +119,9 @@ type IpamsvcIPSpace struct {
 
 	// The character to replace non-matching characters with, when hostname rewrite is enabled.
 	//
-	// Any single ASCII character.
+	// Any single ASCII character or no character if the invalid characters should be removed without replacement.
 	//
-	// Defaults to "_".
+	// Defaults to "-".
 	HostnameRewriteChar string `json:"hostname_rewrite_char,omitempty"`
 
 	// Indicates if client supplied hostnames will be rewritten prior to DDNS update by replacing every character that does not match _hostname_rewrite_regex_ by _hostname_rewrite_char_.
@@ -129,7 +148,7 @@ type IpamsvcIPSpace struct {
 
 	// The name of the IP space. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// The tags for the IP space in JSON format.
 	Tags interface{} `json:"tags,omitempty"`
@@ -143,9 +162,13 @@ type IpamsvcIPSpace struct {
 	// Format: date-time
 	UpdatedAt *strfmt.DateTime `json:"updated_at,omitempty"`
 
-	// The utilization of IP addresses in the IP space.
+	// The utilization of IPV4 addresses in the IP space.
 	// Read Only: true
 	Utilization *IpamsvcUtilization `json:"utilization,omitempty"`
+
+	// The utilization of IPV6 addresses in the IP space.
+	// Read Only: true
+	UtilizationV6 *IpamsvcUtilizationV6 `json:"utilization_v6,omitempty"`
 
 	// The resource identifier.
 	VendorSpecificOptionOptionSpace string `json:"vendor_specific_option_option_space,omitempty"`
@@ -171,6 +194,10 @@ func (m *IpamsvcIPSpace) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDhcpOptionsV6(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateInheritanceSources(formats); err != nil {
 		res = append(res, err)
 	}
@@ -188,6 +215,10 @@ func (m *IpamsvcIPSpace) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUtilization(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUtilizationV6(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -263,6 +294,32 @@ func (m *IpamsvcIPSpace) validateDhcpOptions(formats strfmt.Registry) error {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcIPSpace) validateDhcpOptionsV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.DhcpOptionsV6) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.DhcpOptionsV6); i++ {
+		if swag.IsZero(m.DhcpOptionsV6[i]) { // not required
+			continue
+		}
+
+		if m.DhcpOptionsV6[i] != nil {
+			if err := m.DhcpOptionsV6[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -351,6 +408,25 @@ func (m *IpamsvcIPSpace) validateUtilization(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *IpamsvcIPSpace) validateUtilizationV6(formats strfmt.Registry) error {
+	if swag.IsZero(m.UtilizationV6) { // not required
+		return nil
+	}
+
+	if m.UtilizationV6 != nil {
+		if err := m.UtilizationV6.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ipamsvc IP space based on the context it is used
 func (m *IpamsvcIPSpace) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -375,6 +451,10 @@ func (m *IpamsvcIPSpace) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDhcpOptionsV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -395,6 +475,10 @@ func (m *IpamsvcIPSpace) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateUtilizationV6(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -404,6 +488,11 @@ func (m *IpamsvcIPSpace) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *IpamsvcIPSpace) contextValidateAsmConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmConfig != nil {
+
+		if swag.IsZero(m.AsmConfig) { // not required
+			return nil
+		}
+
 		if err := m.AsmConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_config")
@@ -438,6 +527,11 @@ func (m *IpamsvcIPSpace) contextValidateCreatedAt(ctx context.Context, formats s
 func (m *IpamsvcIPSpace) contextValidateDhcpConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpConfig != nil {
+
+		if swag.IsZero(m.DhcpConfig) { // not required
+			return nil
+		}
+
 		if err := m.DhcpConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_config")
@@ -456,11 +550,41 @@ func (m *IpamsvcIPSpace) contextValidateDhcpOptions(ctx context.Context, formats
 	for i := 0; i < len(m.DhcpOptions); i++ {
 
 		if m.DhcpOptions[i] != nil {
+
+			if swag.IsZero(m.DhcpOptions[i]) { // not required
+				return nil
+			}
+
 			if err := m.DhcpOptions[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("dhcp_options" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *IpamsvcIPSpace) contextValidateDhcpOptionsV6(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.DhcpOptionsV6); i++ {
+
+		if m.DhcpOptionsV6[i] != nil {
+
+			if swag.IsZero(m.DhcpOptionsV6[i]) { // not required
+				return nil
+			}
+
+			if err := m.DhcpOptionsV6[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp_options_v6" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -483,6 +607,11 @@ func (m *IpamsvcIPSpace) contextValidateID(ctx context.Context, formats strfmt.R
 func (m *IpamsvcIPSpace) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -499,6 +628,11 @@ func (m *IpamsvcIPSpace) contextValidateInheritanceSources(ctx context.Context, 
 func (m *IpamsvcIPSpace) contextValidateThreshold(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Threshold != nil {
+
+		if swag.IsZero(m.Threshold) { // not required
+			return nil
+		}
+
 		if err := m.Threshold.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("threshold")
@@ -524,11 +658,37 @@ func (m *IpamsvcIPSpace) contextValidateUpdatedAt(ctx context.Context, formats s
 func (m *IpamsvcIPSpace) contextValidateUtilization(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Utilization != nil {
+
+		if swag.IsZero(m.Utilization) { // not required
+			return nil
+		}
+
 		if err := m.Utilization.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("utilization")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("utilization")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IpamsvcIPSpace) contextValidateUtilizationV6(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.UtilizationV6 != nil {
+
+		if swag.IsZero(m.UtilizationV6) { // not required
+			return nil
+		}
+
+		if err := m.UtilizationV6.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("utilization_v6")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("utilization_v6")
 			}
 			return err
 		}

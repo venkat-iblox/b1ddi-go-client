@@ -53,10 +53,12 @@ func NewRangeListParamsWithHTTPClient(client *http.Client) *RangeListParams {
 	}
 }
 
-/* RangeListParams contains all the parameters to send to the API endpoint
-   for the range list operation.
+/*
+RangeListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the range list operation.
+
+	Typically these are written to a http.Request.
 */
 type RangeListParams struct {
 

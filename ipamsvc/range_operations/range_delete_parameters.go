@@ -52,10 +52,12 @@ func NewRangeDeleteParamsWithHTTPClient(client *http.Client) *RangeDeleteParams 
 	}
 }
 
-/* RangeDeleteParams contains all the parameters to send to the API endpoint
-   for the range delete operation.
+/*
+RangeDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the range delete operation.
+
+	Typically these are written to a http.Request.
 */
 type RangeDeleteParams struct {
 

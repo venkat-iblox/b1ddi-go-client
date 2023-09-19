@@ -29,30 +29,31 @@ func (o *IpamHostDeleteReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewIpamHostDeleteNoContent()
+	result := NewIpamHostDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewIpamHostDeleteNoContent creates a IpamHostDeleteNoContent with default headers values
-func NewIpamHostDeleteNoContent() *IpamHostDeleteNoContent {
-	return &IpamHostDeleteNoContent{}
+// NewIpamHostDeleteOK creates a IpamHostDeleteOK with default headers values
+func NewIpamHostDeleteOK() *IpamHostDeleteOK {
+	return &IpamHostDeleteOK{}
 }
 
-/* IpamHostDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamHostDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type IpamHostDeleteNoContent struct {
+type IpamHostDeleteOK struct {
 }
 
-func (o *IpamHostDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/host/{id}][%d] ipamHostDeleteNoContent ", 204)
+func (o *IpamHostDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /ipam/host/{id}][%d] ipamHostDeleteOK ", 200)
 }
 
-func (o *IpamHostDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *IpamHostDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

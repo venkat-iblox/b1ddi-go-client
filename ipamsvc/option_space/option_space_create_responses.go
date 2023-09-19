@@ -31,34 +31,35 @@ func (o *OptionSpaceCreateReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionSpaceCreateCreated()
+	result := NewOptionSpaceCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionSpaceCreateCreated creates a OptionSpaceCreateCreated with default headers values
-func NewOptionSpaceCreateCreated() *OptionSpaceCreateCreated {
-	return &OptionSpaceCreateCreated{}
+// NewOptionSpaceCreateOK creates a OptionSpaceCreateOK with default headers values
+func NewOptionSpaceCreateOK() *OptionSpaceCreateOK {
+	return &OptionSpaceCreateOK{}
 }
 
-/* OptionSpaceCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionSpaceCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type OptionSpaceCreateCreated struct {
+type OptionSpaceCreateOK struct {
 	Payload *models.IpamsvcCreateOptionSpaceResponse
 }
 
-func (o *OptionSpaceCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/option_space][%d] optionSpaceCreateCreated  %+v", 201, o.Payload)
+func (o *OptionSpaceCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/option_space][%d] optionSpaceCreateOK  %+v", 200, o.Payload)
 }
-func (o *OptionSpaceCreateCreated) GetPayload() *models.IpamsvcCreateOptionSpaceResponse {
+func (o *OptionSpaceCreateOK) GetPayload() *models.IpamsvcCreateOptionSpaceResponse {
 	return o.Payload
 }
 
-func (o *OptionSpaceCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionSpaceCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateOptionSpaceResponse)
 

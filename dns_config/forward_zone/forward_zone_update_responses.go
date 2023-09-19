@@ -31,34 +31,35 @@ func (o *ForwardZoneUpdateReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardZoneUpdateCreated()
+	result := NewForwardZoneUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardZoneUpdateCreated creates a ForwardZoneUpdateCreated with default headers values
-func NewForwardZoneUpdateCreated() *ForwardZoneUpdateCreated {
-	return &ForwardZoneUpdateCreated{}
+// NewForwardZoneUpdateOK creates a ForwardZoneUpdateOK with default headers values
+func NewForwardZoneUpdateOK() *ForwardZoneUpdateOK {
+	return &ForwardZoneUpdateOK{}
 }
 
-/* ForwardZoneUpdateCreated describes a response with status code 201, with default header values.
+/*
+ForwardZoneUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type ForwardZoneUpdateCreated struct {
+type ForwardZoneUpdateOK struct {
 	Payload *models.ConfigUpdateForwardZoneResponse
 }
 
-func (o *ForwardZoneUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/forward_zone/{id}][%d] forwardZoneUpdateCreated  %+v", 201, o.Payload)
+func (o *ForwardZoneUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/forward_zone/{id}][%d] forwardZoneUpdateOK  %+v", 200, o.Payload)
 }
-func (o *ForwardZoneUpdateCreated) GetPayload() *models.ConfigUpdateForwardZoneResponse {
+func (o *ForwardZoneUpdateOK) GetPayload() *models.ConfigUpdateForwardZoneResponse {
 	return o.Payload
 }
 
-func (o *ForwardZoneUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardZoneUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateForwardZoneResponse)
 

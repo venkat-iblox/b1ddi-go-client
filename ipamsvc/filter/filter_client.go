@@ -36,9 +36,9 @@ type ClientService interface {
 }
 
 /*
-  FilterList retrieves d h c p filters
+FilterList retrieves d h c p filters
 
-  Use this method to retrieve DHCP __Filter__ objects of all types.
+Use this method to retrieve DHCP __Filter__ objects of all types.
 */
 func (a *Client) FilterList(params *FilterListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FilterListOK, error) {
 	// TODO: Validate the params before sending

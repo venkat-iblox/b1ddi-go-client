@@ -39,7 +39,7 @@ type IpamsvcInheritedDHCPOption struct {
 
 	// The inherited value for the DHCP option.
 	// Read Only: true
-	Value *IpamsvcOptionItem `json:"value,omitempty"`
+	Value *IpamsvcInheritedDHCPOptionItem `json:"value,omitempty"`
 }
 
 // Validate validates this ipamsvc inherited d h c p option
@@ -105,6 +105,11 @@ func (m *IpamsvcInheritedDHCPOption) contextValidateDisplayName(ctx context.Cont
 func (m *IpamsvcInheritedDHCPOption) contextValidateValue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Value != nil {
+
+		if swag.IsZero(m.Value) { // not required
+			return nil
+		}
+
 		if err := m.Value.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("value")

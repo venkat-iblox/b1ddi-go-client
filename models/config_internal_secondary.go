@@ -23,7 +23,7 @@ type ConfigInternalSecondary struct {
 
 	// The resource identifier.
 	// Required: true
-	Host *string `json:"host,omitempty"`
+	Host *string `json:"host"`
 }
 
 // Validate validates this config internal secondary

@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupCreateCreated, error)
+	HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupCreateOK, error)
 
-	HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupDeleteNoContent, error)
+	HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupDeleteOK, error)
 
 	HaGroupList(params *HaGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupListOK, error)
 
 	HaGroupRead(params *HaGroupReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupReadOK, error)
 
-	HaGroupUpdate(params *HaGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupUpdateCreated, error)
+	HaGroupUpdate(params *HaGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  HaGroupCreate creates the h a group
+	HaGroupCreate creates the h a group
 
-  Use this method to create an __HAGroup__ object.
+	Use this method to create an __HAGroup__ object.
+
 The __HAGroup__ object represents on-prem hosts that can serve the same leases for HA.
 */
-func (a *Client) HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupCreateCreated, error) {
+func (a *Client) HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHaGroupCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HaGroupCreateCreated)
+	success, ok := result.(*HaGroupCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) HaGroupCreate(params *HaGroupCreateParams, authInfo runtime.Cli
 }
 
 /*
-  HaGroupDelete deletes the h a group
+	HaGroupDelete deletes the h a group
 
-  Use this method to delete an __HAGroup__ object.
+	Use this method to delete an __HAGroup__ object.
+
 The __HAGroup__ (_dhcp/ha_group_) object represents on-prem hosts that can serve the same leases for HA.
 */
-func (a *Client) HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupDeleteNoContent, error) {
+func (a *Client) HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHaGroupDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HaGroupDeleteNoContent)
+	success, ok := result.(*HaGroupDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) HaGroupDelete(params *HaGroupDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  HaGroupList retrieves h a groups
+	HaGroupList retrieves h a groups
 
-  Use this method to retrieve __HAGroup__ objects.
+	Use this method to retrieve __HAGroup__ objects.
+
 The __HAGroup__ (_dhcp/ha_group_) object represents on-prem hosts that can serve the same leases for HA.
 */
 func (a *Client) HaGroupList(params *HaGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) HaGroupList(params *HaGroupListParams, authInfo runtime.ClientA
 }
 
 /*
-  HaGroupRead retrieves the h a group
+	HaGroupRead retrieves the h a group
 
-  Use this method to retrieve an __HAGroup__ object.
+	Use this method to retrieve an __HAGroup__ object.
+
 The __HAGroup__ object represents on-prem hosts that can serve the same leases for HA.
 */
 func (a *Client) HaGroupRead(params *HaGroupReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) HaGroupRead(params *HaGroupReadParams, authInfo runtime.ClientA
 }
 
 /*
-  HaGroupUpdate updates the h a group
+	HaGroupUpdate updates the h a group
 
-  Use this method to update an __HAGroup__ object.
+	Use this method to update an __HAGroup__ object.
+
 The __HAGroup__ object represents on-prem hosts that can serve the same leases for HA.
 */
-func (a *Client) HaGroupUpdate(params *HaGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupUpdateCreated, error) {
+func (a *Client) HaGroupUpdate(params *HaGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HaGroupUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHaGroupUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) HaGroupUpdate(params *HaGroupUpdateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*HaGroupUpdateCreated)
+	success, ok := result.(*HaGroupUpdateOK)
 	if ok {
 		return success, nil
 	}

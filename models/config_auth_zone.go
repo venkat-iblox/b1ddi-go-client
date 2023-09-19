@@ -36,6 +36,10 @@ type ConfigAuthZone struct {
 	// Optional. DNS primaries external to BloxOne DDI. Order is not significant.
 	ExternalPrimaries []*ConfigExternalPrimary `json:"external_primaries,omitempty"`
 
+	// list of external providers for the auth zone.
+	// Read Only: true
+	ExternalProviders []*AuthZoneExternalProvider `json:"external_providers"`
+
 	// DNS secondaries external to BloxOne DDI. Order is not significant.
 	ExternalSecondaries []*ConfigExternalSecondary `json:"external_secondaries,omitempty"`
 
@@ -44,7 +48,7 @@ type ConfigAuthZone struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// _gss_tsig_enabled_ enables/disables GSS-TSIG signed dynamic updates.
 	//
@@ -100,7 +104,7 @@ type ConfigAuthZone struct {
 	//  * _external_: zone data owned by an external nameserver,
 	//  * _cloud_: zone data is owned by a BloxOne DDI host.
 	// Required: true
-	PrimaryType *string `json:"primary_type,omitempty"`
+	PrimaryType *string `json:"primary_type"`
 
 	// Zone FQDN in punycode.
 	// Read Only: true
@@ -136,6 +140,10 @@ type ConfigAuthZone struct {
 	// The resource identifier.
 	View string `json:"view,omitempty"`
 
+	// The list of an auth zone warnings.
+	// Read Only: true
+	Warnings []*ConfigWarning `json:"warnings"`
+
 	// Optional. ZoneAuthority.
 	ZoneAuthority *ConfigZoneAuthority `json:"zone_authority,omitempty"`
 }
@@ -149,6 +157,10 @@ func (m *ConfigAuthZone) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateExternalPrimaries(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExternalProviders(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -192,6 +204,10 @@ func (m *ConfigAuthZone) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateWarnings(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateZoneAuthority(formats); err != nil {
 		res = append(res, err)
 	}
@@ -230,6 +246,32 @@ func (m *ConfigAuthZone) validateExternalPrimaries(formats strfmt.Registry) erro
 					return ve.ValidateName("external_primaries" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("external_primaries" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ConfigAuthZone) validateExternalProviders(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExternalProviders) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ExternalProviders); i++ {
+		if swag.IsZero(m.ExternalProviders[i]) { // not required
+			continue
+		}
+
+		if m.ExternalProviders[i] != nil {
+			if err := m.ExternalProviders[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("external_providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("external_providers" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -445,6 +487,32 @@ func (m *ConfigAuthZone) validateUpdatedAt(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ConfigAuthZone) validateWarnings(formats strfmt.Registry) error {
+	if swag.IsZero(m.Warnings) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Warnings); i++ {
+		if swag.IsZero(m.Warnings[i]) { // not required
+			continue
+		}
+
+		if m.Warnings[i] != nil {
+			if err := m.Warnings[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("warnings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("warnings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigAuthZone) validateZoneAuthority(formats strfmt.Registry) error {
 	if swag.IsZero(m.ZoneAuthority) { // not required
 		return nil
@@ -473,6 +541,10 @@ func (m *ConfigAuthZone) ContextValidate(ctx context.Context, formats strfmt.Reg
 	}
 
 	if err := m.contextValidateExternalPrimaries(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExternalProviders(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -524,6 +596,10 @@ func (m *ConfigAuthZone) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateWarnings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateZoneAuthority(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -548,6 +624,11 @@ func (m *ConfigAuthZone) contextValidateExternalPrimaries(ctx context.Context, f
 	for i := 0; i < len(m.ExternalPrimaries); i++ {
 
 		if m.ExternalPrimaries[i] != nil {
+
+			if swag.IsZero(m.ExternalPrimaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalPrimaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_primaries" + "." + strconv.Itoa(i))
@@ -563,11 +644,45 @@ func (m *ConfigAuthZone) contextValidateExternalPrimaries(ctx context.Context, f
 	return nil
 }
 
+func (m *ConfigAuthZone) contextValidateExternalProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "external_providers", "body", []*AuthZoneExternalProvider(m.ExternalProviders)); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.ExternalProviders); i++ {
+
+		if m.ExternalProviders[i] != nil {
+
+			if swag.IsZero(m.ExternalProviders[i]) { // not required
+				return nil
+			}
+
+			if err := m.ExternalProviders[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("external_providers" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("external_providers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigAuthZone) contextValidateExternalSecondaries(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.ExternalSecondaries); i++ {
 
 		if m.ExternalSecondaries[i] != nil {
+
+			if swag.IsZero(m.ExternalSecondaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.ExternalSecondaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("external_secondaries" + "." + strconv.Itoa(i))
@@ -601,6 +716,11 @@ func (m *ConfigAuthZone) contextValidateInheritanceAssignedHosts(ctx context.Con
 	for i := 0; i < len(m.InheritanceAssignedHosts); i++ {
 
 		if m.InheritanceAssignedHosts[i] != nil {
+
+			if swag.IsZero(m.InheritanceAssignedHosts[i]) { // not required
+				return nil
+			}
+
 			if err := m.InheritanceAssignedHosts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("inheritance_assigned_hosts" + "." + strconv.Itoa(i))
@@ -619,6 +739,11 @@ func (m *ConfigAuthZone) contextValidateInheritanceAssignedHosts(ctx context.Con
 func (m *ConfigAuthZone) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -637,6 +762,11 @@ func (m *ConfigAuthZone) contextValidateInternalSecondaries(ctx context.Context,
 	for i := 0; i < len(m.InternalSecondaries); i++ {
 
 		if m.InternalSecondaries[i] != nil {
+
+			if swag.IsZero(m.InternalSecondaries[i]) { // not required
+				return nil
+			}
+
 			if err := m.InternalSecondaries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("internal_secondaries" + "." + strconv.Itoa(i))
@@ -684,6 +814,11 @@ func (m *ConfigAuthZone) contextValidateQueryACL(ctx context.Context, formats st
 	for i := 0; i < len(m.QueryACL); i++ {
 
 		if m.QueryACL[i] != nil {
+
+			if swag.IsZero(m.QueryACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.QueryACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("query_acl" + "." + strconv.Itoa(i))
@@ -704,6 +839,11 @@ func (m *ConfigAuthZone) contextValidateTransferACL(ctx context.Context, formats
 	for i := 0; i < len(m.TransferACL); i++ {
 
 		if m.TransferACL[i] != nil {
+
+			if swag.IsZero(m.TransferACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.TransferACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("transfer_acl" + "." + strconv.Itoa(i))
@@ -724,6 +864,11 @@ func (m *ConfigAuthZone) contextValidateUpdateACL(ctx context.Context, formats s
 	for i := 0; i < len(m.UpdateACL); i++ {
 
 		if m.UpdateACL[i] != nil {
+
+			if swag.IsZero(m.UpdateACL[i]) { // not required
+				return nil
+			}
+
 			if err := m.UpdateACL[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("update_acl" + "." + strconv.Itoa(i))
@@ -748,9 +893,43 @@ func (m *ConfigAuthZone) contextValidateUpdatedAt(ctx context.Context, formats s
 	return nil
 }
 
+func (m *ConfigAuthZone) contextValidateWarnings(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "warnings", "body", []*ConfigWarning(m.Warnings)); err != nil {
+		return err
+	}
+
+	for i := 0; i < len(m.Warnings); i++ {
+
+		if m.Warnings[i] != nil {
+
+			if swag.IsZero(m.Warnings[i]) { // not required
+				return nil
+			}
+
+			if err := m.Warnings[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("warnings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("warnings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *ConfigAuthZone) contextValidateZoneAuthority(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ZoneAuthority != nil {
+
+		if swag.IsZero(m.ZoneAuthority) { // not required
+			return nil
+		}
+
 		if err := m.ZoneAuthority.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("zone_authority")

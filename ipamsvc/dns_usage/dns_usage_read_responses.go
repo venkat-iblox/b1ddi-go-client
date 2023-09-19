@@ -43,7 +43,8 @@ func NewDNSUsageReadOK() *DNSUsageReadOK {
 	return &DNSUsageReadOK{}
 }
 
-/* DNSUsageReadOK describes a response with status code 200, with default header values.
+/*
+DNSUsageReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

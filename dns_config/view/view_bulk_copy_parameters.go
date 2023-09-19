@@ -54,10 +54,12 @@ func NewViewBulkCopyParamsWithHTTPClient(client *http.Client) *ViewBulkCopyParam
 	}
 }
 
-/* ViewBulkCopyParams contains all the parameters to send to the API endpoint
-   for the view bulk copy operation.
+/*
+ViewBulkCopyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the view bulk copy operation.
+
+	Typically these are written to a http.Request.
 */
 type ViewBulkCopyParams struct {
 

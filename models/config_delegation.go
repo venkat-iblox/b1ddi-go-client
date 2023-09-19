@@ -36,7 +36,7 @@ type ConfigDelegation struct {
 	//
 	// Read-only after creation.
 	// Required: true
-	Fqdn *string `json:"fqdn,omitempty"`
+	Fqdn *string `json:"fqdn"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -136,6 +136,11 @@ func (m *ConfigDelegation) contextValidateDelegationServers(ctx context.Context,
 	for i := 0; i < len(m.DelegationServers); i++ {
 
 		if m.DelegationServers[i] != nil {
+
+			if swag.IsZero(m.DelegationServers[i]) { // not required
+				return nil
+			}
+
 			if err := m.DelegationServers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("delegation_servers" + "." + strconv.Itoa(i))

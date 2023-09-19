@@ -43,7 +43,8 @@ func NewDelegationListOK() *DelegationListOK {
 	return &DelegationListOK{}
 }
 
-/* DelegationListOK describes a response with status code 200, with default header values.
+/*
+DelegationListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

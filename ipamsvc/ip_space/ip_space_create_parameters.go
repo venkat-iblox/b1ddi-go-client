@@ -54,10 +54,12 @@ func NewIPSpaceCreateParamsWithHTTPClient(client *http.Client) *IPSpaceCreatePar
 	}
 }
 
-/* IPSpaceCreateParams contains all the parameters to send to the API endpoint
-   for the ip space create operation.
+/*
+IPSpaceCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ip space create operation.
+
+	Typically these are written to a http.Request.
 */
 type IPSpaceCreateParams struct {
 

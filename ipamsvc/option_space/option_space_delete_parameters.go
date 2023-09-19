@@ -52,10 +52,12 @@ func NewOptionSpaceDeleteParamsWithHTTPClient(client *http.Client) *OptionSpaceD
 	}
 }
 
-/* OptionSpaceDeleteParams contains all the parameters to send to the API endpoint
-   for the option space delete operation.
+/*
+OptionSpaceDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option space delete operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionSpaceDeleteParams struct {
 

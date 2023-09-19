@@ -29,30 +29,31 @@ func (o *RangeDeleteReader) ReadResponse(response runtime.ClientResponse, consum
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewRangeDeleteNoContent()
+	result := NewRangeDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewRangeDeleteNoContent creates a RangeDeleteNoContent with default headers values
-func NewRangeDeleteNoContent() *RangeDeleteNoContent {
-	return &RangeDeleteNoContent{}
+// NewRangeDeleteOK creates a RangeDeleteOK with default headers values
+func NewRangeDeleteOK() *RangeDeleteOK {
+	return &RangeDeleteOK{}
 }
 
-/* RangeDeleteNoContent describes a response with status code 204, with default header values.
+/*
+RangeDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type RangeDeleteNoContent struct {
+type RangeDeleteOK struct {
 }
 
-func (o *RangeDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/range/{id}][%d] rangeDeleteNoContent ", 204)
+func (o *RangeDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /ipam/range/{id}][%d] rangeDeleteOK ", 200)
 }
 
-func (o *RangeDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *RangeDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

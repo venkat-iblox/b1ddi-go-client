@@ -29,30 +29,31 @@ func (o *AddressBlockDeleteReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockDeleteNoContent()
+	result := NewAddressBlockDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockDeleteNoContent creates a AddressBlockDeleteNoContent with default headers values
-func NewAddressBlockDeleteNoContent() *AddressBlockDeleteNoContent {
-	return &AddressBlockDeleteNoContent{}
+// NewAddressBlockDeleteOK creates a AddressBlockDeleteOK with default headers values
+func NewAddressBlockDeleteOK() *AddressBlockDeleteOK {
+	return &AddressBlockDeleteOK{}
 }
 
-/* AddressBlockDeleteNoContent describes a response with status code 204, with default header values.
+/*
+AddressBlockDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type AddressBlockDeleteNoContent struct {
+type AddressBlockDeleteOK struct {
 }
 
-func (o *AddressBlockDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/address_block/{id}][%d] addressBlockDeleteNoContent ", 204)
+func (o *AddressBlockDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /ipam/address_block/{id}][%d] addressBlockDeleteOK ", 200)
 }
 
-func (o *AddressBlockDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -31,34 +31,35 @@ func (o *AuthZoneCopyReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthZoneCopyCreated()
+	result := NewAuthZoneCopyOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthZoneCopyCreated creates a AuthZoneCopyCreated with default headers values
-func NewAuthZoneCopyCreated() *AuthZoneCopyCreated {
-	return &AuthZoneCopyCreated{}
+// NewAuthZoneCopyOK creates a AuthZoneCopyOK with default headers values
+func NewAuthZoneCopyOK() *AuthZoneCopyOK {
+	return &AuthZoneCopyOK{}
 }
 
-/* AuthZoneCopyCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneCopyOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AuthZoneCopyCreated struct {
+type AuthZoneCopyOK struct {
 	Payload *models.ConfigCopyAuthZoneResponse
 }
 
-func (o *AuthZoneCopyCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/auth_zone/copy][%d] authZoneCopyCreated  %+v", 201, o.Payload)
+func (o *AuthZoneCopyOK) Error() string {
+	return fmt.Sprintf("[POST /dns/auth_zone/copy][%d] authZoneCopyOK  %+v", 200, o.Payload)
 }
-func (o *AuthZoneCopyCreated) GetPayload() *models.ConfigCopyAuthZoneResponse {
+func (o *AuthZoneCopyOK) GetPayload() *models.ConfigCopyAuthZoneResponse {
 	return o.Payload
 }
 
-func (o *AuthZoneCopyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthZoneCopyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCopyAuthZoneResponse)
 

@@ -31,34 +31,35 @@ func (o *HardwareFilterCreateReader) ReadResponse(response runtime.ClientRespons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHardwareFilterCreateCreated()
+	result := NewHardwareFilterCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHardwareFilterCreateCreated creates a HardwareFilterCreateCreated with default headers values
-func NewHardwareFilterCreateCreated() *HardwareFilterCreateCreated {
-	return &HardwareFilterCreateCreated{}
+// NewHardwareFilterCreateOK creates a HardwareFilterCreateOK with default headers values
+func NewHardwareFilterCreateOK() *HardwareFilterCreateOK {
+	return &HardwareFilterCreateOK{}
 }
 
-/* HardwareFilterCreateCreated describes a response with status code 201, with default header values.
+/*
+HardwareFilterCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type HardwareFilterCreateCreated struct {
+type HardwareFilterCreateOK struct {
 	Payload *models.IpamsvcCreateHardwareFilterResponse
 }
 
-func (o *HardwareFilterCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/hardware_filter][%d] hardwareFilterCreateCreated  %+v", 201, o.Payload)
+func (o *HardwareFilterCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/hardware_filter][%d] hardwareFilterCreateOK  %+v", 200, o.Payload)
 }
-func (o *HardwareFilterCreateCreated) GetPayload() *models.IpamsvcCreateHardwareFilterResponse {
+func (o *HardwareFilterCreateOK) GetPayload() *models.IpamsvcCreateHardwareFilterResponse {
 	return o.Payload
 }
 
-func (o *HardwareFilterCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HardwareFilterCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateHardwareFilterResponse)
 

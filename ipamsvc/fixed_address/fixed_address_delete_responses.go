@@ -29,30 +29,31 @@ func (o *FixedAddressDeleteReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewFixedAddressDeleteNoContent()
+	result := NewFixedAddressDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewFixedAddressDeleteNoContent creates a FixedAddressDeleteNoContent with default headers values
-func NewFixedAddressDeleteNoContent() *FixedAddressDeleteNoContent {
-	return &FixedAddressDeleteNoContent{}
+// NewFixedAddressDeleteOK creates a FixedAddressDeleteOK with default headers values
+func NewFixedAddressDeleteOK() *FixedAddressDeleteOK {
+	return &FixedAddressDeleteOK{}
 }
 
-/* FixedAddressDeleteNoContent describes a response with status code 204, with default header values.
+/*
+FixedAddressDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type FixedAddressDeleteNoContent struct {
+type FixedAddressDeleteOK struct {
 }
 
-func (o *FixedAddressDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/fixed_address/{id}][%d] fixedAddressDeleteNoContent ", 204)
+func (o *FixedAddressDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/fixed_address/{id}][%d] fixedAddressDeleteOK ", 200)
 }
 
-func (o *FixedAddressDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *FixedAddressDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

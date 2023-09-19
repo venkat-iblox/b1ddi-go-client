@@ -52,10 +52,12 @@ func NewAuthNsgDeleteParamsWithHTTPClient(client *http.Client) *AuthNsgDeletePar
 	}
 }
 
-/* AuthNsgDeleteParams contains all the parameters to send to the API endpoint
-   for the auth nsg delete operation.
+/*
+AuthNsgDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth nsg delete operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthNsgDeleteParams struct {
 

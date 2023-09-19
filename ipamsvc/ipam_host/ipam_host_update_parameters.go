@@ -54,10 +54,12 @@ func NewIpamHostUpdateParamsWithHTTPClient(client *http.Client) *IpamHostUpdateP
 	}
 }
 
-/* IpamHostUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam host update operation.
+/*
+IpamHostUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam host update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamHostUpdateParams struct {
 

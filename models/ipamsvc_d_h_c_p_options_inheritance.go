@@ -74,6 +74,11 @@ func (m *IpamsvcDHCPOptionsInheritance) ContextValidate(ctx context.Context, for
 func (m *IpamsvcDHCPOptionsInheritance) contextValidateDhcpOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DhcpOptions != nil {
+
+		if swag.IsZero(m.DhcpOptions) { // not required
+			return nil
+		}
+
 		if err := m.DhcpOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dhcp_options")

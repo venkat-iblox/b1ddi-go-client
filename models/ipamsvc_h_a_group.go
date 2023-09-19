@@ -22,6 +22,9 @@ import (
 // swagger:model ipamsvcHAGroup
 type IpamsvcHAGroup struct {
 
+	// The resource identifier.
+	AnycastConfigID string `json:"anycast_config_id,omitempty"`
+
 	// The description for the HA group. May contain 0 to 1024 characters. Can include UTF-8.
 	Comment string `json:"comment,omitempty"`
 
@@ -32,7 +35,7 @@ type IpamsvcHAGroup struct {
 
 	// The list of hosts.
 	// Required: true
-	Hosts []*IpamsvcHAGroupHost `json:"hosts,omitempty"`
+	Hosts []*IpamsvcHAGroupHost `json:"hosts"`
 
 	// The resource identifier.
 	// Read Only: true
@@ -51,7 +54,10 @@ type IpamsvcHAGroup struct {
 
 	// The name of the HA group. Must contain 1 to 256 characters. Can include UTF-8.
 	// Required: true
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
+
+	// Status of the HA group. This field is set when the _collect_stats_ is set to _true_ in the _GET_ _/dhcp/ha_group_ request.
+	Status string `json:"status,omitempty"`
 
 	// The tags for the HA group.
 	Tags interface{} `json:"tags,omitempty"`
@@ -188,6 +194,11 @@ func (m *IpamsvcHAGroup) contextValidateHosts(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Hosts); i++ {
 
 		if m.Hosts[i] != nil {
+
+			if swag.IsZero(m.Hosts[i]) { // not required
+				return nil
+			}
+
 			if err := m.Hosts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("hosts" + "." + strconv.Itoa(i))

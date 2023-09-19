@@ -52,10 +52,12 @@ func NewViewDeleteParamsWithHTTPClient(client *http.Client) *ViewDeleteParams {
 	}
 }
 
-/* ViewDeleteParams contains all the parameters to send to the API endpoint
-   for the view delete operation.
+/*
+ViewDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the view delete operation.
+
+	Typically these are written to a http.Request.
 */
 type ViewDeleteParams struct {
 

@@ -96,6 +96,11 @@ func (m *ConfigECSBlock) contextValidateEcsZones(ctx context.Context, formats st
 	for i := 0; i < len(m.EcsZones); i++ {
 
 		if m.EcsZones[i] != nil {
+
+			if swag.IsZero(m.EcsZones[i]) { // not required
+				return nil
+			}
+
 			if err := m.EcsZones[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ecs_zones" + "." + strconv.Itoa(i))

@@ -32,29 +32,30 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewBulkCopyCreated, error)
+	ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewBulkCopyOK, error)
 
-	ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewCreateCreated, error)
+	ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewCreateOK, error)
 
-	ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewDeleteNoContent, error)
+	ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewDeleteOK, error)
 
 	ViewList(params *ViewListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewListOK, error)
 
 	ViewRead(params *ViewReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewReadOK, error)
 
-	ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewUpdateCreated, error)
+	ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  ViewBulkCopy copies the specified auth zone and forward zone objects in the view
+	ViewBulkCopy copies the specified auth zone and forward zone objects in the view
 
-  Use this method to bulk copy __AuthZone__ and __ForwardZone__ objects from one __View__ object to another __View__ object.
+	Use this method to bulk copy __AuthZone__ and __ForwardZone__ objects from one __View__ object to another __View__ object.
+
 The __AuthZone__ object represents an authoritative zone.
 The __ForwardZone__ object represents a forwarding zone.
 */
-func (a *Client) ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewBulkCopyCreated, error) {
+func (a *Client) ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewBulkCopyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewBulkCopyParams()
@@ -80,7 +81,7 @@ func (a *Client) ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ViewBulkCopyCreated)
+	success, ok := result.(*ViewBulkCopyOK)
 	if ok {
 		return success, nil
 	}
@@ -91,12 +92,13 @@ func (a *Client) ViewBulkCopy(params *ViewBulkCopyParams, authInfo runtime.Clien
 }
 
 /*
-  ViewCreate creates the view object
+	ViewCreate creates the view object
 
-  Use this method to create a View object.
+	Use this method to create a View object.
+
 Named collection of DNS View settings.
 */
-func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewCreateCreated, error) {
+func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewCreateParams()
@@ -122,7 +124,7 @@ func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ViewCreateCreated)
+	success, ok := result.(*ViewCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -133,12 +135,13 @@ func (a *Client) ViewCreate(params *ViewCreateParams, authInfo runtime.ClientAut
 }
 
 /*
-  ViewDelete moves the view object to recyclebin
+	ViewDelete moves the view object to recyclebin
 
-  Use this method to move a View object to Recyclebin.
+	Use this method to move a View object to Recyclebin.
+
 Named collection of DNS View settings.
 */
-func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewDeleteNoContent, error) {
+func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewDeleteParams()
@@ -167,7 +170,7 @@ func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ViewDeleteNoContent)
+	success, ok := result.(*ViewDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -178,9 +181,10 @@ func (a *Client) ViewDelete(params *ViewDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
-  ViewList lists view objects
+	ViewList lists view objects
 
-  Use this method to list View objects.
+	Use this method to list View objects.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewList(params *ViewListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewListOK, error) {
@@ -220,9 +224,10 @@ func (a *Client) ViewList(params *ViewListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  ViewRead reads the view object
+	ViewRead reads the view object
 
-  Use this method to read a View object.
+	Use this method to read a View object.
+
 Named collection of DNS View settings.
 */
 func (a *Client) ViewRead(params *ViewReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewReadOK, error) {
@@ -265,12 +270,13 @@ func (a *Client) ViewRead(params *ViewReadParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  ViewUpdate updates the view object
+	ViewUpdate updates the view object
 
-  Use this method to update a View object.
+	Use this method to update a View object.
+
 Named collection of DNS View settings.
 */
-func (a *Client) ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewUpdateCreated, error) {
+func (a *Client) ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ViewUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewUpdateParams()
@@ -299,7 +305,7 @@ func (a *Client) ViewUpdate(params *ViewUpdateParams, authInfo runtime.ClientAut
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ViewUpdateCreated)
+	success, ok := result.(*ViewUpdateOK)
 	if ok {
 		return success, nil
 	}

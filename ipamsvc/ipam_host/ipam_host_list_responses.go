@@ -43,7 +43,8 @@ func NewIpamHostListOK() *IpamHostListOK {
 	return &IpamHostListOK{}
 }
 
-/* IpamHostListOK describes a response with status code 200, with default header values.
+/*
+IpamHostListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

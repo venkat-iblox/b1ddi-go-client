@@ -36,17 +36,18 @@ type ClientService interface {
 
 	GlobalRead2(params *GlobalRead2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalRead2OK, error)
 
-	GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdateCreated, error)
+	GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdateOK, error)
 
-	GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdate2Created, error)
+	GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdate2OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  GlobalRead retrieves the global configuration
+	GlobalRead retrieves the global configuration
 
-  Use this method to retrieve the __Global__ configuration object.
+	Use this method to retrieve the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalRead(params *GlobalReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalReadOK, error) {
@@ -86,9 +87,10 @@ func (a *Client) GlobalRead(params *GlobalReadParams, authInfo runtime.ClientAut
 }
 
 /*
-  GlobalRead2 retrieves the global configuration
+	GlobalRead2 retrieves the global configuration
 
-  Use this method to retrieve the __Global__ configuration object.
+	Use this method to retrieve the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
 func (a *Client) GlobalRead2(params *GlobalRead2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalRead2OK, error) {
@@ -131,12 +133,13 @@ func (a *Client) GlobalRead2(params *GlobalRead2Params, authInfo runtime.ClientA
 }
 
 /*
-  GlobalUpdate updates the global configuration
+	GlobalUpdate updates the global configuration
 
-  Use this method to update the __Global__ configuration object.
+	Use this method to update the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
-func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdateCreated, error) {
+func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGlobalUpdateParams()
@@ -162,7 +165,7 @@ func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.Clien
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GlobalUpdateCreated)
+	success, ok := result.(*GlobalUpdateOK)
 	if ok {
 		return success, nil
 	}
@@ -173,12 +176,13 @@ func (a *Client) GlobalUpdate(params *GlobalUpdateParams, authInfo runtime.Clien
 }
 
 /*
-  GlobalUpdate2 updates the global configuration
+	GlobalUpdate2 updates the global configuration
 
-  Use this method to update the __Global__ configuration object.
+	Use this method to update the __Global__ configuration object.
+
 The service operates on single __Global__ (_dhcp/global_) object that represents parent configuration settings for inheritance.
 */
-func (a *Client) GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdate2Created, error) {
+func (a *Client) GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalUpdate2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGlobalUpdate2Params()
@@ -207,7 +211,7 @@ func (a *Client) GlobalUpdate2(params *GlobalUpdate2Params, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GlobalUpdate2Created)
+	success, ok := result.(*GlobalUpdate2OK)
 	if ok {
 		return success, nil
 	}

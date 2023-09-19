@@ -29,30 +29,31 @@ func (o *OptionSpaceDeleteReader) ReadResponse(response runtime.ClientResponse, 
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionSpaceDeleteNoContent()
+	result := NewOptionSpaceDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionSpaceDeleteNoContent creates a OptionSpaceDeleteNoContent with default headers values
-func NewOptionSpaceDeleteNoContent() *OptionSpaceDeleteNoContent {
-	return &OptionSpaceDeleteNoContent{}
+// NewOptionSpaceDeleteOK creates a OptionSpaceDeleteOK with default headers values
+func NewOptionSpaceDeleteOK() *OptionSpaceDeleteOK {
+	return &OptionSpaceDeleteOK{}
 }
 
-/* OptionSpaceDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionSpaceDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type OptionSpaceDeleteNoContent struct {
+type OptionSpaceDeleteOK struct {
 }
 
-func (o *OptionSpaceDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/option_space/{id}][%d] optionSpaceDeleteNoContent ", 204)
+func (o *OptionSpaceDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/option_space/{id}][%d] optionSpaceDeleteOK ", 200)
 }
 
-func (o *OptionSpaceDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionSpaceDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

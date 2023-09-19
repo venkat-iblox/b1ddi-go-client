@@ -31,34 +31,35 @@ func (o *OptionCodeUpdateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionCodeUpdateCreated()
+	result := NewOptionCodeUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionCodeUpdateCreated creates a OptionCodeUpdateCreated with default headers values
-func NewOptionCodeUpdateCreated() *OptionCodeUpdateCreated {
-	return &OptionCodeUpdateCreated{}
+// NewOptionCodeUpdateOK creates a OptionCodeUpdateOK with default headers values
+func NewOptionCodeUpdateOK() *OptionCodeUpdateOK {
+	return &OptionCodeUpdateOK{}
 }
 
-/* OptionCodeUpdateCreated describes a response with status code 201, with default header values.
+/*
+OptionCodeUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type OptionCodeUpdateCreated struct {
+type OptionCodeUpdateOK struct {
 	Payload *models.IpamsvcUpdateOptionCodeResponse
 }
 
-func (o *OptionCodeUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/option_code/{id}][%d] optionCodeUpdateCreated  %+v", 201, o.Payload)
+func (o *OptionCodeUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/option_code/{id}][%d] optionCodeUpdateOK  %+v", 200, o.Payload)
 }
-func (o *OptionCodeUpdateCreated) GetPayload() *models.IpamsvcUpdateOptionCodeResponse {
+func (o *OptionCodeUpdateOK) GetPayload() *models.IpamsvcUpdateOptionCodeResponse {
 	return o.Payload
 }
 
-func (o *OptionCodeUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionCodeUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateOptionCodeResponse)
 

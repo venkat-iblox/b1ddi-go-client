@@ -43,7 +43,8 @@ func NewRangeReadOK() *RangeReadOK {
 	return &RangeReadOK{}
 }
 
-/* RangeReadOK describes a response with status code 200, with default header values.
+/*
+RangeReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

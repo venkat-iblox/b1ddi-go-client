@@ -52,10 +52,12 @@ func NewForwardZoneDeleteParamsWithHTTPClient(client *http.Client) *ForwardZoneD
 	}
 }
 
-/* ForwardZoneDeleteParams contains all the parameters to send to the API endpoint
-   for the forward zone delete operation.
+/*
+ForwardZoneDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the forward zone delete operation.
+
+	Typically these are written to a http.Request.
 */
 type ForwardZoneDeleteParams struct {
 

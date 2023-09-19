@@ -31,34 +31,35 @@ func (o *HaGroupUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHaGroupUpdateCreated()
+	result := NewHaGroupUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHaGroupUpdateCreated creates a HaGroupUpdateCreated with default headers values
-func NewHaGroupUpdateCreated() *HaGroupUpdateCreated {
-	return &HaGroupUpdateCreated{}
+// NewHaGroupUpdateOK creates a HaGroupUpdateOK with default headers values
+func NewHaGroupUpdateOK() *HaGroupUpdateOK {
+	return &HaGroupUpdateOK{}
 }
 
-/* HaGroupUpdateCreated describes a response with status code 201, with default header values.
+/*
+HaGroupUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type HaGroupUpdateCreated struct {
+type HaGroupUpdateOK struct {
 	Payload *models.IpamsvcUpdateHAGroupResponse
 }
 
-func (o *HaGroupUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/ha_group/{id}][%d] haGroupUpdateCreated  %+v", 201, o.Payload)
+func (o *HaGroupUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/ha_group/{id}][%d] haGroupUpdateOK  %+v", 200, o.Payload)
 }
-func (o *HaGroupUpdateCreated) GetPayload() *models.IpamsvcUpdateHAGroupResponse {
+func (o *HaGroupUpdateOK) GetPayload() *models.IpamsvcUpdateHAGroupResponse {
 	return o.Payload
 }
 
-func (o *HaGroupUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HaGroupUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateHAGroupResponse)
 

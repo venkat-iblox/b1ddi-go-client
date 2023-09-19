@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -21,9 +22,15 @@ import (
 // swagger:model ipamsvcHAGroupHost
 type IpamsvcHAGroupHost struct {
 
+	// The address on which this host listens.
+	Address string `json:"address,omitempty"`
+
+	// Last successful heartbeat received from its peer/s. This field is set when the _collect_stats_ is set to _true_ in the _GET_ _/dhcp/ha_group_ request.
+	Heartbeats []*IpamsvcHAGroupHeartbeats `json:"heartbeats"`
+
 	// The resource identifier.
 	// Required: true
-	Host *string `json:"host,omitempty"`
+	Host *string `json:"host"`
 
 	// The HA port.
 	// Read Only: true
@@ -31,11 +38,18 @@ type IpamsvcHAGroupHost struct {
 
 	// The role of this host in the HA relationship: _active_ or _passive_.
 	Role string `json:"role,omitempty"`
+
+	// The state of DHCP on the host. This field is set when the _collect_stats_ is set to _true_ in the _GET_ _/dhcp/ha_group_ request.
+	State string `json:"state,omitempty"`
 }
 
 // Validate validates this ipamsvc h a group host
 func (m *IpamsvcHAGroupHost) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateHeartbeats(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateHost(formats); err != nil {
 		res = append(res, err)
@@ -44,6 +58,32 @@ func (m *IpamsvcHAGroupHost) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IpamsvcHAGroupHost) validateHeartbeats(formats strfmt.Registry) error {
+	if swag.IsZero(m.Heartbeats) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Heartbeats); i++ {
+		if swag.IsZero(m.Heartbeats[i]) { // not required
+			continue
+		}
+
+		if m.Heartbeats[i] != nil {
+			if err := m.Heartbeats[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("heartbeats" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("heartbeats" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -60,6 +100,10 @@ func (m *IpamsvcHAGroupHost) validateHost(formats strfmt.Registry) error {
 func (m *IpamsvcHAGroupHost) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateHeartbeats(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidatePort(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -67,6 +111,31 @@ func (m *IpamsvcHAGroupHost) ContextValidate(ctx context.Context, formats strfmt
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *IpamsvcHAGroupHost) contextValidateHeartbeats(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Heartbeats); i++ {
+
+		if m.Heartbeats[i] != nil {
+
+			if swag.IsZero(m.Heartbeats[i]) { // not required
+				return nil
+			}
+
+			if err := m.Heartbeats[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("heartbeats" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("heartbeats" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

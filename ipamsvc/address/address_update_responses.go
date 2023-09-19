@@ -31,34 +31,35 @@ func (o *AddressUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressUpdateCreated()
+	result := NewAddressUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressUpdateCreated creates a AddressUpdateCreated with default headers values
-func NewAddressUpdateCreated() *AddressUpdateCreated {
-	return &AddressUpdateCreated{}
+// NewAddressUpdateOK creates a AddressUpdateOK with default headers values
+func NewAddressUpdateOK() *AddressUpdateOK {
+	return &AddressUpdateOK{}
 }
 
-/* AddressUpdateCreated describes a response with status code 201, with default header values.
+/*
+AddressUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type AddressUpdateCreated struct {
+type AddressUpdateOK struct {
 	Payload *models.IpamsvcUpdateAddressResponse
 }
 
-func (o *AddressUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/address/{id}][%d] addressUpdateCreated  %+v", 201, o.Payload)
+func (o *AddressUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /ipam/address/{id}][%d] addressUpdateOK  %+v", 200, o.Payload)
 }
-func (o *AddressUpdateCreated) GetPayload() *models.IpamsvcUpdateAddressResponse {
+func (o *AddressUpdateOK) GetPayload() *models.IpamsvcUpdateAddressResponse {
 	return o.Payload
 }
 
-func (o *AddressUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateAddressResponse)
 

@@ -44,7 +44,7 @@ type ConfigBulkCopyView struct {
 
 	// The resource identifier.
 	// Required: true
-	Target *string `json:"target,omitempty"`
+	Target *string `json:"target"`
 }
 
 // Validate validates this config bulk copy view
@@ -177,6 +177,11 @@ func (m *ConfigBulkCopyView) ContextValidate(ctx context.Context, formats strfmt
 func (m *ConfigBulkCopyView) contextValidateAuthZoneConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuthZoneConfig != nil {
+
+		if swag.IsZero(m.AuthZoneConfig) { // not required
+			return nil
+		}
+
 		if err := m.AuthZoneConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("auth_zone_config")
@@ -193,6 +198,11 @@ func (m *ConfigBulkCopyView) contextValidateAuthZoneConfig(ctx context.Context, 
 func (m *ConfigBulkCopyView) contextValidateForwardZoneConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ForwardZoneConfig != nil {
+
+		if swag.IsZero(m.ForwardZoneConfig) { // not required
+			return nil
+		}
+
 		if err := m.ForwardZoneConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("forward_zone_config")
@@ -209,6 +219,11 @@ func (m *ConfigBulkCopyView) contextValidateForwardZoneConfig(ctx context.Contex
 func (m *ConfigBulkCopyView) contextValidateSecondaryZoneConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SecondaryZoneConfig != nil {
+
+		if swag.IsZero(m.SecondaryZoneConfig) { // not required
+			return nil
+		}
+
 		if err := m.SecondaryZoneConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secondary_zone_config")

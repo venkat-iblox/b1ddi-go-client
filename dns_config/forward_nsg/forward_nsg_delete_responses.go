@@ -29,30 +29,31 @@ func (o *ForwardNsgDeleteReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardNsgDeleteNoContent()
+	result := NewForwardNsgDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardNsgDeleteNoContent creates a ForwardNsgDeleteNoContent with default headers values
-func NewForwardNsgDeleteNoContent() *ForwardNsgDeleteNoContent {
-	return &ForwardNsgDeleteNoContent{}
+// NewForwardNsgDeleteOK creates a ForwardNsgDeleteOK with default headers values
+func NewForwardNsgDeleteOK() *ForwardNsgDeleteOK {
+	return &ForwardNsgDeleteOK{}
 }
 
-/* ForwardNsgDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ForwardNsgDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type ForwardNsgDeleteNoContent struct {
+type ForwardNsgDeleteOK struct {
 }
 
-func (o *ForwardNsgDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dns/forward_nsg/{id}][%d] forwardNsgDeleteNoContent ", 204)
+func (o *ForwardNsgDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dns/forward_nsg/{id}][%d] forwardNsgDeleteOK ", 200)
 }
 
-func (o *ForwardNsgDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardNsgDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

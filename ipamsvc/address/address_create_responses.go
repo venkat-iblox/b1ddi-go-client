@@ -31,34 +31,35 @@ func (o *AddressCreateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressCreateCreated()
+	result := NewAddressCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressCreateCreated creates a AddressCreateCreated with default headers values
-func NewAddressCreateCreated() *AddressCreateCreated {
-	return &AddressCreateCreated{}
+// NewAddressCreateOK creates a AddressCreateOK with default headers values
+func NewAddressCreateOK() *AddressCreateOK {
+	return &AddressCreateOK{}
 }
 
-/* AddressCreateCreated describes a response with status code 201, with default header values.
+/*
+AddressCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressCreateCreated struct {
+type AddressCreateOK struct {
 	Payload *models.IpamsvcCreateAddressResponse
 }
 
-func (o *AddressCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address][%d] addressCreateCreated  %+v", 201, o.Payload)
+func (o *AddressCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address][%d] addressCreateOK  %+v", 200, o.Payload)
 }
-func (o *AddressCreateCreated) GetPayload() *models.IpamsvcCreateAddressResponse {
+func (o *AddressCreateOK) GetPayload() *models.IpamsvcCreateAddressResponse {
 	return o.Payload
 }
 
-func (o *AddressCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateAddressResponse)
 

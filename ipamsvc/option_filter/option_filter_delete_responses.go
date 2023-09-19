@@ -29,30 +29,31 @@ func (o *OptionFilterDeleteReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionFilterDeleteNoContent()
+	result := NewOptionFilterDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionFilterDeleteNoContent creates a OptionFilterDeleteNoContent with default headers values
-func NewOptionFilterDeleteNoContent() *OptionFilterDeleteNoContent {
-	return &OptionFilterDeleteNoContent{}
+// NewOptionFilterDeleteOK creates a OptionFilterDeleteOK with default headers values
+func NewOptionFilterDeleteOK() *OptionFilterDeleteOK {
+	return &OptionFilterDeleteOK{}
 }
 
-/* OptionFilterDeleteNoContent describes a response with status code 204, with default header values.
+/*
+OptionFilterDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type OptionFilterDeleteNoContent struct {
+type OptionFilterDeleteOK struct {
 }
 
-func (o *OptionFilterDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/option_filter/{id}][%d] optionFilterDeleteNoContent ", 204)
+func (o *OptionFilterDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/option_filter/{id}][%d] optionFilterDeleteOK ", 200)
 }
 
-func (o *OptionFilterDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionFilterDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -52,10 +52,12 @@ func NewSubnetReadParamsWithHTTPClient(client *http.Client) *SubnetReadParams {
 	}
 }
 
-/* SubnetReadParams contains all the parameters to send to the API endpoint
-   for the subnet read operation.
+/*
+SubnetReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the subnet read operation.
+
+	Typically these are written to a http.Request.
 */
 type SubnetReadParams struct {
 

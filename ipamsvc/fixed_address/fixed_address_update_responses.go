@@ -31,34 +31,35 @@ func (o *FixedAddressUpdateReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewFixedAddressUpdateCreated()
+	result := NewFixedAddressUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewFixedAddressUpdateCreated creates a FixedAddressUpdateCreated with default headers values
-func NewFixedAddressUpdateCreated() *FixedAddressUpdateCreated {
-	return &FixedAddressUpdateCreated{}
+// NewFixedAddressUpdateOK creates a FixedAddressUpdateOK with default headers values
+func NewFixedAddressUpdateOK() *FixedAddressUpdateOK {
+	return &FixedAddressUpdateOK{}
 }
 
-/* FixedAddressUpdateCreated describes a response with status code 201, with default header values.
+/*
+FixedAddressUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type FixedAddressUpdateCreated struct {
+type FixedAddressUpdateOK struct {
 	Payload *models.IpamsvcUpdateFixedAddressResponse
 }
 
-func (o *FixedAddressUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dhcp/fixed_address/{id}][%d] fixedAddressUpdateCreated  %+v", 201, o.Payload)
+func (o *FixedAddressUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dhcp/fixed_address/{id}][%d] fixedAddressUpdateOK  %+v", 200, o.Payload)
 }
-func (o *FixedAddressUpdateCreated) GetPayload() *models.IpamsvcUpdateFixedAddressResponse {
+func (o *FixedAddressUpdateOK) GetPayload() *models.IpamsvcUpdateFixedAddressResponse {
 	return o.Payload
 }
 
-func (o *FixedAddressUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *FixedAddressUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcUpdateFixedAddressResponse)
 

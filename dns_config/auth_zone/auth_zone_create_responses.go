@@ -31,34 +31,35 @@ func (o *AuthZoneCreateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthZoneCreateCreated()
+	result := NewAuthZoneCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthZoneCreateCreated creates a AuthZoneCreateCreated with default headers values
-func NewAuthZoneCreateCreated() *AuthZoneCreateCreated {
-	return &AuthZoneCreateCreated{}
+// NewAuthZoneCreateOK creates a AuthZoneCreateOK with default headers values
+func NewAuthZoneCreateOK() *AuthZoneCreateOK {
+	return &AuthZoneCreateOK{}
 }
 
-/* AuthZoneCreateCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AuthZoneCreateCreated struct {
+type AuthZoneCreateOK struct {
 	Payload *models.ConfigCreateAuthZoneResponse
 }
 
-func (o *AuthZoneCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/auth_zone][%d] authZoneCreateCreated  %+v", 201, o.Payload)
+func (o *AuthZoneCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/auth_zone][%d] authZoneCreateOK  %+v", 200, o.Payload)
 }
-func (o *AuthZoneCreateCreated) GetPayload() *models.ConfigCreateAuthZoneResponse {
+func (o *AuthZoneCreateOK) GetPayload() *models.ConfigCreateAuthZoneResponse {
 	return o.Payload
 }
 
-func (o *AuthZoneCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthZoneCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateAuthZoneResponse)
 

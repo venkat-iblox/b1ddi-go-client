@@ -31,34 +31,35 @@ func (o *OptionFilterCreateReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewOptionFilterCreateCreated()
+	result := NewOptionFilterCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewOptionFilterCreateCreated creates a OptionFilterCreateCreated with default headers values
-func NewOptionFilterCreateCreated() *OptionFilterCreateCreated {
-	return &OptionFilterCreateCreated{}
+// NewOptionFilterCreateOK creates a OptionFilterCreateOK with default headers values
+func NewOptionFilterCreateOK() *OptionFilterCreateOK {
+	return &OptionFilterCreateOK{}
 }
 
-/* OptionFilterCreateCreated describes a response with status code 201, with default header values.
+/*
+OptionFilterCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type OptionFilterCreateCreated struct {
+type OptionFilterCreateOK struct {
 	Payload *models.IpamsvcCreateOptionFilterResponse
 }
 
-func (o *OptionFilterCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dhcp/option_filter][%d] optionFilterCreateCreated  %+v", 201, o.Payload)
+func (o *OptionFilterCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dhcp/option_filter][%d] optionFilterCreateOK  %+v", 200, o.Payload)
 }
-func (o *OptionFilterCreateCreated) GetPayload() *models.IpamsvcCreateOptionFilterResponse {
+func (o *OptionFilterCreateOK) GetPayload() *models.IpamsvcCreateOptionFilterResponse {
 	return o.Payload
 }
 
-func (o *OptionFilterCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *OptionFilterCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateOptionFilterResponse)
 

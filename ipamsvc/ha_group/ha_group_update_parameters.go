@@ -54,10 +54,12 @@ func NewHaGroupUpdateParamsWithHTTPClient(client *http.Client) *HaGroupUpdatePar
 	}
 }
 
-/* HaGroupUpdateParams contains all the parameters to send to the API endpoint
-   for the ha group update operation.
+/*
+HaGroupUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ha group update operation.
+
+	Typically these are written to a http.Request.
 */
 type HaGroupUpdateParams struct {
 

@@ -31,34 +31,35 @@ func (o *ForwardNsgCreateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewForwardNsgCreateCreated()
+	result := NewForwardNsgCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewForwardNsgCreateCreated creates a ForwardNsgCreateCreated with default headers values
-func NewForwardNsgCreateCreated() *ForwardNsgCreateCreated {
-	return &ForwardNsgCreateCreated{}
+// NewForwardNsgCreateOK creates a ForwardNsgCreateOK with default headers values
+func NewForwardNsgCreateOK() *ForwardNsgCreateOK {
+	return &ForwardNsgCreateOK{}
 }
 
-/* ForwardNsgCreateCreated describes a response with status code 201, with default header values.
+/*
+ForwardNsgCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type ForwardNsgCreateCreated struct {
+type ForwardNsgCreateOK struct {
 	Payload *models.ConfigCreateForwardNSGResponse
 }
 
-func (o *ForwardNsgCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/forward_nsg][%d] forwardNsgCreateCreated  %+v", 201, o.Payload)
+func (o *ForwardNsgCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/forward_nsg][%d] forwardNsgCreateOK  %+v", 200, o.Payload)
 }
-func (o *ForwardNsgCreateCreated) GetPayload() *models.ConfigCreateForwardNSGResponse {
+func (o *ForwardNsgCreateOK) GetPayload() *models.ConfigCreateForwardNSGResponse {
 	return o.Payload
 }
 
-func (o *ForwardNsgCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ForwardNsgCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateForwardNSGResponse)
 

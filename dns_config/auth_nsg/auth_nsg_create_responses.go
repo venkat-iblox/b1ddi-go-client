@@ -31,34 +31,35 @@ func (o *AuthNsgCreateReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthNsgCreateCreated()
+	result := NewAuthNsgCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthNsgCreateCreated creates a AuthNsgCreateCreated with default headers values
-func NewAuthNsgCreateCreated() *AuthNsgCreateCreated {
-	return &AuthNsgCreateCreated{}
+// NewAuthNsgCreateOK creates a AuthNsgCreateOK with default headers values
+func NewAuthNsgCreateOK() *AuthNsgCreateOK {
+	return &AuthNsgCreateOK{}
 }
 
-/* AuthNsgCreateCreated describes a response with status code 201, with default header values.
+/*
+AuthNsgCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AuthNsgCreateCreated struct {
+type AuthNsgCreateOK struct {
 	Payload *models.ConfigCreateAuthNSGResponse
 }
 
-func (o *AuthNsgCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/auth_nsg][%d] authNsgCreateCreated  %+v", 201, o.Payload)
+func (o *AuthNsgCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/auth_nsg][%d] authNsgCreateOK  %+v", 200, o.Payload)
 }
-func (o *AuthNsgCreateCreated) GetPayload() *models.ConfigCreateAuthNSGResponse {
+func (o *AuthNsgCreateOK) GetPayload() *models.ConfigCreateAuthNSGResponse {
 	return o.Payload
 }
 
-func (o *AuthNsgCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthNsgCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigCreateAuthNSGResponse)
 

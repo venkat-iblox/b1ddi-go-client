@@ -31,34 +31,35 @@ func (o *AuthZoneUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAuthZoneUpdateCreated()
+	result := NewAuthZoneUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAuthZoneUpdateCreated creates a AuthZoneUpdateCreated with default headers values
-func NewAuthZoneUpdateCreated() *AuthZoneUpdateCreated {
-	return &AuthZoneUpdateCreated{}
+// NewAuthZoneUpdateOK creates a AuthZoneUpdateOK with default headers values
+func NewAuthZoneUpdateOK() *AuthZoneUpdateOK {
+	return &AuthZoneUpdateOK{}
 }
 
-/* AuthZoneUpdateCreated describes a response with status code 201, with default header values.
+/*
+AuthZoneUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type AuthZoneUpdateCreated struct {
+type AuthZoneUpdateOK struct {
 	Payload *models.ConfigUpdateAuthZoneResponse
 }
 
-func (o *AuthZoneUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/auth_zone/{id}][%d] authZoneUpdateCreated  %+v", 201, o.Payload)
+func (o *AuthZoneUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/auth_zone/{id}][%d] authZoneUpdateOK  %+v", 200, o.Payload)
 }
-func (o *AuthZoneUpdateCreated) GetPayload() *models.ConfigUpdateAuthZoneResponse {
+func (o *AuthZoneUpdateOK) GetPayload() *models.ConfigUpdateAuthZoneResponse {
 	return o.Payload
 }
 
-func (o *AuthZoneUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AuthZoneUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateAuthZoneResponse)
 

@@ -31,34 +31,35 @@ func (o *SubnetCreateNextAvailableIPReader) ReadResponse(response runtime.Client
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewSubnetCreateNextAvailableIPCreated()
+	result := NewSubnetCreateNextAvailableIPOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewSubnetCreateNextAvailableIPCreated creates a SubnetCreateNextAvailableIPCreated with default headers values
-func NewSubnetCreateNextAvailableIPCreated() *SubnetCreateNextAvailableIPCreated {
-	return &SubnetCreateNextAvailableIPCreated{}
+// NewSubnetCreateNextAvailableIPOK creates a SubnetCreateNextAvailableIPOK with default headers values
+func NewSubnetCreateNextAvailableIPOK() *SubnetCreateNextAvailableIPOK {
+	return &SubnetCreateNextAvailableIPOK{}
 }
 
-/* SubnetCreateNextAvailableIPCreated describes a response with status code 201, with default header values.
+/*
+SubnetCreateNextAvailableIPOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type SubnetCreateNextAvailableIPCreated struct {
+type SubnetCreateNextAvailableIPOK struct {
 	Payload *models.IpamsvcCreateNextAvailableIPResponse
 }
 
-func (o *SubnetCreateNextAvailableIPCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/subnet/{id}/nextavailableip][%d] subnetCreateNextAvailableIpCreated  %+v", 201, o.Payload)
+func (o *SubnetCreateNextAvailableIPOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/subnet/{id}/nextavailableip][%d] subnetCreateNextAvailableIpOK  %+v", 200, o.Payload)
 }
-func (o *SubnetCreateNextAvailableIPCreated) GetPayload() *models.IpamsvcCreateNextAvailableIPResponse {
+func (o *SubnetCreateNextAvailableIPOK) GetPayload() *models.IpamsvcCreateNextAvailableIPResponse {
 	return o.Payload
 }
 
-func (o *SubnetCreateNextAvailableIPCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *SubnetCreateNextAvailableIPOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateNextAvailableIPResponse)
 

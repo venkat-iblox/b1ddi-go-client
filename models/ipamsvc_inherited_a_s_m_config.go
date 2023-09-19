@@ -254,6 +254,11 @@ func (m *IpamsvcInheritedASMConfig) ContextValidate(ctx context.Context, formats
 func (m *IpamsvcInheritedASMConfig) contextValidateAsmEnableBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmEnableBlock != nil {
+
+		if swag.IsZero(m.AsmEnableBlock) { // not required
+			return nil
+		}
+
 		if err := m.AsmEnableBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_enable_block")
@@ -270,6 +275,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateAsmEnableBlock(ctx context.Co
 func (m *IpamsvcInheritedASMConfig) contextValidateAsmGrowthBlock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmGrowthBlock != nil {
+
+		if swag.IsZero(m.AsmGrowthBlock) { // not required
+			return nil
+		}
+
 		if err := m.AsmGrowthBlock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_growth_block")
@@ -286,6 +296,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateAsmGrowthBlock(ctx context.Co
 func (m *IpamsvcInheritedASMConfig) contextValidateAsmThreshold(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AsmThreshold != nil {
+
+		if swag.IsZero(m.AsmThreshold) { // not required
+			return nil
+		}
+
 		if err := m.AsmThreshold.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("asm_threshold")
@@ -302,6 +317,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateAsmThreshold(ctx context.Cont
 func (m *IpamsvcInheritedASMConfig) contextValidateForecastPeriod(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ForecastPeriod != nil {
+
+		if swag.IsZero(m.ForecastPeriod) { // not required
+			return nil
+		}
+
 		if err := m.ForecastPeriod.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("forecast_period")
@@ -318,6 +338,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateForecastPeriod(ctx context.Co
 func (m *IpamsvcInheritedASMConfig) contextValidateHistory(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.History != nil {
+
+		if swag.IsZero(m.History) { // not required
+			return nil
+		}
+
 		if err := m.History.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("history")
@@ -334,6 +359,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateHistory(ctx context.Context, 
 func (m *IpamsvcInheritedASMConfig) contextValidateMinTotal(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MinTotal != nil {
+
+		if swag.IsZero(m.MinTotal) { // not required
+			return nil
+		}
+
 		if err := m.MinTotal.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("min_total")
@@ -350,6 +380,11 @@ func (m *IpamsvcInheritedASMConfig) contextValidateMinTotal(ctx context.Context,
 func (m *IpamsvcInheritedASMConfig) contextValidateMinUnused(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MinUnused != nil {
+
+		if swag.IsZero(m.MinUnused) { // not required
+			return nil
+		}
+
 		if err := m.MinUnused.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("min_unused")

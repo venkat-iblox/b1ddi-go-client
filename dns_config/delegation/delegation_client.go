@@ -32,26 +32,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DelegationCreate(params *DelegationCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationCreateCreated, error)
+	DelegationCreate(params *DelegationCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationCreateOK, error)
 
-	DelegationDelete(params *DelegationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationDeleteNoContent, error)
+	DelegationDelete(params *DelegationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationDeleteOK, error)
 
 	DelegationList(params *DelegationListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationListOK, error)
 
 	DelegationRead(params *DelegationReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationReadOK, error)
 
-	DelegationUpdate(params *DelegationUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationUpdateCreated, error)
+	DelegationUpdate(params *DelegationUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  DelegationCreate creates the delegation object
+	DelegationCreate creates the delegation object
 
-  Use this method to create a Delegation object.
+	Use this method to create a Delegation object.
+
 This object (_dns/delegation_) represents a zone delegation.
 */
-func (a *Client) DelegationCreate(params *DelegationCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationCreateCreated, error) {
+func (a *Client) DelegationCreate(params *DelegationCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDelegationCreateParams()
@@ -77,7 +78,7 @@ func (a *Client) DelegationCreate(params *DelegationCreateParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DelegationCreateCreated)
+	success, ok := result.(*DelegationCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -88,12 +89,13 @@ func (a *Client) DelegationCreate(params *DelegationCreateParams, authInfo runti
 }
 
 /*
-  DelegationDelete moves the delegation object to recyclebin
+	DelegationDelete moves the delegation object to recyclebin
 
-  Use this method to move a Delegation object to Recyclebin.
+	Use this method to move a Delegation object to Recyclebin.
+
 This object (_dns/delegation_) represents a zone delegation.
 */
-func (a *Client) DelegationDelete(params *DelegationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationDeleteNoContent, error) {
+func (a *Client) DelegationDelete(params *DelegationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDelegationDeleteParams()
@@ -122,7 +124,7 @@ func (a *Client) DelegationDelete(params *DelegationDeleteParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DelegationDeleteNoContent)
+	success, ok := result.(*DelegationDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -133,9 +135,10 @@ func (a *Client) DelegationDelete(params *DelegationDeleteParams, authInfo runti
 }
 
 /*
-  DelegationList lists delegation objects
+	DelegationList lists delegation objects
 
-  Use this method to list Delegation objects.
+	Use this method to list Delegation objects.
+
 This object (_dns/delegation_) represents a zone delegation.
 */
 func (a *Client) DelegationList(params *DelegationListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationListOK, error) {
@@ -175,9 +178,10 @@ func (a *Client) DelegationList(params *DelegationListParams, authInfo runtime.C
 }
 
 /*
-  DelegationRead reads the delegation object
+	DelegationRead reads the delegation object
 
-  Use this method to read a Delegation object.
+	Use this method to read a Delegation object.
+
 This object (_dns/delegation)_ represents a zone delegation.
 */
 func (a *Client) DelegationRead(params *DelegationReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationReadOK, error) {
@@ -220,12 +224,13 @@ func (a *Client) DelegationRead(params *DelegationReadParams, authInfo runtime.C
 }
 
 /*
-  DelegationUpdate updates the delegation object
+	DelegationUpdate updates the delegation object
 
-  Use this method to update a Delegation object.
+	Use this method to update a Delegation object.
+
 This object (_dns/delegation_) represents a zone delegation.
 */
-func (a *Client) DelegationUpdate(params *DelegationUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationUpdateCreated, error) {
+func (a *Client) DelegationUpdate(params *DelegationUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DelegationUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDelegationUpdateParams()
@@ -254,7 +259,7 @@ func (a *Client) DelegationUpdate(params *DelegationUpdateParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DelegationUpdateCreated)
+	success, ok := result.(*DelegationUpdateOK)
 	if ok {
 		return success, nil
 	}

@@ -43,7 +43,8 @@ func NewOptionCodeReadOK() *OptionCodeReadOK {
 	return &OptionCodeReadOK{}
 }
 
-/* OptionCodeReadOK describes a response with status code 200, with default header values.
+/*
+OptionCodeReadOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

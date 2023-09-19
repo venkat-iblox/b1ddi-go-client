@@ -31,34 +31,35 @@ func (o *AddressBlockCreateNextAvailableIPReader) ReadResponse(response runtime.
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockCreateNextAvailableIPCreated()
+	result := NewAddressBlockCreateNextAvailableIPOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockCreateNextAvailableIPCreated creates a AddressBlockCreateNextAvailableIPCreated with default headers values
-func NewAddressBlockCreateNextAvailableIPCreated() *AddressBlockCreateNextAvailableIPCreated {
-	return &AddressBlockCreateNextAvailableIPCreated{}
+// NewAddressBlockCreateNextAvailableIPOK creates a AddressBlockCreateNextAvailableIPOK with default headers values
+func NewAddressBlockCreateNextAvailableIPOK() *AddressBlockCreateNextAvailableIPOK {
+	return &AddressBlockCreateNextAvailableIPOK{}
 }
 
-/* AddressBlockCreateNextAvailableIPCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateNextAvailableIPOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressBlockCreateNextAvailableIPCreated struct {
+type AddressBlockCreateNextAvailableIPOK struct {
 	Payload *models.IpamsvcCreateNextAvailableIPResponse
 }
 
-func (o *AddressBlockCreateNextAvailableIPCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailableip][%d] addressBlockCreateNextAvailableIpCreated  %+v", 201, o.Payload)
+func (o *AddressBlockCreateNextAvailableIPOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address_block/{id}/nextavailableip][%d] addressBlockCreateNextAvailableIpOK  %+v", 200, o.Payload)
 }
-func (o *AddressBlockCreateNextAvailableIPCreated) GetPayload() *models.IpamsvcCreateNextAvailableIPResponse {
+func (o *AddressBlockCreateNextAvailableIPOK) GetPayload() *models.IpamsvcCreateNextAvailableIPResponse {
 	return o.Payload
 }
 
-func (o *AddressBlockCreateNextAvailableIPCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockCreateNextAvailableIPOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateNextAvailableIPResponse)
 

@@ -31,34 +31,35 @@ func (o *AddressBlockCreateReader) ReadResponse(response runtime.ClientResponse,
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewAddressBlockCreateCreated()
+	result := NewAddressBlockCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewAddressBlockCreateCreated creates a AddressBlockCreateCreated with default headers values
-func NewAddressBlockCreateCreated() *AddressBlockCreateCreated {
-	return &AddressBlockCreateCreated{}
+// NewAddressBlockCreateOK creates a AddressBlockCreateOK with default headers values
+func NewAddressBlockCreateOK() *AddressBlockCreateOK {
+	return &AddressBlockCreateOK{}
 }
 
-/* AddressBlockCreateCreated describes a response with status code 201, with default header values.
+/*
+AddressBlockCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type AddressBlockCreateCreated struct {
+type AddressBlockCreateOK struct {
 	Payload *models.IpamsvcCreateAddressBlockResponse
 }
 
-func (o *AddressBlockCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /ipam/address_block][%d] addressBlockCreateCreated  %+v", 201, o.Payload)
+func (o *AddressBlockCreateOK) Error() string {
+	return fmt.Sprintf("[POST /ipam/address_block][%d] addressBlockCreateOK  %+v", 200, o.Payload)
 }
-func (o *AddressBlockCreateCreated) GetPayload() *models.IpamsvcCreateAddressBlockResponse {
+func (o *AddressBlockCreateOK) GetPayload() *models.IpamsvcCreateAddressBlockResponse {
 	return o.Payload
 }
 
-func (o *AddressBlockCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *AddressBlockCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.IpamsvcCreateAddressBlockResponse)
 

@@ -85,6 +85,10 @@ type ConfigHost struct {
 	// Read Only: true
 	ProtocolAbsoluteName string `json:"protocol_absolute_name,omitempty"`
 
+	// External provider identifier.
+	// Read Only: true
+	ProviderID string `json:"provider_id,omitempty"`
+
 	// The resource identifier.
 	Server string `json:"server,omitempty"`
 
@@ -94,6 +98,16 @@ type ConfigHost struct {
 
 	// Host tagging specifics.
 	Tags interface{} `json:"tags,omitempty"`
+
+	// Defines the type of host.
+	// Allowed values:
+	//  * _bloxone_ddi_: host type is BloxOne DDI,
+	//  * _microsoft_azure_: host type is Microsoft Azure,
+	//  * _amazon_web_service_: host type is Amazon Web Services,
+	//  * _microsoft_active_directory_: host type is Microsoft Active Directory,
+	//  * _google_cloud_platform_: host type is Google Cloud Platform.
+	// Read Only: true
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this config host
@@ -242,7 +256,15 @@ func (m *ConfigHost) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateProviderID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSiteID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -282,6 +304,11 @@ func (m *ConfigHost) contextValidateAnycastAddresses(ctx context.Context, format
 func (m *ConfigHost) contextValidateAssociatedServer(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AssociatedServer != nil {
+
+		if swag.IsZero(m.AssociatedServer) { // not required
+			return nil
+		}
+
 		if err := m.AssociatedServer.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("associated_server")
@@ -343,6 +370,11 @@ func (m *ConfigHost) contextValidateID(ctx context.Context, formats strfmt.Regis
 func (m *ConfigHost) contextValidateInheritanceSources(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InheritanceSources != nil {
+
+		if swag.IsZero(m.InheritanceSources) { // not required
+			return nil
+		}
+
 		if err := m.InheritanceSources.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("inheritance_sources")
@@ -361,6 +393,11 @@ func (m *ConfigHost) contextValidateKerberosKeys(ctx context.Context, formats st
 	for i := 0; i < len(m.KerberosKeys); i++ {
 
 		if m.KerberosKeys[i] != nil {
+
+			if swag.IsZero(m.KerberosKeys[i]) { // not required
+				return nil
+			}
+
 			if err := m.KerberosKeys[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("kerberos_keys" + "." + strconv.Itoa(i))
@@ -403,9 +440,27 @@ func (m *ConfigHost) contextValidateProtocolAbsoluteName(ctx context.Context, fo
 	return nil
 }
 
+func (m *ConfigHost) contextValidateProviderID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "provider_id", "body", string(m.ProviderID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *ConfigHost) contextValidateSiteID(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "site_id", "body", string(m.SiteID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ConfigHost) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "type", "body", string(m.Type)); err != nil {
 		return err
 	}
 

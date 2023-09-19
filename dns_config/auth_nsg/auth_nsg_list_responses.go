@@ -43,7 +43,8 @@ func NewAuthNsgListOK() *AuthNsgListOK {
 	return &AuthNsgListOK{}
 }
 
-/* AuthNsgListOK describes a response with status code 200, with default header values.
+/*
+AuthNsgListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

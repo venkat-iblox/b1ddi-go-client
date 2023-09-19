@@ -43,7 +43,8 @@ func NewOptionSpaceListOK() *OptionSpaceListOK {
 	return &OptionSpaceListOK{}
 }
 
-/* OptionSpaceListOK describes a response with status code 200, with default header values.
+/*
+OptionSpaceListOK describes a response with status code 200, with default header values.
 
 GET operation response
 */

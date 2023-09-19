@@ -54,10 +54,12 @@ func NewCacheFlushCreateParamsWithHTTPClient(client *http.Client) *CacheFlushCre
 	}
 }
 
-/* CacheFlushCreateParams contains all the parameters to send to the API endpoint
-   for the cache flush create operation.
+/*
+CacheFlushCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the cache flush create operation.
+
+	Typically these are written to a http.Request.
 */
 type CacheFlushCreateParams struct {
 

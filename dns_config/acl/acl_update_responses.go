@@ -31,34 +31,35 @@ func (o *ACLUpdateReader) ReadResponse(response runtime.ClientResponse, consumer
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewACLUpdateCreated()
+	result := NewACLUpdateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewACLUpdateCreated creates a ACLUpdateCreated with default headers values
-func NewACLUpdateCreated() *ACLUpdateCreated {
-	return &ACLUpdateCreated{}
+// NewACLUpdateOK creates a ACLUpdateOK with default headers values
+func NewACLUpdateOK() *ACLUpdateOK {
+	return &ACLUpdateOK{}
 }
 
-/* ACLUpdateCreated describes a response with status code 201, with default header values.
+/*
+ACLUpdateOK describes a response with status code 200, with default header values.
 
 PATCH operation response
 */
-type ACLUpdateCreated struct {
+type ACLUpdateOK struct {
 	Payload *models.ConfigUpdateACLResponse
 }
 
-func (o *ACLUpdateCreated) Error() string {
-	return fmt.Sprintf("[PATCH /dns/acl/{id}][%d] aclUpdateCreated  %+v", 201, o.Payload)
+func (o *ACLUpdateOK) Error() string {
+	return fmt.Sprintf("[PATCH /dns/acl/{id}][%d] aclUpdateOK  %+v", 200, o.Payload)
 }
-func (o *ACLUpdateCreated) GetPayload() *models.ConfigUpdateACLResponse {
+func (o *ACLUpdateOK) GetPayload() *models.ConfigUpdateACLResponse {
 	return o.Payload
 }
 
-func (o *ACLUpdateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *ACLUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ConfigUpdateACLResponse)
 

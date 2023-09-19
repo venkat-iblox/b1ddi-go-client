@@ -53,10 +53,12 @@ func NewOptionSpaceListParamsWithHTTPClient(client *http.Client) *OptionSpaceLis
 	}
 }
 
-/* OptionSpaceListParams contains all the parameters to send to the API endpoint
-   for the option space list operation.
+/*
+OptionSpaceListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the option space list operation.
+
+	Typically these are written to a http.Request.
 */
 type OptionSpaceListParams struct {
 

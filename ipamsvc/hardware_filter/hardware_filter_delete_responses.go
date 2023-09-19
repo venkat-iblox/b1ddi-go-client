@@ -29,30 +29,31 @@ func (o *HardwareFilterDeleteReader) ReadResponse(response runtime.ClientRespons
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewHardwareFilterDeleteNoContent()
+	result := NewHardwareFilterDeleteOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewHardwareFilterDeleteNoContent creates a HardwareFilterDeleteNoContent with default headers values
-func NewHardwareFilterDeleteNoContent() *HardwareFilterDeleteNoContent {
-	return &HardwareFilterDeleteNoContent{}
+// NewHardwareFilterDeleteOK creates a HardwareFilterDeleteOK with default headers values
+func NewHardwareFilterDeleteOK() *HardwareFilterDeleteOK {
+	return &HardwareFilterDeleteOK{}
 }
 
-/* HardwareFilterDeleteNoContent describes a response with status code 204, with default header values.
+/*
+HardwareFilterDeleteOK describes a response with status code 200, with default header values.
 
-No Content
+OK
 */
-type HardwareFilterDeleteNoContent struct {
+type HardwareFilterDeleteOK struct {
 }
 
-func (o *HardwareFilterDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /dhcp/hardware_filter/{id}][%d] hardwareFilterDeleteNoContent ", 204)
+func (o *HardwareFilterDeleteOK) Error() string {
+	return fmt.Sprintf("[DELETE /dhcp/hardware_filter/{id}][%d] hardwareFilterDeleteOK ", 200)
 }
 
-func (o *HardwareFilterDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *HardwareFilterDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -31,34 +31,35 @@ func (o *CacheFlushCreateReader) ReadResponse(response runtime.ClientResponse, c
 		return nil, b1cliruntime.NewAPIHTTPError("response status code indicates server error", response.Body(), response.Code())
 	}
 
-	result := NewCacheFlushCreateCreated()
+	result := NewCacheFlushCreateOK()
 	if err := result.readResponse(response, consumer, o.formats); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-// NewCacheFlushCreateCreated creates a CacheFlushCreateCreated with default headers values
-func NewCacheFlushCreateCreated() *CacheFlushCreateCreated {
-	return &CacheFlushCreateCreated{}
+// NewCacheFlushCreateOK creates a CacheFlushCreateOK with default headers values
+func NewCacheFlushCreateOK() *CacheFlushCreateOK {
+	return &CacheFlushCreateOK{}
 }
 
-/* CacheFlushCreateCreated describes a response with status code 201, with default header values.
+/*
+CacheFlushCreateOK describes a response with status code 200, with default header values.
 
 POST operation response
 */
-type CacheFlushCreateCreated struct {
+type CacheFlushCreateOK struct {
 	Payload models.ProtobufEmpty
 }
 
-func (o *CacheFlushCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /dns/cache_flush][%d] cacheFlushCreateCreated  %+v", 201, o.Payload)
+func (o *CacheFlushCreateOK) Error() string {
+	return fmt.Sprintf("[POST /dns/cache_flush][%d] cacheFlushCreateOK  %+v", 200, o.Payload)
 }
-func (o *CacheFlushCreateCreated) GetPayload() models.ProtobufEmpty {
+func (o *CacheFlushCreateOK) GetPayload() models.ProtobufEmpty {
 	return o.Payload
 }
 
-func (o *CacheFlushCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *CacheFlushCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
