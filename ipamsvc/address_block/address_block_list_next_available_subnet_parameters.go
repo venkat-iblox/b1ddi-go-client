@@ -53,10 +53,12 @@ func NewAddressBlockListNextAvailableSubnetParamsWithHTTPClient(client *http.Cli
 	}
 }
 
-/* AddressBlockListNextAvailableSubnetParams contains all the parameters to send to the API endpoint
-   for the address block list next available subnet operation.
+/*
+AddressBlockListNextAvailableSubnetParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the address block list next available subnet operation.
+
+	Typically these are written to a http.Request.
 */
 type AddressBlockListNextAvailableSubnetParams struct {
 

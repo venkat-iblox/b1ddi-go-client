@@ -32,17 +32,17 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	AddressBlockCopy(params *AddressBlockCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCopyCreated, error)
+	AddressBlockCopy(params *AddressBlockCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCopyOK, error)
 
-	AddressBlockCreate(params *AddressBlockCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateCreated, error)
+	AddressBlockCreate(params *AddressBlockCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateOK, error)
 
-	AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNextAvailableABParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableABCreated, error)
+	AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNextAvailableABParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableABOK, error)
 
-	AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableIPCreated, error)
+	AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableIPOK, error)
 
-	AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreateNextAvailableSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableSubnetCreated, error)
+	AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreateNextAvailableSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableSubnetOK, error)
 
-	AddressBlockDelete(params *AddressBlockDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockDeleteNoContent, error)
+	AddressBlockDelete(params *AddressBlockDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockDeleteOK, error)
 
 	AddressBlockList(params *AddressBlockListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockListOK, error)
 
@@ -54,18 +54,19 @@ type ClientService interface {
 
 	AddressBlockRead(params *AddressBlockReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockReadOK, error)
 
-	AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockUpdateCreated, error)
+	AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  AddressBlockCopy copies the address block
+	AddressBlockCopy copies the address block
 
-  Use this method to copy an __AddressBlock__ object.
+	Use this method to copy an __AddressBlock__ object.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
-func (a *Client) AddressBlockCopy(params *AddressBlockCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCopyCreated, error) {
+func (a *Client) AddressBlockCopy(params *AddressBlockCopyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCopyOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockCopyParams()
@@ -94,7 +95,7 @@ func (a *Client) AddressBlockCopy(params *AddressBlockCopyParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockCopyCreated)
+	success, ok := result.(*AddressBlockCopyOK)
 	if ok {
 		return success, nil
 	}
@@ -105,12 +106,13 @@ func (a *Client) AddressBlockCopy(params *AddressBlockCopyParams, authInfo runti
 }
 
 /*
-  AddressBlockCreate creates the address block
+	AddressBlockCreate creates the address block
 
-  Use this method to create an __AddressBlock__ object.
+	Use this method to create an __AddressBlock__ object.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
-func (a *Client) AddressBlockCreate(params *AddressBlockCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateCreated, error) {
+func (a *Client) AddressBlockCreate(params *AddressBlockCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockCreateParams()
@@ -136,7 +138,7 @@ func (a *Client) AddressBlockCreate(params *AddressBlockCreateParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockCreateCreated)
+	success, ok := result.(*AddressBlockCreateOK)
 	if ok {
 		return success, nil
 	}
@@ -147,12 +149,13 @@ func (a *Client) AddressBlockCreate(params *AddressBlockCreateParams, authInfo r
 }
 
 /*
-  AddressBlockCreateNextAvailableAB creates the next available address block object
+	AddressBlockCreateNextAvailableAB creates the next available address block object
 
-  Use this method to create a Next Available __AddressBlock__ object.
+	Use this method to create a Next Available __AddressBlock__ object.
+
 The Next Available Address Block is a generator that allocates one or more _ipam/address_block_ resource from available address blocks when the network address is not known prior to allocation.
 */
-func (a *Client) AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNextAvailableABParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableABCreated, error) {
+func (a *Client) AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNextAvailableABParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableABOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockCreateNextAvailableABParams()
@@ -181,7 +184,7 @@ func (a *Client) AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNex
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockCreateNextAvailableABCreated)
+	success, ok := result.(*AddressBlockCreateNextAvailableABOK)
 	if ok {
 		return success, nil
 	}
@@ -192,12 +195,13 @@ func (a *Client) AddressBlockCreateNextAvailableAB(params *AddressBlockCreateNex
 }
 
 /*
-  AddressBlockCreateNextAvailableIP allocates the next available IP address
+	AddressBlockCreateNextAvailableIP allocates the next available IP address
 
-  Use this method to allocate the next available IP address.
+	Use this method to allocate the next available IP address.
+
 This allocates one or more __Address__ (_ipam/address_) resource from available addresses, when the IP address is not known prior to allocation.
 */
-func (a *Client) AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableIPCreated, error) {
+func (a *Client) AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableIPOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockCreateNextAvailableIPParams()
@@ -226,7 +230,7 @@ func (a *Client) AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNex
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockCreateNextAvailableIPCreated)
+	success, ok := result.(*AddressBlockCreateNextAvailableIPOK)
 	if ok {
 		return success, nil
 	}
@@ -237,12 +241,13 @@ func (a *Client) AddressBlockCreateNextAvailableIP(params *AddressBlockCreateNex
 }
 
 /*
-  AddressBlockCreateNextAvailableSubnet creates the next available subnet object
+	AddressBlockCreateNextAvailableSubnet creates the next available subnet object
 
-  Use this method to create a Next Available __Subnet__ object.
+	Use this method to create a Next Available __Subnet__ object.
+
 The Next Available Subnet is a generator that allocates one or more _ipam/subnet_ resource from available subnets when the network address is not known prior to allocation.
 */
-func (a *Client) AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreateNextAvailableSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableSubnetCreated, error) {
+func (a *Client) AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreateNextAvailableSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockCreateNextAvailableSubnetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockCreateNextAvailableSubnetParams()
@@ -271,7 +276,7 @@ func (a *Client) AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreat
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockCreateNextAvailableSubnetCreated)
+	success, ok := result.(*AddressBlockCreateNextAvailableSubnetOK)
 	if ok {
 		return success, nil
 	}
@@ -282,12 +287,13 @@ func (a *Client) AddressBlockCreateNextAvailableSubnet(params *AddressBlockCreat
 }
 
 /*
-  AddressBlockDelete moves the address block to the recycle bin
+	AddressBlockDelete moves the address block to the recycle bin
 
-  Use this method to move an __AddressBlock__ object to the recycle bin.
+	Use this method to move an __AddressBlock__ object to the recycle bin.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
-func (a *Client) AddressBlockDelete(params *AddressBlockDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockDeleteNoContent, error) {
+func (a *Client) AddressBlockDelete(params *AddressBlockDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockDeleteParams()
@@ -316,7 +322,7 @@ func (a *Client) AddressBlockDelete(params *AddressBlockDeleteParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockDeleteNoContent)
+	success, ok := result.(*AddressBlockDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -327,9 +333,10 @@ func (a *Client) AddressBlockDelete(params *AddressBlockDeleteParams, authInfo r
 }
 
 /*
-  AddressBlockList retrieves the address blocks
+	AddressBlockList retrieves the address blocks
 
-  Use this method to retrieve __AddressBlock__ objects.
+	Use this method to retrieve __AddressBlock__ objects.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
 func (a *Client) AddressBlockList(params *AddressBlockListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockListOK, error) {
@@ -369,9 +376,10 @@ func (a *Client) AddressBlockList(params *AddressBlockListParams, authInfo runti
 }
 
 /*
-  AddressBlockListNextAvailableAB lists next available address block objects
+	AddressBlockListNextAvailableAB lists next available address block objects
 
-  Use this method to list Next Available __AddressBlock__ objects.
+	Use this method to list Next Available __AddressBlock__ objects.
+
 The Next Available __AddressBlock__ is a generator that returns one or more _ipam/address_block_ resource from available address blocks when the network address is not known prior to allocation.
 */
 func (a *Client) AddressBlockListNextAvailableAB(params *AddressBlockListNextAvailableABParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockListNextAvailableABOK, error) {
@@ -414,9 +422,10 @@ func (a *Client) AddressBlockListNextAvailableAB(params *AddressBlockListNextAva
 }
 
 /*
-  AddressBlockListNextAvailableIP retrieves the next available IP address
+	AddressBlockListNextAvailableIP retrieves the next available IP address
 
-  Use this method to retrieve the next available IP address.
+	Use this method to retrieve the next available IP address.
+
 This returns one or more __Address__ (_ipam/address_) resource from available addresses, when IP address is not known prior to allocation.
 */
 func (a *Client) AddressBlockListNextAvailableIP(params *AddressBlockListNextAvailableIPParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockListNextAvailableIPOK, error) {
@@ -459,9 +468,10 @@ func (a *Client) AddressBlockListNextAvailableIP(params *AddressBlockListNextAva
 }
 
 /*
-  AddressBlockListNextAvailableSubnet lists next available subnet objects
+	AddressBlockListNextAvailableSubnet lists next available subnet objects
 
-  Use this method to list Next Available __Subnet__ objects.
+	Use this method to list Next Available __Subnet__ objects.
+
 The Next Available Address Block is a generator that returns one or more _ipam/subnet_ resource from available subnets when the network address is not known prior to allocation.
 */
 func (a *Client) AddressBlockListNextAvailableSubnet(params *AddressBlockListNextAvailableSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockListNextAvailableSubnetOK, error) {
@@ -504,9 +514,10 @@ func (a *Client) AddressBlockListNextAvailableSubnet(params *AddressBlockListNex
 }
 
 /*
-  AddressBlockRead retrieves the address block
+	AddressBlockRead retrieves the address block
 
-  Use this method to retrieve an __AddressBlock__ object.
+	Use this method to retrieve an __AddressBlock__ object.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
 func (a *Client) AddressBlockRead(params *AddressBlockReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockReadOK, error) {
@@ -549,12 +560,13 @@ func (a *Client) AddressBlockRead(params *AddressBlockReadParams, authInfo runti
 }
 
 /*
-  AddressBlockUpdate updates the address block
+	AddressBlockUpdate updates the address block
 
-  Use this method to update an __AddressBlock__ object.
+	Use this method to update an __AddressBlock__ object.
+
 The __AddressBlock__ object allows a uniform representation of the address space segmentation, supporting functions such as administrative grouping, routing aggregation, delegation etc.
 */
-func (a *Client) AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockUpdateCreated, error) {
+func (a *Client) AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddressBlockUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddressBlockUpdateParams()
@@ -583,7 +595,7 @@ func (a *Client) AddressBlockUpdate(params *AddressBlockUpdateParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*AddressBlockUpdateCreated)
+	success, ok := result.(*AddressBlockUpdateOK)
 	if ok {
 		return success, nil
 	}
