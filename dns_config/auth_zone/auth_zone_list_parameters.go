@@ -53,10 +53,12 @@ func NewAuthZoneListParamsWithHTTPClient(client *http.Client) *AuthZoneListParam
 	}
 }
 
-/* AuthZoneListParams contains all the parameters to send to the API endpoint
-   for the auth zone list operation.
+/*
+AuthZoneListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone list operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneListParams struct {
 
@@ -98,6 +100,12 @@ type AuthZoneListParams struct {
 
 	*/
 	Filter *string
+
+	/* Inherit.
+
+	   This parameter is used for getting inheritance_sources.
+	*/
+	Inherit *string
 
 	/* Limit.
 
@@ -228,6 +236,17 @@ func (o *AuthZoneListParams) SetFilter(filter *string) {
 	o.Filter = filter
 }
 
+// WithInherit adds the inherit to the auth zone list params
+func (o *AuthZoneListParams) WithInherit(inherit *string) *AuthZoneListParams {
+	o.SetInherit(inherit)
+	return o
+}
+
+// SetInherit adds the inherit to the auth zone list params
+func (o *AuthZoneListParams) SetInherit(inherit *string) {
+	o.Inherit = inherit
+}
+
 // WithLimit adds the limit to the auth zone list params
 func (o *AuthZoneListParams) WithLimit(limit *int64) *AuthZoneListParams {
 	o.SetLimit(limit)
@@ -331,6 +350,23 @@ func (o *AuthZoneListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qFilter != "" {
 
 			if err := r.SetQueryParam("_filter", qFilter); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Inherit != nil {
+
+		// query param _inherit
+		var qrInherit string
+
+		if o.Inherit != nil {
+			qrInherit = *o.Inherit
+		}
+		qInherit := qrInherit
+		if qInherit != "" {
+
+			if err := r.SetQueryParam("_inherit", qInherit); err != nil {
 				return err
 			}
 		}

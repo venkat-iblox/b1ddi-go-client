@@ -52,10 +52,12 @@ func NewAuthZoneReadParamsWithHTTPClient(client *http.Client) *AuthZoneReadParam
 	}
 }
 
-/* AuthZoneReadParams contains all the parameters to send to the API endpoint
-   for the auth zone read operation.
+/*
+AuthZoneReadParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the auth zone read operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthZoneReadParams struct {
 
@@ -70,6 +72,12 @@ type AuthZoneReadParams struct {
 
 	*/
 	Fields *string
+
+	/* Inherit.
+
+	   This parameter is used for getting inheritance_sources.
+	*/
+	Inherit *string
 
 	/* ID.
 
@@ -141,6 +149,17 @@ func (o *AuthZoneReadParams) SetFields(fields *string) {
 	o.Fields = fields
 }
 
+// WithInherit adds the inherit to the auth zone read params
+func (o *AuthZoneReadParams) WithInherit(inherit *string) *AuthZoneReadParams {
+	o.SetInherit(inherit)
+	return o
+}
+
+// SetInherit adds the inherit to the auth zone read params
+func (o *AuthZoneReadParams) SetInherit(inherit *string) {
+	o.Inherit = inherit
+}
+
 // WithID adds the id to the auth zone read params
 func (o *AuthZoneReadParams) WithID(id string) *AuthZoneReadParams {
 	o.SetID(id)
@@ -172,6 +191,23 @@ func (o *AuthZoneReadParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qFields != "" {
 
 			if err := r.SetQueryParam("_fields", qFields); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Inherit != nil {
+
+		// query param _inherit
+		var qrInherit string
+
+		if o.Inherit != nil {
+			qrInherit = *o.Inherit
+		}
+		qInherit := qrInherit
+		if qInherit != "" {
+
+			if err := r.SetQueryParam("_inherit", qInherit); err != nil {
 				return err
 			}
 		}
